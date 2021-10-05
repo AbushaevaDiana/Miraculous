@@ -163,8 +163,28 @@ function editBorderStyle(presentation: Presentation, borderStyle: string) {
 };
 
 
-function moveElement(presentation: Presentation, x: number, y: number) {
-    return presentation;
+function moveElement(presentation: Presentation, x: number, y: number): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.id == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    element: {
+                        ...slide.element,
+                        position: {
+                            x,
+                            y,
+                        }
+                    }
+                    
+                }
+            }
+            return slide
+        })
+    };
 };
 
 function editElementSize(presentation: Presentation, size: number) {
