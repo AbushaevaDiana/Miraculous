@@ -1,8 +1,4 @@
-// const presentationMaker = {
-//     presentation,  
-//     history,
-//     mode,
-// }
+
 
 type PresentationMaker = {
     presentation: Presentation;
@@ -10,15 +6,13 @@ type PresentationMaker = {
     mode: 'editor' | 'preview';
 }
 
-// const mode: 'editor' | 'preview' = 'editor';
-
 type Presentation = {
     slidelist: Slide[];
     name: string;
     selection: SelectionType;
 };
 
-type SelectionType = {   //пришлось поменять название, VSC ругался, что уже зарезервировано в библиотеке это слово
+type SelectionType = {
     idSlide: number;
     idElement: number;
 };
@@ -49,8 +43,6 @@ type Border = {
     width: number;
 };
 
-// const borderStyle = ‘solid’ | ‘dotted’ | ‘dashed’ | ‘double’ я тут объединила его прямо в тип Border, но не уверена, можно так или нет
-
 type Position = {
     x: number;
     y: number;
@@ -77,7 +69,6 @@ type Figure = {
     figureType: 'triangel' | 'round' | 'rectangle';
 };
 
-// const figureType = ‘triangel’ | ‘round’ | ‘rectangle’
 
 //FUNCTIONS
 
