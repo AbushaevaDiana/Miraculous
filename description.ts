@@ -231,12 +231,84 @@ function makeRectangle(presentation: Presentation) {
     return figure;
 };
 
-function setItalicText(presentation: Presentation) {
-    return presentation;
+function setItalicText(presentation: Presentation): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            if (element.text.italic == true){
+                                return{
+                                    ...element,
+                                    text: {
+                                        ...element.text,
+                                        italic : false
+                                    } 
+                                }
+                            }
+                            else{
+                                return{
+                                    ...element,
+                                    text: {
+                                        ...element.text,
+                                        italic : true
+                                    } 
+                                }
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
-function setBoldText(presentation: Presentation) {
-    return presentation;
+function setBoldText(presentation: Presentation): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            if (element.text.bold == true){
+                                return{
+                                    ...element,
+                                    text: {
+                                        ...element.text,
+                                        bold : false
+                                    } 
+                                }
+                            }
+                            else{
+                                return{
+                                    ...element,
+                                    text: {
+                                        ...element.text,
+                                        bold : true
+                                    } 
+                                }
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
 function setUnderlineText(presentation: Presentation): Presentation {
@@ -251,12 +323,23 @@ function setUnderlineText(presentation: Presentation): Presentation {
                     elementlist: slide.elementlist.map(element => {
                         if (element.idElement == selection.idElement)
                         {
-                            return{
-                                ...element,
-                                text: {
-                                    ...element.text,
-                                    underline : true
-                                }   
+                            if (element.text.underline == true){
+                                return{
+                                    ...element,
+                                    text: {
+                                        ...element.text,
+                                        underline : false
+                                    } 
+                                }  
+                            }
+                            else{
+                                return{
+                                    ...element,
+                                    text: {
+                                        ...element.text,
+                                        underline : true
+                                    } 
+                                }
                             }
                         }
                         return element
