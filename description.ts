@@ -239,7 +239,31 @@ function setBoldText(presentation: Presentation) {
     return presentation;
 };
 
-function setUnderlineText(presentation: Presentation) {
-    return presentation;
+function setUnderlineText(presentation: Presentation): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                text: {
+                                    ...element.text,
+                                    underline : true
+                                }   
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
-
