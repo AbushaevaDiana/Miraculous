@@ -18,9 +18,10 @@ type SelectionType = {
 };
 
 type Slide = {
-    element: ElementType;
+    elementlist: ElementType[];
     background: Background;
     effects: 'occurrence' | 'fading';
+    idSlide: number;
 };
 
 type Background = {
@@ -35,6 +36,7 @@ type ElementType = {
     text: TextType;
     img: Img;
     figure: Figure;
+    idElement: number;
 };
 
 type Border = {
@@ -159,18 +161,23 @@ function moveElement(presentation: Presentation, x: number, y: number): Presenta
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.id == selection.idSlide)
+            if (slide.idSlide == selection.idSlide)
             {
                 return {
                     ...slide,
-                    element: {
-                        ...slide.element,
-                        position: {
-                            x,
-                            y,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                position: {
+                                    x,
+                                    y,
+                                }
+                            }
                         }
-                    }
-                    
+                        return element
+                    })  
                 }
             }
             return slide
@@ -185,7 +192,6 @@ function editElementSize(presentation: Presentation, size: number) {
 function editFilter(presentation: Presentation, filter: string) {
     return presentation;
 };
-
 
 function editTextColor(presentation: Presentation, color: number) {
     return presentation;
