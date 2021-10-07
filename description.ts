@@ -325,8 +325,30 @@ function editElementSize(presentation: Presentation, size: number): Presentation
     };
 };
 
-function editFilter(presentation: Presentation, filter: string) {
-    return presentation;
+function editFilter(presentation: Presentation, filter: string) : Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                    ...element,
+                                    stringr: filter
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
 function editTextColor(presentation: Presentation, color: number) {
