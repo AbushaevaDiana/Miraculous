@@ -187,10 +187,34 @@ function editBorderColor(presentation: Presentation, color: number) {
     return presentation;
 };
 
-function editBorderWidth(presentation: Presentation, width: number) {
-    return presentation;
+function editBorderWidth(presentation: Presentation, width: number): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                border: {
+                                    ...element.border,
+                                     width: number
+                                } 
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
-
 function editBorderStyle(presentation: Presentation, newBorderStyle: BorderStyle): Presentation {
     const selection: SelectionType = presentation.selection
     return {
