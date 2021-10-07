@@ -1,5 +1,3 @@
-
-
 type PresentationMaker = {
     presentation: Presentation;
     //history: 
@@ -21,13 +19,13 @@ type Slide = {
     elementlist: ElementType[];
     background: Background;
     effects: 'occurrence' | 'fading';
+    slidePosition: number;
     idSlide: number;
 };
 
-type Background = {
-    img: Img;
-    color: number;
-};
+type Color = string;
+
+type Background = Img | Color;
 
 type ElementType = {
     size: number;
@@ -40,7 +38,7 @@ type ElementType = {
 };
 
 type Border = {
-    color: number;
+    color: Color;
     borderStyle: 'solid' | 'dotted' | 'dashed' | 'double';
     width: number;
 };
@@ -51,7 +49,7 @@ type Position = {
 };
 
 type TextType = {
-    color: number;
+    color: Color;
     textContent: string;
     links: boolean;
     font: string[]; //уточнить
@@ -66,8 +64,8 @@ type Img = {
 };
 
 type Figure = {
-    linecolor: number;
-    fillcolor: number;
+    linecolor: Color;
+    fillcolor: Color;
     figureType: 'triangel' | 'round' | 'rectangle';
 };
 
@@ -97,16 +95,42 @@ function exportPresentation(presentation) {};
 */
 function openPresentation(fileJson) {};
 
-function editPresentationName(presentation: Presentation, name: string) {
-    return presentation;
+function editPresentationName(presentation: Presentation, name: string): Presentation {
+    presentation.name = name;
+    return {
+        ...presentation,
+    };
 };
 
-function moveSlide(presentation: Presentation, slidePosition: number) {
-    return presentation;
+function moveSlide(presentation: Presentation, slidePosition: number): Presentation {
+    const selection: SelectionType = presentation.selection;
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                slide.slidePosition = slidePosition; //уточнить
+                return {
+                    ...slide,
+                };
+            }
+            return slide
+        })
+    }
 };
 
-function addSlide(presentation: Presentation)  {
-    return presentation;
+function addSlide(presentation: Presentation): Presentation  {
+    let newSlide:Slide = {
+        elementlist: [],
+        slidePosition: presentation.slidelist.length + 1,
+        idSlide: Math.floor((Math.random() * 100) + 1),
+        background: 'ffffff',
+        effects: 'occurrence',
+    };
+    presentation.slidelist.push(newSlide);
+    return {
+        ...presentation,
+    };
 };
 
 function deleteSlide(presentation: Presentation)  {
@@ -124,7 +148,6 @@ function editSlideEffect(presentation: Presentation, effect: string) {
 function addElement(presentation: Presentation) {
     return presentation;
 };
-
 
 function deleteElement(presentation: Presentation) {
     return presentation;
@@ -230,7 +253,7 @@ function addLink(presentation: Presentation, link: boolean): Presentation {
     };
 };
 
-function editFigureLineColor(presentation: Presentation, color: number): Presentation {
+function editFigureLineColor(presentation: Presentation, color: Color): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
@@ -259,7 +282,7 @@ function editFigureLineColor(presentation: Presentation, color: number): Present
     };
 };
 
-function editFigureFillColor(presentation: Presentation, color: number): Presentation {
+function editFigureFillColor(presentation: Presentation, color: Color): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
