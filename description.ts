@@ -18,10 +18,12 @@ type SelectionType = {
 type Slide = {
     elementlist: ElementType[];
     background: Background;
-    effects: 'occurrence' | 'fading';
+    effects: SlideEffectType;
     slidePosition: number;
     idSlide: number;
 };
+
+type SlideEffectType = 'occurrence' | 'fading';
 
 type Color = string;
 
@@ -137,24 +139,94 @@ function deleteSlide(presentation: Presentation)  {
     return presentation;
 };
 
-function editSlideBackground(presentation: Presentation, background: Background) {
-    return presentation;
+function editSlideBackground(presentation: Presentation, newBackground: Background): Presentation {
+    const selection: SelectionType = presentation.selection;
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    background: newBackground,  //уточнить
+                }
+            }
+            return slide
+        })
+    };
 };
 
-function editSlideEffect(presentation: Presentation, effect: string) {
-    return presentation;
+function editSlideEffect(presentation: Presentation, effect: SlideEffectType): Presentation {
+    const selection: SelectionType = presentation.selection;
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    effects: effect,
+                }
+            }
+            return slide
+        })
+    };
 };
 
-function addElement(presentation: Presentation) {
-    return presentation;
+function addElement(presentation: Presentation): Presentation {
+    const selection: SelectionType = presentation.selection;
+    return {
+        ...presentation,
+        // slidelist: presentation.slidelist.map(slide => {
+        //     if (slide.idSlide == selection.idSlide)
+        //     {
+        //         let newElement: ElementType = {
+        //             size: 400,
+        //             border: ,
+        //             position: ,
+        //             text: '',
+        //             img: ,
+        //             figure: ,
+        //             idElement: Math.floor((Math.random() * 100) + 1),
+        //         };
+        //         slide.elementlist.push(newElement);
+        //         return {
+        //             ...slide,
+        //         }
+        //     }
+        //     return slide
+        // })
+    };
 };
 
 function deleteElement(presentation: Presentation) {
     return presentation;
 };
 
-function addImg(presentation: Presentation, scr: string) {
-    return presentation;
+function addImg(presentation: Presentation, scr: string): Presentation {
+    const selection: SelectionType = presentation.selection;
+    return {
+        ...presentation,
+        // slidelist: presentation.slidelist.map(slide => {
+        //     if (slide.idSlide == selection.idSlide)
+        //     {
+        //         let newElement: ElementType = {
+        //             size: 400,
+        //             border: ,
+        //             position: ,
+        //             text: '',
+        //             img: ,
+        //             figure: ,
+        //             idElement: Math.floor((Math.random() * 100) + 1),
+        //         };
+        //         slide.elementlist.push(newElement);
+        //         return {
+        //             ...slide,
+        //         }
+        //     }
+        //     return slide
+        // })
+    }
 };
 
 
