@@ -201,16 +201,91 @@ function editFont(presentation: Presentation, font: string[]) {
     return presentation;
 };
 
-function addLink(presentation: Presentation, link: boolean) {
-    return presentation;
+function addLink(presentation: Presentation, link: boolean): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                text: {
+                                    ...element.text,
+                                    links: link
+                                } 
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
-function editFigureLineColor(presentation: Presentation, lineColor: number) {
-    return presentation;
+function editFigureLineColor(presentation: Presentation, color: number): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                figure: {
+                                    ...element.figure,
+                                    linecolor: color
+                                }
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
-function editFigureFillColor(presentation: Presentation, fillColor: number) {
-    return presentation;
+function editFigureFillColor(presentation: Presentation, color: number): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                figure: {
+                                    ...element.figure,
+                                    fillcolor: color
+                                }
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
 function makeRound(presentation: Presentation) {
