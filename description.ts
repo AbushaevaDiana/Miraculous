@@ -104,14 +104,14 @@ function editPresentationName(presentation: Presentation, name: string): Present
     };
 };
 
-function moveSlide(presentation: Presentation, slidePosition: number): Presentation {
+function moveSlide(presentation: Presentation, newSlidePosition: number): Presentation {
     const selection: SelectionType = presentation.selection;
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
             if (slide.idSlide == selection.idSlide)
             {
-                slide.slidePosition = slidePosition; //уточнить
+                let t:Slide = slide;
                 return {
                     ...slide,
                 };
