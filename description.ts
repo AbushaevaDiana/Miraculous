@@ -203,7 +203,7 @@ function editBorderWidth(presentation: Presentation, width: number): Presentatio
                                 ...element,
                                 border: {
                                     ...element.border,
-                                     width: number
+                                     number: width
                                 } 
                             }
                         }
