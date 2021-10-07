@@ -183,8 +183,33 @@ function addFigure(presentation: Presentation) {
     return presentation;
 };
 
-function editBorderColor(presentation: Presentation, color: number) {
-    return presentation;
+function editBorderColor(presentation: Presentation, color: number): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                border: {
+                                    ...element.border,
+                                    Color: color
+                                } 
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
 function editBorderWidth(presentation: Presentation, width: number): Presentation {
