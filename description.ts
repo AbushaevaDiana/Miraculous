@@ -299,8 +299,33 @@ function moveElement(presentation: Presentation, x: number, y: number): Presenta
     };
 };
 
-function editElementSize(presentation: Presentation, size: number) {
-    return presentation;
+function editElementSize(presentation: Presentation, size: number): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                border: {
+                                    ...element.border,
+                                     number: size
+                                } 
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
 function editFilter(presentation: Presentation, filter: string) {
