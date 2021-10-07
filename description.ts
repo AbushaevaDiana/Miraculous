@@ -31,17 +31,17 @@ type ElementType = {
     size: number;
     border: Border;
     position: Position;
-    text: TextType;
-    img: Img;
-    figure: Figure;
+    elementConcept: TextType | Img | Figure;
     idElement: number;
 };
 
 type Border = {
     color: Color;
-    borderStyle: 'solid' | 'dotted' | 'dashed' | 'double';
+    borderStyle: BorderStyle;
     width: number;
 };
+
+type BorderStyle = 'solid' | 'dotted' | 'dashed' | 'double';
 
 type Position = {
     x: number;
@@ -66,7 +66,24 @@ type Img = {
 type Figure = {
     linecolor: Color;
     fillcolor: Color;
-    figureType: 'triangel' | 'round' | 'rectangle';
+    figureType: Triangel | Round | Rectangel;
+};
+
+type Triangel = {
+    x1: number;
+    x2: number;
+    x3: number;
+    y1: number;
+    y2: number;
+    y3: number;
+};
+
+type Round = {
+
+};
+
+type Rectangel = {
+
 };
 
 
@@ -174,8 +191,33 @@ function editBorderWidth(presentation: Presentation, width: number) {
     return presentation;
 };
 
-function editBorderStyle(presentation: Presentation, borderStyle: string) {
-    return presentation;
+function editBorderStyle(presentation: Presentation, newBorderStyle: BorderStyle): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if (element.idElement == selection.idElement)
+                        {
+                            return{
+                                ...element,
+                                border: {
+                                    ...element.border,
+                                    borderStyle: newBorderStyle
+                                } 
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
 };
 
 
