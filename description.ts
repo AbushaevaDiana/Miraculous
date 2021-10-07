@@ -312,11 +312,8 @@ function editElementSize(presentation: Presentation, size: number): Presentation
                         if (element.idElement == selection.idElement)
                         {
                             return{
-                                ...element,
-                                border: {
-                                    ...element.border,
-                                     number: size
-                                } 
+                                    ...element,
+                                     size: newSize
                             }
                         }
                         return element
