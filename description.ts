@@ -1,90 +1,21 @@
-type PresentationMaker = {
-    presentation: Presentation;
-    //history: 
-    mode: 'editor' | 'preview';
-}
-
-type Presentation = {
-    slidelist: Slide[];
-    name: string;
-    selection: SelectionType;
-};
-
-type SelectionType = {
-    idSlide: number;
-    idElement: number;
-};
-
-type Slide = {
-    elementlist: ElementType[];
-    background: Background;
-    effects: 'occurrence' | 'fading';
-    slidePosition: number;
-    idSlide: number;
-};
-
-type Color = string;
-
-type Background = Img | Color;
-
-type ElementType = {
-    size: number;
-    border: Border;
-    position: Position;
-    elementConcept: TextType | Img | Figure;
-    idElement: number;
-};
-
-type Border = {
-    color: Color;
-    borderStyle: BorderStyle;
-    width: number;
-};
-
-type BorderStyle = 'solid' | 'dotted' | 'dashed' | 'double';
-
-type Position = {
-    x: number;
-    y: number;
-};
-
-type TextType = {
-    color: Color;
-    textContent: string;
-    links: boolean;
-    font: string[]; //уточнить
-    italic: boolean;
-    bold: boolean;
-    underline: boolean;
-};
-
-type Img = {
-    src: string;
-    filter: 'black-white' | 'red' | 'green'; //уточнить
-};
-
-type Figure = {
-    linecolor: Color;
-    fillcolor: Color;
-    figureType: Triangel | Round | Rectangel;
-};
-
-type Triangel = {
-    x1: number;
-    x2: number;
-    x3: number;
-    y1: number;
-    y2: number;
-    y3: number;
-};
-
-type Round = {
-
-};
-
-type Rectangel = {
-
-};
+import { PresentationMaker } from "./types";
+import { Presentation } from "./types";
+import { SelectionType } from "./types";
+import { Slide } from "./types";
+import { Color } from "./types";
+import { Background } from "./types";
+import { ElementType } from "./types";
+import { Border } from "./types";
+import { BorderStyle } from "./types";
+import { Position } from "./types";
+import { TextType } from "./types";
+import { Img } from "./types";
+import { Filter } from "./types";
+import { Figure } from "./types";
+import { Triangel } from "./types";
+import { Round } from "./types";
+import { Rectangel } from "./types";
+import { ElementConcept } from "./types";
 
 
 //FUNCTIONS
@@ -119,14 +50,14 @@ function editPresentationName(presentation: Presentation, name: string): Present
     };
 };
 
-function moveSlide(presentation: Presentation, slidePosition: number): Presentation {
+function moveSlide(presentation: Presentation, newSlidePosition: number): Presentation {
     const selection: SelectionType = presentation.selection;
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
             if (slide.idSlide == selection.idSlide)
             {
-                slide.slidePosition = slidePosition; //уточнить
+                slide.slidePosition = newSlidePosition; //уточнить
                 return {
                     ...slide,
                 };
@@ -162,16 +93,43 @@ function editSlideEffect(presentation: Presentation, effect: string) {
     return presentation;
 };
 
-function addElement(presentation: Presentation) {
-    return presentation;
+//не готова
+function addElement(presentation: Presentation, newElement: string): Presentation {
+    const selection: SelectionType = presentation.selection;
+    let newElementConcept: ElementConcept;
+    let newElement: ElementType{
+        size: ;
+        border: Border;
+        position: Position;
+        elementConcept: newElementConcept,
+        idElement: Math.floor((Math.random() * 100) + 1),
+    }
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (slide.idSlide == selection.idSlide)
+            {
+                slide.elementlist.push(newElement);
+                return {
+                    ...slide,
+                };
+            }
+            return slide
+        })
+    }
 };
 
 function deleteElement(presentation: Presentation) {
     return presentation;
 };
 
-function addImg(presentation: Presentation, scr: string) {
-    return presentation;
+function addImg(element: ElementType, newSrc: string) {
+    let newImg:Img = {
+        src: newSrc,
+        filter: 'none',
+    };
+    element: newImg;
+    return element
 };
 
 
@@ -228,7 +186,7 @@ function editBorderWidth(presentation: Presentation, width: number): Presentatio
                                 ...element,
                                 border: {
                                     ...element.border,
-                                     number: width
+                                    number: width
                                 } 
                             }
                         }
@@ -299,7 +257,7 @@ function moveElement(presentation: Presentation, x: number, y: number): Presenta
     };
 };
 
-function editElementSize(presentation: Presentation, size: number): Presentation {
+function editElementSize(presentation: Presentation, newSize: number): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
@@ -312,8 +270,8 @@ function editElementSize(presentation: Presentation, size: number): Presentation
                         if (element.idElement == selection.idElement)
                         {
                             return{
-                                    ...element,
-                                     size: newSize
+                                ...element,
+                                size: newSize
                             }
                         }
                         return element
@@ -325,7 +283,7 @@ function editElementSize(presentation: Presentation, size: number): Presentation
     };
 };
 
-function editFilter(presentation: Presentation, filter: string) : Presentation {
+function editFilter(presentation: Presentation, newFilter: Filter): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
@@ -338,8 +296,11 @@ function editFilter(presentation: Presentation, filter: string) : Presentation {
                         if (element.idElement == selection.idElement)
                         {
                             return{
-                                    ...element,
-                                    stringr: filter
+                                ...element,
+                                elementConcept: {
+                                    ...element.elementConcept,
+                                    filter: newFilter
+                                } 
                             }
                         }
                         return element
@@ -359,7 +320,7 @@ function editFont(presentation: Presentation, font: string[]) {
     return presentation;
 };
 
-function addLink(presentation: Presentation, link: boolean): Presentation {
+function addLink(presentation: Presentation, newLink: boolean): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
@@ -373,9 +334,9 @@ function addLink(presentation: Presentation, link: boolean): Presentation {
                         {
                             return{
                                 ...element,
-                                text: {
-                                    ...element.text,
-                                    links: link
+                                elementConcept: {
+                                    ...element.elementConcept,
+                                    links: newLink
                                 } 
                             }
                         }
@@ -402,8 +363,8 @@ function editFigureLineColor(presentation: Presentation, color: Color): Presenta
                         {
                             return{
                                 ...element,
-                                figure: {
-                                    ...element.figure,
+                                elementConcept: {
+                                    ...element.elementConcept,
                                     linecolor: color
                                 }
                             }
@@ -431,8 +392,8 @@ function editFigureFillColor(presentation: Presentation, color: Color): Presenta
                         {
                             return{
                                 ...element,
-                                figure: {
-                                    ...element.figure,
+                                elementConcept: {
+                                    ...element.elementConcept,
                                     fillcolor: color
                                 }
                             }
@@ -476,11 +437,11 @@ function setItalicText(presentation: Presentation): Presentation {
                     elementlist: slide.elementlist.map(element => {
                         if (element.idElement == selection.idElement)
                         {
-                            if (element.text.italic == true){
+                            if (element.elementConcept.italic == true){
                                 return{
                                     ...element,
-                                    text: {
-                                        ...element.text,
+                                    elementConcept: {
+                                        ...element.elementConcept,
                                         italic : false
                                     } 
                                 }
@@ -488,8 +449,8 @@ function setItalicText(presentation: Presentation): Presentation {
                             else{
                                 return{
                                     ...element,
-                                    text: {
-                                        ...element.text,
+                                    elementConcept: {
+                                        ...element.elementConcept,
                                         italic : true
                                     } 
                                 }
@@ -516,11 +477,11 @@ function setBoldText(presentation: Presentation): Presentation {
                     elementlist: slide.elementlist.map(element => {
                         if (element.idElement == selection.idElement)
                         {
-                            if (element.text.bold == true){
+                            if (element.elementConcept.bold == true){
                                 return{
                                     ...element,
-                                    text: {
-                                        ...element.text,
+                                    elementConcept: {
+                                        ...element.elementConcept,
                                         bold : false
                                     } 
                                 }
@@ -528,8 +489,8 @@ function setBoldText(presentation: Presentation): Presentation {
                             else{
                                 return{
                                     ...element,
-                                    text: {
-                                        ...element.text,
+                                    elementConcept: {
+                                        ...element.elementConcept,
                                         bold : true
                                     } 
                                 }
@@ -556,11 +517,11 @@ function setUnderlineText(presentation: Presentation): Presentation {
                     elementlist: slide.elementlist.map(element => {
                         if (element.idElement == selection.idElement)
                         {
-                            if (element.text.underline == true){
+                            if (element.elementConcept.underline == true){
                                 return{
                                     ...element,
-                                    text: {
-                                        ...element.text,
+                                    elementConcept: {
+                                        ...element.elementConcept,
                                         underline : false
                                     } 
                                 }  
@@ -568,8 +529,8 @@ function setUnderlineText(presentation: Presentation): Presentation {
                             else{
                                 return{
                                     ...element,
-                                    text: {
-                                        ...element.text,
+                                    elementConcept: {
+                                        ...element.elementConcept,
                                         underline : true
                                     } 
                                 }
