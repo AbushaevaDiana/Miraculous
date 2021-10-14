@@ -1,8 +1,10 @@
 export type PresentationMaker = {
     presentation: Presentation;
     //history: 
-    mode: 'editor' | 'preview';
+    mode: Mode;
 }
+
+export type Mode = 'editor' | 'preview'; 
 
 export type Presentation = {
     slidelist: Slide[];
@@ -18,10 +20,12 @@ export type SelectionType = {
 export type Slide = {
     elementlist: ElementType[];
     background: Background;
-    effects: 'occurrence' | 'fading';
+    effects: Effect;
     slidePosition: number;
     idSlide: number;
 };
+
+export type Effect = 'occurrence' | 'fading';
 
 export type Color = string;
 
@@ -70,8 +74,10 @@ export type Filter = 'none' | 'black-white' | 'red' | 'green';
 export type Figure = {
     linecolor: Color;
     fillcolor: Color;
-    figureType: Triangel | Round | Rectangel;
+    figureType: FigureType;
 };
+
+export type FigureType = Triangel | Round | Rectangel;
 
 export type Triangel = {
     x1: number;
