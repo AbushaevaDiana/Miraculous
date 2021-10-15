@@ -1,27 +1,28 @@
 export type PresentationMaker = {
-    presentation: Presentation;
-    //history: 
+    presentation: Presentation; 
     mode: Mode;
 }
 
 export type Mode = 'editor' | 'preview'; 
 
 export type Presentation = {
+    history: Action[];
     slidelist: Slide[];
     name: string;
     selection: SelectionType;
 };
 
+export type Action = string; 
+
 export type SelectionType = {
-    idSlide: number;
-    idElement: number;
+    idSlides: number[];
+    idElements: number[];
 };
 
 export type Slide = {
     elementlist: ElementType[];
     background: Background;
     effects: Effect;
-    slidePosition: number;
     idSlide: number;
 };
 
@@ -32,11 +33,16 @@ export type Color = string;
 export type Background = Img | Color;
 
 export type ElementType = {
-    size: number;
+    size: Size;
     border: Border;
     position: Position;
     elementConcept: ElementConcept;
     idElement: number;
+};
+
+export type Size = {
+    h: Number;
+    w: Number;
 };
 
 export type ElementConcept = TextType | Img | Figure;
@@ -55,48 +61,33 @@ export type Position = {
 };
 
 export type TextType = {
+    type: 'text',
     color: Color;
     textContent: string;
-    links: boolean;
-    font: string[]; //уточнить
+    links: Link;
+    font: string;
     italic: boolean;
     bold: boolean;
     underline: boolean;
 };
 
+export type Link = string;
+
 export type Img = {
+    type: 'img',
     src: string;
-    filter: Filter; //уточнить
+    filter: Filter;
 };
 
 export type Filter = 'none' | 'black-white' | 'red' | 'green';
 
 export type Figure = {
+    type: 'figure',
     linecolor: Color;
     fillcolor: Color;
-    figureType: FigureType;
+    figureConcept: FigureConcept;
 };
 
-export type FigureType = Triangel | Round | Rectangel;
-
-export type Triangel = {
-    x1: number;
-    x2: number;
-    x3: number;
-    y1: number;
-    y2: number;
-    y3: number;
-};
-
-export type Round = {
-    radius: number;
-    x0: number;
-    y0: number;
-};
-
-export type Rectangel = {
-    higth: number;
-    width: number;
-};
+export type FigureConcept = "Triangel" | "Round" | "Rectangel";
 
 export * from "./types";

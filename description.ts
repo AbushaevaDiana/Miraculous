@@ -430,14 +430,14 @@ function setItalicText(presentation: Presentation): Presentation {
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (slide.idSlide == selection.idSlides[0])
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (element.idElement == selection.idElements[0])
                         {
-                            if (element.elementConcept.italic == true){
+                            if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
                                 return{
                                     ...element,
                                     elementConcept: {
@@ -470,14 +470,14 @@ function setBoldText(presentation: Presentation): Presentation {
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (slide.idSlide == selection.idSlides[0])
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (element.idElement == selection.idElements[0])
                         {
-                            if (element.elementConcept.bold == true){
+                            if (element.elementConcept.type == 'text' && element.elementConcept.bold == true){
                                 return{
                                     ...element,
                                     elementConcept: {
@@ -510,14 +510,14 @@ function setUnderlineText(presentation: Presentation): Presentation {
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (slide.idSlide == selection.idSlides[0])
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (element.idElement == selection.idElements[0])
                         {
-                            if (element.elementConcept.underline == true){
+                            if (element.elementConcept.type == 'text' && element.elementConcept.underline == true){
                                 return{
                                     ...element,
                                     elementConcept: {
