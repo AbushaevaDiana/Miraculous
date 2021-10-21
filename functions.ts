@@ -1,4 +1,4 @@
-import { Effect, Mode, PresentationMaker } from "./types";
+import { Effect, FigureConcept, Mode, PresentationMaker } from "./types";
 import { Presentation } from "./types";
 import { SelectionType } from "./types";
 import { Slide } from "./types";
@@ -52,6 +52,18 @@ function exportPresentation(presentation) {};
 */
 function openPresentation(fileJson) {};
 
+/*
+*@param {Presentation} presentation
+*@return {Presentation}
+*/
+function undo(presentation){};
+
+/*
+*@param {Presentation} presentation
+*@return {Presentation}
+*/
+function redo(presentation){};
+
 function changeMode(presentationMaker: PresentationMaker, newMode: Mode): PresentationMaker {
     return {
         ...presentationMaker,
@@ -76,7 +88,7 @@ function moveSlide(presentation: Presentation, newSlidePosition: number): Presen
     presentation.slidelist.map(slide => {
         if (selection.idSlides.indexOf(slide.idSlide) != -1)
         {
-            i: presentation.slidelist.indexOf(slide)
+            i = presentation.slidelist.indexOf(slide)
         };
     });
     if(i < newSlidePosition){
@@ -100,7 +112,7 @@ function addSlide(presentation: Presentation): Presentation  {
     let newSlide:Slide = {
         elementlist: [],
         idSlide: Math.floor((Math.random() * 100) + 1),
-        background: 'ffffff',
+        background: '#ffffff',
         effects: 'occurrence',
     };
     presentation.slidelist.push(newSlide);
@@ -114,10 +126,10 @@ function deleteSlide(presentation: Presentation): Presentation  {
     presentation.slidelist.map(slide => {
         if (selection.idSlides.indexOf(slide.idSlide) != -1)
         {
-            i: presentation.slidelist.indexOf(slide)
+            i = presentation.slidelist.indexOf(slide)
         };
     });
-    for(i = 0; i > presentation.slidelist.length; i--){
+    for(i; i > presentation.slidelist.length; i--){
         iSlide = presentation.slidelist[i];
         presentation.slidelist[i] = presentation.slidelist[i-1];
         presentation.slidelist[i-1] = iSlide;
@@ -132,7 +144,7 @@ function editSlideBackground(presentation: Presentation, newBackground: Backgrou
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide))
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
@@ -149,7 +161,7 @@ function editSlideEffect(presentation: Presentation, newEffect: Effect): Present
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide))
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
@@ -163,66 +175,77 @@ function editSlideEffect(presentation: Presentation, newEffect: Effect): Present
 
                                               //Slide//
 
-//не готова
-function addElement(presentation: Presentation, newElement: string): Presentation {
+                                            //Element//                                              
+
+function addElement(presentation: Presentation, newElementConcept: ElementConcept): ElementType {
     const selection: SelectionType = presentation.selection;
-    let newElementConcept: ElementConcept;
-    let newElement: ElementType{
-        size: ;
-        border: Border;
-        position: Position;
-        elementConcept: newElementConcept,
-        idElement: Math.floor((Math.random() * 100) + 1),
-    }
+    let newElement: {
+        size: {
+            h: 100,
+            w: 100,
+        },
+        border: {
+            color: '#000000',
+            borderStyle: 'none',
+            width: 5,
+        },
+        position: {
+            x: 0,
+            y: 0,
+        };
+        elementConcept: ElementConcept,
+        idElement: number,
+    };
+    newElement.idElement = Math.floor((Math.random() * 100) + 1);
+    newElement.elementConcept = newElementConcept;
+    return newElement;
+};
+
+function deleteElement(presentation: Presentation): Presentation {
+    const selection: SelectionType = presentation.selection;
+    let i: number;
+    let iElement: ElementType;
+
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
-                slide.elementlist.push(newElement);
-                return {
-                    ...slide,
+                slide.elementlist.map(element => {
+                    if (selection.idElements.indexOf(element.idElement) != -1)
+                    {
+                        i = slide.elementlist.indexOf(element)
+                    };
+                });
+                for(i; i > slide.elementlist.length; i--){
+                    iElement = slide.elementlist[i];
+                    slide.elementlist[i] = slide.elementlist[i-1];
+                    slide.elementlist[i-1] = iElement;
                 };
-            }
-            return slide
+                slide.elementlist.pop();
+            };
+            return slide;
         })
-    }
+    };
 };
 
-function deleteElement(presentation: Presentation) {
-    return presentation;
-};
-
-function addImg(element: ElementType, newSrc: string) {
- 
-};
-
-
-function addText(presentation: Presentation, textContent: string) {
-    return presentation;
-};
-
-function addFigure(presentation: Presentation) {
-    return presentation;
-};
-
-function editBorderColor(presentation: Presentation, color: number): Presentation {
+function editBorderColor(presentation: Presentation, newColor: Color): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             return{
                                 ...element,
                                 border: {
                                     ...element.border,
-                                    Color: color
+                                    color: newColor,
                                 } 
                             }
                         }
@@ -235,23 +258,23 @@ function editBorderColor(presentation: Presentation, color: number): Presentatio
     };
 };
 
-function editBorderWidth(presentation: Presentation, width: number): Presentation {
+function editBorderWidth(presentation: Presentation, newWidth: number): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             return{
                                 ...element,
                                 border: {
                                     ...element.border,
-                                    number: width
+                                    width: newWidth
                                 } 
                             }
                         }
@@ -263,17 +286,18 @@ function editBorderWidth(presentation: Presentation, width: number): Presentatio
         })
     };
 };
+
 function editBorderStyle(presentation: Presentation, newBorderStyle: BorderStyle): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             return{
                                 ...element,
@@ -298,12 +322,12 @@ function moveElement(presentation: Presentation, x: number, y: number): Presenta
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             return{
                                 ...element,
@@ -322,21 +346,24 @@ function moveElement(presentation: Presentation, x: number, y: number): Presenta
     };
 };
 
-function editElementSize(presentation: Presentation, newSize: number): Presentation {
+function editElementSize(presentation: Presentation, h: number, w: number): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             return{
                                 ...element,
-                                size: newSize
+                                size: {
+                                    h,
+                                    w,
+                                }
                             }
                         }
                         return element
@@ -348,23 +375,100 @@ function editElementSize(presentation: Presentation, newSize: number): Presentat
     };
 };
 
-function editFilter(presentation: Presentation, newFilter: Filter): Presentation {
+                                         //Element
+
+function addImg(presentation: Presentation, newSrc: string): Presentation{
+    const selection: SelectionType = presentation.selection;
+    let newElement: ElementType;
+    let elementConcept: {
+        type: 'img',
+        src: string,
+        filter: 'none',
+    };
+    elementConcept.src = newSrc;
+    newElement = addElement(presentation, elementConcept);
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
+            {
+                slide.elementlist.push(newElement);
+            };
+            return slide;
+        })
+    };
+};
+
+
+function addText(presentation: Presentation, newTextContent: string): Presentation{
+    const selection: SelectionType = presentation.selection;
+    let newElement: ElementType;
+    let elementConcept: {
+        type: 'text',
+        color: '#000000',
+        textContent: string,
+        links: '',
+        font: string,
+        italic: false,
+        bold: false,
+        underline: false,
+    };
+    elementConcept.textContent = newTextContent;
+    newElement = addElement(presentation, elementConcept);
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
+            {
+                slide.elementlist.push(newElement);
+            };
+            return slide;
+        })
+    };
+};
+
+function addFigure(presentation: Presentation, newFigureConcept: FigureConcept): Presentation{
+    const selection: SelectionType = presentation.selection;
+    let newElement: ElementType;
+    let elementConcept: {
+        type: 'figure',
+        linecolor: '#000000',
+        fillcolor: '#ffffff',
+        figureConcept: FigureConcept,
+    };
+    elementConcept.figureConcept = newFigureConcept;
+    newElement = addElement(presentation, elementConcept);
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
+            {
+                slide.elementlist.push(newElement);
+            };
+            return slide;
+        })
+    };
+};
+
+//Text//
+
+function editTextColor(presentation: Presentation, newColor: Color): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
                         {
                             return{
                                 ...element,
                                 elementConcept: {
                                     ...element.elementConcept,
-                                    filter: newFilter
+                                    color: newColor,
                                 } 
                             }
                         }
@@ -377,25 +481,46 @@ function editFilter(presentation: Presentation, newFilter: Filter): Presentation
     };
 };
 
-function editTextColor(presentation: Presentation, color: number) {
-    return presentation;
-};
-
-function editFont(presentation: Presentation, font: string[]) {
-    return presentation;
-};
-
-function addLink(presentation: Presentation, newLink: boolean): Presentation {
+function editFont(presentation: Presentation, newFont: string): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
+                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                        {
+                            return{
+                                ...element,
+                                elementConcept: {
+                                    ...element.elementConcept,
+                                    font: newFont,
+                                } 
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
+};
+
+function addLink(presentation: Presentation, newLink: string): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
                         {
                             return{
                                 ...element,
@@ -414,93 +539,17 @@ function addLink(presentation: Presentation, newLink: boolean): Presentation {
     };
 };
 
-function editFigureLineColor(presentation: Presentation, color: Color): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    linecolor: color
-                                }
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-};
-
-function editFigureFillColor(presentation: Presentation, color: Color): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElement)
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    fillcolor: color
-                                }
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-};
-
-function makeRound(presentation: Presentation) {
-    let figure: Figure;
-    figure.figureType = 'round';
-    return figure;
-};
-
-function makeTriangel(presentation: Presentation) {
-    let figure: Figure;
-    figure.figureType = 'triangel';
-    return figure;
-};
-
-function makeRectangle(presentation: Presentation) {
-    let figure: Figure;
-    figure.figureType = 'rectangle';
-    return figure;
-};
-
 function setItalicText(presentation: Presentation): Presentation {
     const selection: SelectionType = presentation.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlides[0])
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElements[0])
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
                                 return{
@@ -535,12 +584,12 @@ function setBoldText(presentation: Presentation): Presentation {
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlides[0])
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElements[0])
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             if (element.elementConcept.type == 'text' && element.elementConcept.bold == true){
                                 return{
@@ -575,12 +624,12 @@ function setUnderlineText(presentation: Presentation): Presentation {
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlides[0])
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
             {
                 return {
                     ...slide,
                     elementlist: slide.elementlist.map(element => {
-                        if (element.idElement == selection.idElements[0])
+                        if (selection.idElements.indexOf(element.idElement) != -1)
                         {
                             if (element.elementConcept.type == 'text' && element.elementConcept.underline == true){
                                 return{
@@ -599,6 +648,96 @@ function setUnderlineText(presentation: Presentation): Presentation {
                                         underline : true
                                     } 
                                 }
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
+};
+
+//Figure
+
+function editFigureLineColor(presentation: Presentation, color: Color): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'figure'))
+                        {
+                            return{
+                                ...element,
+                                elementConcept: {
+                                    ...element.elementConcept,
+                                    linecolor: color
+                                }
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
+};
+
+function editFigureFillColor(presentation: Presentation, color: Color): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'figure'))
+                        {
+                            return{
+                                ...element,
+                                elementConcept: {
+                                    ...element.elementConcept,
+                                    fillcolor: color
+                                }
+                            }
+                        }
+                        return element
+                    })  
+                }
+            }
+            return slide
+        })
+    };
+};
+
+//IMG
+function editFilter(presentation: Presentation, newFilter: Filter): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide) != -1)
+            {
+                return {
+                    ...slide,
+                    elementlist: slide.elementlist.map(element => {
+                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'img'))
+                        {
+                            return{
+                                ...element,
+                                elementConcept: {
+                                    ...element.elementConcept,
+                                    filter: newFilter
+                                } 
                             }
                         }
                         return element
