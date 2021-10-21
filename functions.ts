@@ -1,4 +1,4 @@
-import { PresentationMaker } from "./types";
+import { Effect, Mode, PresentationMaker } from "./types";
 import { Presentation } from "./types";
 import { SelectionType } from "./types";
 import { Slide } from "./types";
@@ -12,16 +12,25 @@ import { TextType } from "./types";
 import { Img } from "./types";
 import { Filter } from "./types";
 import { Figure } from "./types";
-import { Triangel } from "./types";
-import { Round } from "./types";
-import { Rectangel } from "./types";
 import { ElementConcept } from "./types";
 
 
 //FUNCTIONS
 
-function createPresentation(presentationMaker: PresentationMaker) {
-    return presentationMaker.presentation;
+function createPresentation(presentationMaker: PresentationMaker): PresentationMaker {
+    let newPresentation: {
+        history: [],
+        slidelist: [],
+        name: "Without name";
+        selection: {
+            idSlides: [],
+            idElements: [],
+        };
+    };
+    return {
+        ...presentationMaker,
+        presentation: newPresentation
+    };
 };
 
 /*
@@ -43,55 +52,116 @@ function exportPresentation(presentation) {};
 */
 function openPresentation(fileJson) {};
 
-function editPresentationName(presentation: Presentation, name: string): Presentation {
-    presentation.name = name;
+function changeMode(presentationMaker: PresentationMaker, newMode: Mode): PresentationMaker {
     return {
-        ...presentation,
+        ...presentationMaker,
+        mode: newMode
     };
 };
 
-function moveSlide(presentation: Presentation, newSlidePosition: number): Presentation {
-    const selection: SelectionType = presentation.selection;
+function editPresentationName(presentation: Presentation, newName: string): Presentation {
     return {
         ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (slide.idSlide == selection.idSlide)
-            {
-                slide.slidePosition = newSlidePosition; //уточнить
-                return {
-                    ...slide,
-                };
-            }
-            return slide
-        })
-    }
+        name: newName
+    };
+};
+
+                                              //Slide//
+
+function moveSlide(presentation: Presentation, newSlidePosition: number): Presentation {
+    const selection: SelectionType = presentation.selection;
+    let i: number;
+    let iSlide: Slide;
+
+    presentation.slidelist.map(slide => {
+        if (selection.idSlides.indexOf(slide.idSlide) != -1)
+        {
+            i: presentation.slidelist.indexOf(slide)
+        };
+    });
+    if(i < newSlidePosition){
+        for(i; i < newSlidePosition; i++){
+            iSlide = presentation.slidelist[i];
+            presentation.slidelist[i] = presentation.slidelist[i+1];
+            presentation.slidelist[i+1] = iSlide;
+        };
+    };
+    if(i > newSlidePosition){
+        for(i; i > newSlidePosition; i--){
+            iSlide = presentation.slidelist[i];
+            presentation.slidelist[i] = presentation.slidelist[i-1];
+            presentation.slidelist[i-1] = iSlide;
+        };
+    };
+    return presentation;
 };
 
 function addSlide(presentation: Presentation): Presentation  {
     let newSlide:Slide = {
         elementlist: [],
-        slidePosition: presentation.slidelist.length + 1,
         idSlide: Math.floor((Math.random() * 100) + 1),
         background: 'ffffff',
         effects: 'occurrence',
     };
     presentation.slidelist.push(newSlide);
+    return presentation;
+};
+
+function deleteSlide(presentation: Presentation): Presentation  {
+    const selection: SelectionType = presentation.selection;
+    let i: number;
+    let iSlide: Slide;
+    presentation.slidelist.map(slide => {
+        if (selection.idSlides.indexOf(slide.idSlide) != -1)
+        {
+            i: presentation.slidelist.indexOf(slide)
+        };
+    });
+    for(i = 0; i > presentation.slidelist.length; i--){
+        iSlide = presentation.slidelist[i];
+        presentation.slidelist[i] = presentation.slidelist[i-1];
+        presentation.slidelist[i-1] = iSlide;
+    };
+    presentation.slidelist.pop();
+
+    return presentation;
+};
+
+function editSlideBackground(presentation: Presentation, newBackground: Background): Presentation {
+    const selection: SelectionType = presentation.selection
     return {
         ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide))
+            {
+                return {
+                    ...slide,
+                    background: newBackground 
+                }
+            }
+            return slide
+        })
     };
 };
 
-function deleteSlide(presentation: Presentation)  {
-    return presentation;
+function editSlideEffect(presentation: Presentation, newEffect: Effect): Presentation {
+    const selection: SelectionType = presentation.selection
+    return {
+        ...presentation,
+        slidelist: presentation.slidelist.map(slide => {
+            if (selection.idSlides.indexOf(slide.idSlide))
+            {
+                return {
+                    ...slide,
+                    effects: newEffect 
+                }
+            }
+            return slide
+        })
+    };
 };
 
-function editSlideBackground(presentation: Presentation, background: Background) {
-    return presentation;
-};
-
-function editSlideEffect(presentation: Presentation, effect: string) {
-    return presentation;
-};
+                                              //Slide//
 
 //не готова
 function addElement(presentation: Presentation, newElement: string): Presentation {
@@ -124,12 +194,7 @@ function deleteElement(presentation: Presentation) {
 };
 
 function addImg(element: ElementType, newSrc: string) {
-    let newImg:Img = {
-        src: newSrc,
-        filter: 'none',
-    };
-    element: newImg;
-    return element
+ 
 };
 
 

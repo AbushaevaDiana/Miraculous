@@ -32,9 +32,10 @@ function editPresentationName(presentation, name) {}
 
 /*
 *@param {PresentationMaker} presentationMaker
-*@return {PresentationMaker}
+*@param {Mode} mode
+*@return {PresentationMaker, mode}
 */
-function changeMode(presentationMaker)
+function changeMode(presentationMaker, )
 
 /*
 *@param {Presentation} presentation
