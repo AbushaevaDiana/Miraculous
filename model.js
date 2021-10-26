@@ -1,7 +1,13 @@
 let presentationMaker = {
     mode: 'editor',
+    history: {
+        actionlist: [],
+        selection: {
+            idSlides: [],
+            idElements: [],
+        }
+    },
     presentation: {
-        history: [],
         slidelist: [{
             elementlist: [{
                 size: {

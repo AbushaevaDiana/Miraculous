@@ -73,7 +73,7 @@ function undo(presentationMaker: PresentationMaker): PresentationMaker {
        ...presentationMaker,
        presentation: newPresentation,
        history: {
-           ...history,
+           ...presentationMaker.history,
            currentIndex: i,
        },
     };
@@ -159,77 +159,99 @@ function moveSlide(presentationMaker: PresentationMaker, newSlidePosition: numbe
 
 };
 
-function addSlide(presentation: Presentation): Presentation  {
+function addSlide(presentationMaker: PresentationMaker): PresentationMaker  {
     let newSlide:Slide = {
         elementlist: [],
         idSlide: Math.floor((Math.random() * 100) + 1),
         background: '#ffffff',
         effects: 'occurrence',
     };
-    presentation.slidelist.push(newSlide);
-    return presentation;
+    let newSlidelist: Slide[] = presentationMaker.presentation.slidelist;
+
+    newSlidelist.push(newSlide);
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: newSlidelist,
+        },
+    };
 };
 
-function deleteSlide(presentation: Presentation): Presentation  {
-    const selection: SelectionType = presentation.selection;
+function deleteSlide(presentationMaker: PresentationMaker): PresentationMaker  {
+    const selection: SelectionType = presentationMaker.selection;
     let i: number;
     let iSlide: Slide;
-    presentation.slidelist.map(slide => {
-        if (selection.idSlides.indexOf(slide.idSlide) != -1)
-        {
-            i = presentation.slidelist.indexOf(slide)
+    let newSlideList: Slide[] = presentationMaker.presentation.slidelist;
+    for(i = 0; i < newSlideList.length; i++)
+    {
+        if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
+            break;
         };
-    });
-    for(i; i > presentation.slidelist.length; i--){
-        iSlide = presentation.slidelist[i];
-        presentation.slidelist[i] = presentation.slidelist[i-1];
-        presentation.slidelist[i-1] = iSlide;
     };
-    presentation.slidelist.pop();
+    for(i; i > newSlideList.length; i--){
+        iSlide = newSlideList[i];
+        newSlideList[i] = newSlideList[i-1];
+        newSlideList[i-1] = iSlide;
+    };
+    newSlideList.pop();
 
-    return presentation;
-};
-
-function editSlideBackground(presentation: Presentation, newBackground: Background): Presentation {
-    const selection: SelectionType = presentation.selection
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    background: newBackground 
-                }
-            }
-            return slide
-        })
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: newSlideList,
+        },
     };
 };
 
-function editSlideEffect(presentation: Presentation, newEffect: Effect): Presentation {
-    const selection: SelectionType = presentation.selection
+function editSlideBackground(presentationMaker: PresentationMaker, newBackground: Background): PresentationMaker {
+    const selection: SelectionType = presentationMaker.selection
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    effects: newEffect 
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        background: newBackground 
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
     };
 };
 
+function editSlideEffect(presentationMaker: PresentationMaker, newEffect: Effect): PresentationMaker {
+    const selection: SelectionType = presentationMaker.selection
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        effects: newEffect,
+                    }
+                }
+                return slide
+            })
+        },
+    };
+};    
                                               //Slide//
 
                                             //Element//                                              
 
-function addElement(presentation: Presentation, newElementConcept: ElementConcept): ElementType {
-    const selection: SelectionType = presentation.selection;
+function addElement(presentationMaker: PresentationMaker, newElementConcept: ElementConcept): PresentationMaker {
+    const selection: SelectionType = presentationMaker.selection
+    let i: number;
+    let newElementlist: ElementType[];
     let newElement: {
         size: {
             h: 100,
@@ -247,10 +269,36 @@ function addElement(presentation: Presentation, newElementConcept: ElementConcep
         elementConcept: ElementConcept,
         idElement: number,
     };
-    newElement.idElement = Math.floor((Math.random() * 100) + 1);
     newElement.elementConcept = newElementConcept;
-    return newElement;
-};
+    newElement.idElement = Math.floor((Math.random() * 100) + 1);
+
+    for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
+    {
+        if(selection.idSlides.indexOf(presentationMaker.presentation.slidelist[i].idSlide) != -1){
+            break;
+        };
+    };
+
+    newElementlist = presentationMaker.presentation.slidelist[i].elementlist;
+    newElementlist.push(newElement);
+
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: newElementlist,
+                    }
+                }
+                return slide
+            })
+        },
+    };
+}; 
 
 function deleteElement(presentation: Presentation): Presentation {
     const selection: SelectionType = presentation.selection;
