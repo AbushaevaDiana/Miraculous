@@ -1,18 +1,26 @@
 export type PresentationMaker = {
     presentation: Presentation, 
     mode: Mode,
+    history: History,
+    selection: SelectionType,
 }
 
 export type Mode = 'editor' | 'preview'; 
 
 export type Presentation = {
-    history: Action[],
     slidelist: Slide[],
     name: string,
-    selection: SelectionType,
 };
 
-export type Action = string; 
+export type History = {
+    actionlist: Presentation[],
+    currentIndex: number,
+};
+
+export type Action = {
+    function: string;
+    params: any[];
+}; 
 
 export type SelectionType = {
     idSlides: number[],

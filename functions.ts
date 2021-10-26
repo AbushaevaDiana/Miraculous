@@ -1,4 +1,4 @@
-import { Effect, FigureConcept, Mode, PresentationMaker } from "./types";
+import { Action, Effect, FigureConcept, History, Mode, PresentationMaker } from "./types";
 import { Presentation } from "./types";
 import { SelectionType } from "./types";
 import { Slide } from "./types";
@@ -15,21 +15,27 @@ import { Figure } from "./types";
 import { ElementConcept } from "./types";
 
 
+
 //FUNCTIONS
 
-function createPresentation(presentationMaker: PresentationMaker): PresentationMaker {
+export function createPresentation(presentationMaker: PresentationMaker): PresentationMaker {
     let newPresentation: {
-        history: [],
         slidelist: [],
         name: "Without name";
-        selection: {
-            idSlides: [],
-            idElements: [],
-        };
+    };
+    let newSelection: {
+        idSlides: [],
+        idElements: [],
+    };
+    let newHistory: {
+        actionlist: [],
+        currentIndex: 0,
     };
     return {
         ...presentationMaker,
-        presentation: newPresentation
+        presentation: newPresentation,
+        selection: newSelection,
+        history: newHistory,
     };
 };
 
@@ -56,13 +62,32 @@ function openPresentation(fileJson) {};
 *@param {Presentation} presentation
 *@return {Presentation}
 */
-function undo(presentation){};
+function undo(presentationMaker: PresentationMaker): PresentationMaker {
+    const actionlist: Presentation[] = presentationMaker.history.actionlist;
+    let i: number = presentationMaker.history.currentIndex;
+    let newPresentation: Presentation = actionlist[i];
+    if (i > 0) {
+        i = i - 1
+    };
+    return {
+       ...presentationMaker,
+       presentation: newPresentation,
+       history: {
+           ...history,
+           currentIndex: i,
+       },
+    };
+};
 
 /*
 *@param {Presentation} presentation
 *@return {Presentation}
 */
-function redo(presentation){};
+function redo(presentationMaker: PresentationMaker): PresentationMaker{
+    return {
+        ...presentationMaker
+    };
+};
 
 function changeMode(presentationMaker: PresentationMaker, newMode: Mode): PresentationMaker {
     return {
@@ -71,41 +96,67 @@ function changeMode(presentationMaker: PresentationMaker, newMode: Mode): Presen
     };
 };
 
-function editPresentationName(presentation: Presentation, newName: string): Presentation {
+function editPresentationName(presentationMaker: PresentationMaker, newName: string): PresentationMaker {
+    let newAction: Presentation = presentationMaker.presentation;
+    let newActionlist: Presentation[];
+    let a: number;
+    let newCurrentIndex: number = presentationMaker.history.currentIndex;
+    for(a = 0; a <= newCurrentIndex; a++){
+        newActionlist.push(presentationMaker.history.actionlist[a]);
+    };
+
+    newActionlist.push(newAction);
+    newCurrentIndex = newCurrentIndex + 1;
     return {
-        ...presentation,
-        name: newName
+        ...presentationMaker,
+        presentation: {        
+            ...presentationMaker.presentation,
+            name: newName,
+        },
+        history: {
+            actionlist: newActionlist,
+            currentIndex: newCurrentIndex,
+        }
     };
 };
 
                                               //Slide//
 
-function moveSlide(presentation: Presentation, newSlidePosition: number): Presentation {
-    const selection: SelectionType = presentation.selection;
+function moveSlide(presentationMaker: PresentationMaker, newSlidePosition: number): PresentationMaker {
+    const presentation = presentationMaker.presentation
+    const selection: SelectionType = presentationMaker.selection;
     let i: number;
     let iSlide: Slide;
+    let newSlideList: Slide[] = presentation.slidelist;
 
-    presentation.slidelist.map(slide => {
-        if (selection.idSlides.indexOf(slide.idSlide) != -1)
-        {
-            i = presentation.slidelist.indexOf(slide)
+    for(i = 0; i < newSlideList.length; i++)
+    {
+        if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
+            break;
         };
-    });
+    };
     if(i < newSlidePosition){
         for(i; i < newSlidePosition; i++){
-            iSlide = presentation.slidelist[i];
-            presentation.slidelist[i] = presentation.slidelist[i+1];
-            presentation.slidelist[i+1] = iSlide;
+            iSlide = newSlideList[i];
+            newSlideList[i] = newSlideList[i+1];
+            newSlideList[i+1] = iSlide;
         };
     };
     if(i > newSlidePosition){
         for(i; i > newSlidePosition; i--){
-            iSlide = presentation.slidelist[i];
-            presentation.slidelist[i] = presentation.slidelist[i-1];
-            presentation.slidelist[i-1] = iSlide;
+            iSlide = newSlideList[i];
+            newSlideList[i] = newSlideList[i-1];
+            newSlideList[i-1] = iSlide;
         };
     };
-    return presentation;
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: newSlideList,
+        }
+    }
+
 };
 
 function addSlide(presentation: Presentation): Presentation  {
@@ -256,7 +307,7 @@ function editBorderColor(presentation: Presentation, newColor: Color): Presentat
             return slide
         })
     };
-};
+}
 
 function editBorderWidth(presentation: Presentation, newWidth: number): Presentation {
     const selection: SelectionType = presentation.selection
@@ -510,8 +561,8 @@ function editFont(presentation: Presentation, newFont: string): Presentation {
     };
 };
 
-function addLink(presentation: Presentation, newLink: string): Presentation {
-    const selection: SelectionType = presentation.selection
+function addLink(presentationMaker: PresentationMaker, newLink: string): PresentationMaker {
+    const selection: SelectionType = presentationMaker.selection
     return {
         ...presentation,
         slidelist: presentation.slidelist.map(slide => {
