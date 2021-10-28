@@ -17,11 +17,6 @@ export type History = {
     currentIndex: number,
 };
 
-export type Action = {
-    function: string;
-    params: any[];
-}; 
-
 export type SelectionType = {
     idSlides: number[],
     idElements: number[],

@@ -29,9 +29,8 @@ export function createPresentation(presentationMaker: PresentationMaker): Presen
     };
     let newHistory: {
         actionlist: Presentation[],
-        currentIndex: 0,
+        currentIndex: -1,
     };
-    newHistory.actionlist.push(newPresentation);
     return {
         ...presentationMaker,
         presentation: newPresentation,
@@ -70,6 +69,7 @@ function addActionToHistory(presentationMaker: PresentationMaker): History {
         newActionlist.push(presentationMaker.history.actionlist[a]);
     };
 
+
     newActionlist.push(newAction);
     newCurrentIndex = newCurrentIndex + 1;
  
@@ -81,19 +81,22 @@ function addActionToHistory(presentationMaker: PresentationMaker): History {
 };
 
 function undo(presentationMaker: PresentationMaker): PresentationMaker {
-    const actionlist: Presentation[] = presentationMaker.history.actionlist;
-    let i: number = presentationMaker.history.currentIndex;
-    let newPresentation: Presentation = actionlist[i];
-    if (i > 0) {
-        i = i - 1
+    let newHistory: History = presentationMaker.history;
+    let i: number = newHistory.currentIndex;
+    let newPresentation: Presentation;
+    if(i >= 0){
+        if (i == (newHistory.actionlist.length - 1)){
+            newHistory = addActionToHistory(presentationMaker)
+        };
+        newPresentation  = newHistory.actionlist[i];
+    
+        i = i - 1;
+        newHistory.currentIndex = i;
     };
     return {
        ...presentationMaker,
        presentation: newPresentation,
-       history: {
-           ...presentationMaker.history,
-           currentIndex: i,
-       },
+       history: newHistory,
     };
 };
 
@@ -101,10 +104,12 @@ function undo(presentationMaker: PresentationMaker): PresentationMaker {
 function redo(presentationMaker: PresentationMaker): PresentationMaker{
     const actionlist: Presentation[] = presentationMaker.history.actionlist;
     let i: number = presentationMaker.history.currentIndex;
-    if (i < actionlist.length) {
-        i = i + 1
+    let newPresentation: Presentation;
+    if (i < (actionlist.length - 2)) {
+        i = i + 2;
+        newPresentation = actionlist[i];
+        i = i - 1;
     };
-    let newPresentation: Presentation = actionlist[i];
     
     return {
        ...presentationMaker,
