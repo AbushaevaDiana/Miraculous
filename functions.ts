@@ -1,4 +1,4 @@
-import { Action, Effect, FigureConcept, History, Mode, PresentationMaker } from "./types";
+import { Effect, FigureConcept, History, Mode, PresentationMaker } from "./types";
 import { Presentation } from "./types";
 import { SelectionType } from "./types";
 import { Slide } from "./types";
@@ -20,17 +20,18 @@ import { ElementConcept } from "./types";
 
 export function createPresentation(presentationMaker: PresentationMaker): PresentationMaker {
     let newPresentation: {
-        slidelist: [],
+        slidelist: Slide[],
         name: "Without name";
     };
     let newSelection: {
-        idSlides: [],
-        idElements: [],
+        idSlides: number[],
+        idElements: number[],
     };
     let newHistory: {
-        actionlist: [],
+        actionlist: Presentation[],
         currentIndex: 0,
     };
+    newHistory.actionlist.push(newPresentation);
     return {
         ...presentationMaker,
         presentation: newPresentation,
@@ -58,10 +59,27 @@ function exportPresentation(presentation) {};
 */
 function openPresentation(fileJson) {};
 
-/*
-*@param {Presentation} presentation
-*@return {Presentation}
-*/
+function addActionToHistory(presentationMaker: PresentationMaker): History {
+    let newAction: Presentation = presentationMaker.presentation;
+    let newHistory: History = presentationMaker.history;
+    let newActionlist: Presentation[] = presentationMaker.history.actionlist; 
+    let newCurrentIndex: number = presentationMaker.history.currentIndex;
+    let a: number;
+
+    for(a = 0; a <= newCurrentIndex; a++){
+        newActionlist.push(presentationMaker.history.actionlist[a]);
+    };
+
+    newActionlist.push(newAction);
+    newCurrentIndex = newCurrentIndex + 1;
+ 
+    return { 
+        ...newHistory,
+        actionlist: newActionlist,
+        currentIndex: newCurrentIndex,
+    };
+};
+
 function undo(presentationMaker: PresentationMaker): PresentationMaker {
     const actionlist: Presentation[] = presentationMaker.history.actionlist;
     let i: number = presentationMaker.history.currentIndex;
@@ -79,13 +97,22 @@ function undo(presentationMaker: PresentationMaker): PresentationMaker {
     };
 };
 
-/*
-*@param {Presentation} presentation
-*@return {Presentation}
-*/
+
 function redo(presentationMaker: PresentationMaker): PresentationMaker{
+    const actionlist: Presentation[] = presentationMaker.history.actionlist;
+    let i: number = presentationMaker.history.currentIndex;
+    if (i < actionlist.length) {
+        i = i + 1
+    };
+    let newPresentation: Presentation = actionlist[i];
+    
     return {
-        ...presentationMaker
+       ...presentationMaker,
+       presentation: newPresentation,
+       history: {
+           ...presentationMaker.history,
+           currentIndex: i,
+       },
     };
 };
 
@@ -96,33 +123,26 @@ function changeMode(presentationMaker: PresentationMaker, newMode: Mode): Presen
     };
 };
 
-function editPresentationName(presentationMaker: PresentationMaker, newName: string): PresentationMaker {
-    let newAction: Presentation = presentationMaker.presentation;
-    let newActionlist: Presentation[];
-    let a: number;
-    let newCurrentIndex: number = presentationMaker.history.currentIndex;
-    for(a = 0; a <= newCurrentIndex; a++){
-        newActionlist.push(presentationMaker.history.actionlist[a]);
-    };
+;
 
-    newActionlist.push(newAction);
-    newCurrentIndex = newCurrentIndex + 1;
+function editPresentationName(presentationMaker: PresentationMaker, newName: string): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
     return {
         ...presentationMaker,
         presentation: {        
             ...presentationMaker.presentation,
             name: newName,
         },
-        history: {
-            actionlist: newActionlist,
-            currentIndex: newCurrentIndex,
-        }
+        history: newHistory,
     };
 };
 
                                               //Slide//
 
 function moveSlide(presentationMaker: PresentationMaker, newSlidePosition: number): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
     const presentation = presentationMaker.presentation
     const selection: SelectionType = presentationMaker.selection;
     let i: number;
@@ -154,12 +174,15 @@ function moveSlide(presentationMaker: PresentationMaker, newSlidePosition: numbe
         presentation: {
             ...presentationMaker.presentation,
             slidelist: newSlideList,
-        }
+        },
+        history: newHistory,
     }
 
 };
 
-function addSlide(presentationMaker: PresentationMaker): PresentationMaker  {
+function addSlide(presentationMaker: PresentationMaker): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
     let newSlide:Slide = {
         elementlist: [],
         idSlide: Math.floor((Math.random() * 100) + 1),
@@ -175,10 +198,13 @@ function addSlide(presentationMaker: PresentationMaker): PresentationMaker  {
             ...presentationMaker.presentation,
             slidelist: newSlidelist,
         },
+        history: newHistory,
     };
 };
 
-function deleteSlide(presentationMaker: PresentationMaker): PresentationMaker  {
+function deleteSlide(presentationMaker: PresentationMaker): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
     const selection: SelectionType = presentationMaker.selection;
     let i: number;
     let iSlide: Slide;
@@ -202,11 +228,14 @@ function deleteSlide(presentationMaker: PresentationMaker): PresentationMaker  {
             ...presentationMaker.presentation,
             slidelist: newSlideList,
         },
+        history: newHistory,
     };
 };
 
 function editSlideBackground(presentationMaker: PresentationMaker, newBackground: Background): PresentationMaker {
-    const selection: SelectionType = presentationMaker.selection
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
         presentation: {
@@ -222,11 +251,14 @@ function editSlideBackground(presentationMaker: PresentationMaker, newBackground
                 return slide
             })
         },
+        history: newHistory,
     };
 };
 
 function editSlideEffect(presentationMaker: PresentationMaker, newEffect: Effect): PresentationMaker {
-    const selection: SelectionType = presentationMaker.selection
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
         presentation: {
@@ -242,16 +274,14 @@ function editSlideEffect(presentationMaker: PresentationMaker, newEffect: Effect
                 return slide
             })
         },
+        history: newHistory,
     };
 };    
                                               //Slide//
 
                                             //Element//                                              
 
-function addElement(presentationMaker: PresentationMaker, newElementConcept: ElementConcept): PresentationMaker {
-    const selection: SelectionType = presentationMaker.selection
-    let i: number;
-    let newElementlist: ElementType[];
+function addElement(presentationMaker: PresentationMaker, newElementConcept: ElementConcept): ElementType {
     let newElement: {
         size: {
             h: 100,
@@ -271,6 +301,241 @@ function addElement(presentationMaker: PresentationMaker, newElementConcept: Ele
     };
     newElement.elementConcept = newElementConcept;
     newElement.idElement = Math.floor((Math.random() * 100) + 1);
+
+    return newElement; 
+}; 
+
+function deleteElement(presentationMaker: PresentationMaker): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
+    let i: number;
+    let iElement: ElementType;
+
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    slide.elementlist.map(element => {
+                        if (selection.idElements.indexOf(element.idElement) != -1)
+                        {
+                            i = slide.elementlist.indexOf(element)
+                        };
+                    });
+                    for(i; i > slide.elementlist.length; i--){
+                        iElement = slide.elementlist[i];
+                        slide.elementlist[i] = slide.elementlist[i-1];
+                        slide.elementlist[i-1] = iElement;
+                    };
+                    slide.elementlist.pop();
+                }
+                return slide;
+            }),
+        },
+        history: newHistory,
+    };
+};
+
+function editBorderColor(presentationMaker: PresentationMaker, newColor: Color): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
+
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                return{
+                                    ...element,
+                                    border: {
+                                        ...element.border,
+                                        color: newColor,
+                                    } 
+                                }
+                            }
+                            return element
+                        })  
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
+    };
+}
+
+function editBorderWidth(presentationMaker: PresentationMaker, newWidth: number): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
+
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                return{
+                                    ...element,
+                                    border: {
+                                        ...element.border,
+                                        width: newWidth,
+                                    } 
+                                }
+                            }
+                            return element
+                        })  
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
+    };
+};
+
+function editBorderStyle(presentationMaker: PresentationMaker, newBorderStyle: BorderStyle): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+    
+    const selection: SelectionType = presentationMaker.selection;
+
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                return{
+                                    ...element,
+                                    border: {
+                                        ...element.border,
+                                        borderStyle: newBorderStyle,
+                                    } 
+                                }
+                            }
+                            return element
+                        })  
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
+    };
+};
+
+
+function moveElement(presentationMaker: PresentationMaker, x: number, y: number): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
+
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                return{
+                                    ...element,
+                                    position: {
+                                        x,
+                                        y,
+                                    } 
+                                }
+                            }
+                            return element
+                        })  
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
+    };
+};
+
+function editElementSize(presentationMaker: PresentationMaker, h: number, w: number): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
+
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                return{
+                                    ...element,
+                                    size: {
+                                        h,
+                                        w,
+                                    } 
+                                }
+                            }
+                            return element
+                        })  
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
+    };
+};
+
+                                         //Element
+
+function addImg(presentationMaker: PresentationMaker, newSrc: string): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+     
+    let i: number;
+    let newElementlist: ElementType[];
+    const selection: SelectionType = presentationMaker.selection;
+    let newElement: ElementType;
+    let elementConcept: {
+        type: 'img',
+        src: string,
+        filter: 'none',
+    };
+    elementConcept.src = newSrc;
+    newElement = addElement(presentationMaker, elementConcept);
 
     for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
     {
@@ -297,210 +562,17 @@ function addElement(presentationMaker: PresentationMaker, newElementConcept: Ele
                 return slide
             })
         },
+        history: newHistory,
     };
-}; 
+};
 
-function deleteElement(presentation: Presentation): Presentation {
-    const selection: SelectionType = presentation.selection;
+
+function addText(presentationMaker: PresentationMaker, newTextContent: string): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
     let i: number;
-    let iElement: ElementType;
-
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                slide.elementlist.map(element => {
-                    if (selection.idElements.indexOf(element.idElement) != -1)
-                    {
-                        i = slide.elementlist.indexOf(element)
-                    };
-                });
-                for(i; i > slide.elementlist.length; i--){
-                    iElement = slide.elementlist[i];
-                    slide.elementlist[i] = slide.elementlist[i-1];
-                    slide.elementlist[i-1] = iElement;
-                };
-                slide.elementlist.pop();
-            };
-            return slide;
-        })
-    };
-};
-
-function editBorderColor(presentation: Presentation, newColor: Color): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            return{
-                                ...element,
-                                border: {
-                                    ...element.border,
-                                    color: newColor,
-                                } 
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-}
-
-function editBorderWidth(presentation: Presentation, newWidth: number): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            return{
-                                ...element,
-                                border: {
-                                    ...element.border,
-                                    width: newWidth
-                                } 
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-};
-
-function editBorderStyle(presentation: Presentation, newBorderStyle: BorderStyle): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            return{
-                                ...element,
-                                border: {
-                                    ...element.border,
-                                    borderStyle: newBorderStyle
-                                } 
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-};
-
-
-function moveElement(presentation: Presentation, x: number, y: number): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            return{
-                                ...element,
-                                position: {
-                                    x,
-                                    y,
-                                }
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-};
-
-function editElementSize(presentation: Presentation, h: number, w: number): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            return{
-                                ...element,
-                                size: {
-                                    h,
-                                    w,
-                                }
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-};
-
-                                         //Element
-
-function addImg(presentation: Presentation, newSrc: string): Presentation{
-    const selection: SelectionType = presentation.selection;
-    let newElement: ElementType;
-    let elementConcept: {
-        type: 'img',
-        src: string,
-        filter: 'none',
-    };
-    elementConcept.src = newSrc;
-    newElement = addElement(presentation, elementConcept);
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                slide.elementlist.push(newElement);
-            };
-            return slide;
-        })
-    };
-};
-
-
-function addText(presentation: Presentation, newTextContent: string): Presentation{
-    const selection: SelectionType = presentation.selection;
+    let newElementlist: ElementType[];
+    const selection: SelectionType = presentationMaker.selection;
     let newElement: ElementType;
     let elementConcept: {
         type: 'text',
@@ -513,21 +585,44 @@ function addText(presentation: Presentation, newTextContent: string): Presentati
         underline: false,
     };
     elementConcept.textContent = newTextContent;
-    newElement = addElement(presentation, elementConcept);
+    newElement = addElement(presentationMaker, elementConcept);
+    
+
+    for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
+    {
+        if(selection.idSlides.indexOf(presentationMaker.presentation.slidelist[i].idSlide) != -1){
+            break;
+        };
+    };
+
+    newElementlist = presentationMaker.presentation.slidelist[i].elementlist;
+    newElementlist.push(newElement);
+
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                slide.elementlist.push(newElement);
-            };
-            return slide;
-        })
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: newElementlist,
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
-function addFigure(presentation: Presentation, newFigureConcept: FigureConcept): Presentation{
-    const selection: SelectionType = presentation.selection;
+function addFigure(presentationMaker: PresentationMaker, newFigureConcept: FigureConcept): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    let i: number;
+    let newElementlist: ElementType[];
+    const selection: SelectionType = presentationMaker.selection;
     let newElement: ElementType;
     let elementConcept: {
         type: 'figure',
@@ -536,314 +631,385 @@ function addFigure(presentation: Presentation, newFigureConcept: FigureConcept):
         figureConcept: FigureConcept,
     };
     elementConcept.figureConcept = newFigureConcept;
-    newElement = addElement(presentation, elementConcept);
+    newElement = addElement(presentationMaker, elementConcept);
+
+    for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
+    {
+        if(selection.idSlides.indexOf(presentationMaker.presentation.slidelist[i].idSlide) != -1){
+            break;
+        };
+    };
+
+    newElementlist = presentationMaker.presentation.slidelist[i].elementlist;
+    newElementlist.push(newElement);
+
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                slide.elementlist.push(newElement);
-            };
-            return slide;
-        })
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: newElementlist,
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
 //Text//
 
-function editTextColor(presentation: Presentation, newColor: Color): Presentation {
-    const selection: SelectionType = presentation.selection
+function editTextColor(presentationMaker: PresentationMaker, newColor: Color): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    color: newColor,
-                                } 
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            {
+                                return{
+                                    ...element,
+                                    elementConcept: {
+                                        ...element.elementConcept,
+                                        color: newColor,
+                                    } 
+                                }
                             }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
-function editFont(presentation: Presentation, newFont: string): Presentation {
-    const selection: SelectionType = presentation.selection
+function editFont(presentationMaker: PresentationMaker, newFont: string): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    font: newFont,
-                                } 
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            {
+                                return{
+                                    ...element,
+                                    elementConcept: {
+                                        ...element.elementConcept,
+                                        font: newFont,
+                                    } 
+                                }
                             }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
 function addLink(presentationMaker: PresentationMaker, newLink: string): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            {
+                                return{
+                                    ...element,
+                                    elementConcept: {
+                                        ...element.elementConcept,
+                                        links: newLink,
+                                    } 
+                                }
+                            }
+                            return element
+                        })  
+                    }
+                }
+                return slide
+            })
+        },
+        history: newHistory,
+    };
+};
+
+function setItalicText(presentationMaker: PresentationMaker): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
     const selection: SelectionType = presentationMaker.selection
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    links: newLink
-                                } 
+        ...presentationMaker,
+        presentation:  {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
+                                    return{
+                                        ...element,
+                                        elementConcept: {
+                                            ...element.elementConcept,
+                                            italic : false
+                                        } 
+                                    }
+                                }
+                                else{
+                                    return{
+                                        ...element,
+                                        elementConcept: {
+                                            ...element.elementConcept,
+                                            italic : true
+                                        } 
+                                    }
+                                }
                             }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
-function setItalicText(presentation: Presentation): Presentation {
-    const selection: SelectionType = presentation.selection
+function setBoldText(presentationMaker: PresentationMaker): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
-                                return{
-                                    ...element,
-                                    elementConcept: {
-                                        ...element.elementConcept,
-                                        italic : false
-                                    } 
+        ...presentationMaker,
+        presentation:  {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
+                                    return{
+                                        ...element,
+                                        elementConcept: {
+                                            ...element.elementConcept,
+                                            bold : false
+                                        } 
+                                    }
+                                }
+                                else{
+                                    return{
+                                        ...element,
+                                        elementConcept: {
+                                            ...element.elementConcept,
+                                            bold : true
+                                        } 
+                                    }
                                 }
                             }
-                            else{
-                                return{
-                                    ...element,
-                                    elementConcept: {
-                                        ...element.elementConcept,
-                                        italic : true
-                                    } 
-                                }
-                            }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
-function setBoldText(presentation: Presentation): Presentation {
-    const selection: SelectionType = presentation.selection
-    return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            if (element.elementConcept.type == 'text' && element.elementConcept.bold == true){
-                                return{
-                                    ...element,
-                                    elementConcept: {
-                                        ...element.elementConcept,
-                                        bold : false
-                                    } 
-                                }
-                            }
-                            else{
-                                return{
-                                    ...element,
-                                    elementConcept: {
-                                        ...element.elementConcept,
-                                        bold : true
-                                    } 
-                                }
-                            }
-                        }
-                        return element
-                    })  
-                }
-            }
-            return slide
-        })
-    };
-};
+function setUnderlineText(presentationMaker: PresentationMaker): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
 
-function setUnderlineText(presentation: Presentation): Presentation {
-    const selection: SelectionType = presentation.selection
+    const selection: SelectionType = presentationMaker.selection
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            if (element.elementConcept.type == 'text' && element.elementConcept.underline == true){
-                                return{
-                                    ...element,
-                                    elementConcept: {
-                                        ...element.elementConcept,
-                                        underline : false
-                                    } 
-                                }  
-                            }
-                            else{
-                                return{
-                                    ...element,
-                                    elementConcept: {
-                                        ...element.elementConcept,
-                                        underline : true
-                                    } 
+        ...presentationMaker,
+        presentation:  {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            {
+                                if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
+                                    return{
+                                        ...element,
+                                        elementConcept: {
+                                            ...element.elementConcept,
+                                            underline : false
+                                        } 
+                                    }
+                                }
+                                else{
+                                    return{
+                                        ...element,
+                                        elementConcept: {
+                                            ...element.elementConcept,
+                                            underline : true
+                                        } 
+                                    }
                                 }
                             }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
 //Figure
 
-function editFigureLineColor(presentation: Presentation, color: Color): Presentation {
-    const selection: SelectionType = presentation.selection
+function editFigureLineColor(presentationMaker: PresentationMaker, color: Color): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+    const selection: SelectionType = presentationMaker.selection;
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'figure'))
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    linecolor: color
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            {
+                                return{
+                                    ...element,
+                                    elementConcept: {
+                                        ...element.elementConcept,
+                                        linecolor: color,
+                                    } 
                                 }
                             }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
-function editFigureFillColor(presentation: Presentation, color: Color): Presentation {
-    const selection: SelectionType = presentation.selection
+function editFigureFillColor(presentationMaker: PresentationMaker, color: Color): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'figure'))
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    fillcolor: color
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            {
+                                return{
+                                    ...element,
+                                    elementConcept: {
+                                        ...element.elementConcept,
+                                        fillcolor: color,
+                                    } 
                                 }
                             }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
 
 //IMG
-function editFilter(presentation: Presentation, newFilter: Filter): Presentation {
-    const selection: SelectionType = presentation.selection
+function editFilter(presentationMaker: PresentationMaker, newFilter: Filter): PresentationMaker {
+    let newHistory: History = addActionToHistory(presentationMaker);
+
+    const selection: SelectionType = presentationMaker.selection;
     return {
-        ...presentation,
-        slidelist: presentation.slidelist.map(slide => {
-            if (selection.idSlides.indexOf(slide.idSlide) != -1)
-            {
-                return {
-                    ...slide,
-                    elementlist: slide.elementlist.map(element => {
-                        if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'img'))
-                        {
-                            return{
-                                ...element,
-                                elementConcept: {
-                                    ...element.elementConcept,
-                                    filter: newFilter
-                                } 
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            {
+                                return{
+                                    ...element,
+                                    elementConcept: {
+                                        ...element.elementConcept,
+                                        filter: newFilter,
+                                    } 
+                                }
                             }
-                        }
-                        return element
-                    })  
+                            return element
+                        })  
+                    }
                 }
-            }
-            return slide
-        })
+                return slide
+            })
+        },
+        history: newHistory,
     };
 };
