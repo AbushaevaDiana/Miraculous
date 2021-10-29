@@ -18,7 +18,7 @@ import { ElementConcept } from "./types";
 
 //FUNCTIONS
 
-export function createPresentation(presentationMaker: PresentationMaker): PresentationMaker {
+function createPresentation(presentationMaker: PresentationMaker): PresentationMaker {
     let newPresentation: {
         slidelist: Slide[],
         name: "Without name";
@@ -37,6 +37,14 @@ export function createPresentation(presentationMaker: PresentationMaker): Presen
         selection: newSelection,
         history: newHistory,
     };
+};
+
+function setNewId(): number{
+    const max: number = 300;
+    const min: number = 10;
+    const randomNum: number = Math.floor(Math.random() * (max - min)) + min;
+    const newId: number = (new Date()).getTime() % 10 ** 8 + randomNum; 
+    return  newId
 };
 
 /*
@@ -190,7 +198,7 @@ function addSlide(presentationMaker: PresentationMaker): PresentationMaker {
 
     let newSlide:Slide = {
         elementlist: [],
-        idSlide: Math.floor((Math.random() * 100) + 1),
+        idSlide: setNewId(),
         background: '#ffffff',
         effects: 'occurrence',
     };
@@ -287,7 +295,7 @@ function editSlideEffect(presentationMaker: PresentationMaker, newEffect: Effect
                                             //Element//                                              
 
 function addElement(presentationMaker: PresentationMaker, newElementConcept: ElementConcept): ElementType {
-    let newElement: {
+    let newElement: ElementType = {
         size: {
             h: 100,
             w: 100,
@@ -300,12 +308,10 @@ function addElement(presentationMaker: PresentationMaker, newElementConcept: Ele
         position: {
             x: 0,
             y: 0,
-        };
-        elementConcept: ElementConcept,
-        idElement: number,
+        },
+        elementConcept: newElementConcept,
+        idElement: setNewId(),
     };
-    newElement.elementConcept = newElementConcept;
-    newElement.idElement = Math.floor((Math.random() * 100) + 1);
 
     return newElement; 
 }; 
@@ -534,12 +540,11 @@ function addImg(presentationMaker: PresentationMaker, newSrc: string): Presentat
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
     let newElement: ElementType;
-    let elementConcept: {
+    let elementConcept: ElementConcept = {
         type: 'img',
-        src: string,
+        src: newSrc,
         filter: 'none',
     };
-    elementConcept.src = newSrc;
     newElement = addElement(presentationMaker, elementConcept);
 
     for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
@@ -579,17 +584,16 @@ function addText(presentationMaker: PresentationMaker, newTextContent: string): 
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
     let newElement: ElementType;
-    let elementConcept: {
+    let elementConcept: ElementConcept = {
         type: 'text',
         color: '#000000',
-        textContent: string,
+        textContent:  newTextContent,
         links: '',
-        font: string,
+        font: 'TimesNewRoman',
         italic: false,
         bold: false,
         underline: false,
     };
-    elementConcept.textContent = newTextContent;
     newElement = addElement(presentationMaker, elementConcept);
     
 
@@ -629,13 +633,12 @@ function addFigure(presentationMaker: PresentationMaker, newFigureConcept: Figur
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
     let newElement: ElementType;
-    let elementConcept: {
+    let elementConcept: ElementConcept = {
         type: 'figure',
         linecolor: '#000000',
         fillcolor: '#ffffff',
-        figureConcept: FigureConcept,
+        figureConcept: newFigureConcept,
     };
-    elementConcept.figureConcept = newFigureConcept;
     newElement = addElement(presentationMaker, elementConcept);
 
     for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
