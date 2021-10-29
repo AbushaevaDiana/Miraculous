@@ -14,6 +14,7 @@ export type Presentation = {
 
 export type History = {
     actionlist: Presentation[],
+    //объединить типы presentation и selection и сделать массив элементов этого общего типа
     currentIndex: number,
 };
 
