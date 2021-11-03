@@ -118,7 +118,7 @@ function moveSlide(presentationMaker: Editer, newSlidePosition: number): Editer 
     {
         if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
             iSlide = newSlideList[i];
-            newSlideList.splice(i);
+            newSlideList.splice(i, 1);
             newSlideList.splice(newSlidePosition, 0, iSlide);
         };
     };
@@ -160,7 +160,7 @@ function deleteSlide(presentationMaker: Editer): Editer {
     for(i = 0; i < newSlideList.length; i++)
     {
         if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
-            newSlideList.splice(i);
+            newSlideList.splice(i, 1);
         };
     };
 
@@ -240,31 +240,28 @@ function addElement(presentationMaker: Editer, newElementConcept: ElementConcept
 
 function deleteElement(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection;
-    let i: number;
-    let iElement: ElementType;
-//переделать
+    let newSlidelist: Slide[] = presentationMaker.presentation.slidelist;
+    let newElementlist: ElementType[];
+    let i, i1: number;
+    
+    for(i = 0; i < newSlidelist.length; i++)
+    {
+        if(selection.idSlides.indexOf(newSlidelist[i].idSlide) != -1){
+            newElementlist = newSlidelist[i].elementlist;
+            for(i1 = 0; i1 < newElementlist.length; i1++)
+            {
+                if(selection.idElements.indexOf(newElementlist[i1].idElement) != -1){
+                    newElementlist.splice(i1, 1);
+                };
+            };
+        };
+    };
+    
     return {
         ...presentationMaker,
         presentation: {
             ...presentationMaker.presentation,
-            slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
-                {
-                    slide.elementlist.map(element => {
-                        if (selection.idElements.indexOf(element.idElement) != -1)
-                        {
-                            i = slide.elementlist.indexOf(element)
-                        };
-                    });
-                    for(i; i > slide.elementlist.length; i--){
-                        iElement = slide.elementlist[i];
-                        slide.elementlist[i] = slide.elementlist[i-1];
-                        slide.elementlist[i-1] = iElement;
-                    };
-                    slide.elementlist.pop();
-                }
-                return slide;
-            }),
+            slidelist: newSlidelist,
         },
     };
 };
