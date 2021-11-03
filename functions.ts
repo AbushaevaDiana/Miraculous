@@ -1,4 +1,4 @@
-import { Effect, FigureConcept, History, Mode, PresentationMaker } from "./types";
+import { Editer, Effect, FigureConcept, History, Mode, PresentationMaker } from "./types";
 import { Presentation } from "./types";
 import { SelectionType } from "./types";
 import { Slide } from "./types";
@@ -16,8 +16,48 @@ import { ElementConcept } from "./types";
 
 
 //FUNCTIONS
-//передавать общий тип presentation и selection
-function createPresentation(presentationMaker: PresentationMaker): PresentationMaker {
+
+
+function setNewId(): number{
+    const max: number = 300;
+    const min: number = 10;
+    const randomNum: number = Math.floor(Math.random() * (max - min)) + min;
+    const newId: number = (new Date()).getTime() % 10 ** 8 + randomNum; 
+    return  newId
+};
+
+//PresentationMaker
+
+function changeMode(presentationMaker: PresentationMaker, newMode: Mode): PresentationMaker {
+    return {
+        ...presentationMaker,
+        mode: newMode
+    };
+};
+
+function setSlideSelection(presentationMaker: Editer, newIdSlides: number[]): Editer { 
+    return {
+        ...presentationMaker,
+        selection: {
+            ...presentationMaker.selection,
+            idSlides: newIdSlides,
+        },
+    };
+};
+
+function setElementSelection(presentationMaker: Editer, newIdElements: number[]): Editer { 
+    return {
+        ...presentationMaker,
+        selection: {
+            ...presentationMaker.selection,
+            idElements: newIdElements,
+        },
+    };
+};
+
+//Presentation
+
+function createPresentation(presentationMaker: Editer): Editer {
     let newPresentation: Presentation = {
         slidelist: [],
         name: "Without name",
@@ -26,24 +66,12 @@ function createPresentation(presentationMaker: PresentationMaker): PresentationM
         idSlides: [],
         idElements: [],
     };
-    let newHistory: History = {
-        actionlist: [],
-        currentIndex: -1,
-    };
+
     return {
         ...presentationMaker,
         presentation: newPresentation,
         selection: newSelection,
-        history: newHistory,
     };
-};
-
-function setNewId(): number{
-    const max: number = 300;
-    const min: number = 10;
-    const randomNum: number = Math.floor(Math.random() * (max - min)) + min;
-    const newId: number = (new Date()).getTime() % 10 ** 8 + randomNum; 
-    return  newId
 };
 
 /*
@@ -65,95 +93,20 @@ function exportPresentation(presentation) {};
 */
 function openPresentation(fileJson) {};
 
-function addActionToHistory(presentationMaker: PresentationMaker): History {
-    let newAction: Presentation = presentationMaker.presentation;
-    let newHistory: History = presentationMaker.history;
-    let newActionlist: Presentation[]; 
-    let newCurrentIndex: number = presentationMaker.history.currentIndex;
-    let a: number;
-
-    for(a = 0; a <= newCurrentIndex; a++){
-        newActionlist.push(presentationMaker.history.actionlist[a]);
-    };
-
-
-    newActionlist.push(newAction);
-    newCurrentIndex = newCurrentIndex + 1;
- 
-    return { 
-        ...newHistory,
-        actionlist: newActionlist,
-        currentIndex: newCurrentIndex,
-    };
-};
-
-function undo(presentationMaker: PresentationMaker): PresentationMaker {
-    let newHistory: History = presentationMaker.history;
-    let i: number = newHistory.currentIndex;
-    let newPresentation: Presentation;
-    if(i >= 0){
-        if (i == (newHistory.actionlist.length - 1)){
-            newHistory = addActionToHistory(presentationMaker)
-        };
-        newPresentation = newHistory.actionlist[i];
-    
-        i = i - 1;
-        newHistory.currentIndex = i;
-    };
-    return {
-       ...presentationMaker,
-       presentation: newPresentation,
-       history: newHistory,
-    };
-};
-
-
-function redo(presentationMaker: PresentationMaker): PresentationMaker{
-    const actionlist: Presentation[] = presentationMaker.history.actionlist;
-    let i: number = presentationMaker.history.currentIndex;
-    let newPresentation: Presentation;
-    if (i < (actionlist.length - 2)) {
-        i = i + 2;
-        newPresentation = actionlist[i];
-        i = i - 1;
-    };
-    
-    return {
-       ...presentationMaker,
-       presentation: newPresentation,
-       history: {
-           ...presentationMaker.history,
-           currentIndex: i,
-       },
-    };
-};
-
-function changeMode(presentationMaker: PresentationMaker, newMode: Mode): PresentationMaker {
-    return {
-        ...presentationMaker,
-        mode: newMode
-    };
-};
-
-;
-
-function editPresentationName(presentationMaker: PresentationMaker, newName: string): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editPresentationName(presentationMaker: Editer, newName: string): Editer {
     return {
         ...presentationMaker,
         presentation: {        
             ...presentationMaker.presentation,
             name: newName,
         },
-        // history: newHistory,
     };
 };
 
-                                              //Slide//
+//Slide//
+
 //slice сохранить слайд, insert в массив на нужное место
-function moveSlide(presentationMaker: PresentationMaker, newSlidePosition: number): PresentationMaker {
-    let newHistory: History = addActionToHistory(presentationMaker);
+function moveSlide(presentationMaker: Editer, newSlidePosition: number): Editer {
 
     const presentation = presentationMaker.presentation
     const selection: SelectionType = presentationMaker.selection;
@@ -164,37 +117,24 @@ function moveSlide(presentationMaker: PresentationMaker, newSlidePosition: numbe
     for(i = 0; i < newSlideList.length; i++)
     {
         if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
-            break;
-        };
-    };
-    if(i < newSlidePosition){
-        for(i; i < newSlidePosition; i++){
             iSlide = newSlideList[i];
-            newSlideList[i] = newSlideList[i+1];
-            newSlideList[i+1] = iSlide;
+            newSlideList.splice(i);
+            newSlideList.splice(newSlidePosition, 0, iSlide);
         };
     };
-    if(i > newSlidePosition){
-        for(i; i > newSlidePosition; i--){
-            iSlide = newSlideList[i];
-            newSlideList[i] = newSlideList[i-1];
-            newSlideList[i-1] = iSlide;
-        };
-    };
+
+   // переделать 
     return {
         ...presentationMaker,
         presentation: {
             ...presentationMaker.presentation,
             slidelist: newSlideList,
         },
-        // history: newHistory,
     }
 
 };
 
-function addSlide(presentationMaker: PresentationMaker): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function addSlide(presentationMaker: Editer): Editer {
     let newSlide:Slide = {
         elementlist: [],
         idSlide: setNewId(),
@@ -210,29 +150,19 @@ function addSlide(presentationMaker: PresentationMaker): PresentationMaker {
             ...presentationMaker.presentation,
             slidelist: newSlidelist,
         },
-        // history: newHistory,
     };
 };
 
-function deleteSlide(presentationMaker: PresentationMaker): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function deleteSlide(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection;
     let i: number;
-    let iSlide: Slide;
     let newSlideList: Slide[] = presentationMaker.presentation.slidelist;
     for(i = 0; i < newSlideList.length; i++)
     {
         if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
-            break;
+            newSlideList.splice(i);
         };
     };
-    for(i; i > newSlideList.length; i--){
-        iSlide = newSlideList[i];
-        newSlideList[i] = newSlideList[i-1];
-        newSlideList[i-1] = iSlide;
-    };
-    newSlideList.pop();
 
     return {
         ...presentationMaker,
@@ -240,13 +170,10 @@ function deleteSlide(presentationMaker: PresentationMaker): PresentationMaker {
             ...presentationMaker.presentation,
             slidelist: newSlideList,
         },
-        // history: newHistory,
     };
 };
 
-function editSlideBackground(presentationMaker: PresentationMaker, newBackground: Background): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editSlideBackground(presentationMaker: Editer, newBackground: Background): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -263,13 +190,10 @@ function editSlideBackground(presentationMaker: PresentationMaker, newBackground
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function editSlideEffect(presentationMaker: PresentationMaker, newEffect: Effect): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editSlideEffect(presentationMaker: Editer, newEffect: Effect): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -286,14 +210,13 @@ function editSlideEffect(presentationMaker: PresentationMaker, newEffect: Effect
                 return slide
             })
         },
-        // history: newHistory,
     };
 };    
-                                              //Slide//
+//Slide//
 
-                                            //Element//                                              
+//Element//                                              
 
-function addElement(presentationMaker: PresentationMaker, newElementConcept: ElementConcept): ElementType {
+function addElement(presentationMaker: Editer, newElementConcept: ElementConcept): ElementType {
     let newElement: ElementType = {
         size: {
             h: 100,
@@ -315,13 +238,11 @@ function addElement(presentationMaker: PresentationMaker, newElementConcept: Ele
     return newElement; 
 }; 
 
-function deleteElement(presentationMaker: PresentationMaker): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function deleteElement(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection;
     let i: number;
     let iElement: ElementType;
-
+//переделать
     return {
         ...presentationMaker,
         presentation: {
@@ -345,13 +266,10 @@ function deleteElement(presentationMaker: PresentationMaker): PresentationMaker 
                 return slide;
             }),
         },
-        // history: newHistory,
     };
 };
 
-function editBorderColor(presentationMaker: PresentationMaker, newColor: Color): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editBorderColor(presentationMaker: Editer, newColor: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -381,13 +299,10 @@ function editBorderColor(presentationMaker: PresentationMaker, newColor: Color):
                 return slide
             })
         },
-        // history: newHistory,
     };
 }
 
-function editBorderWidth(presentationMaker: PresentationMaker, newWidth: number): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editBorderWidth(presentationMaker: Editer, newWidth: number): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -417,12 +332,10 @@ function editBorderWidth(presentationMaker: PresentationMaker, newWidth: number)
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function editBorderStyle(presentationMaker: PresentationMaker, newBorderStyle: BorderStyle): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
+function editBorderStyle(presentationMaker: Editer, newBorderStyle: BorderStyle): Editer {
     
     const selection: SelectionType = presentationMaker.selection;
 
@@ -453,14 +366,11 @@ function editBorderStyle(presentationMaker: PresentationMaker, newBorderStyle: B
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
 
-function moveElement(presentationMaker: PresentationMaker, x: number, y: number): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function moveElement(presentationMaker: Editer, x: number, y: number): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -490,13 +400,10 @@ function moveElement(presentationMaker: PresentationMaker, x: number, y: number)
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function editElementSize(presentationMaker: PresentationMaker, h: number, w: number): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editElementSize(presentationMaker: Editer, h: number, w: number): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -526,15 +433,12 @@ function editElementSize(presentationMaker: PresentationMaker, h: number, w: num
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-                                         //Element
+//Element
 
-function addImg(presentationMaker: PresentationMaker, newSrc: string): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-     
+function addImg(presentationMaker: Editer, newSrc: string): Editer { 
     let i: number;
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
@@ -571,14 +475,11 @@ function addImg(presentationMaker: PresentationMaker, newSrc: string): Presentat
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
 
-function addText(presentationMaker: PresentationMaker, newTextContent: string): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function addText(presentationMaker: Editer, newTextContent: string): Editer {
     let i: number;
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
@@ -621,13 +522,10 @@ function addText(presentationMaker: PresentationMaker, newTextContent: string): 
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function addFigure(presentationMaker: PresentationMaker, newFigureConcept: FigureConcept): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function addFigure(presentationMaker: Editer, newFigureConcept: FigureConcept): Editer {
     let i: number;
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
@@ -665,15 +563,12 @@ function addFigure(presentationMaker: PresentationMaker, newFigureConcept: Figur
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
 //Text//
 
-function editTextColor(presentationMaker: PresentationMaker, newColor: Color): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editTextColor(presentationMaker: Editer, newColor: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -702,13 +597,10 @@ function editTextColor(presentationMaker: PresentationMaker, newColor: Color): P
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function editFont(presentationMaker: PresentationMaker, newFont: string): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editFont(presentationMaker: Editer, newFont: string): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -737,13 +629,10 @@ function editFont(presentationMaker: PresentationMaker, newFont: string): Presen
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function addLink(presentationMaker: PresentationMaker, newLink: string): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function addLink(presentationMaker: Editer, newLink: string): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -772,13 +661,10 @@ function addLink(presentationMaker: PresentationMaker, newLink: string): Present
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function setItalicText(presentationMaker: PresentationMaker): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function setItalicText(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection
     return {
         ...presentationMaker,
@@ -818,13 +704,10 @@ function setItalicText(presentationMaker: PresentationMaker): PresentationMaker 
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function setBoldText(presentationMaker: PresentationMaker): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function setBoldText(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection
     return {
         ...presentationMaker,
@@ -864,13 +747,10 @@ function setBoldText(presentationMaker: PresentationMaker): PresentationMaker {
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function setUnderlineText(presentationMaker: PresentationMaker): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function setUnderlineText(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection
     return {
         ...presentationMaker,
@@ -910,14 +790,12 @@ function setUnderlineText(presentationMaker: PresentationMaker): PresentationMak
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
 //Figure
 
-function editFigureLineColor(presentationMaker: PresentationMaker, color: Color): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
+function editFigureLineColor(presentationMaker: Editer, color: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -946,13 +824,10 @@ function editFigureLineColor(presentationMaker: PresentationMaker, color: Color)
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
-function editFigureFillColor(presentationMaker: PresentationMaker, color: Color): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editFigureFillColor(presentationMaker: Editer, color: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -981,14 +856,11 @@ function editFigureFillColor(presentationMaker: PresentationMaker, color: Color)
                 return slide
             })
         },
-        // history: newHistory,
     };
 };
 
 //IMG
-function editFilter(presentationMaker: PresentationMaker, newFilter: Filter): PresentationMaker {
-    // let newHistory: History = addActionToHistory(presentationMaker);
-
+function editFilter(presentationMaker: Editer, newFilter: Filter): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -1017,6 +889,5 @@ function editFilter(presentationMaker: PresentationMaker, newFilter: Filter): Pr
                 return slide
             })
         },
-        // history: newHistory,
     };
 };

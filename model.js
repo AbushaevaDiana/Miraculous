@@ -2,10 +2,11 @@ let presentationMaker = {
     mode: 'editor',
     history: {
         actionlist: [],
-        selection: {
-            idSlides: [],
-            idElements: [],
-        }
+        currentIndex: 0,
+    },
+    selection: {
+        idSlides: [],
+        idElements: [],
     },
     presentation: {
         slidelist: [{

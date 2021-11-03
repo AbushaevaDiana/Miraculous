@@ -12,9 +12,13 @@ export type Presentation = {
     name: string,
 };
 
+export type Editer = {
+    presentation: Presentation;
+    selection: SelectionType;
+};
+
 export type History = {
-    actionlist: Presentation[],
-    //объединить типы presentation и selection и сделать массив элементов этого общего типа
+    actionlist: Editer[],
     currentIndex: number,
 };
 
