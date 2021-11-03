@@ -1,22 +1,6 @@
-import { Editer, Effect, FigureConcept, History, Mode, PresentationMaker } from "./types";
-import { Presentation } from "./types";
-import { SelectionType } from "./types";
-import { Slide } from "./types";
-import { Color } from "./types";
-import { Background } from "./types";
-import { ElementType } from "./types";
-import { Border } from "./types";
-import { BorderStyle } from "./types";
-import { Position } from "./types";
-import { TextType } from "./types";
-import { Img } from "./types";
-import { Filter } from "./types";
-import { Figure } from "./types";
-import { ElementConcept } from "./types";
-
+import { ElementConcept, Filter, BorderStyle, ElementType, Background, Color, Slide, SelectionType, Presentation, Editer, Effect, FigureConcept, Mode, PresentationMaker } from "./types";
 
 //FUNCTIONS
-
 
 function setNewId(): number{
     const max: number = 300;
