@@ -1,4 +1,4 @@
-import { Presentation, PresentationMaker } from "./types";
+import { Presentation, PresentationMaker } from "../types";
 
 function addActionToHistory(presentationMaker: PresentationMaker): History {
     let newAction: Presentation = presentationMaker.presentation;

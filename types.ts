@@ -87,7 +87,7 @@ export type Img = {
     filter: Filter,
 };
 
-export type Filter = 'none' | 'black-white' | 'red' | 'green';
+export type Filter = 'none' | 'black-white' | 'red' | 'green' | 'blue';
 
 export type Figure = {
     type: 'figure',
