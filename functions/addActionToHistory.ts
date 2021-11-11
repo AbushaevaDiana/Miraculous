@@ -1,23 +1,28 @@
-import { Presentation, PresentationMaker } from "../types";
+import { Editer, History, Presentation, PresentationMaker, SelectionType } from "../types";
 
-function addActionToHistory(presentationMaker: PresentationMaker): History {
-    let newAction: Presentation = presentationMaker.presentation;
-    let newHistory: History = presentationMaker.history;
-    let newActionlist: Presentation[]; 
+function addActionToHistory(presentationMaker: PresentationMaker): PresentationMaker {
+    let newAction: Editer = {
+        presentation: presentationMaker.presentation,
+        selection: presentationMaker.selection
+    };
+    let newActionlist: Editer[]; 
     let newCurrentIndex: number = presentationMaker.history.currentIndex;
     let a: number;
-
+ 
+        
     for(a = 0; a <= newCurrentIndex; a++){
         newActionlist.push(presentationMaker.history.actionlist[a]);
     };
 
-
     newActionlist.push(newAction);
-    newCurrentIndex = newCurrentIndex + 1;
+    newCurrentIndex = a + 1;
  
-    return { 
-        ...newHistory,
-        actionlist: newActionlist,
-        currentIndex: newCurrentIndex,
+    return {
+        ...presentationMaker, 
+        history: {
+            ...history,
+            actionlist: newActionlist,
+            currentIndex: newCurrentIndex,
+        }
     };
 };
