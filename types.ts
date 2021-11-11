@@ -73,6 +73,7 @@ export type TextType = {
     color: Color,
     textContent: string,
     links: Link,
+    size: number;
     font: string,
     italic: boolean,
     bold: boolean,

@@ -470,6 +470,7 @@ function addText(presentationMaker: Editer, newTextContent: string): Editer {
         color: '#000000',
         textContent:  newTextContent,
         links: '',
+        size: 12,
         font: 'TimesNewRoman',
         italic: false,
         bold: false,
@@ -580,6 +581,39 @@ function editTextColor(presentationMaker: Editer, newColor: Color): Editer {
         },
     };
 };
+
+function editTextSize(presentationMaker: Editer, newSize: number): Editer {
+    const selection: SelectionType = presentationMaker.selection;
+    return {
+        ...presentationMaker,
+        presentation: {
+            ...presentationMaker.presentation,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.map(element => {
+                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            {
+                                return{
+                                    ...element,
+                                    elementConcept: {
+                                        ...element.elementConcept,
+                                        size: newSize,
+                                    } 
+                                }
+                            }
+                            return element
+                        })  
+                    }
+                }
+                return slide
+            })
+        },
+    };
+};
+
 
 function editFont(presentationMaker: Editer, newFont: string): Editer {
     const selection: SelectionType = presentationMaker.selection;
