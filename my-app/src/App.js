@@ -1,24 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Headmenu from './Headmenu';
+import Slidemenu from './Slidemenu';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+        <p className="headtext">
+          Презентация Miraculous: Without name
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          React
-        </a>
+        <Headmenu></Headmenu>
       </header>
+      <body className="App-body">
+        <Slidemenu></Slidemenu>
+      </body>
     </div>
+
   );
 }
 

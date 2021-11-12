@@ -2,32 +2,110 @@
   text-align: center;
 }
 
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+*/
 
+/*
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+*/
 .App-header {
-  background-color: #ffffff;
-  min-height: 100vh;
+  background-color: #FFEEDD;
+  height: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: top;
+  font-size: calc(10px + 1vmin);
+  color: #000;
 }
+
+.headtext{
+  margin-top: 0;
+  height: 2%;
+  color: #F08080;
+  font-weight: bold;
+}
+
+.headmenu{
+  width: 100%;
+  border: 0;
+  padding: 0;
+  list-style: none; 
+  margin: 0;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.headmenu__li{
+  width: 25%;
+}
+
+.headmenu__li__button{
+  border-color: #F08080;
+  width: 100%;
+  height: 100%;
+  background-color: #FFEEDD;
+}
+
+.headmenu__li__button:hover{
+  background-color: #F08080;
+  color: #fff;
+}
+
+
+.App-body{
+  width: 100%;
+  /*как сделать высоту на максимум экрана, без прокрутки?*/
+  height: 622px;
+  background-color: #fff;
+}
+
+.slidemenu{
+  background-color: #F08080;
+  width: 19%;
+  height: 100%;
+}
+
+.slidemenu__list{
+  width: 100%;
+  padding-top: 5%;
+  margin: 0;
+  list-style: none; 
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.slidemenu__list__slide{
+  border-color: #F08080;
+  margin: 2%;
+  background-color: #fff;
+  height: 35%;
+  width: 70%;
+}
+
+.imglogo{
+  height: 15%;
+}
+
 
 .App-link {
-  color: #FFD700;
+  color: #00ffff;
 }
 
+
+/*
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +114,4 @@
     transform: rotate(360deg);
   }
 }
+*/
