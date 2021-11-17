@@ -93,14 +93,14 @@ function editPresentationName(presentationMaker: Editer, newName: string): Edite
 function moveSlide(presentationMaker: Editer, newSlidePosition: number): Editer {
 
     const presentation = presentationMaker.presentation
-    const selection: SelectionType = presentationMaker.selection;
+    const selection = presentationMaker.selection;
     let i: number;
     let iSlide: Slide;
-    let newSlideList: Slide[] = presentation.slidelist;
+    let newSlideList = presentation.slidelist;
 
-    for(i = 0; i < newSlideList.length; i++)
+    for(i = 0; i < presentation.slidelist.length; i++)
     {
-        if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
+        if(selection.idSlides.includes(presentation.slidelist[i].idSlide)){
             iSlide = newSlideList[i];
             newSlideList.splice(i, 1);
             newSlideList.splice(newSlidePosition, 0, iSlide);

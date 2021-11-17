@@ -6,7 +6,7 @@ export default class Slidemenu extends Component {
             <>  
                <div class="slidemenu">
                    <ul class="slidemenu__list">
-                       <li className={slidemenu__list__slide}></li>
+                       <li class="slidemenu__list__slide"></li>
                        <li class="slidemenu__list__slide"></li>
                        <li class="slidemenu__list__slide"></li>
                        <li class="slidemenu__list__slide"></li>
