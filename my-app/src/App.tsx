@@ -1,8 +1,9 @@
+import React from 'react';  
 import './normalize.css';
 import './App.css';
 import './Headmenu.css';
-import Headmenu from './Headmenu';
-import Slidemenu from './Slidemenu';
+import Headmenu from './Headmenu'
+import Slidemenu from './Slidemenu'
 
 function App() {
   return (

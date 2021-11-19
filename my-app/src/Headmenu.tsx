@@ -41,12 +41,12 @@ export default class Headmenu extends Component {
                         </div>
                         <div className="font-container__settings font-settings">
                             <div className="font-settings__select font-select">
-                                <select size="3" className="font-select__field select-field">
+                                <select size = {3} className="font-select__field select-field">
                                     <option className="select-field__option">Roboto</option>
                                     <option className="select-field__option">Open Sans</option>
                                     <option className="select-field__option">Praise</option>
                                 </select>
-                                <select size="3" className="font-select__field select-field">
+                                <select size={3} className="font-select__field select-field">
                                     <option className="select-field__option">32,0 pt</option>
                                     <option className="select-field__option">33,0 pt</option>
                                     <option className="select-field__option">34,0 pt</option>
@@ -60,25 +60,25 @@ export default class Headmenu extends Component {
                             </div>
                         </div>
                     </div>
-                    <div class="toolbar__select-container element-settings">
+                    <div className="toolbar__select-container element-settings">
                         <div className="element-settings__img filter-icon"></div>
-                        <select size="3" className="element-settings__select select-field">
+                        <select size={3} className="element-settings__select select-field">
                             <option className="select-field__option">Фильтры</option>
                             <option className="select-field__option">черно-белый</option>
                             <option className="select-field__option">красный</option>
                         </select>
                     </div>
-                    <div class="toolbar__select-container element-settings">
+                    <div className="toolbar__select-container element-settings">
                         <div className="element-settings__img contour-icon"></div>
-                        <select size="3" className="element-settings__select select-field">
+                        <select size={3} className="element-settings__select select-field">
                             <option className="select-field__option">Контур фигуры</option>
                             <option className="select-field__option">черно-белый</option>
                             <option className="select-field__option">красный</option>
                         </select>
                     </div>
-                    <div class="toolbar__select-container element-settings">
+                    <div className="toolbar__select-container element-settings">
                         <div className="element-settings__img fill-icon"></div>
-                        <select size="3" className="element-settings__select select-field">
+                        <select className="element-settings__select select-field" size={3}>
                             <option className="select-field__option">Заливка фигуры</option>
                             <option className="select-field__option">черно-белый</option>
                             <option className="select-field__option">красный</option>
@@ -87,7 +87,5 @@ export default class Headmenu extends Component {
                 </div>
             </>
         )
-
     }
 };
-
