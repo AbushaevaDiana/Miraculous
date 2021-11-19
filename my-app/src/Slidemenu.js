@@ -12,7 +12,7 @@ export default class Slidemenu extends Component {
                        <li class="slidemenu__list__slide"></li>
                        <li class="slidemenu__list__slide"></li>
                    </ul>
-                   <img class="imglogo" src="/img/logo.png" alt="Логотип"></img>
+                   <img class="imglogo" src="./img/logoMiraculous.png" alt="Логотип"></img>
                </div>
             </>
         )
