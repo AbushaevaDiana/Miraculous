@@ -1,6 +1,18 @@
 import './App.css';
 import './Headmenu.css';
+// import styles from './Headmenu.module.css';
 import React, { Component } from 'react';
+
+
+// type EditorContainerProps = {
+//     children?: React.ReactNode;
+//     };
+
+// export function EditorContainer({ children }: EditorContainerProps) {
+//     return <div className={styles.appEditorContainer}>{children}</div>;
+// }
+
+
 export default class Headmenu extends Component {
     render() {
         return (
@@ -16,7 +28,7 @@ export default class Headmenu extends Component {
                         <button className="headmenu__li__button">Вставить</button>
                     </li>
                     <li className="headmenu__li">
-                        <button className="headmenu__li__button">Эллемент</button>
+                        <button className="headmenu__li__button">Элемент</button>
                     </li>
                 </ul>
                 <div className = "toolbar">

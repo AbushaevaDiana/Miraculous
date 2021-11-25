@@ -1,8 +1,9 @@
 import './App.css';
+import './Slidemenu.css';
 import React, { Component } from 'react';
 export default class Slidemenu extends Component {
     render() {
-        return(
+        return (
             <>  
                <div className="slidemenu">
                    <ul className="slidemenu__list">

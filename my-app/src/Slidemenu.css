@@ -1,0 +1,46 @@
+.slidemenu {
+    background-color: #F08080;
+    width: 15%;
+    height: 100%;
+  }
+  
+.slidemenu__list {
+    width: 100%;
+    padding-top: 5%;
+    margin: 0;
+    list-style: none; 
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+.slidemenu__list__slide{
+    border-color: #F08080;
+    margin: 2%;
+    background-color: #fff;
+    height: 35%;
+    width: 70%;
+}
+
+.imglogo{
+    height: 15%;
+}
+
+
+.App-link {
+    color: #00ffff;
+}
+
+
+/*
+@keyframes App-logo-spin {
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(360deg);
+}
+}
+*/
