@@ -1,7 +1,6 @@
 import './App.css';
-import './Headmenu.css';
-// import styles from './Headmenu.module.css';
-import React, { Component } from 'react';
+import styles from './Headmenu.module.css';
+import React, { Children, Component } from 'react';
 
 
 // type EditorContainerProps = {
@@ -17,83 +16,83 @@ export default class Headmenu extends Component {
     render() {
         return (
             <> 
-                <ul className="headmenu">
-                    <li className="headmenu__li">       
-                        <button className="headmenu__li__button">Файл</button>
+                <ul className={styles.headmenu}>
+                    <li className= {styles.headmenuLi}>       
+                        <button className={styles.headmenuLiButton}>Файл</button>
                     </li>
-                    <li className="headmenu__li">
-                        <button className="headmenu__li__button">Главная</button>
+                    <li className={styles.headmenuLi}>
+                        <button className={styles.headmenuLiButton}>Главная</button>
                     </li>
-                    <li className="headmenu__li">
-                        <button className="headmenu__li__button">Вставить</button>
+                    <li className={styles.headmenuLi}>
+                        <button className={styles.headmenuLiButton}>Вставить</button>
                     </li>
-                    <li className="headmenu__li">
-                        <button className="headmenu__li__button">Элемент</button>
+                    <li className={styles.headmenuLi}>
+                        <button className={styles.headmenuLiButton}>Элемент</button>
                     </li>
                 </ul>
-                <div className = "toolbar">
-                    <div className="toolbar__newSlide newSlide-btn">
-                        <div className="newSlide-btn__img"></div>
-                        <p className="newSlide-btn__insc tool-insc">Новый слайд</p>
+                <div className = {styles.toolbar}>
+                    <div className={styles.toolbarNewSlide}>
+                        <div className={styles.newSlideBtnImg}></div>
+                        <p className={styles.newSlideBtnInsc + ' ' + styles.toolInsc}>Новый слайд</p>
                     </div>
-                    <div className="toolbar__cancelRefund cancelRefund-btn">
-                        <div className="cancelRefund-btn__container do-redo-btn">
-                            <div className="do-redo-btn__arrow arrow-left"></div>
-                            <p className="do-redo-btn__insc tool-insc">Отмена</p>
+                    <div className={styles.toolbarCancelRefund + ' ' +styles.cancelRefundBtn}>
+                        <div className= {styles.cancelRefundBtnContainer + ' ' +styles.doRedoBtn}>
+                            <div className={styles.doRedoBtnArrow + ' ' + styles.arrowLeft}></div>
+                            <p className={styles.doRedoBtnInsc + ' ' + styles.toolInsc}>Отмена</p>
                         </div>
-                        <div className="cancelRefund-btn__container do-redo-btn">
-                        <div className="do-redo-btn__arrow arrow-right"></div>
-                            <p className="do-redo-btn__insc tool-insc">Возврат</p>
+                        <div className={styles.cancelRefundBtnContainer + ' ' +styles.doRedoBtn}>
+                        <div className={styles.doRedoBtnArrow + ' ' + styles.arrowRight}></div>
+                            <p className={styles.doRedoBtnInsc + ' ' + styles.toolInsc}>Возврат</p>
                         </div>
                     </div>
-                    <div className="toolbar__font font-container">
-                        <div className="font-container__btn font-btn">
-                            <div className="font-btn__img"></div>
-                            <p className="font-btn__insc tool-insc">Шрифт</p>
+                    <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
+                        <div className={styles.fontContainerBt + ' ' + styles.fontBtn}>
+                            <div className={styles.fontBtnImg}></div>
+                            <p className={styles.fontBtnInsc +  ' ' + styles.toolInsc}>Шрифт</p>
                         </div>
-                        <div className="font-container__settings font-settings">
-                            <div className="font-settings__select font-select">
-                                <select size = {3} className="font-select__field select-field">
-                                    <option className="select-field__option">Roboto</option>
-                                    <option className="select-field__option">Open Sans</option>
-                                    <option className="select-field__option">Praise</option>
+                        <div className={styles.fontContainerSettings +  ' ' + styles.fontSettings}>
+                            <div className={styles.fontSettingsSelect +  ' ' + styles.fontSelect}>
+                                <select size = {3} className={styles.fontSelectField +  ' ' + styles.selectField}>
+                                    <option className={styles.selectFieldOption}>Roboto</option>
+                                    <option className={styles.selectFieldOption}>Open Sans</option>
+                                    <option className={styles.selectFieldOption}>Praise</option>
                                 </select>
-                                <select size={3} className="font-select__field select-field">
-                                    <option className="select-field__option">32,0 pt</option>
-                                    <option className="select-field__option">33,0 pt</option>
-                                    <option className="select-field__option">34,0 pt</option>
+                                <select  className={styles.fontSelectField +  ' ' + styles.selectField}>
+                                    <option className={styles.selectFieldOption}>32,0 pt</option>
+                                    <option className={styles.selectFieldOption}>33,0 pt</option>
+                                    <option className={styles.selectFieldOption}>34,0 pt</option>
                                 </select>
                             </div>
-                            <div className="font-settings__mark font-mark">
-                                <div className="font-mark__icon bold"></div>
-                                <div className="font-mark__icon italic"></div>
-                                <div className="font-mark__icon underlined"></div>
-                                <div className="font-mark__icon select-color"></div>
+                            <div className={styles.fontSettingsMark +  ' ' + styles.fontMark}>
+                                <div className={styles.fontMarkIcon +  ' ' + styles.bold}></div> 
+                                <div className={styles.fontMarkIcon +  ' ' + styles.italic}></div>
+                                <div className={styles.fontMarkIcon +  ' ' + styles.underlined}></div>
+                                <div className={styles.fontMarkIcon +  ' ' + styles.selectColor}></div>
                             </div>
                         </div>
                     </div>
-                    <div className="toolbar__select-container element-settings">
-                        <div className="element-settings__img filter-icon"></div>
-                        <select size={3} className="element-settings__select select-field">
-                            <option className="select-field__option">Фильтры</option>
-                            <option className="select-field__option">черно-белый</option>
-                            <option className="select-field__option">красный</option>
+                    <div className={styles.toolbarSelectContainer + ' ' + styles.elementSettings}>
+                        <div className={styles.elementSettingsImg + ' ' + styles.filterIcon}></div>
+                        <select className={styles.elementSettingsSelect + ' ' + styles.selectField}>
+                            <option className={styles.selectFieldOption}>Фильтры</option>
+                            <option className={styles.selectFieldOption}>черно-белый</option>
+                            <option className={styles.selectFieldOption}>красный</option>
                         </select>
                     </div>
-                    <div className="toolbar__select-container element-settings">
-                        <div className="element-settings__img contour-icon"></div>
-                        <select size={3} className="element-settings__select select-field">
-                            <option className="select-field__option">Контур фигуры</option>
-                            <option className="select-field__option">черно-белый</option>
-                            <option className="select-field__option">красный</option>
+                    <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
+                        <div className={styles.elementSettingsImg + ' ' + styles.contourIcon}></div>
+                        <select className={styles.elementSettingsSelect + ' ' + styles.selectField}>
+                            <option className={styles.selectFieldOption}>Контур фигуры</option>
+                            <option className={styles.selectFieldOption}>черно-белый</option>
+                            <option className={styles.selectFieldOption}>красный</option>
                         </select>
                     </div>
-                    <div className="toolbar__select-container element-settings">
-                        <div className="element-settings__img fill-icon"></div>
-                        <select className="element-settings__select select-field" size={3}>
-                            <option className="select-field__option">Заливка фигуры</option>
-                            <option className="select-field__option">черно-белый</option>
-                            <option className="select-field__option">красный</option>
+                    <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
+                        <div className={styles.elementSettingsImg + ' ' + styles.fillIcon}></div>
+                        <select className= {styles.lementSettingsSelect + ' ' + styles.selectField} >
+                            <option className={styles.selectFieldOption}>Заливка фигуры</option>
+                            <option className={styles.selectFieldOption}>черно-белый</option>
+                            <option className={styles.selectFieldOption}>красный</option>
                         </select>
                     </div>
                 </div>

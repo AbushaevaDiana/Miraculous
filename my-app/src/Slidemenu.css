@@ -2,30 +2,58 @@
     background-color: #F08080;
     width: 15%;
     height: 100%;
-  }
-  
-.slidemenu__list {
-    width: 100%;
-    padding-top: 5%;
-    margin: 0;
-    list-style: none; 
-    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-self: center;
 }
-
-.slidemenu__list__slide{
-    border-color: #F08080;
-    margin: 2%;
-    background-color: #fff;
-    height: 35%;
-    width: 70%;
+  
+.slidemenu__list {
+    width: 100%;
+    padding: 0 27px;
+    list-style: none;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    counter-reset: heading;
 }
 
-.imglogo{
-    height: 15%;
+.slidemenu__list__slide {
+    margin-bottom: 17px;
+    border: 5px solid transparent;
+    background-color: #fff;
+    height: 35%;
+    width: 100%;
+    transition: border, .3s, ease-in-out;
+}
+
+.slidemenu__list__slide::before {
+    position: absolute;
+    left: 8px;
+    counter-increment: heading;
+    content: counter(heading) " ";
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+
+/* .slidemenu__list__slide:not(:last-child) {
+margin-bottom: 17px;
+} */
+    
+.slidemenu__list__slide:active {
+  border: 5px solid #000000;
+}
+
+.imglogo {
+   background: url('./img/logoMiraculous.png');
+   width: 178px;
+   height: 67px;
 }
 
 
