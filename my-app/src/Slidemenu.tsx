@@ -1,22 +1,22 @@
 import './App.css';
-import './Slidemenu.css';
+import styles from './Slidemenu.module.css';
 import React, { Component } from 'react';
+
 export default class Slidemenu extends Component {
     render() {
         return (
             <>  
-               <div className="slidemenu">
-                   <ul className="slidemenu__list">
-                       <li className="slidemenu__list__slide"></li>
-                       <li className="slidemenu__list__slide"></li>
-                       <li className="slidemenu__list__slide"></li>
-                       <li className="slidemenu__list__slide"></li>
-                       <li className="slidemenu__list__slide"></li>
+               <div className={styles.slidemenu}>
+                   <ul className={styles.slidemenuList}>
+                       <li className={styles.slidemenuListSlide}></li>
+                       <li className={styles.slidemenuListSlide}></li>
+                       <li className={styles.slidemenuListSlide}></li>
+                       <li className={styles.slidemenuListSlide}></li>
+                       <li className={styles.slidemenuListSlide}></li>
                    </ul>
-                   <div className="imglogo"></div>
+                   <div className={styles.imglogo}></div>
                </div>
             </>
         )
-
     }
 };

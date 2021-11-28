@@ -1,16 +1,6 @@
 import './App.css';
 import styles from './Headmenu.module.css';
-import React, { Children, Component } from 'react';
-
-
-// type EditorContainerProps = {
-//     children?: React.ReactNode;
-//     };
-
-// export function EditorContainer({ children }: EditorContainerProps) {
-//     return <div className={styles.appEditorContainer}>{children}</div>;
-// }
-
+import React, { Component } from 'react';
 
 export default class Headmenu extends Component {
     render() {
@@ -52,7 +42,7 @@ export default class Headmenu extends Component {
                         </div>
                         <div className={styles.fontContainerSettings +  ' ' + styles.fontSettings}>
                             <div className={styles.fontSettingsSelect +  ' ' + styles.fontSelect}>
-                                <select size = {3} className={styles.fontSelectField +  ' ' + styles.selectField}>
+                                <select className={styles.fontSelectField +  ' ' + styles.selectField}>
                                     <option className={styles.selectFieldOption}>Roboto</option>
                                     <option className={styles.selectFieldOption}>Open Sans</option>
                                     <option className={styles.selectFieldOption}>Praise</option>

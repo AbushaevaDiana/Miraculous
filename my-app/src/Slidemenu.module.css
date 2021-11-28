@@ -8,7 +8,7 @@
     align-self: center;
 }
   
-.slidemenu__list {
+.slidemenuList {
     width: 100%;
     padding: 0 27px;
     list-style: none;
@@ -20,7 +20,7 @@
     counter-reset: heading;
 }
 
-.slidemenu__list__slide {
+.slidemenuListSlide {
     margin-bottom: 17px;
     border: 5px solid transparent;
     background-color: #fff;
@@ -29,7 +29,7 @@
     transition: border, .3s, ease-in-out;
 }
 
-.slidemenu__list__slide::before {
+.slidemenuListSlide::before {
     position: absolute;
     left: 8px;
     counter-increment: heading;
@@ -46,20 +46,22 @@
 margin-bottom: 17px;
 } */
     
-.slidemenu__list__slide:active {
+.slidemenuListSlide:active {
   border: 5px solid #000000;
 }
 
 .imglogo {
-   background: url('./img/logoMiraculous.png');
-   width: 178px;
-   height: 67px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 178px;
+    height: 67px;
+    background: url('./img/logoMiraculous.png');
 }
 
 
-.App-link {
+/* .App-link {
     color: #00ffff;
-}
+} */
 
 
 /*
