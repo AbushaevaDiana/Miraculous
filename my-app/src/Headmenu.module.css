@@ -134,7 +134,7 @@
 }
 
 .fontSettingsSelect {
-    margin-bottom: 20px;
+    margin-bottom: 6%;
 }
 
 .fontSelect {
@@ -142,7 +142,7 @@
 }
 
 .selectField {
-    height: 23px;
+    height: 50%;
     font-size: 14px;
     line-height: 16px;
     text-align: center;
@@ -152,6 +152,7 @@
 }
 
 .fontSelectField {
+    height: 80%;
     width: 49%;
 }
 
@@ -174,26 +175,32 @@
 }
 
 .fontMarkIcon {
-    width: 24px;
-    height: 26px;
-    background-repeat: no-repeat;
-    background-position: center;
+    width: 25%;
+    height: 50%;
+}
+
+.fontMarkIconButton {
+    width: 100%;
+    height: 100%;
+    background-color: #FFEEDD;
+    border: none;
 }
 
 .bold {
-    background: url('./img/A_bold.png');
+    font-weight: bold;
 }
 
 .italic {
-    background: url('./img/A\ _italic.png');
+    font-style: italic;
 }
 
 .underlined {
-    background: url('./img/A.png');
+    text-decoration: underline;
 }
 
 .selectColor {
-    background: url('./img/A_selectColor.png');
+    color: #FF6666;
+    text-decoration: underline;
 }
 
 .elementSettings {

@@ -54,10 +54,18 @@ export default class Headmenu extends Component {
                                 </select>
                             </div>
                             <div className={styles.fontSettingsMark +  ' ' + styles.fontMark}>
-                                <div className={styles.fontMarkIcon +  ' ' + styles.bold}></div> 
-                                <div className={styles.fontMarkIcon +  ' ' + styles.italic}></div>
-                                <div className={styles.fontMarkIcon +  ' ' + styles.underlined}></div>
-                                <div className={styles.fontMarkIcon +  ' ' + styles.selectColor}></div>
+                                <div className={styles.fontMarkIcon}>
+                                    <button className={styles.bold + ' ' + styles.fontMarkIconButton}>А</button>
+                                </div> 
+                                <div className={styles.fontMarkIcon}>
+                                    <button className={styles.italic + ' ' + styles.fontMarkIconButton}>А</button>
+                                </div>
+                                <div className={styles.fontMarkIcon}>
+                                    <button className={styles.underlined + ' ' + styles.fontMarkIconButton}>А</button>
+                                </div>
+                                <div className={styles.fontMarkIcon}>
+                                    <button className={styles.selectColor + ' ' + styles.fontMarkIconButton}>А</button>
+                                </div>
                             </div>
                         </div>
                     </div>
