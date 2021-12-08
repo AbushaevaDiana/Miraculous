@@ -58,11 +58,10 @@ function createPresentation(presentationMaker: Editer): Editer {
     };
 };
 
-/*
-*@param {Presentation } presentation
-*@return {FileJson } 
-*/
-function savePresentation(presentation: Presentation) {};
+function savePresentation(presentation: Presentation): string {
+    const jsonString = JSON.stringify(presentation)
+    return jsonString
+};
 
 /*
 *@param {Presentation } presentation
@@ -70,12 +69,10 @@ function savePresentation(presentation: Presentation) {};
 */
 function exportPresentation(presentation) {};
 
-/*
-*@param {Presentation } presentationMaker
-*@param {FileJson } fileJson 
-*@return { Presentation }
-*/
-function openPresentation(fileJson) {};
+function openPresentation(jsonString: string): Presentation {
+    const presentation = JSON.parse(jsonString)
+    return presentation
+};
 
 function editPresentationName(presentationMaker: Editer, newName: string): Editer {
     return {

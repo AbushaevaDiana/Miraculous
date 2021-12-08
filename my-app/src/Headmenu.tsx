@@ -22,8 +22,8 @@ export default class Headmenu extends Component {
                 </ul>
                 <div className = {styles.toolbar}>
                     <div className={styles.toolbarNewSlide}>
-                        <div className={styles.newSlideBtnImg}></div>
-                        <p className={styles.newSlideBtnInsc + ' ' + styles.toolInsc}>Новый слайд</p>
+                        <div className={styles.newSlideBtnImg} id='newSlideBtnImg'></div>
+                        <p className={styles.newSlideBtnInsc + ' ' + styles.toolInsc} >Новый слайд</p> 
                     </div>
                     <div className={styles.toolbarCancelRefund + ' ' +styles.cancelRefundBtn}>
                         <div className= {styles.cancelRefundBtnContainer + ' ' +styles.doRedoBtn}>
