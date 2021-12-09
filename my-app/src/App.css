@@ -13,9 +13,10 @@
   height: 100%;
 }
 
-/* button {
-  border: none;
-} */
+button {
+  /* border: none; */
+  cursor: pointer;
+}
 
 /*
 .App-logo {

@@ -1,0 +1,59 @@
+.toolbarNewSlide {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 0 6px;
+    border-right: 1px solid #000000;
+}
+
+.newSlideBtnImg {
+    margin-bottom: 9px;
+    width: 51px;
+    height: 45px;
+    background: url('./img/newSlide__logo.png');
+}
+
+.newSlideBtnInsc {
+    width: 52px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+}
+
+.toolbarCancelRefund {
+    padding: 5px 23px 0 27px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #000000;
+}
+
+.cancelRefundBtnContainer:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.doRedoBtnArrow
+ {
+    width: 45px;
+    height: 27px;
+}
+
+.arrowLeft {
+    background: url('./img/arrowLeft.png');
+}
+
+.arrowRight {
+    background: url('./img/arrowRight.png');
+}
+
+.toolInsc {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+}

@@ -5,6 +5,9 @@ import './Headmenu.module.css';
 import Headmenu from './Headmenu';
 import Slidemenu from './Slidemenu';
 import PresentationContent from './Presentation-content';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
 
 function App() {
   return (
