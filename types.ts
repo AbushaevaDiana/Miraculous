@@ -1,5 +1,5 @@
 export type PresentationMaker = {
-    presentation: Presentation, 
+    readonly presentation: Presentation, 
     mode: Mode,
     history: History,
     selection: SelectionType,

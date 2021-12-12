@@ -58,7 +58,7 @@ export default class Element extends Component {
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.fillIcon}></div>
-                    <select className= {styles.lementSettingsSelect + ' ' + styles.selectField} >
+                    <select className= {styles.elementSettingsSelect + ' ' + styles.selectField} >
                         <option className={styles.selectFieldOption}>Заливка фигуры</option>
                         <option className={styles.selectFieldOption}>черно-белый</option>
                         <option className={styles.selectFieldOption}>красный</option>

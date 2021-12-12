@@ -3,20 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-
-
-import { Router } from "react-router-dom"
-
-// import './index.scss'
-
-
-
-// // создаём кастомную историю
-// const history = createBrowserHistory()
+// import { getEditor } from './editor';
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <App editor={getEditor() /}> */}
     <App />
   </React.StrictMode>,
   document.getElementById('root')
