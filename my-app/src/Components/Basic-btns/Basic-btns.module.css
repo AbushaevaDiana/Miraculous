@@ -9,7 +9,7 @@
     margin-bottom: 9px;
     width: 51px;
     height: 45px;
-    background: url('./img/newSlide__logo.png');
+    background: url('/my-app/src/img/newSlide__logo.png');
 }
 
 .newSlideBtnInsc {
@@ -41,11 +41,11 @@
 }
 
 .arrowLeft {
-    background: url('./img/arrowLeft.png');
+    background: url('/my-app/src/img/arrowLeft.png');
 }
 
 .arrowRight {
-    background: url('./img/arrowRight.png');
+    background: url('/my-app/src/img/arrowRight.png');
 }
 
 .toolInsc {

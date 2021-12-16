@@ -2,8 +2,7 @@ import './App.css';
 import styles from './Slidemenu.module.css';
 import React, { Component } from 'react';
 
-export default class Slidemenu extends Component {
-    render() {
+function Slidemenu(){
         return (
             <>  
                <div className={styles.slidemenu}>
@@ -18,5 +17,6 @@ export default class Slidemenu extends Component {
                </div>
             </>
         )
-    }
 };
+
+export {Slidemenu}

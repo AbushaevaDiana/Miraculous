@@ -2,9 +2,9 @@ import React from 'react';
 import './normalize.css';
 import './App.css';
 import './Headmenu.module.css';
-import Headmenu from './Headmenu';
-import Slidemenu from './Slidemenu';
-import PresentationContent from './Presentation-content';
+import Headmenu from './Components/Headmenu/Headmenu';
+import { Slidemenu } from './Components/SLidemenu/Slidemenu';
+import PresentationContent from './Components/Presentation-content/Presentation-content';
 
 function App() {
   return (

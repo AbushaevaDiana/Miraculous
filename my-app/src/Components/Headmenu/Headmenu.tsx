@@ -1,7 +1,7 @@
 import './App.css';
 import styles from './Headmenu.module.css';
-import BasicBtns from './Basic-btns';
-import Element from './Element';
+import BasicBtns from '../Basic-btns/Basic-btns';
+import Element from '../Element/Element';
 import React, { Component } from 'react';
 // import { BrowserRouter, Route, Link } from 'react-router-dom';
 // import { createBrowserHistory } from "history";

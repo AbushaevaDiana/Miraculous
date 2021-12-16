@@ -18,7 +18,7 @@
     margin-bottom: 13px;
     width: 51px;
     height: 36px;
-    background: url('./img/fontIcon.png');
+    background: url('/home/diana/Документ/ОПИ/Miraculous/img/fontIcon.png');
 }
 
 .fontSettings {
@@ -117,21 +117,21 @@
     margin-right: 25px;
     width: 55px;
     height: 55px;
-    background: url('./img/filterIcon.png');
+    background: url('/home/diana/Документ/ОПИ/Miraculous/img/filterIcon.png');
 }
 
 .contourIcon {
     margin-right: 15px;
     width: 60px;
     height: 59px;
-    background: url('./img/contourIcon.png');
+    background: url('/home/diana/Документ/ОПИ/Miraculous/img/contourIcon.png');
 }
 
 .fillIcon {
     margin-right: 15px;
     width: 55px;
     height: 58px;
-    background: url('./img/fillicon.png');
+    background: url('/home/diana/Документ/ОПИ/Miraculous/img/fillicon.png');
 }
 
 /* .selectField {
