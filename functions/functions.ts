@@ -86,70 +86,57 @@ function editPresentationName(presentationMaker: Editer, newName: string): Edite
 
 //Slide//
 
-//slice сохранить слайд, insert в массив на нужное место
 function moveSlide(presentationMaker: Editer, newSlidePosition: number): Editer {
-
+    const selection: SelectionType = presentationMaker.selection; 
     const presentation = presentationMaker.presentation
-    const selection = presentationMaker.selection;
+    let slidelist = presentation.slidelist;
     let i: number;
-    let iSlide: Slide;
-    let newSlideList = presentation.slidelist;
-
-    for(i = 0; i < presentation.slidelist.length; i++)
+    
+    for(i = 0; i < slidelist.length; i++)
     {
-        if(selection.idSlides.includes(presentation.slidelist[i].idSlide)){
-            iSlide = newSlideList[i];
-            newSlideList.splice(i, 1);
-            newSlideList.splice(newSlidePosition, 0, iSlide);
+        if(selection.idSlides.indexOf(slidelist[i].idSlide) != -1)
+        {
+            break;
         };
     };
 
-   // переделать 
     return {
         ...presentationMaker,
         presentation: {
             ...presentationMaker.presentation,
-            slidelist: newSlideList,
+            slidelist: [slidelist[i], slidelist[newSlidePosition]] = [slidelist[newSlidePosition], slidelist[i]]
         },
     }
-
 };
 
 function addSlide(presentationMaker: Editer): Editer {
-    let newSlide:Slide = {
+    let newSlide: Slide = {
         elementlist: [],
         idSlide: setNewId(),
         background: '#ffffff',
         effects: 'occurrence',
     };
-    let newSlidelist: Slide[] = presentationMaker.presentation.slidelist;
 
-    newSlidelist.push(newSlide);
     return {
         ...presentationMaker,
         presentation: {
             ...presentationMaker.presentation,
-            slidelist: newSlidelist,
+            slidelist: [ 
+                ...presentationMaker.presentation.slidelist,
+                newSlide 
+            ]
         },
     };
 };
 
-function deleteSlide(presentationMaker: Editer): Editer {
-    const selection: SelectionType = presentationMaker.selection;
-    let i: number;
-    let newSlideList: Slide[] = presentationMaker.presentation.slidelist;
-    for(i = 0; i < newSlideList.length; i++)
-    {
-        if(selection.idSlides.indexOf(newSlideList[i].idSlide) != -1){
-            newSlideList.splice(i, 1);
-        };
-    };
+function deleteSelectedSlide(presentationMaker: Editer): Editer {
+    const selection: SelectionType = presentationMaker.selection; 
 
     return {
         ...presentationMaker,
         presentation: {
             ...presentationMaker.presentation,
-            slidelist: newSlideList,
+            slidelist: presentationMaker.presentation.slidelist.filter(slide => !(selection.idSlides.includes(slide.idSlide)))
         },
     };
 };
@@ -219,30 +206,23 @@ function addElement(presentationMaker: Editer, newElementConcept: ElementConcept
     return newElement; 
 }; 
 
-function deleteElement(presentationMaker: Editer): Editer {
+function deleteSelectedElement(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection;
-    let newSlidelist: Slide[] = presentationMaker.presentation.slidelist;
-    let newElementlist: ElementType[];
-    let i, i1: number;
-    
-    for(i = 0; i < newSlidelist.length; i++)
-    {
-        if(selection.idSlides.indexOf(newSlidelist[i].idSlide) != -1){
-            newElementlist = newSlidelist[i].elementlist;
-            for(i1 = 0; i1 < newElementlist.length; i1++)
-            {
-                if(selection.idElements.indexOf(newElementlist[i1].idElement) != -1){
-                    newElementlist.splice(i1, 1);
-                };
-            };
-        };
-    };
-    
+
     return {
         ...presentationMaker,
         presentation: {
             ...presentationMaker.presentation,
-            slidelist: newSlidelist,
+            slidelist: presentationMaker.presentation.slidelist.map(slide => {
+                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                {
+                    return {
+                        ...slide,
+                        elementlist: slide.elementlist.filter(element => !(selection.idElements.includes(element.idElement)))
+                    }
+                }
+                return slide
+            })
         },
     };
 };
@@ -428,16 +408,6 @@ function addImg(presentationMaker: Editer, newSrc: string): Editer {
     };
     newElement = addElement(presentationMaker, elementConcept);
 
-    for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
-    {
-        if(selection.idSlides.indexOf(presentationMaker.presentation.slidelist[i].idSlide) != -1){
-            break;
-        };
-    };
-
-    newElementlist = presentationMaker.presentation.slidelist[i].elementlist;
-    newElementlist.push(newElement);
-
     return {
         ...presentationMaker,
         presentation: {
@@ -447,7 +417,11 @@ function addImg(presentationMaker: Editer, newSrc: string): Editer {
                 {
                     return {
                         ...slide,
-                        elementlist: newElementlist,
+                        elementlist: 
+                        [
+                            ...slide.elementlist,
+                            newElement 
+                        ]
                     }
                 }
                 return slide
@@ -474,17 +448,6 @@ function addText(presentationMaker: Editer, newTextContent: string): Editer {
         underline: false,
     };
     newElement = addElement(presentationMaker, elementConcept);
-    
-
-    for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
-    {
-        if(selection.idSlides.indexOf(presentationMaker.presentation.slidelist[i].idSlide) != -1){
-            break;
-        };
-    };
-
-    newElementlist = presentationMaker.presentation.slidelist[i].elementlist;
-    newElementlist.push(newElement);
 
     return {
         ...presentationMaker,
@@ -495,7 +458,11 @@ function addText(presentationMaker: Editer, newTextContent: string): Editer {
                 {
                     return {
                         ...slide,
-                        elementlist: newElementlist,
+                        elementlist: 
+                        [
+                            ...slide.elementlist,
+                            newElement
+                        ]
                     }
                 }
                 return slide
@@ -517,16 +484,6 @@ function addFigure(presentationMaker: Editer, newFigureConcept: FigureConcept): 
     };
     newElement = addElement(presentationMaker, elementConcept);
 
-    for(i = 0; i < presentationMaker.presentation.slidelist.length; i++)
-    {
-        if(selection.idSlides.indexOf(presentationMaker.presentation.slidelist[i].idSlide) != -1){
-            break;
-        };
-    };
-
-    newElementlist = presentationMaker.presentation.slidelist[i].elementlist;
-    newElementlist.push(newElement);
-
     return {
         ...presentationMaker,
         presentation: {
@@ -536,7 +493,11 @@ function addFigure(presentationMaker: Editer, newFigureConcept: FigureConcept): 
                 {
                     return {
                         ...slide,
-                        elementlist: newElementlist,
+                        elementlist: 
+                        [
+                            ...slide.elementlist,
+                            newElement
+                        ]
                     }
                 }
                 return slide
