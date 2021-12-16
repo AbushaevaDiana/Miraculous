@@ -1,4 +1,4 @@
-import { ElementConcept, Filter, BorderStyle, ElementType, Background, Color, Slide, SelectionType, Presentation, Editer, Effect, FigureConcept, Mode, PresentationMaker } from "../types";
+import { ElementConcept, Filter, BorderStyle, ElementType, Background, Color, Slide, SelectionType, Presentation, Editer, Effect, FigureConcept, Mode, PresentationMaker } from '../../../types';
 
 //FUNCTIONS
 
@@ -67,7 +67,7 @@ function savePresentation(presentation: Presentation): string {
 *@param {Presentation } presentation
 *@return {FilePDF }  
 */
-function exportPresentation(presentation) {};
+function exportPresentation(presentation: Presentation) {};
 
 function openPresentation(jsonString: string): Presentation {
     const presentation = JSON.parse(jsonString)

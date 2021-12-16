@@ -1,4 +1,4 @@
-import './App.css';
+import '../../App.css';
 import styles from './Element.module.css';
 import React, { Component } from 'react';
 

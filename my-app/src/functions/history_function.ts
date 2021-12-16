@@ -1,4 +1,4 @@
-import { Editer, History, Presentation, PresentationMaker } from "../types";
+import { Editer, History, Presentation, PresentationMaker } from '../../../types';
 
 function undo(presentationMaker: PresentationMaker): PresentationMaker {
     let newHistory: History = presentationMaker.history;

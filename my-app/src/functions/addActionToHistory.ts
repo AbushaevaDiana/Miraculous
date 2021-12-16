@@ -1,4 +1,4 @@
-import { Editer, History, Presentation, PresentationMaker, SelectionType } from "../types";
+import { Editer, History, Presentation, PresentationMaker, SelectionType } from '../../../types';
 
 function addActionToHistory(presentationMaker: PresentationMaker): PresentationMaker {
     let newAction: Editer = {
@@ -9,7 +9,9 @@ function addActionToHistory(presentationMaker: PresentationMaker): PresentationM
     let newCurrentIndex: number = presentationMaker.history.currentIndex;
     let a: number;
  
-        
+    //пришлось инициализировать так, чтобы не ругалось
+    newActionlist = [];
+    
     for(a = 0; a <= newCurrentIndex; a++){
         newActionlist.push(presentationMaker.history.actionlist[a]);
     };

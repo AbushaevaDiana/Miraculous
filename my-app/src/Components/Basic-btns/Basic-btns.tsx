@@ -1,4 +1,4 @@
-import './App.css';
+import '../../App.css';
 import styles from './Basic-btns.module.css';
 import React, { Component } from 'react';
 
