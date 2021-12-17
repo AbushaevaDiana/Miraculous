@@ -5,6 +5,7 @@ import { Headmenu } from './Components/Headmenu/Headmenu';
 import { Slidemenu } from './Components/SLidemenu/Slidemenu';
 import { PresentationContent } from './Components/Presentation-content/Presentation-content';
 import { presentationMaker } from '../../js/model';
+import { slidelist }  from './test/test';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Headmenu></Headmenu>
       </header>
       <body className='AppBody'>
-        <Slidemenu slidelist = {[]}></Slidemenu>;
+        <Slidemenu slidelist = {slidelist}></Slidemenu>;
         <PresentationContent></PresentationContent>
       </body>
     </div>
