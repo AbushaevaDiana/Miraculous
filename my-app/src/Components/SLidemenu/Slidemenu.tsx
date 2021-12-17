@@ -3,11 +3,11 @@ import styles from './Slidemenu.module.css';
 import React, { Component } from 'react';
 import { Slide } from '../../../../types';
 
-interface slidemenuList {
+interface SlidemenuList {
     slidelist: Array<Slide>
 }
 
-export function Slidemenu(props: slidemenuList){
+export function Slidemenu(props: SlidemenuList){
         return (
             <>  
                <div className={styles.slidemenu}>

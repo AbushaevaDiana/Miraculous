@@ -15,7 +15,7 @@ function App() {
         <Headmenu></Headmenu>
       </header>
       <body className='AppBody'>
-        <Slidemenu></Slidemenu>
+        Slidemenu([]);
         <PresentationContent></PresentationContent>
       </body>
     </div>
