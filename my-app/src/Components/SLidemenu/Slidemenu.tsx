@@ -7,21 +7,16 @@ interface slidemenuList {
     slidelist: Array<Slide>
 }
 
-function Slidemenu(props: slidemenuList){
+export function Slidemenu(props: slidemenuList){
         return (
             <>  
                <div className={styles.slidemenu}>
+                
                <ul className={styles.slidemenuList}>
-                   <li className={styles.slidemenuListSlide}></li>
-                   <li className={styles.slidemenuListSlide}></li>
-                   <li className={styles.slidemenuListSlide}></li>
-                   <li className={styles.slidemenuListSlide}></li>
-                   <li className={styles.slidemenuListSlide}></li>
+                 {props.slidelist.map(slide => <li key={slide.idSlide} className={styles.slidemenuListSlide}></li>)}
                </ul>
                    <div className={styles.imglogo}></div>
                </div>
             </>
         )
 };
-
-export {Slidemenu}

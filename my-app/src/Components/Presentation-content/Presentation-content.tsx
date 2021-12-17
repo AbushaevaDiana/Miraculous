@@ -2,8 +2,7 @@ import '../../App.css';
 import styles from './Presentation-content.module.css';
 import React, { Component } from 'react';
 
-export default class PresentationContent extends Component {
-    render() {
+export function PresentationContent(){
         return (
             <>
                 <div className = {styles.presentationContent}>
@@ -11,5 +10,4 @@ export default class PresentationContent extends Component {
                 </div>
             </>
         )
-    }
 };

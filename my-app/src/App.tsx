@@ -1,9 +1,9 @@
 import React from 'react';  
 import './normalize.css';
 import './App.css';
-import Headmenu from './Components/Headmenu/Headmenu';
+import { Headmenu } from './Components/Headmenu/Headmenu';
 import { Slidemenu } from './Components/SLidemenu/Slidemenu';
-import PresentationContent from './Components/Presentation-content/Presentation-content';
+import { PresentationContent } from './Components/Presentation-content/Presentation-content';
 
 function App() {
   return (

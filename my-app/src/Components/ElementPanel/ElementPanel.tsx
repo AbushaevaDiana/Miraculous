@@ -1,9 +1,9 @@
 import '../../App.css';
-import styles from './Element.module.css';
+import styles from './ElementPanel.module.css';
 import React, { Component } from 'react';
 
-export default class Element extends Component {
-    render() {
+
+export function ElementPanel() {
         return (
             <>
                 <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
@@ -66,5 +66,4 @@ export default class Element extends Component {
                 </div>
             </>
         )
-    }
 }

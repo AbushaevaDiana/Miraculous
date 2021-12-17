@@ -1,11 +1,10 @@
 import '../../App.css';
 import styles from './Headmenu.module.css';
-import BasicBtns from '../Basic-btns/Basic-btns';
-import Element from '../Element/Element';
+import { BasicBtns } from '../Basic-btns/Basic-btns';
+import { ElementPanel } from '../ElementPanel/ElementPanel';
 import React, { Component } from 'react';
 
-export default class Headmenu extends Component {
-    render() {
+export function Headmenu() {
         return (
             <>
                 <ul className={styles.headmenu}>
@@ -24,10 +23,9 @@ export default class Headmenu extends Component {
                 </ul>
                 <div className = {styles.toolbar}>
                     <BasicBtns></BasicBtns>
-                    <Element></Element>
+                    <ElementPanel></ElementPanel>
                 </div>
             </>
             // </BrowserRouter> 
         )
-    }
 };

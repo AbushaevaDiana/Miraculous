@@ -2,8 +2,7 @@ import '../../App.css';
 import styles from './Basic-btns.module.css';
 import React, { Component } from 'react';
 
-export default class BasicBtns extends Component {
-    render () {
+export function BasicBtns(){
         return (
             <>
                 <div className={styles.toolbarNewSlide}>
@@ -22,5 +21,4 @@ export default class BasicBtns extends Component {
                 </div>
             </>
         )
-    }
-}
+};
