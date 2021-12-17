@@ -119,3 +119,5 @@ let presentationMaker = {
         },
     }
 }
+
+export { presentationMaker } 
