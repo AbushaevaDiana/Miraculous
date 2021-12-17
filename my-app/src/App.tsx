@@ -4,20 +4,16 @@ import './App.css';
 import { Headmenu } from './Components/Headmenu/Headmenu';
 import { Slidemenu } from './Components/SLidemenu/Slidemenu';
 import { PresentationContent } from './Components/Presentation-content/Presentation-content';
-import { presentationMaker } from '../../js/model';
-import { slidelist }  from './test/test';
+import { presentationMaker } from './test/model';
 
 function App() {
   return (
     <div className='App'>
       <header className='AppHeader'>
-        <p className='headtext'>
-          Презентация Miraculous: Without name
-        </p>
-        <Headmenu></Headmenu>
+        <Headmenu name = {presentationMaker.presentation.name}></Headmenu>
       </header>
       <body className='AppBody'>
-        <Slidemenu slidelist = {slidelist}></Slidemenu>;
+        <Slidemenu slidelist = {presentationMaker.presentation.slidelist}></Slidemenu>;
         <PresentationContent></PresentationContent>
       </body>
     </div>

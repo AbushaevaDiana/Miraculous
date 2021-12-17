@@ -4,9 +4,17 @@ import { BasicBtns } from '../Basic-btns/Basic-btns';
 import { ElementPanel } from '../ElementPanel/ElementPanel';
 import React, { Component } from 'react';
 
-export function Headmenu() {
+
+interface HeadmenuProps {
+    name: string,
+}
+
+export function Headmenu(props: HeadmenuProps) {
         return (
             <>
+                <p className='headtext'>
+                    Презентация Miraculous: {props.name}
+                </p>
                 <ul className={styles.headmenu}>
                     <li className= {styles.headmenuLi}>       
                         <button className={styles.headmenuLiButton}>Файл</button>

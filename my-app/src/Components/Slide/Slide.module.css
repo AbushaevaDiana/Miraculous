@@ -1,0 +1,29 @@
+.slidemenuListSlide {
+    margin-bottom: 17px;
+    border: 5px solid transparent;
+    background-color: #fff;
+    height: 35%;
+    width: 100%;
+    transition: border, .3s, ease-in-out;
+}
+
+.slidemenuListSlide::before {
+    position: absolute;
+    left: 8px;
+    counter-increment: heading;
+    content: counter(heading) " ";
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+
+/* .slidemenu__list__slide:not(:last-child) {
+margin-bottom: 17px;
+} */
+    
+.slidemenuListSlide:active {
+  border: 5px solid #000000;
+}

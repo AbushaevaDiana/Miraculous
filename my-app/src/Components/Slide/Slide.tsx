@@ -1,25 +1,19 @@
 import '../../App.css';
-import styles from './Slidemenu.module.css';
+import styles from './Slide.module.css';
 import React, { Component } from 'react';
+import { Slide } from '../../../../types';
 
 
-//interface SLideProps{
-//   slide: Slide,
-//};
 
-// function Slide(props:SLideProps){
-//         return (
-//             <>  
-//                 props.slide.elementlist
-//                 <ul className={styles.slidemenuList}>
-//                     <li className={styles.slidemenuListSlide}></li>
-//                     <li className={styles.slidemenuListSlide}></li>
-//                     <li className={styles.slidemenuListSlide}></li>
-//                     <li className={styles.slidemenuListSlide}></li>
-//                     <li className={styles.slidemenuListSlide}></li>
-//                 </ul>
-//             </>
-//         )
-// };
+interface SLideProps{
+   slide: Slide,
+};
 
-// export {Slide}
+
+export function SlideView(props:SLideProps){
+   return (
+      <div key={props.slide.idSlide} className={styles.slidemenuListSlide}>
+      </div>
+   )
+
+};
