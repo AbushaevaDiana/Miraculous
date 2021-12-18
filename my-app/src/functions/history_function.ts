@@ -1,4 +1,4 @@
-import { Editer, History, Presentation, PresentationMaker } from '../../../types';
+import { Editer, History, Presentation, PresentationMaker } from '../types';
 
 //пересмотреть
 function undo(presentationMaker: PresentationMaker): PresentationMaker {

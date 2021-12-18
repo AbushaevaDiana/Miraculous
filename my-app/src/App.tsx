@@ -13,8 +13,8 @@ function App() {
         <Headmenu name = {presentationMaker.presentation.name}></Headmenu>
       </header>
       <body className='AppBody'>
-        <Slidemenu slidelist = {presentationMaker.presentation.slidelist}></Slidemenu>;
-        <PresentationContent></PresentationContent>
+        <Slidemenu slidelist = {presentationMaker.presentation.slidelist}></Slidemenu>
+        <PresentationContent slide={presentationMaker.presentation.slidelist[1]}></PresentationContent>
       </body>
     </div>
   );

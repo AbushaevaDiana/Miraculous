@@ -1,4 +1,4 @@
-import { Editer, History, Presentation, PresentationMaker, SelectionType } from '../../../types';
+import { Editer, History, Presentation, PresentationMaker, SelectionType } from '../types';
 
 function addActionToHistory(presentationMaker: PresentationMaker): PresentationMaker {
     let newAction: Editer = {

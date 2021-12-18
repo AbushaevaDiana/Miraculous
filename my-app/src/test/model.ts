@@ -121,7 +121,14 @@ export const presentationMaker: PresentationMaker = {
             background: '#808080',
             effects: 'occurrence',
             idSlide: 13414,
-        }],
+        },
+        {
+            elementlist: [],
+            background: '#808080',
+            effects: 'occurrence',
+            idSlide: 13414,
+        }
+    ],
         name: 'NoName',
     },
 }
