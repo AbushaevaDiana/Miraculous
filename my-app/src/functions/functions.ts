@@ -2,7 +2,7 @@ import { ElementConcept, Filter, BorderStyle, ElementType, Background, Color, Sl
 
 //FUNCTIONS
 
-function setNewId(): number{
+export function setNewId(): number{
     const max: number = 300;
     const min: number = 10;
     const randomNum: number = Math.floor(Math.random() * (max - min)) + min;
@@ -12,14 +12,14 @@ function setNewId(): number{
 
 //PresentationMaker
 
-function changeMode(presentationMaker: PresentationMaker, newMode: Mode): PresentationMaker {
+export function changeMode(presentationMaker: PresentationMaker, newMode: Mode): PresentationMaker {
     return {
         ...presentationMaker,
         mode: newMode
     };
 };
 
-function setSlideSelection(presentationMaker: Editer, newIdSlides: number[]): Editer { 
+export function setSlideSelection(presentationMaker: Editer, newIdSlides: number[]): Editer { 
     return {
         ...presentationMaker,
         selection: {
@@ -29,7 +29,7 @@ function setSlideSelection(presentationMaker: Editer, newIdSlides: number[]): Ed
     };
 };
 
-function setElementSelection(presentationMaker: Editer, newIdElements: number[]): Editer { 
+export function setElementSelection(presentationMaker: Editer, newIdElements: number[]): Editer { 
     return {
         ...presentationMaker,
         selection: {
@@ -41,7 +41,7 @@ function setElementSelection(presentationMaker: Editer, newIdElements: number[])
 
 //Presentation
 
-function createPresentation(presentationMaker: Editer): Editer {
+export function createPresentation(presentationMaker: Editer): Editer {
     let newPresentation: Presentation = {
         slidelist: [],
         name: "Without name",
@@ -58,7 +58,7 @@ function createPresentation(presentationMaker: Editer): Editer {
     };
 };
 
-function savePresentation(presentation: Presentation): string {
+export function savePresentation(presentation: Presentation): string {
     const jsonString = JSON.stringify(presentation)
     return jsonString
 };
@@ -67,14 +67,14 @@ function savePresentation(presentation: Presentation): string {
 *@param {Presentation } presentation
 *@return {FilePDF }  
 */
-function exportPresentation(presentation: Presentation) {};
+export function exportPresentation(presentation: Presentation) {};
 
-function openPresentation(jsonString: string): Presentation {
+export function openPresentation(jsonString: string): Presentation {
     const presentation = JSON.parse(jsonString)
     return presentation
 };
 
-function editPresentationName(presentationMaker: Editer, newName: string): Editer {
+export function editPresentationName(presentationMaker: Editer, newName: string): Editer {
     return {
         ...presentationMaker,
         presentation: {        
@@ -86,7 +86,7 @@ function editPresentationName(presentationMaker: Editer, newName: string): Edite
 
 //Slide//
 
-function moveSlide(presentationMaker: Editer, newSlidePosition: number): Editer {
+export function moveSlide(presentationMaker: Editer, newSlidePosition: number): Editer {
     const selection: SelectionType = presentationMaker.selection; 
     const presentation = presentationMaker.presentation
     let slidelist = presentation.slidelist;
@@ -109,7 +109,7 @@ function moveSlide(presentationMaker: Editer, newSlidePosition: number): Editer 
     }
 };
 
-function addSlide(presentationMaker: Editer): Editer {
+export function addSlide(presentationMaker: Editer): Editer {
     let newSlide: Slide = {
         elementlist: [],
         idSlide: setNewId(),
@@ -129,7 +129,7 @@ function addSlide(presentationMaker: Editer): Editer {
     };
 };
 
-function deleteSelectedSlide(presentationMaker: Editer): Editer {
+export function deleteSelectedSlide(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection; 
 
     return {
@@ -141,7 +141,7 @@ function deleteSelectedSlide(presentationMaker: Editer): Editer {
     };
 };
 
-function editSlideBackground(presentationMaker: Editer, newBackground: Background): Editer {
+export function editSlideBackground(presentationMaker: Editer, newBackground: Background): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -161,7 +161,7 @@ function editSlideBackground(presentationMaker: Editer, newBackground: Backgroun
     };
 };
 
-function editSlideEffect(presentationMaker: Editer, newEffect: Effect): Editer {
+export function editSlideEffect(presentationMaker: Editer, newEffect: Effect): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -184,7 +184,7 @@ function editSlideEffect(presentationMaker: Editer, newEffect: Effect): Editer {
 
 //Element//                                              
 
-function addElement(presentationMaker: Editer, newElementConcept: ElementConcept): ElementType {
+export function addElement(presentationMaker: Editer, newElementConcept: ElementConcept): ElementType {
     let newElement: ElementType = {
         size: {
             h: 100,
@@ -206,7 +206,7 @@ function addElement(presentationMaker: Editer, newElementConcept: ElementConcept
     return newElement; 
 }; 
 
-function deleteSelectedElement(presentationMaker: Editer): Editer {
+export function deleteSelectedElement(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -227,7 +227,7 @@ function deleteSelectedElement(presentationMaker: Editer): Editer {
     };
 };
 
-function editBorderColor(presentationMaker: Editer, newColor: Color): Editer {
+export function editBorderColor(presentationMaker: Editer, newColor: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -260,7 +260,7 @@ function editBorderColor(presentationMaker: Editer, newColor: Color): Editer {
     };
 }
 
-function editBorderWidth(presentationMaker: Editer, newWidth: number): Editer {
+export function editBorderWidth(presentationMaker: Editer, newWidth: number): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -293,7 +293,7 @@ function editBorderWidth(presentationMaker: Editer, newWidth: number): Editer {
     };
 };
 
-function editBorderStyle(presentationMaker: Editer, newBorderStyle: BorderStyle): Editer {
+export function editBorderStyle(presentationMaker: Editer, newBorderStyle: BorderStyle): Editer {
     
     const selection: SelectionType = presentationMaker.selection;
 
@@ -328,7 +328,7 @@ function editBorderStyle(presentationMaker: Editer, newBorderStyle: BorderStyle)
 };
 
 
-function moveElement(presentationMaker: Editer, x: number, y: number): Editer {
+export function moveElement(presentationMaker: Editer, x: number, y: number): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -361,7 +361,7 @@ function moveElement(presentationMaker: Editer, x: number, y: number): Editer {
     };
 };
 
-function editElementSize(presentationMaker: Editer, h: number, w: number): Editer {
+export function editElementSize(presentationMaker: Editer, h: number, w: number): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -396,7 +396,7 @@ function editElementSize(presentationMaker: Editer, h: number, w: number): Edite
 
 //Element
 
-function addImg(presentationMaker: Editer, newSrc: string): Editer { 
+export function addImg(presentationMaker: Editer, newSrc: string): Editer { 
     let i: number;
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
@@ -431,7 +431,7 @@ function addImg(presentationMaker: Editer, newSrc: string): Editer {
 };
 
 
-function addText(presentationMaker: Editer, newTextContent: string): Editer {
+export function addText(presentationMaker: Editer, newTextContent: string): Editer {
     let i: number;
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
@@ -471,7 +471,7 @@ function addText(presentationMaker: Editer, newTextContent: string): Editer {
     };
 };
 
-function addFigure(presentationMaker: Editer, newFigureConcept: FigureConcept): Editer {
+export function addFigure(presentationMaker: Editer, newFigureConcept: FigureConcept): Editer {
     let i: number;
     let newElementlist: ElementType[];
     const selection: SelectionType = presentationMaker.selection;
@@ -508,7 +508,7 @@ function addFigure(presentationMaker: Editer, newFigureConcept: FigureConcept): 
 
 //Text//
 
-function editTextColor(presentationMaker: Editer, newColor: Color): Editer {
+export function editTextColor(presentationMaker: Editer, newColor: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -540,7 +540,7 @@ function editTextColor(presentationMaker: Editer, newColor: Color): Editer {
     };
 };
 
-function editTextSize(presentationMaker: Editer, newSize: number): Editer {
+export function editTextSize(presentationMaker: Editer, newSize: number): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -573,7 +573,7 @@ function editTextSize(presentationMaker: Editer, newSize: number): Editer {
 };
 
 
-function editFont(presentationMaker: Editer, newFont: string): Editer {
+export function editFont(presentationMaker: Editer, newFont: string): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -605,7 +605,7 @@ function editFont(presentationMaker: Editer, newFont: string): Editer {
     };
 };
 
-function addLink(presentationMaker: Editer, newLink: string): Editer {
+export function addLink(presentationMaker: Editer, newLink: string): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -637,7 +637,7 @@ function addLink(presentationMaker: Editer, newLink: string): Editer {
     };
 };
 
-function setItalicText(presentationMaker: Editer): Editer {
+export function setItalicText(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection
     return {
         ...presentationMaker,
@@ -680,7 +680,7 @@ function setItalicText(presentationMaker: Editer): Editer {
     };
 };
 
-function setBoldText(presentationMaker: Editer): Editer {
+export function setBoldText(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection
     return {
         ...presentationMaker,
@@ -723,7 +723,7 @@ function setBoldText(presentationMaker: Editer): Editer {
     };
 };
 
-function setUnderlineText(presentationMaker: Editer): Editer {
+export function setUnderlineText(presentationMaker: Editer): Editer {
     const selection: SelectionType = presentationMaker.selection
     return {
         ...presentationMaker,
@@ -768,7 +768,7 @@ function setUnderlineText(presentationMaker: Editer): Editer {
 
 //Figure
 
-function editFigureLineColor(presentationMaker: Editer, color: Color): Editer {
+export function editFigureLineColor(presentationMaker: Editer, color: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -800,7 +800,7 @@ function editFigureLineColor(presentationMaker: Editer, color: Color): Editer {
     };
 };
 
-function editFigureFillColor(presentationMaker: Editer, color: Color): Editer {
+export function editFigureFillColor(presentationMaker: Editer, color: Color): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -833,7 +833,7 @@ function editFigureFillColor(presentationMaker: Editer, color: Color): Editer {
 };
 
 //IMG
-function editFilter(presentationMaker: Editer, newFilter: Filter): Editer {
+export function editFilter(presentationMaker: Editer, newFilter: Filter): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,
@@ -864,3 +864,4 @@ function editFilter(presentationMaker: Editer, newFilter: Filter): Editer {
         },
     };
 };
+

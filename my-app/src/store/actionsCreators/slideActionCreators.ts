@@ -1,6 +1,7 @@
 import { StateTypes } from "../../types";
+import { connect } from 'react-redux';
 
-export { addSlide }
+export { addSlide, deleteSlide, gotoSlide }
 
 function addSlide() {
     return {

@@ -1,9 +1,11 @@
 import '../../App.css';
 import styles from './Slidemenu.module.css';
-import React, { Component } from 'react';
-import { Slide } from '../../../../types';
+import { connect } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { Slide } from '../../types';
 import { SlideView } from '../Slide/Slide';
 import { isPropertySignature } from 'typescript';
+
 
 
 interface SlidemenuList {

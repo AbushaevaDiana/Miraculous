@@ -1,7 +1,8 @@
 import '../../App.css';
 import styles from './Slide.module.css';
-import React, { Component } from 'react';
-import { Slide } from '../../../../types';
+import { Slide } from '../../types';
+import { connect } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
 
 
 

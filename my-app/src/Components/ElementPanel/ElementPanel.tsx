@@ -1,6 +1,7 @@
 import '../../App.css';
 import styles from './ElementPanel.module.css';
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
 
 
 export function ElementPanel() {

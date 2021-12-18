@@ -1,4 +1,4 @@
-import { PresentationMaker } from "../../../types"
+import { PresentationMaker } from "../types"
 
 export const presentationMaker: PresentationMaker = {
     mode: 'editor',
