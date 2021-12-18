@@ -1,4 +1,4 @@
-import { ElementConcept, Filter, BorderStyle, ElementType, Background, Color, Slide, SelectionType, Presentation, Editer, Effect, FigureConcept, Mode, PresentationMaker } from '../../../types';
+import { ElementConcept, Filter, BorderStyle, ElementType, Background, Color, Slide, SelectionType, Presentation, Editer, Effect, FigureConcept, Mode, PresentationMaker } from '../types';
 
 //FUNCTIONS
 

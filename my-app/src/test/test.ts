@@ -1,4 +1,5 @@
-import { Slide } from '../../../types';
+import { Slide } from "../types";
+
 export const slidelist: Slide[] = [{
     elementlist: [],
     background: '#000',

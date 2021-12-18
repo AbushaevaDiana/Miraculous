@@ -1,3 +1,12 @@
+export type ActionType = any
+
+export enum StateTypes {
+    ADD_SLIDE,
+    DELETE_SLIDE,
+    MOVE_SLIDE,
+    GOTO_SLIDE,
+}
+
 export type PresentationMaker = {
     readonly presentation: Presentation, 
     mode: Mode,
