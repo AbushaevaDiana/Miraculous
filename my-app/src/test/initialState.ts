@@ -1,6 +1,6 @@
 import { PresentationMaker } from "../types"
 
-export const initialState: PresentationMaker = {
+export const initialState:  PresentationMaker = {
     mode: 'editor',
     history: {
         actionlist: [],

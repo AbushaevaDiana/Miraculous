@@ -1,11 +1,12 @@
+import { Reducer } from "react";
 import { ActionType, Presentation } from "../../types";
 import { slides } from './slideReduce';
 
-let presentationRedusers = (state: Presentation, action: ActionType) => {
-    return{
+let presentationReduser: Reducer<Presentation, ActionType> = (state: Presentation, action: ActionType): Presentation => {
+    return {
         name: state.name,
-        slides: slides(state.slidelist, action)
+        slidelist: slides(state.slidelist, action)
     }
 }
 
-export {presentationRedusers}
+export default {presentationReduser}
