@@ -1,7 +1,8 @@
+import { Reducer } from "react"
 import { setNewId } from "../../functions/functions"
 import { ActionType, Slide } from "../../types"
 
-const slides = (state: Array<Slide> = [], action: ActionType) => {
+const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action: ActionType): Slide[] => {
     switch (action.type) {
     case 'ADD_SLIDE':
       return state.concat([{ 
@@ -15,6 +16,6 @@ const slides = (state: Array<Slide> = [], action: ActionType) => {
     default:
       return state
     }
-}  
+};  
 
-export {slides}
+export default slidelist

@@ -5,6 +5,7 @@ export enum StateTypes {
     DELETE_SLIDE,
     MOVE_SLIDE,
     GOTO_SLIDE,
+    CHANGE_PRESENTATION_TITLE,
 }
 
 export type PresentationMaker = {

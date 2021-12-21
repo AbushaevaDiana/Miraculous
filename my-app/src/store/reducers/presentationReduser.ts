@@ -1,12 +1,22 @@
 import { Reducer } from "react";
+import { combineReducers } from "redux";
 import { ActionType, Presentation } from "../../types";
-import { slides } from './slideReduce';
+import  presentationNameReduser  from "./presentationNameReduser";
+import slidelistReduser from "./slideReduce";
 
-let presentationReduser: Reducer<Presentation, ActionType> = (state: Presentation, action: ActionType): Presentation => {
-    return {
-        name: state.name,
-        slidelist: slides(state.slidelist, action)
-    }
+export const state: Presentation = {
+    slidelist: [
+        {
+            elementlist:[], 
+            background: '#FFFFFF',
+            effects: 'fading',
+            idSlide: 1,
+        },   
+    ],
+    name: 'NoName',
 }
 
-export default {presentationReduser}
+
+const rootReducer = combineReducers({slides: slidelistReduser, name: presentationNameReduser})
+
+export default rootReducer
