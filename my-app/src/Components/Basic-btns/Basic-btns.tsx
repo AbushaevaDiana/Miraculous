@@ -12,9 +12,15 @@ interface BasicBtnsProps {
 function BasicBtns(props: BasicBtnsProps){
         return ( 
             <>
-                <div className={styles.toolbarNewSlide} onClick={() => {props.addSlide()}}>   
-                    <div className={styles.newSlideBtnImg} id='newSlideBtnImg'></div>
-                    <p className={styles.newSlideBtnInsc + ' ' + styles.toolInsc} >Новый слайд</p> 
+                <div className={styles.slideBtnContainer}>
+                    <div className={styles.slideBtn} onClick={() => {props.addSlide()}}>   
+                        <div className={styles.slideBtnImg + ' ' + styles.newSlideBtnImg} id='newSlideBtnImg'></div>
+                        <p className={styles.slideBtnInscr + ' ' + styles.toolInsc}>Новый слайд</p> 
+                    </div>
+                    <div className={styles.slideBtn}>   
+                        <div className={styles.slideBtnImg + ' ' + styles.deleteSlideBtnImg} id='deleteSlideBtnImg'></div>
+                        <p className={styles.slideBtnInscr + ' ' + styles.toolInsc}>Удалить слайд</p> 
+                    </div>
                 </div>
                 <div className={styles.toolbarCancelRefund + ' ' +styles.cancelRefundBtn}>
                     <div className= {styles.cancelRefundBtnContainer + ' ' +styles.doRedoBtn}>

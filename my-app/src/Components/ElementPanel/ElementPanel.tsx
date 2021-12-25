@@ -8,7 +8,7 @@ export function ElementPanel() {
         return (
             <>
                 <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
-                    <div className={styles.fontContainerBt + ' ' + styles.fontBtn}>
+                    <div className={styles.fontContainerBtn + ' ' + styles.fontBtn}>
                         <div className={styles.fontBtnImg}></div>
                         <p className={styles.fontBtnInsc +  ' ' + styles.toolInsc}>Шрифт</p>
                     </div>

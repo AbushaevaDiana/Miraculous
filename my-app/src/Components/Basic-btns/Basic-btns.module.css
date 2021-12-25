@@ -1,22 +1,45 @@
-.toolbarNewSlide {
+.slideBtnContainer {
     display: flex;
+    width: 10%;
+    justify-content: center;
+}
+
+.slideBtn {
+    display: flex;
+    justify-content: center;
     flex-direction: column;
     padding: 0 20px 0 6px;
+}
+
+.slideBtn:last-child {
     border-right: 1px solid #000000;
 }
 
-.toolbarNewSlide:hover {
+.slideBtn:hover {
     cursor: pointer;
 }
 
-.newSlideBtnImg {
+.slideBtnImg {
     margin-bottom: 9px;
-    width: 51px;
-    height: 45px;
-    background: url('../img/newSlide__logo.png');
+    height: 45%;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
-.newSlideBtnInsc {
+.newSlideBtnImg {
+    width: 98%;
+    background-image: url('../img/newSlide__logo.png');
+}
+
+.deleteSlideBtnImg {
+    display: flex;
+    justify-self: center;
+    margin-left: 5%;
+    width: 95%;
+    background-image: url('../img/basket.png');
+}
+
+.slideBtnInscr {
     width: 52px;
     font-family: 'Roboto';
     font-style: normal;
