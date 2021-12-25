@@ -5,6 +5,10 @@
     border-right: 1px solid #000000;
 }
 
+.toolbarNewSlide:hover {
+    cursor: pointer;
+}
+
 .newSlideBtnImg {
     margin-bottom: 9px;
     width: 51px;

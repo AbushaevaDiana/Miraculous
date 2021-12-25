@@ -1,11 +1,18 @@
 import '../../App.css';
 import styles from './Basic-btns.module.css';
 import React, { Component } from 'react';
+import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators';
+import { Presentation } from '../../types';
+import { connect } from 'react-redux';
 
-export function BasicBtns(){
-        return (
+interface BasicBtnsProps {
+    addSlide: () => void,
+}
+
+function BasicBtns(props: BasicBtnsProps){
+        return ( 
             <>
-                <div className={styles.toolbarNewSlide}>
+                <div className={styles.toolbarNewSlide} onClick={() => {props.addSlide()}}>   
                     <div className={styles.newSlideBtnImg} id='newSlideBtnImg'></div>
                     <p className={styles.newSlideBtnInsc + ' ' + styles.toolInsc} >Новый слайд</p> 
                 </div>
@@ -22,3 +29,13 @@ export function BasicBtns(){
             </>
         )
 };
+
+const mapDispatchToProps = ({
+    addSlide,
+})
+  
+  function mapStateToProps(state: Presentation) {
+    return { slidelist: state.slidelist } 
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(BasicBtns)

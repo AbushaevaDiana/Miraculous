@@ -7,15 +7,15 @@ import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/sl
 import  store  from '../../store/store'
 
 interface SlidemenuList {
-    slidelist: Array<Slide>
+    slidelist: Array<Slide>,
 }
 
-export function Slidemenu(props: SlidemenuList){
+function Slidemenu(props: SlidemenuList){
         return (
             <>  
                <div className={styles.slidemenu}>
                <ul className={styles.slidemenuList}> 
-                 {props.slidelist.map(slide => <SlideView slide = {slide}></SlideView>)}
+                 {props.slidelist.map(slide => <li key={slide.idSlide} className={styles.slidemenuListSlide}></li>)}
                </ul>
                    <div className={styles.imglogo} ></div>
                </div>
@@ -25,12 +25,13 @@ export function Slidemenu(props: SlidemenuList){
 
 //
 function mapStateToProps(state: Presentation) {
-    return { props: state.slidelist} 
+    console.log(state)
+    return { slidelist: state.slidelist} 
 };
 
-const mapDispatchToProps = {
-    addSlide,
-}
+// const mapDispatchToProps = {
+    
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Slidemenu);
+export default connect(mapStateToProps)(Slidemenu);
 //

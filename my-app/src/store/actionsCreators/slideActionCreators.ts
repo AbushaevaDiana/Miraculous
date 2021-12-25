@@ -1,8 +1,6 @@
 import { StateTypes } from "../../types";
 import { connect } from 'react-redux';
 
-export { addSlide, deleteSlide, gotoSlide }
-
 function addSlide() {
     return {
       type: StateTypes.ADD_SLIDE
@@ -31,7 +29,7 @@ function gotoSlide(idSlide: Number) {
 }
 
 
-
+export { addSlide, deleteSlide, gotoSlide }
 
 
 /////////////

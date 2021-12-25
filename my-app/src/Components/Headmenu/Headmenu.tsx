@@ -1,14 +1,17 @@
 import '../../App.css';
 import styles from './Headmenu.module.css';
-import { BasicBtns } from '../Basic-btns/Basic-btns';
+import  BasicBtns  from '../Basic-btns/Basic-btns';
 import { ElementPanel } from '../ElementPanel/ElementPanel';
 // import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
+import { addSlide } from '../../store/actionsCreators/slideActionCreators';
+import { Presentation } from '../../types';
 
 
 interface HeadmenuProps {
     name: string,
+    addSlide: () => void,
 }
 
 export function Headmenu(props: HeadmenuProps) {
@@ -32,10 +35,20 @@ export function Headmenu(props: HeadmenuProps) {
                     </li>
                 </ul>
                 <div className = {styles.toolbar}>
-                    <BasicBtns></BasicBtns>
+                    <BasicBtns  />
                     <ElementPanel></ElementPanel>
                 </div>
             </>
             // </BrowserRouter> 
         )
 };
+
+const mapDispatchToProps = {
+    addSlide,
+}
+
+const mapStateToProps = (state: Presentation) => ({
+  name: state.name,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Headmenu)

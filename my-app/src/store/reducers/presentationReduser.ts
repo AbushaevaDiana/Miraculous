@@ -17,6 +17,6 @@ export const state: Presentation = {
 }
 
 
-const rootReducer: Reducer = combineReducers({slides: slidelistReduser, name: presentationNameReduser})
+const rootReducer: Reducer = combineReducers({slidelist: slidelistReduser, name: presentationNameReduser})
 
 export default rootReducer

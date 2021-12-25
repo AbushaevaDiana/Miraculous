@@ -1,11 +1,11 @@
 export type ActionType = any
 
 export enum StateTypes {
-    ADD_SLIDE,
-    DELETE_SLIDE,
-    MOVE_SLIDE,
-    GOTO_SLIDE,
-    CHANGE_PRESENTATION_TITLE,
+    ADD_SLIDE = 'ADD_SLIDE',
+    DELETE_SLIDE = 'DELETE_SLIDE',
+    MOVE_SLIDE = 'MOVE_SLIDE',
+    GOTO_SLIDE = 'GOTO_SLIDE',
+    CHANGE_PRESENTATION_TITLE = 'CHANGE_PRESENTATION_TITLE',
 }
 
 export type PresentationMaker = {
