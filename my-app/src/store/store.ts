@@ -1,8 +1,9 @@
 import { createStore, Store } from 'redux';
-import { ActionType, Presentation } from '../types';
-import rootReducer, { state }  from './reducers/presentationReduser';
+import { ActionType, Presentation, PresentationMaker } from '../types';
+import rootReducer from './reducers/presentationMakerReduser';
+import { initialState } from '../test/initialState'
 
 
-let store: Store<Presentation, ActionType> = createStore(rootReducer, state);
+let store: Store<PresentationMaker, ActionType> = createStore(rootReducer, initialState);
 
 export default store;

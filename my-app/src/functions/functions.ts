@@ -94,7 +94,7 @@ export function moveSlide(presentationMaker: Editer, newSlidePosition: number): 
     
     for(i = 0; i < slidelist.length; i++)
     {
-        if(selection.idSlides.indexOf(slidelist[i].idSlide) != -1)
+        if(selection.idSlides.indexOf(slidelist[i].idSlide) !== -1)
         {
             break;
         };
@@ -148,7 +148,7 @@ export function editSlideBackground(presentationMaker: Editer, newBackground: Ba
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
@@ -168,7 +168,7 @@ export function editSlideEffect(presentationMaker: Editer, newEffect: Effect): E
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
@@ -214,7 +214,7 @@ export function deleteSelectedElement(presentationMaker: Editer): Editer {
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
@@ -235,12 +235,12 @@ export function editBorderColor(presentationMaker: Editer, newColor: Color): Edi
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 return{
                                     ...element,
@@ -268,12 +268,12 @@ export function editBorderWidth(presentationMaker: Editer, newWidth: number): Ed
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 return{
                                     ...element,
@@ -302,12 +302,12 @@ export function editBorderStyle(presentationMaker: Editer, newBorderStyle: Borde
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 return{
                                     ...element,
@@ -336,12 +336,12 @@ export function moveElement(presentationMaker: Editer, x: number, y: number): Ed
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 return{
                                     ...element,
@@ -369,12 +369,12 @@ export function editElementSize(presentationMaker: Editer, h: number, w: number)
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 return{
                                     ...element,
@@ -413,7 +413,7 @@ export function addImg(presentationMaker: Editer, newSrc: string): Editer {
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
@@ -454,7 +454,7 @@ export function addText(presentationMaker: Editer, newTextContent: string): Edit
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
@@ -489,7 +489,7 @@ export function addFigure(presentationMaker: Editer, newFigureConcept: FigureCon
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
@@ -515,12 +515,12 @@ export function editTextColor(presentationMaker: Editer, newColor: Color): Edite
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            if ((selection.idElements.indexOf(element.idElement) !== -1) && (element.elementConcept.type == 'text'))
                             {
                                 return{
                                     ...element,
@@ -547,12 +547,12 @@ export function editTextSize(presentationMaker: Editer, newSize: number): Editer
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            if ((selection.idElements.indexOf(element.idElement) !== -1) && (element.elementConcept.type == 'text'))
                             {
                                 return{
                                     ...element,
@@ -580,12 +580,12 @@ export function editFont(presentationMaker: Editer, newFont: string): Editer {
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            if ((selection.idElements.indexOf(element.idElement) !== -1) && (element.elementConcept.type == 'text'))
                             {
                                 return{
                                     ...element,
@@ -612,12 +612,12 @@ export function addLink(presentationMaker: Editer, newLink: string): Editer {
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            if ((selection.idElements.indexOf(element.idElement) !== -1) && (element.elementConcept.type == 'text'))
                             {
                                 return{
                                     ...element,
@@ -644,12 +644,12 @@ export function setItalicText(presentationMaker: Editer): Editer {
         presentation:  {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
                                     return{
@@ -687,12 +687,12 @@ export function setBoldText(presentationMaker: Editer): Editer {
         presentation:  {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
                                     return{
@@ -730,12 +730,12 @@ export function setUnderlineText(presentationMaker: Editer): Editer {
         presentation:  {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if (selection.idElements.indexOf(element.idElement) != -1)
+                            if (selection.idElements.indexOf(element.idElement) !== -1)
                             {
                                 if (element.elementConcept.type == 'text' && element.elementConcept.italic == true){
                                     return{
@@ -775,12 +775,12 @@ export function editFigureLineColor(presentationMaker: Editer, color: Color): Ed
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            if ((selection.idElements.indexOf(element.idElement) !== -1) && (element.elementConcept.type == 'text'))
                             {
                                 return{
                                     ...element,
@@ -807,12 +807,12 @@ export function editFigureFillColor(presentationMaker: Editer, color: Color): Ed
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            if ((selection.idElements.indexOf(element.idElement) !== -1) && (element.elementConcept.type == 'text'))
                             {
                                 return{
                                     ...element,
@@ -840,12 +840,12 @@ export function editFilter(presentationMaker: Editer, newFilter: Filter): Editer
         presentation: {
             ...presentationMaker.presentation,
             slidelist: presentationMaker.presentation.slidelist.map(slide => {
-                if (selection.idSlides.indexOf(slide.idSlide) != -1)
+                if (selection.idSlides.indexOf(slide.idSlide) !== -1)
                 {
                     return {
                         ...slide,
                         elementlist: slide.elementlist.map(element => {
-                            if ((selection.idElements.indexOf(element.idElement) != -1) && (element.elementConcept.type == 'text'))
+                            if ((selection.idElements.indexOf(element.idElement) !== -1) && (element.elementConcept.type == 'text'))
                             {
                                 return{
                                     ...element,

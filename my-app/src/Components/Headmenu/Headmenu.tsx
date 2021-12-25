@@ -6,7 +6,7 @@ import { ElementPanel } from '../ElementPanel/ElementPanel';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide } from '../../store/actionsCreators/slideActionCreators';
-import { Presentation } from '../../types';
+import { Presentation, PresentationMaker } from '../../types';
 
 
 interface HeadmenuProps {
@@ -35,7 +35,7 @@ export function Headmenu(props: HeadmenuProps) {
                     </li>
                 </ul>
                 <div className = {styles.toolbar}>
-                    <BasicBtns  />
+                    <BasicBtns />
                     <ElementPanel></ElementPanel>
                 </div>
             </>
@@ -47,8 +47,8 @@ const mapDispatchToProps = {
     addSlide,
 }
 
-const mapStateToProps = (state: Presentation) => ({
-  name: state.name,
+const mapStateToProps = (state: PresentationMaker) => ({
+  name: state.presentation.name,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Headmenu)

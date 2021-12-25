@@ -2,7 +2,7 @@ import '../../App.css';
 import styles from './Basic-btns.module.css';
 import React, { Component } from 'react';
 import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators';
-import { Presentation } from '../../types';
+import { Presentation, PresentationMaker } from '../../types';
 import { connect } from 'react-redux';
 
 interface BasicBtnsProps {
@@ -40,8 +40,8 @@ const mapDispatchToProps = ({
     addSlide,
 })
   
-  function mapStateToProps(state: Presentation) {
-    return { slidelist: state.slidelist } 
-  }
+function mapStateToProps(state: PresentationMaker) {
+    return { slidelist: state.presentation.slidelist } 
+}
   
-  export default connect(mapStateToProps, mapDispatchToProps)(BasicBtns)
+export default connect(mapStateToProps, mapDispatchToProps)(BasicBtns)

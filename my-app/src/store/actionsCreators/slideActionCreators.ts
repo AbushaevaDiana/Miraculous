@@ -24,7 +24,7 @@ function deleteSlide(idSlide: Number) {
 function gotoSlide(idSlide: Number) {
     return {
         type: 'GOTO_SLIDE',
-        idSlide,
+        payload: idSlide,
     }
 }
 

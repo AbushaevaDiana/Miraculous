@@ -1,7 +1,7 @@
 import '../../App.css';
 import styles from './Slidemenu.module.css';
 import { connect } from 'react-redux';
-import { Presentation, Slide } from '../../types';
+import { Presentation, PresentationMaker, Slide } from '../../types';
 import { SlideView } from '../Slide/Slide';
 import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators'
 import  store  from '../../store/store'
@@ -24,9 +24,9 @@ function Slidemenu(props: SlidemenuList){
 };
 
 //
-function mapStateToProps(state: Presentation) {
+function mapStateToProps(state: PresentationMaker) {
     console.log(state)
-    return { slidelist: state.slidelist} 
+    return { slidelist: state.presentation.slidelist} 
 };
 
 // const mapDispatchToProps = {

@@ -13,6 +13,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
       }])
     case 'DELETE_SLIDE':
       return state.filter(slide => action.slideId !== slide.idSlide)
+    case 'GOTO_SLIDE':
     default:
       return state
     }

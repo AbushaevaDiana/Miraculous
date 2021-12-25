@@ -1,10 +1,12 @@
 import { Reducer } from "redux";
 import { combineReducers } from "redux";
 import { ActionType, Presentation } from "../../types";
+import name from "./presentationNameReduser";
 import  presentationNameReduser  from "./presentationNameReduser";
+import slidelist from "./slideReduce";
 import slidelistReduser from "./slideReduce";
 
-export const state: Presentation = {
+const stateStart: Presentation = {
     slidelist: [
         {
             elementlist:[], 
@@ -16,7 +18,17 @@ export const state: Presentation = {
     name: 'NoName',
 }
 
+const presentation: Reducer<Presentation, any> = (state: Presentation = stateStart, action: ActionType): Presentation => {
+    return{
+        slidelist: slidelist(state.slidelist, action),
+        name: name(state.name, action),
+    }
+};  
 
-const rootReducer: Reducer = combineReducers({slidelist: slidelistReduser, name: presentationNameReduser})
+export default presentation
 
-export default rootReducer
+
+
+//const rootReducer: Reducer = combineReducers({slidelist: slidelistReduser, name: presentationNameReduser})
+
+//export default rootReducer
