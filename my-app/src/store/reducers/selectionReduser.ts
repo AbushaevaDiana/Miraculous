@@ -1,6 +1,5 @@
 import { Reducer } from "react"
-import { setNewId } from "../../functions/functions"
-import { ActionType, History, PresentationMaker, SelectionType } from "../../types"
+import { ActionType, SelectionType } from "../../types"
 
 const selection: Reducer<SelectionType, any> = (state: SelectionType = {idSlides: [], idElements: [] }, action: ActionType): SelectionType => {
     switch (action.type) {
