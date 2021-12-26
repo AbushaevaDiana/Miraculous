@@ -14,16 +14,16 @@ function addSlide() {
 //     }
 // }
 
-function deleteSlide(idSlide: Number) {
+function deleteSlide(idSlides: Number[]) {
     return {
         type: StateTypes.DELETE_SLIDE,
-        idSlide,
+        payload: idSlides,
     }
 }
 
 function gotoSlide(idSlide: Number) {
     return {
-        type: 'GOTO_SLIDE',
+        type: StateTypes.GOTO_SLIDE,
         payload: idSlide,
     }
 }

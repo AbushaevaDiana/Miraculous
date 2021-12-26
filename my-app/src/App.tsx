@@ -29,6 +29,7 @@ function App(props: AppProps) {
 
 //
 function mapStateToProps(state: PresentationMaker) {
+  return{state: state}
 };
 
 const mapDispatchToProps = {

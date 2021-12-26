@@ -12,9 +12,10 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
         effects: 'occurrence',
       }])
     case 'DELETE_SLIDE':
-      return state.filter(slide => action.slideId !== slide.idSlide)
-    default:
+      console.log('delete work', action.payload, typeof(action.payload));
       return state
+    default:
+      return state.filter(slide => slide.idSlide !== action.payload)
     }
 };  
 

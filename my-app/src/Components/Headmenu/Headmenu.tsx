@@ -5,13 +5,14 @@ import { ElementPanel } from '../ElementPanel/ElementPanel';
 // import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
-import { addSlide } from '../../store/actionsCreators/slideActionCreators';
+import { addSlide, deleteSlide } from '../../store/actionsCreators/slideActionCreators';
 import { Presentation, PresentationMaker } from '../../types';
 
 
 interface HeadmenuProps {
     name: string,
     addSlide: () => void,
+    deleteSlide: (idSlide: Number[]) => void
 }
 
 export function Headmenu(props: HeadmenuProps) {
@@ -45,6 +46,7 @@ export function Headmenu(props: HeadmenuProps) {
 
 const mapDispatchToProps = {
     addSlide,
+    deleteSlide
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({
