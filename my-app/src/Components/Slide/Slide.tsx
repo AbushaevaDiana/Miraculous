@@ -1,6 +1,6 @@
 import '../../App.css';
 import styles from './Slide.module.css';
-import { PresentationMaker, SelectionType, Slide } from '../../types';
+import { PresentationMaker, SelectionType, Slide, Color } from '../../types';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators'
@@ -12,11 +12,22 @@ interface SLideProps{
 };
 
 
-export function SlideView(props:SLideProps){
-   return (
-      <div key={props.slide.idSlide} className={styles.slidemenuListSlide} onClick={() => {props.gotoSlide(props.slide.idSlide)}}>
-      </div>
-   )
+
+export function SlideView(props:SLideProps){    
+   let privet = styles.slidemenuListSlide;
+   let color: string = '';
+   if(props.slide.background.type === 'color'){
+      color = props.slide.background.color
+   }
+   const sLideStyle = {
+      background: color,
+    };
+
+   console.log(props.slide.background)
+      return (
+         <div key={props.slide.idSlide} style={sLideStyle} className={privet} onClick={() => {props.gotoSlide(props.slide.idSlide)}}>
+         </div>
+      )
 };
 
 //

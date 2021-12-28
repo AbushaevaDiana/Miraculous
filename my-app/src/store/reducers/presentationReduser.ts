@@ -10,7 +10,9 @@ const stateStart: Presentation = {
     slidelist: [
         {
             elementlist:[], 
-            background: '#FFFFFF',
+            background:{
+                type: 'color', 
+                color: '#FFFFFF'},
             effects: 'fading',
             idSlide: 1
         },   

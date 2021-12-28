@@ -1,6 +1,6 @@
 import { PresentationMaker } from "../types"
 
-export const presentationMaker: PresentationMaker = {
+/*export const presentationMaker: PresentationMaker = {
     mode: 'editor',
     history: {
         actionlist: [],
@@ -131,4 +131,4 @@ export const presentationMaker: PresentationMaker = {
     ],
         name: 'NoName',
     },
-}
+}*/

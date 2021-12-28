@@ -46,7 +46,10 @@ export type Slide = {
 
 export type Effect = 'occurrence' | 'fading';
 
-export type Color = string;
+export type Color = {
+    type: 'color',
+    color: string,
+};
 
 export type Background = Img | Color;
 

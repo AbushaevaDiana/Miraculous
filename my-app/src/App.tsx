@@ -4,7 +4,7 @@ import './App.css';
 import  Headmenu from './Components/Headmenu/Headmenu';
 import  Slidemenu   from './Components/SLidemenu/Slidemenu';
 import { PresentationContent } from './Components/Presentation-content/Presentation-content';
-import { presentationMaker } from './test/model';
+import { initialState } from './test/initialState';
 import { Presentation, PresentationMaker } from './types';
 import { connect } from 'react-redux';
 import { addSlide, deleteSlide, gotoSlide } from './store/actionsCreators/slideActionCreators'
@@ -21,7 +21,7 @@ function App(props: AppProps) {
       </header>
       <body className='AppBody'>
         <Slidemenu gotoSlide = {props.gotoSlide}></Slidemenu>
-        <PresentationContent slide={presentationMaker.presentation.slidelist[1]}></PresentationContent>
+        <PresentationContent slide={initialState.presentation.slidelist[0]}></PresentationContent>
       </body>
     </div>
   );

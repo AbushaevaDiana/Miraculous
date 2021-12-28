@@ -110,12 +110,15 @@ export function moveSlide(presentationMaker: Editer, newSlidePosition: number): 
 };
 
 export function addSlide(presentationMaker: Editer): Editer {
-    let newSlide: Slide = {
+    let newSlide: Slide = { 
         elementlist: [],
         idSlide: setNewId(),
-        background: '#ffffff',
+        background: {
+          type: 'color',
+          color: '#ffffff'
+        },
         effects: 'occurrence',
-    };
+      };
 
     return {
         ...presentationMaker,
@@ -191,7 +194,10 @@ export function addElement(presentationMaker: Editer, newElementConcept: Element
             w: 100,
         },
         border: {
-            color: '#000000',
+            color: {
+                type: 'color',
+                color: '#000000',
+            },
             borderStyle: 'none',
             width: 5,
         },
@@ -438,7 +444,10 @@ export function addText(presentationMaker: Editer, newTextContent: string): Edit
     let newElement: ElementType;
     let elementConcept: ElementConcept = {
         type: 'text',
-        color: '#000000',
+        color: {
+            type: 'color',
+            color: '#000000',
+        },
         textContent:  newTextContent,
         links: '',
         size: 12,
@@ -478,8 +487,12 @@ export function addFigure(presentationMaker: Editer, newFigureConcept: FigureCon
     let newElement: ElementType;
     let elementConcept: ElementConcept = {
         type: 'figure',
-        linecolor: '#000000',
-        fillcolor: '#ffffff',
+        linecolor: {
+            type: 'color',
+            color: '#000000'},
+        fillcolor: {
+            type: 'color',
+            color: '#ffffff'},
         figureConcept: newFigureConcept,
     };
     newElement = addElement(presentationMaker, elementConcept);
