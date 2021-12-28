@@ -9,6 +9,11 @@ const selection: Reducer<SelectionType, any> = (state: SelectionType = {idSlides
                     idSlides: action.payload,
                     idElements: []
                 };
+        case 'DELETE_SLIDE':
+            return {
+              idSlides: [], 
+              idElements: []
+            };
         default:
           return state
         }

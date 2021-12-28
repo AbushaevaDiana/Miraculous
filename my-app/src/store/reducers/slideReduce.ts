@@ -13,9 +13,9 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
       }])
     case 'DELETE_SLIDE':
       console.log('delete work', action.payload, typeof(action.payload));
-      return state
-    default:
       return state.filter(slide => slide.idSlide !== action.payload)
+    default:
+      return state
     }
 };  
 
