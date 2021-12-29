@@ -2,8 +2,9 @@
     margin-bottom: 17px;
     border: 5px solid transparent;
     /*background-color: #fff;*/
-    height: 35%;
-    width: 100%;
+    width: 95%;
+    max-height: 20%;
+    min-height: 20%;
     transition: border, .3s, ease-in-out;
 }
 
