@@ -18,6 +18,11 @@ button {
   cursor: pointer;
 }
 
+html {
+  font-family: 'Roboto';
+  font-style: normal;
+}
+
 /*
 .App-logo {
   height: 40vmin;

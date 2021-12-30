@@ -2,6 +2,8 @@ import '../../App.css';
 import styles from './Headmenu.module.css';
 import  BasicBtns  from '../Basic-btns/Basic-btns';
 import { ElementPanel } from '../ElementPanel/ElementPanel';
+import { InsertPanel } from '../InsertPanel/InsertPanel';
+import { MainPanel } from '../MainPanel/MainPanel';
 // import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
@@ -37,7 +39,9 @@ export function Headmenu(props: HeadmenuProps) {
                 </ul>
                 <div className = {styles.toolbar}>
                     <BasicBtns />
-                    <ElementPanel></ElementPanel>
+                    <MainPanel></MainPanel>
+                    {/* <InsertPanel></InsertPanel> */}
+                    {/* <ElementPanel></ElementPanel> */}
                 </div>
             </>
             // </BrowserRouter> 

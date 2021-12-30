@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 interface BasicBtnsProps {
     addSlide: () => void,
     deleteSlide: (idSlide: Number[]) => void,
-    selection: SelectionType
+    selection: SelectionType,
 }
 
 function BasicBtns(props: BasicBtnsProps){

@@ -1,6 +1,6 @@
 .slideBtnContainer {
     display: flex;
-    width: 10%;
+    /* width: 10%; */
     justify-content: center;
 }
 
@@ -51,9 +51,11 @@
 }
 
 .toolbarCancelRefund {
-    padding: 5px 23px 0 27px;
+    width: 8%;
+    /* padding: 5px 23px 0 23px; */
     display: flex;
     flex-direction: column;
+    align-items: center;
     border-right: 1px solid #000000;
 }
 
