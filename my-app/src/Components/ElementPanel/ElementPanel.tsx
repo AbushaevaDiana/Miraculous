@@ -65,6 +65,10 @@ export function ElementPanel() {
                         <option className={styles.selectFieldOption}>красный</option>
                     </select>
                 </div>
+                <div className={styles.deleteElementContainer}>   
+                    <div className={styles.deleteElementIcon}></div>
+                    <p className={styles.deleteElementInscr}>Удалить элемент</p> 
+                </div>
             </>
         )
 }

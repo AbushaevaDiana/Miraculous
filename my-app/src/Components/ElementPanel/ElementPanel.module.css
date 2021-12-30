@@ -1,6 +1,6 @@
 .fontContainer {
     padding: 15px 12px 10px 0;
-    width: 35%;
+    width: 22%;
     display: flex;
     border-right: 1px solid #000000;
 }
@@ -52,15 +52,22 @@
 .selectField {
     height: 50%;
     font-size: 14px;
-    line-height: 16px;
-    text-align: center;
+    font-weight: 600;
+    line-height: 1;
     color: #000000;
     background-color: transparent;
-    border: 1px solid #000000;
+    border: 2px solid #000000;
+}
+
+.elementSettings {
+    padding: 15px;
+    width: 20%;
+    display: flex;
+    border-right: 1px solid #000000;
 }
 
 .fontSelectField {
-    height: 80%;
+    height: 23px;
     width: 49%;
 }
 
@@ -73,7 +80,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 16px;
+    line-height: 1;
     color: #000000;
 }
 
@@ -111,16 +118,6 @@
     text-decoration: underline;
 }
 
-.elementSettings {
-    padding: 15px;
-    width: 27%;
-    display: flex;
-}
-
-.elementSettings:not(:last-child) {
-    border-right: 1px solid #000000;
-}
-
 .elementSettingsSelect {
     width: 70%;
     padding: 0;
@@ -147,6 +144,31 @@
     background: url('../img/fillicon.png');
 }
 
-/* .selectField {
-    width: 140px;
-} */
+.deleteElementContainer {
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.deleteElementIcon {
+    margin-bottom: 10px;
+    width: 53px;
+    height: 55px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../img/basket.png');
+}
+
+.deleteElementInscr {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    color: #000000;
+}

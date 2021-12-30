@@ -1,15 +1,179 @@
 .slideBackgroundContainer {
     padding: 8px 15px;
     width: 35%;
-    border: 2px solid black;
+    display: flex;
+    border-right: 1px solid black;
 }
 
 .backgroundImage {
-    width: 60%;
+    width: 55%;
+    display: flex;
+    border-right: 1px solid #A0A0A0;
 }
 
+.slideBackgroundInscr {
+    margin-right: 20px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: black;
+}
 
+.chooseImgContainer {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chooseImgIcon {
+    margin-bottom: 10px;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../img/imgIcon.png');
+}
+
+.chooseImgInput {
+    padding: 0 5px;
+    width: 100%;
+    height: 23px;
+    background-color: transparent;
+}
 
 .backgroundColor {
-    width: 40%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chooseColorIcon {
+    margin-bottom: 10px;
+    width: 75px;
+    height: 75px;
+    background-image: url('../img/fillicon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.chooseColorSelect {
+    padding: 0 5px;
+    width: 80%;
+    height: 23px;
+    background-color: transparent;
+    border: 2px solid black;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.selectFieldOption {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1;
+    color: #000000;
+}
+
+.elementOutlineContainer {
+    padding: 0 15px;
+    width: 34%;
+    display: flex;
+    border-right: 1px solid black;
+}
+
+.elementOutlineInscr {
+    padding-top: 8px;
+    margin-right: 10px;
+    width: 24%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    color: black;
+}
+
+.selectContainer {
+    padding-top: 8px;
+    padding-right: 10px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #A0A0A0;
+}
+
+.elementOutlineSelect {
+    padding: 0 5px;
+    width: 100%;
+    height: 23px;
+    background-color: transparent;
+    border: 2px solid black;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.elementOutlineOption {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    color: #000000;    
+}
+
+.colorContourContainer {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.colorContourIcon {
+    margin-bottom: 8px;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../img/contourIcon.png');
+}
+
+.hrIcon {
+    margin-bottom: 10px;
+    width: 58px;
+    height: 5px;
+    background-color: #FF6666;
+    border: none;
+}
+
+.elementOutlineSelectSmall {
+    width: 70%;
+}
+
+.animationContainer {
+    padding: 8px 2% 0 2%;
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animationIcon {
+    margin-bottom: 10px;
+    width: 90px;
+    height: 58px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../img/animationIcon.png');
 }

@@ -1,9 +1,16 @@
 .presentationContent {
-    margin: 30px 25px 60px 15px;
-    width: 85%;
+    margin: auto;
+    width: 60%;
     height: 90%;
     border: 2px solid #FF6666;
 };
+
+/* @media (min-width: 1024px) {
+    .presentationContent {
+        width: 100px;
+        height: 100px;
+    }
+} */
 
 /* .presentation-content__main {
     width: 100%;

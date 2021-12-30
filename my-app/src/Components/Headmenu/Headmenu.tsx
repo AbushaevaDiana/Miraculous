@@ -39,9 +39,9 @@ export function Headmenu(props: HeadmenuProps) {
                 </ul>
                 <div className = {styles.toolbar}>
                     <BasicBtns />
-                    <MainPanel></MainPanel>
+                    {/* <MainPanel></MainPanel> */}
                     {/* <InsertPanel></InsertPanel> */}
-                    {/* <ElementPanel></ElementPanel> */}
+                    <ElementPanel></ElementPanel>
                 </div>
             </>
             // </BrowserRouter> 
