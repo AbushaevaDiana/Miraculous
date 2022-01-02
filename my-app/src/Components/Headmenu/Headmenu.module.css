@@ -42,3 +42,19 @@
     background-color: #F08080;
     color: #fff;
 }
+
+.headmenuName{
+    display: flex;
+    flex-direction: row;
+    justify-self: start;
+    align-self: center;
+       
+}
+
+.headmenuInput{
+    background-color: #FFEEDD;
+    border: none;
+
+    color: #F08080;
+    font-weight: bold;
+}

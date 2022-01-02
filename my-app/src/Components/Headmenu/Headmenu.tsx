@@ -7,13 +7,15 @@ import { MainPanel } from '../MainPanel/MainPanel';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide } from '../../store/actionsCreators/slideActionCreators';
+import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
 import { Presentation, PresentationMaker } from '../../types';
 
 
 interface HeadmenuProps {
     name: string,
     addSlide: () => void,
-    deleteSlide: (idSlide: Number[]) => void
+    deleteSlide: (idSlide: Number[]) => void,
+    changePresentationNAME: (name: string) => void,
 }
 
 export function Headmenu(props: HeadmenuProps) {
@@ -35,11 +37,26 @@ export function Headmenu(props: HeadmenuProps) {
         setMainPanelVisible(false);
         setInsertPanelVisible(false);
     };
-        return (
+
+    const [nameInputVisible, setNameInputVisible] = useState(false);
+    const handleToggleNameInput = () => {
+        setNameInputVisible(!nameInputVisible)
+    }
+    console.log(props.name);
+    return (
             <>
-                <p className='headtext'>
-                    Презентация Miraculous: {props.name}
+            <span className={styles.headmenuName}>             
+                <p className='headtext'onClick = {handleToggleNameInput}>
+                    Презентация Miraculous:  
                 </p>
+                <input type="text" className={styles.headmenuInput} defaultValue={props.name} 
+                    onKeyPress= {
+                    (e) => {if (e.key === "Enter") {
+                    e.currentTarget.value = (e.currentTarget.value == '') ? 'Презентация без названия' : e.currentTarget.value
+                    props.changePresentationNAME(e.currentTarget.value)
+                    e.currentTarget.blur()
+                }}}/>
+            </span> 
                 <ul className={styles.headmenu}>
                     <li className= {styles.headmenuLi}>       
                         <button className={styles.headmenuLiButton}>Файл</button>
@@ -67,7 +84,8 @@ export function Headmenu(props: HeadmenuProps) {
 
 const mapDispatchToProps = {
     addSlide,
-    deleteSlide
+    deleteSlide,
+    changePresentationNAME
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

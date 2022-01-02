@@ -17,7 +17,7 @@ const stateStart: Presentation = {
             idSlide: 1
         },   
     ],
-    name: 'NoName',
+    name: 'Презентация без названия',
 }
 
 const presentation: Reducer<Presentation, any> = (state: Presentation = stateStart, action: ActionType): Presentation => {

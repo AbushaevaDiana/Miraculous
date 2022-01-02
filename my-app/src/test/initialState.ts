@@ -21,6 +21,6 @@ export const initialState:  PresentationMaker = {
                 idSlide: 1,
             },   
         ],
-        name: 'NoName',
+        name: 'Презентация без названия',
     },
 }
