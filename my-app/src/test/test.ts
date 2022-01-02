@@ -1,10 +1,13 @@
 import { Slide } from "../types";
 
-export const slidelist: Slide[] = [{
+/*export const slidelist: Slide[] = [{
     elementlist: [],
-    background: '#000',
+    background: {
+        type: 'color',
+        color: '#000',},
     effects: 'occurrence',
     idSlide: 44,
+    selected: false,
 }, {
     elementlist: [{
         size: {
@@ -12,7 +15,9 @@ export const slidelist: Slide[] = [{
             w: 100,
         },
         border: {
-            color: '#FF00FF',
+            color: {
+                type: 'color',
+                color: '#FF00FF'},
             borderStyle: 'dashed',
             width: 10,
         },
@@ -56,4 +61,4 @@ export const slidelist: Slide[] = [{
     background: '#808080',
     effects: 'occurrence',
     idSlide: 13414,
-}];
+}];*/

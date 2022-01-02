@@ -16,11 +16,16 @@ interface SLideProps{
 export function SlideView(props:SLideProps){    
    let privet = styles.slidemenuListSlide;
    let color: string = '';
+   let borderCol: string = 'none';
    if(props.slide.background.type === 'color'){
       color = props.slide.background.color
+      if(props.slide.background.color !== '#FFFFFF'){
+         borderCol = '#000'
+      } else {borderCol = props.slide.background.color}
    }
    const sLideStyle = {
       background: color,
+      borderColor: borderCol,
     };
 
    console.log(props.slide.background)

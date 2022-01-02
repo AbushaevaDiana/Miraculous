@@ -14,7 +14,8 @@ const stateStart: Presentation = {
                 type: 'color', 
                 color: '#FFFFFF'},
             effects: 'fading',
-            idSlide: 1
+            idSlide: 1,
+            selected: false,
         },   
     ],
     name: 'Презентация без названия',

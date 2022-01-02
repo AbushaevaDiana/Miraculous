@@ -42,6 +42,7 @@ export type Slide = {
     background: Background,
     effects: Effect,
     idSlide: number,
+    selected: boolean,
 };
 
 export type Effect = 'occurrence' | 'fading';

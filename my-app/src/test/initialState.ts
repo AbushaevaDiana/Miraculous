@@ -19,6 +19,7 @@ export const initialState:  PresentationMaker = {
                     color: '#FFFFFF'},
                 effects: 'fading',
                 idSlide: 1,
+                selected: false,
             },   
         ],
         name: 'Презентация без названия',

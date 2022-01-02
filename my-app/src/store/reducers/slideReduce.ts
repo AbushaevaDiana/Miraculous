@@ -10,33 +10,34 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
         idSlide: setNewId(),
         background: {
           type: 'color',
-          color: '#ffffff'
+          color: '#FFFFFF'
         },
         effects: 'occurrence',
+        selected: false,
       }])
     case 'DELETE_SLIDE':
       return state.filter(slide => slide.idSlide !== action.payload)
-    case 'GOTO_SLIDE':
-      return state.map(slide => {
-        if (slide.idSlide === action.payload)
-        { 
-          return {
-            ...slide,
-            background: {
-              ...slide.background,
-              color: '#98FB98'
-            }
-          } 
-        } else { 
+      case 'GOTO_SLIDE':
+        return state.map(slide => {
+          if (slide.idSlide === action.payload)
+          { 
             return {
               ...slide,
               background: {
                 ...slide.background,
-                color: '#FFFFFF'
+                color: '#98FB98'
               }
             } 
-          }
-    })
+          } else { 
+              return {
+                ...slide,
+                background: {
+                  ...slide.background,
+                  color: '#FFFFFF'
+                }
+              } 
+            }
+      })
     default:
       return state
     }

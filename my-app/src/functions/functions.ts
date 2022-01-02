@@ -118,6 +118,7 @@ export function addSlide(presentationMaker: Editer): Editer {
           color: '#ffffff'
         },
         effects: 'occurrence',
+        selected: false,
       };
 
     return {
