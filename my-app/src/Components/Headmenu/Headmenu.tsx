@@ -4,7 +4,6 @@ import  BasicBtns  from '../Basic-btns/Basic-btns';
 import { ElementPanel } from '../ElementPanel/ElementPanel';
 import { InsertPanel } from '../InsertPanel/InsertPanel';
 import { MainPanel } from '../MainPanel/MainPanel';
-// import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide } from '../../store/actionsCreators/slideActionCreators';
@@ -18,6 +17,24 @@ interface HeadmenuProps {
 }
 
 export function Headmenu(props: HeadmenuProps) {
+    const [mainPanelVisible, setMainPanelVisible] = useState(true);
+    const handleToggleMainPanel = () => {
+        setMainPanelVisible(true);
+        setInsertPanelVisible(false);
+        setElementPanelVisible(false);
+    };
+    const [insertPanelVisible, setInsertPanelVisible] = useState(false);
+    const handleToggleInsertPanel = () => {
+        setInsertPanelVisible(true);
+        setMainPanelVisible(false);
+        setElementPanelVisible(false);
+    };
+    const [elementPanelVisible, setElementPanelVisible] = useState(false);
+    const handleToggleElementPanel = () => {
+        setElementPanelVisible(true);
+        setMainPanelVisible(false);
+        setInsertPanelVisible(false);
+    };
         return (
             <>
                 <p className='headtext'>
@@ -28,20 +45,20 @@ export function Headmenu(props: HeadmenuProps) {
                         <button className={styles.headmenuLiButton}>Файл</button>
                     </li>
                     <li className={styles.headmenuLi}>
-                        <button className={styles.headmenuLiButton}>Главная</button>
+                        <button className={styles.headmenuLiButton} onClick={handleToggleMainPanel}>Главная</button>
                     </li>
                     <li className={styles.headmenuLi}>
-                        <button className={styles.headmenuLiButton}>Вставить</button>
+                        <button className={styles.headmenuLiButton} onClick={handleToggleInsertPanel}>Вставить</button>
                     </li>
                     <li className={styles.headmenuLi}>
-                        <button className={styles.headmenuLiButton}>Элемент</button>
+                        <button className={styles.headmenuLiButton} onClick={handleToggleElementPanel}>Элемент</button>
                     </li>
                 </ul>
                 <div className = {styles.toolbar}>
                     <BasicBtns />
-                    {/* <MainPanel></MainPanel> */}
-                    {/* <InsertPanel></InsertPanel> */}
-                    <ElementPanel></ElementPanel>
+                    {mainPanelVisible ? (<MainPanel></MainPanel> ) : (null)}
+                    {insertPanelVisible ? (<InsertPanel></InsertPanel> ) : (null)}
+                    {elementPanelVisible ? (<ElementPanel></ElementPanel> ) : (null)} 
                 </div>
             </>
             // </BrowserRouter> 
