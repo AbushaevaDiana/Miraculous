@@ -23,18 +23,12 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
           { 
             return {
               ...slide,
-              background: {
-                ...slide.background,
-                color: '#98FB98'
-              }
+              selected: true 
             } 
           } else { 
               return {
                 ...slide,
-                background: {
-                  ...slide.background,
-                  color: '#FFFFFF'
-                }
+                selected: false
               } 
             }
       })

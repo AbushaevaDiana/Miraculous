@@ -19,7 +19,7 @@ export function SlideView(props:SLideProps){
    let borderCol: string = 'none';
    if(props.slide.background.type === 'color'){
       color = props.slide.background.color
-      if(props.slide.background.color !== '#FFFFFF'){
+      if(props.slide.selected === true){
          borderCol = '#000'
       } else {borderCol = props.slide.background.color}
    }
