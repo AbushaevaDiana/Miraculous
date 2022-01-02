@@ -17,11 +17,7 @@ export function MainPanel() {
                 </div>
                 <div className={styles.backgroundColor}>
                     <div className={styles.chooseColorIcon}></div>
-                    <select className= {styles.chooseColorSelect} >
-                        <option className={styles.selectFieldOption}>Заливка</option>
-                        <option className={styles.selectFieldOption}>черно-белый</option>
-                        <option className={styles.selectFieldOption}>красный</option>
-                    </select>
+                    <input type="color" id="slideBackground" className= {styles.chooseColorSelect} defaultValue='#F08080'></input>
                 </div>
             </div>
             <div className={styles.elementOutlineContainer}>
@@ -41,12 +37,9 @@ export function MainPanel() {
                 <div className={styles.colorContourContainer}>
                     <div className={styles.colorContourIcon}></div>
                     {/* <hr className={styles.hrIcon} /> */}
-                    <select className={styles.elementOutlineSelect + ' ' + styles.elementOutlineSelectSmall}>
-                        <option className={styles.elementOutlineOption}>Цвет контура</option>
-                        <option className={styles.elementOutlineOption}>Синий</option>
-                        <option className={styles.elementOutlineOption}>Красный</option>
-                        <option className={styles.elementOutlineOption}>Зеленый</option>
-                    </select>
+                    <input type="color"id="borderColor" className= {styles.chooseColorSelect} defaultValue='#F08080'>
+                    </input>
+                    
                 </div>
             </div>
             <div className={styles.animationContainer}>

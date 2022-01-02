@@ -123,6 +123,10 @@
     padding: 0;
 }
 
+.elementSettingsSelect:hover {
+    cursor: pointer;
+}
+
 .filterIcon {
     margin-right: 25px;
     width: 55px;

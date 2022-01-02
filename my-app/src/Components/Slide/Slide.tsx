@@ -9,6 +9,7 @@ interface SLideProps{
    slide: Slide,
    gotoSlide: (idSlide: Number) => void,
    selection: SelectionType,
+   index: Number,
 };
 
 
@@ -30,8 +31,11 @@ export function SlideView(props:SLideProps){
 
    console.log(props.slide.background)
       return (
-         <div key={props.slide.idSlide} style={sLideStyle} className={privet} onClick={() => {props.gotoSlide(props.slide.idSlide)}}>
-         </div>
+         <>
+                <p className={styles.slidemenuListSlideIndex}>{props.index}</p>
+                <div key={props.slide.idSlide} style={sLideStyle} className={privet} onClick={() => {props.gotoSlide(props.slide.idSlide)}}>
+                </div>
+         </>
       )
 };
 

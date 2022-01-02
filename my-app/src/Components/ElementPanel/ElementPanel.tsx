@@ -51,19 +51,13 @@ export function ElementPanel() {
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.contourIcon}></div>
-                    <select className={styles.elementSettingsSelect + ' ' + styles.selectField}>
-                        <option className={styles.selectFieldOption}>Контур фигуры</option>
-                        <option className={styles.selectFieldOption}>черно-белый</option>
-                        <option className={styles.selectFieldOption}>красный</option>
-                    </select>
+                    <input type="color"id="borderColor" className= {styles.elementSettingsSelect + ' ' + styles.selectField} defaultValue='#F08080'>
+                    </input>
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.fillIcon}></div>
-                    <select className= {styles.elementSettingsSelect + ' ' + styles.selectField} >
-                        <option className={styles.selectFieldOption}>Заливка фигуры</option>
-                        <option className={styles.selectFieldOption}>черно-белый</option>
-                        <option className={styles.selectFieldOption}>красный</option>
-                    </select>
+                    <input type="color"id="borderColor" className= {styles.elementSettingsSelect + ' ' + styles.selectField} defaultValue='#F08080'>
+                    </input>
                 </div>
                 <div className={styles.deleteElementContainer}>   
                     <div className={styles.deleteElementIcon}></div>

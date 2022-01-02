@@ -6,9 +6,26 @@
     max-height: 20%;
     min-height: 20%;
     transition: border, .3s, ease-in-out;
+    display: inline-flex;
 }
 
-.slidemenuListSlide::before {
+.slidemenuListSlide:hover {
+  cursor: pointer;
+}
+
+.slidemenuListSlideIndex{
+  left: 8px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+  align-self: start;
+  display: inline;  
+}
+
+/*.slidemenuListSlide::before {
     position: absolute;
     left: 8px;
     counter-increment: heading;
@@ -19,7 +36,7 @@
     font-size: 24px;
     line-height: 28px;
     color: #000000;
-}
+}*/
 
 
 /*.slidemenuListSlideSelected {
