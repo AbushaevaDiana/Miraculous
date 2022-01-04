@@ -6,8 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import store from './store/store';
+import { Editer, PresentationMaker } from './types';
+import {saveToHistory} from '../src/functions/addActionToHistory'
 
-
+saveToHistory()
 
 ReactDOM.render(
   <React.StrictMode>

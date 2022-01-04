@@ -7,6 +7,9 @@ export enum StateTypes {
     GOTO_SLIDE = 'GOTO_SLIDE',
     EDIT_SLIDE_BACKGROUND_COLOR = 'EDIT_SLIDE_BACKGROUND_COLOR',
     CHANGE_PRESENTATION_NAME = 'CHANGE_PRESENTATION_NAME',
+    Undo = 'Undo',
+    Redo = 'Redo',
+    ADD_ACTION_TO_HISTORY = 'ADD_ACTION_TO_HISTORY'
 }
 
 export type PresentationMaker = {
