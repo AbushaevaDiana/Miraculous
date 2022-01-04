@@ -1,10 +1,22 @@
 import '../../App.css';
 import styles from './MainPanel.module.css';
 import { connect } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
+import { PresentationMaker, SelectionType } from '../../types';
 
+interface MainPanelProps {
+    selection: SelectionType,
+    editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
+}
 
-export function MainPanel() {
+function MainPanel(props: MainPanelProps) {
+    const hanglerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputColor = event.target as HTMLInputElement
+        const inputColorStr = String(inputColor.value)
+        console.log('цвет', inputColorStr)
+        props.editSLideBackgroundColor(props.selection.idSlides, inputColorStr)
+    }
     return (
         <>
             <div className={styles.slideBackgroundContainer}>
@@ -17,7 +29,7 @@ export function MainPanel() {
                 </div>
                 <div className={styles.backgroundColor}>
                     <div className={styles.chooseColorIcon}></div>
-                    <input type="color" id="slideBackground" className= {styles.chooseColorSelect} defaultValue='#F08080'></input>
+                    <input type="color" onChange = {hanglerOnChange}id="slideBackground" className= {styles.chooseColorSelect} defaultValue='#F08080'></input>
                 </div>
             </div>
             <div className={styles.elementOutlineContainer}>
@@ -54,3 +66,13 @@ export function MainPanel() {
         </>
     )
 }
+
+const mapDispatchToProps = ({
+    editSLideBackgroundColor
+})
+  
+function mapStateToProps(state: PresentationMaker) {
+    return {selection: state.selection} 
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(MainPanel)

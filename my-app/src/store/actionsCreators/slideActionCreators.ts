@@ -1,4 +1,4 @@
-import { StateTypes } from "../../types";
+import { Color, Img, StateTypes } from "../../types";
 import { connect } from 'react-redux';
 
 function addSlide() {
@@ -7,6 +7,17 @@ function addSlide() {
     }
   }
   
+  
+function editSLideBackgroundColor(idSlides: Number[], newBackground: string) {
+    return {
+        type: StateTypes.EDIT_SLIDE_BACKGROUND_COLOR,
+        payload: {
+            idSlides,
+            newBackground,
+        }
+    }
+}
+
 // function moveSlide(curPos: number) {
 //     return {
 //         type: StateTypes.MOVE_SLIDE,
@@ -29,7 +40,7 @@ function gotoSlide(idSlide: Number) {
 }
 
 
-export { addSlide, deleteSlide, gotoSlide }
+export { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor}
 
 
 /////////////

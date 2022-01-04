@@ -1,7 +1,7 @@
 import '../../App.css';
 import styles from './Basic-btns.module.css';
 import React, { Component } from 'react';
-import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators';
+import { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor} from '../../store/actionsCreators/slideActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import { connect } from 'react-redux';
 
@@ -40,11 +40,10 @@ function BasicBtns(props: BasicBtnsProps){
 
 const mapDispatchToProps = ({
     addSlide,
-    deleteSlide
+    deleteSlide,
 })
   
 function mapStateToProps(state: PresentationMaker) {
-    console.log(state.selection.idSlides)
     return { slidelist: state.presentation.slidelist, selection: state.selection} 
 }
   

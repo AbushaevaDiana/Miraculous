@@ -17,7 +17,7 @@ function Slidemenu(props: SlidemenuList){
             <>  
                <div className={styles.slidemenu}>
                <ul className={styles.slidemenuList}> 
-                 {props.slidelist.map(slide => <SlideView slide = {slide} index = {props.slidelist.indexOf(slide)+1} gotoSlide = {props.gotoSlide}></SlideView>)}
+                 {props.slidelist.map(slide => <SlideView key = {slide.idSlide} slide = {slide} index = {props.slidelist.indexOf(slide)+1} gotoSlide = {props.gotoSlide}></SlideView>)}
                </ul>
                    <div className={styles.imglogo} ></div>
                </div>

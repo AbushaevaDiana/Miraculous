@@ -3,10 +3,10 @@ import styles from './Headmenu.module.css';
 import  BasicBtns  from '../Basic-btns/Basic-btns';
 import { ElementPanel } from '../ElementPanel/ElementPanel';
 import { InsertPanel } from '../InsertPanel/InsertPanel';
-import { MainPanel } from '../MainPanel/MainPanel';
+import MainPanel from '../MainPanel/MainPanel';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
-import { addSlide, deleteSlide } from '../../store/actionsCreators/slideActionCreators';
+import { addSlide, deleteSlide, editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
 import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
 import { Presentation, PresentationMaker } from '../../types';
 
@@ -16,6 +16,7 @@ interface HeadmenuProps {
     addSlide: () => void,
     deleteSlide: (idSlide: Number[]) => void,
     changePresentationNAME: (name: string) => void,
+    editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
 }
 
 export function Headmenu(props: HeadmenuProps) {
@@ -85,7 +86,8 @@ export function Headmenu(props: HeadmenuProps) {
 const mapDispatchToProps = {
     addSlide,
     deleteSlide,
-    changePresentationNAME
+    changePresentationNAME,
+    editSLideBackgroundColor,
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

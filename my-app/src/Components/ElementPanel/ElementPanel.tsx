@@ -3,7 +3,6 @@ import styles from './ElementPanel.module.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 
-
 export function ElementPanel() {
         return (
             <>
