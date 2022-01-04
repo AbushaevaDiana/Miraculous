@@ -30,7 +30,7 @@
   
 .slidemenuList::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: linear-gradient(180deg,  #ea0000, #FFEEDD);
+    background: linear-gradient(180deg,  #ec9191, #FFEEDD);
   }
 
 .slidemenuListSlide {
