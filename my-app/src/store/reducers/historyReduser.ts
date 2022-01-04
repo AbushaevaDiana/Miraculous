@@ -4,13 +4,9 @@ import { ActionType, History, Mode, Slide } from "../../types"
 
 const history: Reducer<History, any> = (state: History = { actionlist: [], currentIndex: -1 }, action: ActionType): History => {
     switch (action.type) {
-        case 'ADD_ACTION_TO_HISTORY':
-          console.log('add to history work')
-          return{
-              ...state,
-              actionlist: state.actionlist.concat([action.payload]),
-              currentIndex: (state.currentIndex+1)
-          }
+        case 'Undo':
+          console.log('undo work')
+          return state
         default:
           return state
         }
