@@ -7,7 +7,7 @@ export const initialState:  PresentationMaker = {
         currentIndex: -1,
     },
     selection: {
-        idSlides: [1],
+        idSlides: [],
         idElements: [],
     },
     presentation: {
@@ -52,7 +52,7 @@ export const initialState:  PresentationMaker = {
                     color: '#FFFFFF'},
                 effects: 'fading',
                 idSlide: 1,
-                selected: true,
+                selected: false,
             },   
         ],
         name: 'Презентация без названия',

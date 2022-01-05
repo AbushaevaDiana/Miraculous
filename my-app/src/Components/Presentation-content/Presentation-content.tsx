@@ -8,12 +8,13 @@ import { changeTextContent, moveElement } from '../../store/actionsCreators/elem
 
 interface PropsPresentationContent{
   slidelist: Slide[],
+  selection: SelectionType,
   changeTextContent: (selection: SelectionType, content: string) => void,
   moveElement: (selection: SelectionType, position: Position) => void,
 }
 
 function PresentationContent(props: PropsPresentationContent){
-    if (props.slidelist.length !== 0) {  
+    if ((props.slidelist.length !== 0) && (props.selection.idSlides.length !== 0)) {  
       let mainSlide: Slide = props.slidelist[0];
       for(let i = 0; i < props.slidelist.length; i++ ){
         if(props.slidelist[i].selected === true){
@@ -42,7 +43,7 @@ function PresentationContent(props: PropsPresentationContent){
       return (
         <>
           <div className={styles.presentationContentEmpty}>
-              <div className={styles.presentationContentText}>Упс! Слайдов нет.</div>
+              <div className={styles.presentationContentText}>Выбирите слайд / Создайте и выбирете слайд</div>
               <div className={styles.presentationContentImg}></div>
           </div>
         </>
@@ -52,7 +53,7 @@ function PresentationContent(props: PropsPresentationContent){
 
 //
 function mapStateToProps(state: PresentationMaker) {
-  return{slidelist: state.presentation.slidelist}
+  return{selection: state.selection, slidelist: state.presentation.slidelist}
 };
 
 const mapDispatchToProps = {
