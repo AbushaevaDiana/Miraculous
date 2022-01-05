@@ -79,7 +79,6 @@ export function Headmenu(props: HeadmenuProps) {
                     {elementPanelVisible ? (<ElementPanel></ElementPanel> ) : (null)} 
                 </div>
             </>
-            // </BrowserRouter> 
         )
 };
 

@@ -9,6 +9,7 @@ export enum StateTypes {
     CHANGE_PRESENTATION_NAME = 'CHANGE_PRESENTATION_NAME',
     Undo = 'Undo',
     Redo = 'Redo',
+    CHANGE_TEXT_CONTENT = 'CHANGE_TEXT_CONTENT', 
 }
 
 export type PresentationMaker = {
