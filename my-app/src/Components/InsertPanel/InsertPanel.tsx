@@ -2,9 +2,15 @@ import '../../App.css';
 import styles from './InsertPanel.module.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
+import { PresentationMaker, SelectionType } from '../../types';
+import { addText, deleteElement} from '../../store/actionsCreators/elementActionCreators';
 
+interface InsertPanelProps {
+    addText: () => void,
+    selection: SelectionType,
+}
 
-export function InsertPanel() {
+export function InsertPanel(props: InsertPanelProps) {
     return (
         <>
             <div className={styles.imageContainer}>
@@ -15,7 +21,7 @@ export function InsertPanel() {
                 <input type="text" className={styles.imgInput} />
             </div>
             <div className={styles.textContainer}>
-                <div className={styles.textBlock}>
+                <div className={styles.textBlock} onClick = {() => props.addText()}>
                     <div className={styles.icon + ' ' + styles.textIcon}></div>
                     <div className={styles.insc}>Текст</div>
                 </div>
@@ -38,3 +44,14 @@ export function InsertPanel() {
         </>
     )
 }
+
+const mapDispatchToProps = ({
+    addText,
+    deleteElement,
+})
+  
+function mapStateToProps(state: PresentationMaker) {
+    return { selection: state.selection} 
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(InsertPanel)

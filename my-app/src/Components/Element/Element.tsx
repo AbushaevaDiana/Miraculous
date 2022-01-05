@@ -1,61 +1,40 @@
 import '../../App.css';
-// import styles from './Slide.module.css';
+import styles from './Element.module.css';
 import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Position } from '../../types';
 import { connect } from 'react-redux';
-import React, { DragEvent, useEffect, useRef, useState } from 'react';
-import { changeTextContent } from '../../store/actionsCreators/elementActionCreators'
+import React, { MouseEvent, DragEvent, useEffect, useRef, useState } from 'react';
+import { changeTextContent, moveElement, gotoElement } from '../../store/actionsCreators/elementActionCreators'
 
 interface ElementProps{
     element: ElementType,
     selection: SelectionType,
-    changeTextContent: (idElements: Number[], content: string) => void,
+    changeTextContent: (selection: SelectionType, content: string) => void,
+    moveElement: (selection: SelectionType, position: Position) => void,
+    gotoElement: (idElement: Number) => void,
 };
 
 
 
-export function Element(props: ElementProps){    
-    const[currentElement, setCurrentElement] = useState(props.element)
-    function dragStartHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        console.log('drag', props.element)
-        setCurrentElement(props.element)
-    }
-    function dragLeaveHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        e.preventDefault()
-
-    }
-    function dragEndHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-
-    }
-    function dragOverHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        e.preventDefault()
-
-    }
-    function dropHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        e.preventDefault()
- 
-    }
-
-
+export function Element(props: ElementProps){
+    let elementStyle = {
+        top: props.element.position.y,
+        left: props.element.position.x,
+    }     
     let textI: string = '';   
     if(props.element.elementConcept.type === 'text'){
        textI = props.element.elementConcept.textContent;
+       console.log(props.element.elementConcept.textContent)
        return (
         <>
-          <div 
-          onDragStart={(e: DragEvent<HTMLDivElement>) => dragStartHandler(e, props)}
-          onDragLeave={(e: DragEvent<HTMLDivElement>) => dragLeaveHandler(e, props)}
-          onDragEnd={(e: DragEvent<HTMLDivElement>) => dragEndHandler(e, props)}
-          onDragOver={(e: DragEvent<HTMLDivElement>) => dragOverHandler(e, props)}
-          onDrop={(e: DragEvent<HTMLDivElement>) => dropHandler(e, props)}
-          draggable = {true}>
-            <svg height="100" width="100">
-                <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+          <div onClick={() => props.gotoElement(props.element.idElement)}>
+            <svg height="6" width="6">
+                <circle cx="3" cy="3" r="3" stroke="black" stroke-width="3" fill="black" />
              </svg>
-            <input type="text" defaultValue={textI} 
+            <input style = {elementStyle} className={styles.text} type="text" defaultValue={textI} 
                         onKeyPress= {
                         (e) => {if (e.key === "Enter") {
                         e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
-                        props.changeTextContent(props.selection.idElements, e.currentTarget.value)
+                        props.changeTextContent(props.selection, e.currentTarget.value)
                         e.currentTarget.blur()
                 }}}/>
             </div>
@@ -77,6 +56,8 @@ function mapStateToProps(state: PresentationMaker) {
 
 const mapDispatchToProps = {
     changeTextContent,
+    moveElement,
+    gotoElement,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Element);

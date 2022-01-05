@@ -208,6 +208,7 @@ export function addElement(presentationMaker: Editer, newElementConcept: Element
         },
         elementConcept: newElementConcept,
         idElement: setNewId(),
+        selected: false,
     };
 
     return newElement; 

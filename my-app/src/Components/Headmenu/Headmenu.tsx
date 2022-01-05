@@ -1,18 +1,21 @@
 import '../../App.css';
 import styles from './Headmenu.module.css';
 import  BasicBtns  from '../Basic-btns/Basic-btns';
-import { ElementPanel } from '../ElementPanel/ElementPanel';
-import { InsertPanel } from '../InsertPanel/InsertPanel';
+import ElementPanel from '../ElementPanel/ElementPanel';
+import InsertPanel from '../InsertPanel/InsertPanel';
 import MainPanel from '../MainPanel/MainPanel';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
 import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
-import { Presentation, PresentationMaker } from '../../types';
+import { Presentation, PresentationMaker, SelectionType } from '../../types';
+import { addText, deleteElement} from '../../store/actionsCreators/elementActionCreators';
 
 
 interface HeadmenuProps {
     name: string,
+    addText: () => void,
+    deleteElement: (selection: SelectionType) => void,
     addSlide: () => void,
     deleteSlide: (idSlide: Number[]) => void,
     changePresentationNAME: (name: string) => void,
@@ -87,6 +90,8 @@ const mapDispatchToProps = {
     deleteSlide,
     changePresentationNAME,
     editSLideBackgroundColor,
+    addText,
+    deleteElement
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

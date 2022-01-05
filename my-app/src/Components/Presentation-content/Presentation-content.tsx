@@ -2,14 +2,14 @@ import '../../App.css';
 import styles from './Presentation-content.module.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
-import { Position, PresentationMaker, Slide } from '../../types';
+import { Position, PresentationMaker, SelectionType, Slide } from '../../types';
 import Element from '../Element/Element'
 import { changeTextContent, moveElement } from '../../store/actionsCreators/elementActionCreators'
 
 interface PropsPresentationContent{
   slidelist: Slide[],
-  changeTextContent: (idElements: Number[], content: string) => void,
-  moveElement: (idElements: Number[], position: Position) => void,
+  changeTextContent: (selection: SelectionType, content: string) => void,
+  moveElement: (selection: SelectionType, position: Position) => void,
 }
 
 function PresentationContent(props: PropsPresentationContent){

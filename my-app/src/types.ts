@@ -10,6 +10,11 @@ export enum StateTypes {
     Undo = 'Undo',
     Redo = 'Redo',
     CHANGE_TEXT_CONTENT = 'CHANGE_TEXT_CONTENT', 
+    MOVE_ELEMENT = 'MOVE_ELEMENT',
+    GOTO_ELEMENT = 'GOTO_ELEMENT',
+    ADD_TEXT = 'ADD_TEXT',
+    ADD_PICTURE = 'ADD_PICTURE',
+    DELETE_ELEMENT = 'DELETE_ELEMENT'
 }
 
 export type PresentationMaker = {
@@ -64,6 +69,7 @@ export type ElementType = {
     position: Position,
     elementConcept: ElementConcept,
     idElement: number,
+    selected: boolean,
 };
 
 export type Size = {

@@ -2,8 +2,15 @@ import '../../App.css';
 import styles from './ElementPanel.module.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
+import { PresentationMaker, SelectionType } from '../../types';
+import { deleteElement} from '../../store/actionsCreators/elementActionCreators';
 
-export function ElementPanel() {
+interface ElementPanelProps {
+    deleteElement: (selection: SelectionType) => void,
+    selection: SelectionType,
+}
+
+export function ElementPanel(props: ElementPanelProps) {
         return (
             <>
                 <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
@@ -58,10 +65,20 @@ export function ElementPanel() {
                     <input type="color"id="borderColor" className= {styles.elementSettingsSelect + ' ' + styles.selectField} defaultValue='#F08080'>
                     </input>
                 </div>
-                <div className={styles.deleteElementContainer}>   
+                <div className={styles.deleteElementContainer} onClick = {() => props.deleteElement(props.selection)}>   
                     <div className={styles.deleteElementIcon}></div>
                     <p className={styles.deleteElementInscr}>Удалить элемент</p> 
                 </div>
             </>
         )
 }
+
+const mapDispatchToProps = ({
+    deleteElement,
+})
+  
+function mapStateToProps(state: PresentationMaker) {
+    return { selection: state.selection} 
+}
+  
+export default connect(mapStateToProps, mapDispatchToProps)(ElementPanel)

@@ -7,7 +7,7 @@ export const initialState:  PresentationMaker = {
         currentIndex: -1,
     },
     selection: {
-        idSlides: [],
+        idSlides: [1],
         idElements: [],
     },
     presentation: {
@@ -27,15 +27,15 @@ export const initialState:  PresentationMaker = {
                             width: 40,
                         },
                         position: {
-                            x: 321,
-                            y: 64,
+                            x: 100,
+                            y: 100,
                         },
                         elementConcept: {
                             type: 'text',
                             color: {
                                 type: 'color',
                                 color: '#000000' },
-                            textContent: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem will uncover many web sites still in their infancy. ', 
+                            textContent: 'Привет ', 
                             links: '',
                             size: 14,
                             font: 'Roboto',
@@ -44,6 +44,7 @@ export const initialState:  PresentationMaker = {
                             underline: false,
                         },
                         idElement: 577,
+                        selected: false,
                     }
                 ], 
                 background: {
@@ -51,7 +52,7 @@ export const initialState:  PresentationMaker = {
                     color: '#FFFFFF'},
                 effects: 'fading',
                 idSlide: 1,
-                selected: false,
+                selected: true,
             },   
         ],
         name: 'Презентация без названия',
