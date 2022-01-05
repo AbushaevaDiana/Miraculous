@@ -2,11 +2,14 @@ import '../../App.css';
 import styles from './Presentation-content.module.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
-import { PresentationMaker, Slide } from '../../types';
+import { Position, PresentationMaker, Slide } from '../../types';
 import Element from '../Element/Element'
+import { changeTextContent, moveElement } from '../../store/actionsCreators/elementActionCreators'
 
 interface PropsPresentationContent{
   slidelist: Slide[],
+  changeTextContent: (idElements: Number[], content: string) => void,
+  moveElement: (idElements: Number[], position: Position) => void,
 }
 
 function PresentationContent(props: PropsPresentationContent){
@@ -38,7 +41,10 @@ function PresentationContent(props: PropsPresentationContent){
     } else {
       return (
         <>
-          <p>Пусто</p>
+          <div className={styles.presentationContentEmpty}>
+              <div className={styles.presentationContentText}>Упс! Слайдов нет.</div>
+              <div className={styles.presentationContentImg}></div>
+          </div>
         </>
       )
     }
@@ -50,7 +56,9 @@ function mapStateToProps(state: PresentationMaker) {
 };
 
 const mapDispatchToProps = {
+  moveElement,
+  changeTextContent,
 }
 
-export default connect(mapStateToProps)(PresentationContent);
+export default connect(mapStateToProps, mapDispatchToProps)(PresentationContent);
 //

@@ -4,7 +4,34 @@
     height: 90%;
     /*border: 2px solid #FF6666;*/
     box-shadow: 0 14px 28px #F08080, 10px 10px 10px #F08080;
-};
+}
+
+.presentationContentEmpty{
+    margin: auto;
+    width: 60%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.presentationContentImg {
+    height: 100%;
+    width: 100%;
+    background: url('../img/ladicat.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-image: '../img/суперкотиледибаг.jpg'*/
+}
+
+.presentationContentText{
+    color: #F08080;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+}
 
 /* @media (min-width: 1024px) {
     .presentationContent {
