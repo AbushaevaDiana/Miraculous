@@ -25,6 +25,7 @@ function saveState(prog: PresentationMaker) {
     localStorage.setItem("stateProgram", serializedState)
   }
 
+// прописать ограничение на запись если undo или redo  
 export function saveToHistory() {
     const newState = store.getState()
     addActionToHistory(newState)

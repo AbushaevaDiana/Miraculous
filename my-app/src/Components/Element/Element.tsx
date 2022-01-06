@@ -62,6 +62,8 @@ export function Element(props: ElementProps){
            height: props.element.size.h,
            WebkitFilter: webFilter,
            borderColor: bColor,
+           left: String(props.element.position.x),
+           top: String(props.element.position.y),
         }
        return (
         <>
@@ -124,6 +126,8 @@ export function Element(props: ElementProps){
                 width: props.element.size.w,
                 height: props.element.size.h,
                 WebkitFilter: webFilter,
+                left: props.element.position.x,
+                top: props.element.position.y,
             }
             let x1: string = String(props.element.size.w/46)
             let x2: string = String(props.element.size.w/2 )
