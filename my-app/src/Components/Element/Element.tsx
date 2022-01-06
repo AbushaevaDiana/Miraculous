@@ -3,51 +3,32 @@ import '../../App.css';
 import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Position } from '../../types';
 import { connect } from 'react-redux';
 import React, { DragEvent, useEffect, useRef, useState } from 'react';
-import { changeTextContent } from '../../store/actionsCreators/elementActionCreators'
+import { changeTextContent, changeElemPosition } from '../../store/actionsCreators/elementActionCreators'
+import { useDragAndDropElement } from '../../Hooks/ElementMouse';
 
 interface ElementProps{
     element: ElementType,
     selection: SelectionType,
     changeTextContent: (idElements: Number[], content: string) => void,
+    changeElemPosition: (newX: number, newY: number, id: Number) => void,
 };
 
-
-
-export function Element(props: ElementProps){    
-    const[currentElement, setCurrentElement] = useState(props.element)
-    function dragStartHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        console.log('drag', props.element)
-        setCurrentElement(props.element)
-    }
-    function dragLeaveHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        e.preventDefault()
-
-    }
-    function dragEndHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-
-    }
-    function dragOverHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        e.preventDefault()
-
-    }
-    function dropHandler(e: DragEvent<HTMLDivElement>, props: ElementProps) {
-        e.preventDefault()
- 
-    }
-
+export function Element(props: ElementProps) {  
+    // useDragAndDropElement({
+    //     element: props.element,
+    //     changeElemPosition: props.changeElemPosition,
+    //     elemRef,
+    //     mainSvgProps,
+    //     setPos
+    //   })
 
     let textI: string = '';   
     if(props.element.elementConcept.type === 'text'){
        textI = props.element.elementConcept.textContent;
        return (
         <>
-          <div 
-          onDragStart={(e: DragEvent<HTMLDivElement>) => dragStartHandler(e, props)}
-          onDragLeave={(e: DragEvent<HTMLDivElement>) => dragLeaveHandler(e, props)}
-          onDragEnd={(e: DragEvent<HTMLDivElement>) => dragEndHandler(e, props)}
-          onDragOver={(e: DragEvent<HTMLDivElement>) => dragOverHandler(e, props)}
-          onDrop={(e: DragEvent<HTMLDivElement>) => dropHandler(e, props)}
-          draggable = {true}>
+          <div id={String(props.element.idElement)}>
+          
             <svg height="100" width="100">
                 <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
              </svg>
@@ -77,6 +58,7 @@ function mapStateToProps(state: PresentationMaker) {
 
 const mapDispatchToProps = {
     changeTextContent,
+    changeElemPosition,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Element);

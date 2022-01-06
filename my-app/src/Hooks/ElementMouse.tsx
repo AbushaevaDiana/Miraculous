@@ -1,146 +1,93 @@
-// import React, {useEffect, useRef} from 'react'
-// import  store  from '../store/store';
-// import { checkSelectedElem, getCurrElemPosition, getCurrElemSize } from '../Models/CommonFunctions/supportFunctions/supportElemOperations'
-// import { getSelectedSlides, getSlides } from '../Models/CommonFunctions/supportFunctions/supportSlideOperations'
-// import { PresentationMaker, Position, Slide } from '../types'
+import React, {useEffect, useRef} from 'react'
+import  store  from '../store/store';
+import { PresentationMaker, Position, Slide, ElementType } from '../types';
+import {changeElemPosition} from '../store/actionsCreators/elementActionCreators';
 
+export {
+  useDragAndDropElement,
+}
 
+interface dragAndDropProps {
+  element:ElementType,
+  changeElemPosition: (newX: number, newY: number, idElements: Number) => void,
+  elemRef: React.MutableRefObject<SVGElement | null>,
+  mainSvgProps: DOMRect | undefined,
+  setPos: React.Dispatch<React.SetStateAction<Position>>
+} 
 
-// export {
-//   useDragAndDropElement,
-//   useReSizeElement
-// }
+function useDragAndDropElement(props: dragAndDropProps) {
+  const mainSvgProps = props.mainSvgProps 
+  const leftSvgBorder = Number(mainSvgProps?.x)
+  const topSvgBorder = Number(mainSvgProps?.y)
 
-// interface setSelectedElemsProps {
-//     selectedElements: Array<string>,
-//     setSelectedElement: (elemsArr: Array<string>) => void,
-//     removeOneElemFromSelectedElems: (elemId: string) => void,
-//     event: React.MouseEvent | MouseEvent, 
-//     elemId: string
-//   }
-  
-//   function setSelectedElemsInHook(props: setSelectedElemsProps) {
-//     if (!checkSelectedElem(props.selectedElements, props.elemId)) {
-//       if (props.event.ctrlKey) { 
-//         props.setSelectedElement([...props.selectedElements, props.elemId]) 
-//       } else {
-//         props.setSelectedElement([props.elemId])
-//       } 
-//     } else if (props.event.ctrlKey) {
-//       props.removeOneElemFromSelectedElems(props.elemId)
-//     }
-//   }
+  const modelPos = {
+    x: props.element.position.x,
+    y: props.element.position.y,
+  }
 
-// interface dragAndDropProps {
-//   id: string,
-//   slides: Array<Slide>,
-//   selectedElements: Array<Number>,
-//   selectedSlides: Array<Number>,
-  
-//   elemRef: React.MutableRefObject<SVGElement | null>
-//   mainSvgProps: DOMRect | undefined
+let startPos = {
+    x: 0,
+    y: 0
+}
 
-//   setPos: React.Dispatch<React.SetStateAction<Position>>
-// } 
+let newPos = {
+    x: 0,
+    y: 0
+}
 
-// function useDragAndDropElement(props: dragAndDropProps) {
-//   const mainSvgProps = props.mainSvgProps 
-//   const leftSvgBorder = Number(mainSvgProps?.x)
-//   const topSvgBorder = Number(mainSvgProps?.y)
+useEffect(() => {
+props.elemRef.current?.addEventListener('mousedown', mouseDownHandler);
+return () => props.elemRef.current?.removeEventListener('mousedown', mouseDownHandler)  
+})
 
-//   const modelPos = {
-//     x: getCurrElemPosition(props.slides, props.selectedSlides, props.id).x,
-//     y: getCurrElemPosition(props.slides, props.selectedSlides, props.id).y
-//   }
+  const mouseDownHandler = (event: React.MouseEvent | MouseEvent) => {
 
-//   const selectedElemsLength = props.selectedElements.length
+    if (!event.defaultPrevented){
+      startPos = {
+        x: event.pageX - leftSvgBorder,
+        y: event.pageY - topSvgBorder
+      }
 
-//   let startPos = {
-//     x: 0,
-//     y: 0
-//   }
-
-//   let newPos = {
-//     x: 0,
-//     y: 0
-//   }
-
-//   useEffect(() => {
-//     if (selectedElemsLength > 1) {
-//       document.addEventListener('mousedown', mouseDownAllElemsHandler)
-//       return () => document.removeEventListener('mousedown', mouseDownAllElemsHandler)  
-//     }
-//   })
-
-//   const mouseDownAllElemsHandler = (event: React.MouseEvent | MouseEvent) => {
-//     if (event.defaultPrevented && checkSelectedElem(props.selectedElements, props.id)) {
-//       startPos = {
-//         x: event.pageX - leftSvgBorder,
-//         y: event.pageY - topSvgBorder
-//       }
-
-//       document.addEventListener('mousemove', mouseMoveHandler)
-//       document.addEventListener('mouseup', mouseUpHandler)
-//     }  
-//   }
-  
-
-//   useEffect(() => {
-//     props.elemRef.current?.addEventListener('mousedown', mouseDownHandler)
-//     return () => props.elemRef.current?.removeEventListener('mousedown', mouseDownHandler)  
-//   })
-
-//   const mouseDownHandler = (event: React.MouseEvent | MouseEvent) => {
-//     if (props.canDeleteSlides) {
-//       props.setCanDeleteSlide(false)
-//     }
-
-//     if (!event.defaultPrevented){
-//       startPos = {
-//         x: event.pageX - leftSvgBorder,
-//         y: event.pageY - topSvgBorder
-//       }
-
-//       setSelectedElemsInHook({
-//         selectedElements: props.selectedElements,
-//         setSelectedElement: props.setSelectedElement,
-//         removeOneElemFromSelectedElems: props.removeOneElemFromSelectedElems,
-//         event, 
-//         elemId: props.id
-//       })
+    //   setSelectedElemsInHook({
+    //     selectedElements: props.selectedElements,
+    //     setSelectedElement: props.setSelectedElement,
+    //     removeOneElemFromSelectedElems: props.removeOneElemFromSelectedElems,
+    //     event, 
+    //     elemId: props.id
+    //   })
       
 
-//       document.addEventListener('mousemove', mouseMoveHandler)
-//       document.addEventListener('mouseup', mouseUpHandler)
+      document.addEventListener('mousemove', mouseMoveHandler)
+      document.addEventListener('mouseup', mouseUpHandler)
 
-//       event.preventDefault()
-//     }  
-//   }
+      event.preventDefault()
+    }  
+  }
 
 
-//   const mouseMoveHandler = (event: React.MouseEvent | MouseEvent) => {
+  const mouseMoveHandler = (event: React.MouseEvent | MouseEvent) => {
 
-//     const delta = {
-//       x: event.pageX - leftSvgBorder - startPos.x,
-//       y: event.pageY - topSvgBorder - startPos.y
-//     }
+    const delta = {
+      x: event.pageX - leftSvgBorder - startPos.x,
+      y: event.pageY - topSvgBorder - startPos.y
+    }
 
-//     newPos = {
-//       x: modelPos.x + delta.x,
-//       y: modelPos.y + delta.y
-//     }
+    newPos = {
+      x: modelPos.x + delta.x,
+      y: modelPos.y + delta.y
+    }
     
-//     props.setPos(newPos)   
-//   }
+    props.setPos(newPos)   
+  }
 
-//   const mouseUpHandler = () => {
-//     if (startPos.x !== newPos.x && startPos.y !== newPos.y && newPos.x !== 0) {
-//       props.changeElemPosition(newPos.x, newPos.y, props.id) 
-//     } 
-//     document.removeEventListener('mousemove', mouseMoveHandler)
-//     document.removeEventListener('mouseup', mouseUpHandler)
-//   }
-// }
+  const mouseUpHandler = () => {
+    if (startPos.x !== newPos.x && startPos.y !== newPos.y && newPos.x !== 0) {
+      props.changeElemPosition(newPos.x, newPos.y, props.element.idElement) 
+    } 
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  }
+}
 
 // interface resizeProps {
 //   id: string,
@@ -322,4 +269,4 @@
 
 //   }
 // }
-export {}
+// export {}
