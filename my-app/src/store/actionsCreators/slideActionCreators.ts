@@ -18,6 +18,16 @@ function editSLideBackgroundColor(idSlides: Number[], newBackground: string) {
     }
 }
 
+function editSLideBackgroundImg(idSlides: Number[], newBackground: string) {
+    return {
+        type: StateTypes.EDIT_SLIDE_BACKGROUND_IMG,
+        payload: {
+            idSlides,
+            newBackground,
+        }
+    }
+}
+
 // function moveSlide(curPos: number) {
 //     return {
 //         type: StateTypes.MOVE_SLIDE,
@@ -40,7 +50,7 @@ function gotoSlide(idSlide: Number) {
 }
 
 
-export { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor}
+export { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor, editSLideBackgroundImg}
 
 
 /////////////

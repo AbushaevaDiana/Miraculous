@@ -1,3 +1,4 @@
+import { type } from "os";
 import { Reducer } from "react"
 import { setNewId } from "../../functions/functions"
 import { ActionType, Figure, Slide } from "../../types"
@@ -42,14 +43,14 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
     case 'EDIT_SLIDE_BACKGROUND_COLOR':
-      console.log('color change work')
+      console.log('back color change work')
         return state.map(slide => {
           if (slide.idSlide === action.payload.idSlides)
           { 
             return {
               ...slide,
               background: {
-                ...slide.background,
+                type: 'color',
                 color: action.payload.newBackground,
               }
             } 
@@ -57,6 +58,23 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'EDIT_SLIDE_BACKGROUND_IMG':
+        console.log('back img work', action.payload.newBackground)
+          return state.map(slide => {
+            if (slide.idSlide === action.payload.idSlides)
+            { 
+              return {
+                ...slide,
+                background: {
+                  type: 'img',
+                  src: action.payload.newBackground,
+                  filter: 'none',
+                }
+              } 
+            } else { 
+                return slide
+              }
+        });
       case 'CHANGE_TEXT_CONTENT':
         console.log('change text work')
         return state.map(slide => {

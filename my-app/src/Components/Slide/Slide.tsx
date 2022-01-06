@@ -16,17 +16,24 @@ interface SLideProps{
 
 export function SlideView(props:SLideProps){    
    let privet = styles.slidemenuListSlide;
-   let color: string = '';
    let borderCol: string = 'none';
+   let back: string = '';
+   if(props.slide.background.type === 'img'){
+     back = 'url(' + props.slide.background.src + ') no-repeat center'
+     if(props.slide.selected === true){
+      borderCol = '#000'
+   } else {borderCol = ''}
+   }
    if(props.slide.background.type === 'color'){
-      color = props.slide.background.color
+      back = props.slide.background.color
       if(props.slide.selected === true){
          borderCol = '#000'
       } else {borderCol = props.slide.background.color}
    }
    const sLideStyle = {
-      background: color,
+      background: back,
       borderColor: borderCol,
+      backgroundSize: 'contain'
     };
 
    console.log(props.slide.background)

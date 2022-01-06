@@ -4,6 +4,7 @@
     height: 90%;
     /*border: 2px solid #FF6666;*/
     box-shadow: 0 14px 28px #F08080, 10px 10px 10px #F08080;
+    background-size: contain;
 }
 
 .presentationContentEmpty{

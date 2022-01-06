@@ -2,12 +2,13 @@ import '../../App.css';
 import styles from './MainPanel.module.css';
 import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
+import { editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
 import { PresentationMaker, SelectionType } from '../../types';
 
 interface MainPanelProps {
     selection: SelectionType,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
+    editSLideBackgroundImg: (idSlides: Number[], newBackground: string) => void,
 }
 
 function MainPanel(props: MainPanelProps) {
@@ -23,8 +24,27 @@ function MainPanel(props: MainPanelProps) {
                 <div className={styles.backgroundImage}>
                     <div className={styles.slideBackgroundInscr}>Фон слайда</div>
                     <div className={styles.chooseImgContainer}>
-                        <div className={styles.chooseImgIcon}></div>
-                        <input type="text" className={styles.chooseImgInput} />
+                        <div className={styles.chooseImgIcon} onClick={() => {
+                        const fileInputNode = document.createElement("input");
+                        fileInputNode.type = "file";
+                        fileInputNode.click();
+                        fileInputNode.addEventListener("change", () => {
+                        const file = fileInputNode.files?.[0] as File;
+                        const reader = new FileReader();
+                        
+                        reader.onloadend = function () {
+                        let src: string =  "https://via.placeholder.com/150";
+
+                        if (file.type.includes("image")) {
+                          src = String(reader.result);
+                        }
+                        console.log(src)
+                        props.editSLideBackgroundImg(props.selection.idSlides, src)
+                        };
+                        
+                        reader.readAsDataURL(file);
+                        });
+                        }}></div>
                     </div>
                 </div>
                 <div className={styles.backgroundColor}>
@@ -68,7 +88,8 @@ function MainPanel(props: MainPanelProps) {
 }
 
 const mapDispatchToProps = ({
-    editSLideBackgroundColor
+    editSLideBackgroundColor,
+    editSLideBackgroundImg,
 })
   
 function mapStateToProps(state: PresentationMaker) {

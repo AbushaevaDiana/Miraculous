@@ -16,11 +16,6 @@ interface InsertPanelProps {
 }
 
 export function InsertPanel(props: InsertPanelProps) {
-    function getFileName(srcP: string, props: InsertPanelProps) {
-        console.log(srcP);
-        let fr = new FileReader();
-        props.addPicture('Htllj');
-    }
     return (
         <>
             <form className={styles.imageContainer}>

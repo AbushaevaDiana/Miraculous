@@ -22,12 +22,15 @@ function PresentationContent(props: PropsPresentationContent){
           break;
         }
       };
-      let color: string = '';
+      let back: string = '';
       if(mainSlide.background.type === 'color'){
-        color = mainSlide.background.color
+        back = mainSlide.background.color
+      }
+      if(mainSlide.background.type === 'img'){
+        back = 'url(' + mainSlide.background.src + ') no-repeat center'
       }
       const mainSLideStyle = {
-        background: color,
+        background: back,
       };    
       console.log('Main slide', mainSlide.idSlide)
       return (
