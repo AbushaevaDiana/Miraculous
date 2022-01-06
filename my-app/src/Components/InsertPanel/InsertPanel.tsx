@@ -32,18 +32,13 @@ export function InsertPanel(props: InsertPanelProps) {
                         const reader = new FileReader();
                         
                         reader.onloadend = function () {
-                        const newImage: Img = {
-                        type: 'img',
-                        src: "https://via.placeholder.com/150",
-                        filter: 'none'
-                        };
-                        
+                        let src: string =  "https://via.placeholder.com/150";
+
                         if (file.type.includes("image")) {
-                        newImage.src = String(reader.result);
+                          src = String(reader.result);
                         }
-                        console.log(newImage)
-                        props.addPicture(newImage.src)
-                        /*dispatch(createElement, true, selectedSlide, newImage);*/
+                        console.log(src)
+                        props.addPicture(src)
                         };
                         
                         reader.readAsDataURL(file);
@@ -51,7 +46,6 @@ export function InsertPanel(props: InsertPanelProps) {
                         }}></div>
                     <div className={styles.insc}>Картинку</div>
                 </div>
-                <input type="file" id="inputImg" className={styles.imgInput} /*onInput={(e) => props.addPicture(e.currentTarget.value)}*/ />
             </form>
             <div className={styles.textContainer}>
                 <div className={styles.textBlock} onClick = {() => props.addText()}>
