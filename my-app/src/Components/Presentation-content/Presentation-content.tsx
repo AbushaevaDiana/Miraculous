@@ -27,7 +27,7 @@ function PresentationContent(props: PropsPresentationContent){
         back = mainSlide.background.color
       }
       if(mainSlide.background.type === 'img'){
-        back = 'url(' + mainSlide.background.src + ') no-repeat center'
+        back = 'url(' + mainSlide.background.src + ') no-repeat center /100% 100%'
       }
       const mainSLideStyle = {
         background: back,

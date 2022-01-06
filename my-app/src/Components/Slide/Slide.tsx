@@ -12,14 +12,12 @@ interface SLideProps{
    index: Number,
 };
 
-
-
 export function SlideView(props:SLideProps){    
    let privet = styles.slidemenuListSlide;
    let borderCol: string = 'none';
    let back: string = '';
    if(props.slide.background.type === 'img'){
-     back = 'url(' + props.slide.background.src + ') no-repeat center'
+     back = 'url(' + props.slide.background.src + ') no-repeat center /100% 100%'
      if(props.slide.selected === true){
       borderCol = '#000'
    } else {borderCol = ''}
@@ -28,12 +26,11 @@ export function SlideView(props:SLideProps){
       back = props.slide.background.color
       if(props.slide.selected === true){
          borderCol = '#000'
-      } else {borderCol = props.slide.background.color}
+      } else {borderCol = ''}
    }
    const sLideStyle = {
-      background: back,
       borderColor: borderCol,
-      backgroundSize: 'contain'
+      background: back,
     };
 
    console.log(props.slide.background)
