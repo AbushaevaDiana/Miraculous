@@ -79,10 +79,12 @@ export function Element(props: ElementProps){
      }
     if (props.element.elementConcept.type === 'figure') {
         if (props.element.elementConcept.figureConcept === 'Round') {
+            let width: number = props.element.size.w/2 
+            let heigth: number = props.element.size.h/2 
             return (
-                <svg width={props.element.size.w} height={props.element.size.h} fill="none" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx={props.element.size.w / 2} cy={props.element.size.h / 2} rx={props.element.size.w / 2} ry={props.element.size.h / 2} fill={props.element.elementConcept.fillcolor || '#ffffff'} />
-                </svg>                
+                <svg width={props.element.size.w } height={props.element.size.h}>
+                    <ellipse rx={width} ry={heigth} cx={props.element.position.x} cy={props.element.position.y} fill="gold" stroke="orange" stroke-width="5"/>
+                </svg>               
             )
         }
     }

@@ -1,7 +1,13 @@
 import { Reducer } from "react"
 import { setNewId } from "../../functions/functions"
-import { ActionType, Slide } from "../../types"
+import { ActionType, Figure, Slide } from "../../types"
 
+let round: Figure = {
+  type: 'figure',
+  linecolor: '#00FFFF',
+  fillcolor: '#FFFFFF',
+  figureConcept: 'Round',
+}
 const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action: ActionType): Slide[] => {
     switch (action.type) {
     case 'ADD_SLIDE':
@@ -132,7 +138,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
       case 'ADD_ROUND':
-        console.log('add round work', action.payload)
+        console.log('add round work')
         return state.map(slide => {
           if (slide.selected === true)
           { 
@@ -140,8 +146,8 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               ...slide,
               elementlist: slide.elementlist.concat([{
                 size: {
-                    h: 100,
-                    w: 100,
+                    h: 10,
+                    w: 10,
                 },
                 border: {
                     color: {
@@ -155,12 +161,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     x: 100,
                     y: 100,
                 },
-                elementConcept: {
-                  type: 'figure',
-                  linecolor: '#00FFFF',
-                  fillcolor: '#FFFFFF',
-                  figureConcept: 'Round',
-              },
+                elementConcept: round,
                 idElement: setNewId(),
                 selected: false,
             }])
