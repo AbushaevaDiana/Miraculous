@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
 import { PresentationMaker, SelectionType } from '../../types';
+import { changeBorderColor} from '../../store/actionsCreators/elementActionCreators';
 
 interface MainPanelProps {
     selection: SelectionType,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     editSLideBackgroundImg: (idSlides: Number[], newBackground: string) => void,
+    changeBorderColor: (selection: SelectionType, color: string) => void,
 }
 
 function MainPanel(props: MainPanelProps) {
@@ -17,6 +19,12 @@ function MainPanel(props: MainPanelProps) {
         const inputColorStr = String(inputColor.value)
         console.log('цвет', inputColorStr)
         props.editSLideBackgroundColor(props.selection.idSlides, inputColorStr)
+    }
+    const hanglerOnChangeBorderColor = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputColor = event.target as HTMLInputElement
+        const inputColorStr = String(inputColor.value)
+        console.log('цвет', inputColorStr)
+        props.changeBorderColor(props.selection, inputColorStr)
     }
     return (
         <>
@@ -49,7 +57,7 @@ function MainPanel(props: MainPanelProps) {
                 </div>
                 <div className={styles.backgroundColor}>
                     <div className={styles.chooseColorIcon}></div>
-                    <input type="color" onChange = {hanglerOnChange}id="slideBackground" className= {styles.chooseColorSelect} defaultValue='#F08080'></input>
+                    <input type="color" onChange = {hanglerOnChange} id="slideBackground" className= {styles.chooseColorSelect} defaultValue='#F08080'></input>
                 </div>
             </div>
             <div className={styles.elementOutlineContainer}>
@@ -62,6 +70,7 @@ function MainPanel(props: MainPanelProps) {
                         <option className={styles.elementOutlineOption}>8px</option>
                     </select>
                     <select className={styles.elementOutlineSelect}>
+                        <option className={styles.elementOutlineOption}>Без границы</option>
                         <option className={styles.elementOutlineOption}>Сплошная линия</option>
                         <option className={styles.elementOutlineOption}>Пунктирная линия</option>
                     </select>
@@ -69,7 +78,8 @@ function MainPanel(props: MainPanelProps) {
                 <div className={styles.colorContourContainer}>
                     <div className={styles.colorContourIcon}></div>
                     {/* <hr className={styles.hrIcon} /> */}
-                    <input type="color"id="borderColor" className= {styles.chooseColorSelect} defaultValue='#F08080'>
+                    <input type="color"id="borderColor"  onChange = {hanglerOnChangeBorderColor}
+                    className= {styles.chooseColorSelect} defaultValue='#F08080'>
                     </input>
                     
                 </div>
@@ -90,6 +100,7 @@ function MainPanel(props: MainPanelProps) {
 const mapDispatchToProps = ({
     editSLideBackgroundColor,
     editSLideBackgroundImg,
+    changeBorderColor,
 })
   
 function mapStateToProps(state: PresentationMaker) {

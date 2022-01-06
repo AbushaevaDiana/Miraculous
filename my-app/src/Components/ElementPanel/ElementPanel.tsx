@@ -1,16 +1,37 @@
 import '../../App.css';
 import styles from './ElementPanel.module.css';
 import { connect } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { PresentationMaker, SelectionType } from '../../types';
-import { deleteElement} from '../../store/actionsCreators/elementActionCreators';
+import { deleteElement, changeFillColor, changeLineColor, changeTextColor} from '../../store/actionsCreators/elementActionCreators';
 
 interface ElementPanelProps {
     deleteElement: (selection: SelectionType) => void,
     selection: SelectionType,
+    changeTextColor: (selection: SelectionType, color: string) => void,
+    changeLineColor: (selection: SelectionType, color: string) => void,
+    changeFillColor: (selection: SelectionType, color: string) => void,
 }
 
 export function ElementPanel(props: ElementPanelProps) {
+    const hanglerOnChangeLine = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputColor = event.target as HTMLInputElement
+        const inputColorStr = String(inputColor.value)
+        console.log('цвет', inputColorStr)
+        props.changeLineColor(props.selection, inputColorStr)
+    }
+    const hanglerOnChangeFill = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputColor = event.target as HTMLInputElement
+        const inputColorStr = String(inputColor.value)
+        console.log('цвет', inputColorStr)
+        props.changeFillColor(props.selection, inputColorStr)
+    }
+    const hanglerOnChangeText = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputColor = event.target as HTMLInputElement
+        const inputColorStr = String(inputColor.value)
+        console.log('цвет', inputColorStr)
+        props.changeTextColor(props.selection, inputColorStr)
+    }
         return (
             <>
                 <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
@@ -43,6 +64,9 @@ export function ElementPanel(props: ElementPanelProps) {
                             </div>
                             <div className={styles.fontMarkIcon}>
                                 <button className={styles.selectColor + ' ' + styles.fontMarkIconButton}>А</button>
+                                <input type="color"id="textColor" onChange = {hanglerOnChangeText}
+                                className= {styles.elementSettingsSelect + ' ' + styles.selectField} defaultValue='#F08080'>
+                                </input>
                             </div>
                         </div>
                     </div>
@@ -57,12 +81,15 @@ export function ElementPanel(props: ElementPanelProps) {
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.contourIcon}></div>
-                    <input type="color"id="borderColor" className= {styles.elementSettingsSelect + ' ' + styles.selectField} defaultValue='#F08080'>
+                    <input type="color"id="borderColor" onChange = {hanglerOnChangeLine}
+                    className= {styles.elementSettingsSelect + ' ' + styles.selectField} defaultValue='#F08080'>
                     </input>
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.fillIcon}></div>
-                    <input type="color"id="borderColor" className= {styles.elementSettingsSelect + ' ' + styles.selectField} defaultValue='#F08080'>
+                    <input type="color"id="fillColor" onChange = {hanglerOnChangeFill}
+                    className= {styles.elementSettingsSelect + ' ' + styles.selectField}
+                     defaultValue='#F08080'>
                     </input>
                 </div>
                 <div className={styles.deleteElementContainer} onClick = {() => props.deleteElement(props.selection)}>   
@@ -75,6 +102,9 @@ export function ElementPanel(props: ElementPanelProps) {
 
 const mapDispatchToProps = ({
     deleteElement,
+    changeTextColor,
+    changeLineColor,
+    changeFillColor,
 })
   
 function mapStateToProps(state: PresentationMaker) {

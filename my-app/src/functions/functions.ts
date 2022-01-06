@@ -195,10 +195,7 @@ export function addElement(presentationMaker: Editer, newElementConcept: Element
             w: 100,
         },
         border: {
-            color: {
-                type: 'color',
-                color: '#000000',
-            },
+            color: '#000000',
             borderStyle: 'none',
             width: 5,
         },
@@ -235,7 +232,7 @@ export function deleteSelectedElement(presentationMaker: Editer): Editer {
     };
 };
 
-export function editBorderColor(presentationMaker: Editer, newColor: Color): Editer {
+export function editBorderColor(presentationMaker: Editer, newColor: string): Editer {
     const selection: SelectionType = presentationMaker.selection;
 
     return {
@@ -446,10 +443,7 @@ export function addText(presentationMaker: Editer, newTextContent: string): Edit
     let newElement: ElementType;
     let elementConcept: ElementConcept = {
         type: 'text',
-        color: {
-            type: 'color',
-            color: '#000000',
-        },
+        color: '#000000',
         textContent:  newTextContent,
         links: '',
         size: 12,
@@ -519,7 +513,7 @@ export function addFigure(presentationMaker: Editer, newFigureConcept: FigureCon
 
 //Text//
 
-export function editTextColor(presentationMaker: Editer, newColor: Color): Editer {
+export function editTextColor(presentationMaker: Editer, newColor: string): Editer {
     const selection: SelectionType = presentationMaker.selection;
     return {
         ...presentationMaker,

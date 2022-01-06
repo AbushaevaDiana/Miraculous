@@ -9,6 +9,18 @@ let round: Figure = {
   fillcolor: '#ADFF2F',
   figureConcept: 'Round',
 }
+let triangel: Figure = {
+  type: 'figure',
+  linecolor: '#000000',
+  fillcolor: '#ADFF2F',
+  figureConcept: 'Triangel',
+}
+let rectangel: Figure = {
+  type: 'figure',
+  linecolor: '#000000',
+  fillcolor: '#ADFF2F',
+  figureConcept: 'Rectangel',
+}
 const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action: ActionType): Slide[] => {
     switch (action.type) {
     case 'ADD_SLIDE':
@@ -98,6 +110,98 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'CHANGE_LINE_COLOR':
+        console.log('change line color work')
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        linecolor: action.payload.color,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'CHANGE_BORDER_COLOR':
+        console.log('change border color work')
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    border: {
+                      ...element.border,
+                      color: action.payload.color 
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'CHANGE_TEXT_COLOR':
+        console.log('change text color work')
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        color: action.payload.color,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'CHANGE_FILL_COLOR':
+        console.log('change fill color work')
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        fillcolor: action.payload.color,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
       case 'GOTO_ELEMENT':
         console.log('goto element work')
         return state.map(slide => {
@@ -156,10 +260,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     w: 100,
                 },
                 border: {
-                    color: {
-                        type: 'color',
-                        color: '#000000',
-                    },
+                    color: '#000000',
                     borderStyle: 'none',
                     width: 5,
                 },
@@ -193,10 +294,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     w: 100,
                 },
                 border: {
-                    color: {
-                        type: 'color',
-                        color: '#000000',
-                    },
+                    color: '#000000',
                     borderStyle: 'none',
                     width: 5,
                 },
@@ -205,6 +303,66 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     y: 100,
                 },
                 elementConcept: round,
+                idElement: setNewId(),
+                selected: false,
+            }])
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'ADD_RECTANGLE':
+        console.log('add RECTANGLE work')
+        return state.map(slide => {
+          if (slide.selected === true)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.concat([{
+                size: {
+                    h: 100,
+                    w: 100,
+                },
+                border: {
+                    color: '#000000',
+                    borderStyle: 'none',
+                    width: 5,
+                },
+                position: {
+                    x: 100,
+                    y: 100,
+                },
+                elementConcept: rectangel,
+                idElement: setNewId(),
+                selected: false,
+            }])
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'ADD_TRIANGLE':
+        console.log('add triangel work')
+        return state.map(slide => {
+          if (slide.selected === true)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.concat([{
+                size: {
+                    h: 100,
+                    w: 100,
+                },
+                border: {
+                    color: '#000000',
+                    borderStyle: 'none',
+                    width: 5,
+                },
+                position: {
+                    x: 100,
+                    y: 100,
+                },
+                elementConcept: triangel,
                 idElement: setNewId(),
                 selected: false,
             }])
@@ -226,10 +384,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     w: 100,
                 },
                 border: {
-                    color: {
-                        type: 'color',
-                        color: '#000000',
-                    },
+                    color: '#000000',
                     borderStyle: 'none',
                     width: 5,
                 },
@@ -239,10 +394,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                 },
                 elementConcept: {
                     type: 'text',
-                    color: {
-                        type: 'color',
-                        color: '#000000',
-                    },
+                    color: '#000000',
                     textContent: 'Текст',
                     links: '',
                     size: 12,

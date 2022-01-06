@@ -50,13 +50,18 @@ export function Element(props: ElementProps){
        if(props.element.elementConcept.bold === true){
         fW = 'bold'
        }
+       let bColor: string = 'transparent'
+       if(props.element.border.borderStyle !== 'none'){
+           bColor = props.element.border.color
+       }
        let elementStyle = {
            font: props.element.elementConcept.font,
            fontWeight: fW,
-           color: props.element.elementConcept.color.color,
+           color: props.element.elementConcept.color,
            width: props.element.size.w,
            height: props.element.size.h,
-           WebkitFilter: webFilter
+           WebkitFilter: webFilter,
+           borderColor: bColor,
         }
        return (
         <>
@@ -111,6 +116,42 @@ export function Element(props: ElementProps){
                     <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                     fill={props.element.elementConcept.fillcolor} 
                     stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
+                </svg>               
+            )
+        }
+        if (props.element.elementConcept.figureConcept === 'Triangel') {
+            let elementStyle = {
+                width: props.element.size.w,
+                height: props.element.size.h,
+                WebkitFilter: webFilter,
+            }
+            let x1: string = String(props.element.size.w/46)
+            let x2: string = String(props.element.size.w/2 )
+            let x3: string = String(props.element.size.w - 3 ) 
+            let y1: string = String(props.element.size.h - 3)
+            let y2: string = String(props.element.size.h/28 )
+            let y3: string = String(props.element.size.h - 3 )
+            let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
+            return (
+               <svg style={elementStyle} onClick={() => props.gotoElement(props.element.idElement)}>
+                  <polygon points={point} fill={props.element.elementConcept.fillcolor} 
+                  stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
+               </svg>             
+            )
+        }
+        if (props.element.elementConcept.figureConcept === 'Rectangel') {
+            let elementStyle = {
+                width: props.element.size.w,
+                height: props.element.size.h,
+                WebkitFilter: webFilter,
+            }
+            let width: number = (props.element.size.w - 6) 
+            let heigth: number = (props.element.size.h - 6)
+            return (
+                <svg style={elementStyle} onClick={() => props.gotoElement(props.element.idElement)}>
+                      <rect x="3" y="3" width={width} height={heigth} 
+                      fill={props.element.elementConcept.fillcolor} 
+                      stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                 </svg>               
             )
         }

@@ -56,13 +56,13 @@ export function InsertPanel(props: InsertPanelProps) {
                     <div className={styles.icon + ' ' + styles.figureIcon}></div>
                     <div className={styles.insc}>Фигуру</div>
                 </div>
-                <div className={styles.figureTypeBlock}>
+                <div className={styles.figureTypeBlock} onClick = {() => props.addTriangle()}>
                     <div className={styles.figureTypeIcon + ' ' + styles.triangleIcon}></div>
                 </div>
                 <div className={styles.figureTypeBlock} onClick = {() => props.addRound()}>
                     <div className={styles.figureTypeIcon + ' ' + styles.circleIcon}></div>
                 </div>
-                <div className={styles.figureTypeBlock}>
+                <div className={styles.figureTypeBlock} onClick = {() => props.addRectangle()}>
                     <div className={styles.figureTypeIcon + ' ' + styles.squareIcon}></div>
                 </div>
             </div>

@@ -65,4 +65,49 @@ function addTriangle() {
   }
 }
 
-export {changeTextContent, moveElement, gotoElement, deleteElement, addText, addPicture, addRound, addRectangle, addTriangle}
+function changeFillColor(selection: SelectionType, color: string) {
+  return {
+      type: StateTypes.CHANGE_FILL_COLOR,
+      payload: {
+          selection,
+          color,
+      }
+  }
+}
+
+
+function changeLineColor(selection: SelectionType, color: string) {
+  return {
+      type: StateTypes.CHANGE_LINE_COLOR,
+      payload: {
+          selection,
+          color,
+      }
+  }
+}
+
+function changeTextColor(selection: SelectionType, color: string) {
+  return {
+      type: StateTypes.CHANGE_TEXT_COLOR,
+      payload: {
+          selection,
+          color,
+      }
+  }
+}
+
+
+function changeBorderColor(selection: SelectionType, color: string) {
+  return {
+      type: StateTypes.CHANGE_BORDER_COLOR,
+      payload: {
+          selection,
+          color,
+      }
+  }
+}
+
+export {changeTextContent, moveElement, gotoElement, 
+       deleteElement, addText, addPicture, addRound, 
+       addRectangle, addTriangle, changeFillColor, changeLineColor,
+       changeTextColor, changeBorderColor}

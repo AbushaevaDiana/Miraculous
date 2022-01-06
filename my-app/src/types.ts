@@ -19,6 +19,10 @@ export enum StateTypes {
     ADD_ROUND = 'ADD_ROUND',
     ADD_RECTANGLE = 'ADD_RECTANGLE',
     ADD_TRIANGLE = 'ADD_TRIANGLE', 
+    CHANGE_FILL_COLOR = 'CHANGE_FILL_COLOR',
+    CHANGE_LINE_COLOR = 'CHANGE_LINE_COLOR',
+    CHANGE_TEXT_COLOR = 'CHANGE_TEXT_COLOR',
+    CHANGE_BORDER_COLOR = 'CHANGE_BORDER_COLOR'
 }
 
 export type PresentationMaker = {
@@ -84,7 +88,7 @@ export type Size = {
 export type ElementConcept = TextType | Img | Figure;
 
 export type Border = {
-    color: Color,
+    color: string,
     borderStyle: BorderStyle,
     width: number,
 };
@@ -98,7 +102,7 @@ export type Position = {
 
 export type TextType = {
     type: 'text',
-    color: Color,
+    color: string,
     textContent: string,
     links: Link,
     size: number;

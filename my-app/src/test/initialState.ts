@@ -20,9 +20,7 @@ export const initialState:  PresentationMaker = {
                             w: 70,
                         },
                         border: {
-                            color: {
-                                type: 'color',
-                                color: '#FFB6C1'},
+                            color: 'black',
                             borderStyle: 'solid',
                             width: 40,
                         },
@@ -32,9 +30,7 @@ export const initialState:  PresentationMaker = {
                         },
                         elementConcept: {
                             type: 'text',
-                            color: {
-                                type: 'color',
-                                color: 'green' },
+                            color: 'red',
                             textContent: 'Привет ', 
                             links: '',
                             size: 14,
