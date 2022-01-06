@@ -98,6 +98,31 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'GOTO_ELEMENT':
+        console.log('goto element work')
+        return state.map(slide => {
+          if (slide.selected === true)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload){
+                  return {
+                    ...element,
+                    selected: true 
+                }
+                } else { 
+                  return {
+                    ...element,
+                    selected: false 
+                }
+                }
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
     case 'MOVE_ELEMENT':
         console.log('move work')
         return state.map(slide => {

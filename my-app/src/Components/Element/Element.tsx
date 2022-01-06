@@ -36,7 +36,11 @@ export function Element(props: ElementProps){
         
     const posit = p as Position;
     //const sz = s as Size;
-        
+    
+    let webFilter: string = 'none'
+    if(props.element.selected === true){
+        webFilter = 'drop-shadow(7px 7px 7px #222)';
+    }
 //Текстовый элемент
     let textI: string = '';   
     if(props.element.elementConcept.type === 'text'){
@@ -52,6 +56,7 @@ export function Element(props: ElementProps){
            color: props.element.elementConcept.color.color,
            width: props.element.size.w,
            height: props.element.size.h,
+           WebkitFilter: webFilter
         }
        return (
         <>
@@ -78,6 +83,7 @@ export function Element(props: ElementProps){
         let elementStyle = {
             width: props.element.size.w,
             height: props.element.size.h,
+            WebkitFilter: webFilter
          }
         return (
          <>
@@ -96,14 +102,15 @@ export function Element(props: ElementProps){
             let elementStyle = {
                 width: props.element.size.w,
                 height: props.element.size.h,
+                WebkitFilter: webFilter,
             }
             let width: number = props.element.size.w/2 
             let heigth: number = props.element.size.h/2 
             return (
                 <svg style={elementStyle} onClick={() => props.gotoElement(props.element.idElement)}>
-                    <ellipse rx={width-5} ry={heigth-5} cx={width} cy={heigth} 
+                    <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                     fill={props.element.elementConcept.fillcolor} 
-                    stroke={props.element.elementConcept.linecolor} strokeWidth="5"/>
+                    stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
                 </svg>               
             )
         }
