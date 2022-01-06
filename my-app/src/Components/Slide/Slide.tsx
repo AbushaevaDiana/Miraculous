@@ -4,6 +4,10 @@ import { PresentationMaker, SelectionType, Slide, Color } from '../../types';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators'
+import { MiniElement } from '../Element/miniElement'
+import { Element } from '../Element/Element';
+import slidelist from '../../store/reducers/slideReduce';
+
 
 interface SLideProps{
    slide: Slide,
@@ -38,6 +42,9 @@ export function SlideView(props:SLideProps){
          <>
                 <p className={styles.slidemenuListSlideIndex}>{props.index}</p>
                 <div key={props.slide.idSlide} style={sLideStyle} className={privet} onClick={() => {props.gotoSlide(props.slide.idSlide)}}>
+                  <ul> 
+                   {props.slide.elementlist.map(element => <MiniElement key = {element.idElement} element = {element}></MiniElement>)}
+                  </ul>
                 </div>
          </>
       )
