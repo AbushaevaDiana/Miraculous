@@ -9,15 +9,20 @@ import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
 import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
-import { addText, deleteElement, addPicture} from '../../store/actionsCreators/elementActionCreators';
+import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
 
 
 interface HeadmenuProps {
     name: string,
     addText: () => void,
+    addRound: () => void,
+    addTriangle: () => void,
+    addRectangle: () => void,
     deleteElement: (selection: SelectionType) => void,
     addSlide: () => void,
     deleteSlide: (idSlide: Number[]) => void,
+    
+
     changePresentationNAME: (name: string) => void,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     addPicture: (src: string) => void,
@@ -94,6 +99,9 @@ const mapDispatchToProps = {
     addText,
     deleteElement,
     addPicture,
+    addRectangle,
+    addRound,
+    addTriangle,
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

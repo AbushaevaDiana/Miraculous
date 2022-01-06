@@ -14,7 +14,10 @@ export enum StateTypes {
     GOTO_ELEMENT = 'GOTO_ELEMENT',
     ADD_TEXT = 'ADD_TEXT',
     ADD_PICTURE = 'ADD_PICTURE',
-    DELETE_ELEMENT = 'DELETE_ELEMENT'
+    DELETE_ELEMENT = 'DELETE_ELEMENT',
+    ADD_ROUND = 'ADD_ROUND',
+    ADD_RECTANGLE = 'ADD_RECTANGLE',
+    ADD_TRIANGLE = 'ADD_TRIANGLE', 
 }
 
 export type PresentationMaker = {
@@ -73,8 +76,8 @@ export type ElementType = {
 };
 
 export type Size = {
-    h: Number,
-    w: Number,
+    h: number,
+    w: number,
 };
 
 export type ElementConcept = TextType | Img | Figure;
@@ -116,8 +119,8 @@ export type Filter = 'none' | 'black-white' | 'red' | 'green' | 'blue';
 
 export type Figure = {
     type: 'figure',
-    linecolor: Color,
-    fillcolor: Color,
+    linecolor: string,
+    fillcolor: string,
     figureConcept: FigureConcept,
 };
 

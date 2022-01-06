@@ -489,12 +489,8 @@ export function addFigure(presentationMaker: Editer, newFigureConcept: FigureCon
     let newElement: ElementType;
     let elementConcept: ElementConcept = {
         type: 'figure',
-        linecolor: {
-            type: 'color',
-            color: '#000000'},
-        fillcolor: {
-            type: 'color',
-            color: '#ffffff'},
+        linecolor:  '#000000',
+        fillcolor: '#ffffff',
         figureConcept: newFigureConcept,
     };
     newElement = addElement(presentationMaker, elementConcept);

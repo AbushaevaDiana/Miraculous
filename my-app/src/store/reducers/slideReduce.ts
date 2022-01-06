@@ -131,6 +131,44 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'ADD_ROUND':
+        console.log('add round work', action.payload)
+        return state.map(slide => {
+          if (slide.selected === true)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.concat([{
+                size: {
+                    h: 100,
+                    w: 100,
+                },
+                border: {
+                    color: {
+                        type: 'color',
+                        color: '#000000',
+                    },
+                    borderStyle: 'none',
+                    width: 5,
+                },
+                position: {
+                    x: 100,
+                    y: 100,
+                },
+                elementConcept: {
+                  type: 'figure',
+                  linecolor: '#00FFFF',
+                  fillcolor: '#FFFFFF',
+                  figureConcept: 'Round',
+              },
+                idElement: setNewId(),
+                selected: false,
+            }])
+            } 
+          } else { 
+              return slide
+            }
+      });
     case 'ADD_TEXT':
         console.log('add element work')
         return state.map(slide => {

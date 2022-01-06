@@ -3,11 +3,14 @@ import styles from './InsertPanel.module.css';
 import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Img, PresentationMaker, SelectionType } from '../../types';
-import { addText, deleteElement, addPicture} from '../../store/actionsCreators/elementActionCreators';
+import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
 
 
 interface InsertPanelProps {
     addText: () => void,
+    addRound: () => void,
+    addTriangle: () => void,
+    addRectangle: () => void,
     selection: SelectionType,
     addPicture: (src: string) => void,
 }
@@ -61,7 +64,7 @@ export function InsertPanel(props: InsertPanelProps) {
                 <div className={styles.figureTypeBlock}>
                     <div className={styles.figureTypeIcon + ' ' + styles.triangleIcon}></div>
                 </div>
-                <div className={styles.figureTypeBlock}>
+                <div className={styles.figureTypeBlock} onClick = {() => props.addRound()}>
                     <div className={styles.figureTypeIcon + ' ' + styles.circleIcon}></div>
                 </div>
                 <div className={styles.figureTypeBlock}>
@@ -76,6 +79,9 @@ const mapDispatchToProps = ({
     addText,
     deleteElement,
     addPicture,
+    addRectangle,
+    addRound,
+    addTriangle,
 })
   
 function mapStateToProps(state: PresentationMaker) {

@@ -47,4 +47,22 @@ function addPicture(src: string) {
   }
 }
 
-export {changeTextContent, moveElement, gotoElement, deleteElement, addText, addPicture}
+function addRound() {
+  return {
+    type: StateTypes.ADD_ROUND,
+  }
+}
+
+function addRectangle() {
+  return {
+    type: StateTypes.ADD_RECTANGLE,
+  }
+}
+
+function addTriangle() {
+  return {
+    type: StateTypes.ADD_TRIANGLE,
+  }
+}
+
+export {changeTextContent, moveElement, gotoElement, deleteElement, addText, addPicture, addRound, addRectangle, addTriangle}
