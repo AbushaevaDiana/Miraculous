@@ -37,14 +37,22 @@ export function Element(props: ElementProps){
     const posit = p as Position;
     //const sz = s as Size;
         
-    let elementStyle = {
-        top: moving ? posit.y : props.element.position.y,
-        left: moving ? posit.x : props.element.position.x,
-    }   
+//Текстовый элемент
     let textI: string = '';   
     if(props.element.elementConcept.type === 'text'){
        textI = props.element.elementConcept.textContent;
        console.log(props.element.elementConcept.textContent)
+       let fW: string = 'normal'
+       if(props.element.elementConcept.bold === true){
+        fW = 'bold'
+       }
+       let elementStyle = {
+           font: props.element.elementConcept.font,
+           fontWeight: fW,
+           color: props.element.elementConcept.color.color,
+           width: props.element.size.w,
+           height: props.element.size.h,
+        }
        return (
         <>
           
@@ -52,7 +60,7 @@ export function Element(props: ElementProps){
             <svg height="6" width="6">
                 <circle cx="3" cy="3" r="3" stroke="black" stroke-width="3" fill="black" />
              </svg>
-            <input style = {elementStyle} className={styles.text} type="text" defaultValue={textI} 
+            <textarea style = {elementStyle} className={styles.text}  defaultValue={textI} 
                         onKeyPress= {
                         (e) => {if (e.key === "Enter") {
                         e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
@@ -63,27 +71,39 @@ export function Element(props: ElementProps){
         </>
      )
     }
+//Картинка
     if(props.element.elementConcept.type === 'img') {
         let src: string = props.element.elementConcept.src;
         console.log(src);
+        let elementStyle = {
+            width: props.element.size.w,
+            height: props.element.size.h,
+         }
         return (
          <>
            <div onClick={(e) => {props.gotoElement(props.element.idElement);
            e.stopPropagation();
            setMoving(true);
         }}>               
-               <img src={src} alt={String(props.element.idElement)} /> 
+               <img src={src} style={elementStyle} alt={String(props.element.idElement)} /> 
             </div>
          </>
       )
      }
+//Фигуры
     if (props.element.elementConcept.type === 'figure') {
         if (props.element.elementConcept.figureConcept === 'Round') {
+            let elementStyle = {
+                width: props.element.size.w,
+                height: props.element.size.h,
+            }
             let width: number = props.element.size.w/2 
             let heigth: number = props.element.size.h/2 
             return (
-                <svg width={props.element.size.w } height={props.element.size.h}>
-                    <ellipse rx={width} ry={heigth} cx={props.element.position.x} cy={props.element.position.y} fill="gold" stroke="orange" stroke-width="5"/>
+                <svg style={elementStyle} onClick={() => props.gotoElement(props.element.idElement)}>
+                    <ellipse rx={width-5} ry={heigth-5} cx={width} cy={heigth} 
+                    fill={props.element.elementConcept.fillcolor} 
+                    stroke={props.element.elementConcept.linecolor} strokeWidth="5"/>
                 </svg>               
             )
         }

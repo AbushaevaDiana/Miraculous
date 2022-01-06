@@ -16,8 +16,8 @@ export const initialState:  PresentationMaker = {
                 elementlist:[ 
                     {
                         size: {
-                            h: 100,
-                            w: 100,
+                            h: 50,
+                            w: 70,
                         },
                         border: {
                             color: {
@@ -34,7 +34,7 @@ export const initialState:  PresentationMaker = {
                             type: 'text',
                             color: {
                                 type: 'color',
-                                color: '#000000' },
+                                color: 'green' },
                             textContent: 'Привет ', 
                             links: '',
                             size: 14,

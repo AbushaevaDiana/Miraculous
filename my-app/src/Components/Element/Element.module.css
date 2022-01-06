@@ -1,8 +1,10 @@
 .text{
-    width: 100px;
-    height: 100px;
+    background: transparent;
     border: none;
+    /* width: 100px;
+    height: 100px; */
     overflow-wrap: hyphens;
     word-wrap: break-word;
     word-break: break-all;
+    resize: none;
 }

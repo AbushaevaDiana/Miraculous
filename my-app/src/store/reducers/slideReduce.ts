@@ -5,8 +5,8 @@ import { ActionType, Figure, Slide } from "../../types"
 
 let round: Figure = {
   type: 'figure',
-  linecolor: '#00FFFF',
-  fillcolor: '#FFFFFF',
+  linecolor: '#000000',
+  fillcolor: '#ADFF2F',
   figureConcept: 'Round',
 }
 const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action: ActionType): Slide[] => {
@@ -164,8 +164,8 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               ...slide,
               elementlist: slide.elementlist.concat([{
                 size: {
-                    h: 10,
-                    w: 10,
+                    h: 100,
+                    w: 100,
                 },
                 border: {
                     color: {
