@@ -4,6 +4,7 @@ import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Posi
 import { connect } from 'react-redux';
 import React, { MouseEvent, DragEvent, useEffect, useRef, useState } from 'react';
 import { changeTextContent, moveElement, gotoElement } from '../../store/actionsCreators/elementActionCreators'
+import { url } from 'inspector';
 
 interface ElementProps{
     element: ElementType,
@@ -12,8 +13,6 @@ interface ElementProps{
     moveElement: (selection: SelectionType, position: Position) => void,
     gotoElement: (idElement: Number) => void,
 };
-
-
 
 export function Element(props: ElementProps){
     let elementStyle = {
@@ -41,11 +40,22 @@ export function Element(props: ElementProps){
         </>
      )
     }
-    else {
+    if(props.element.elementConcept.type === 'img') {
+        let src: string = props.element.elementConcept.src;
+        console.log(src);
         return (
+         <>
+           <div onClick={() => props.gotoElement(props.element.idElement)}>
+               
+               <img src={src} alt={String(props.element.idElement)} /> 
+
+            </div>
+         </>
+      )
+     }
+    return (
             <></>
         )
-    }
 };
 
 

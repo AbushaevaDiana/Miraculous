@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
 import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
-import { addText, deleteElement} from '../../store/actionsCreators/elementActionCreators';
+import { addText, deleteElement, addPicture} from '../../store/actionsCreators/elementActionCreators';
 
 
 interface HeadmenuProps {
@@ -20,6 +20,7 @@ interface HeadmenuProps {
     deleteSlide: (idSlide: Number[]) => void,
     changePresentationNAME: (name: string) => void,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
+    addPicture: (src: string) => void,
 }
 
 export function Headmenu(props: HeadmenuProps) {
@@ -91,7 +92,8 @@ const mapDispatchToProps = {
     changePresentationNAME,
     editSLideBackgroundColor,
     addText,
-    deleteElement
+    deleteElement,
+    addPicture,
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

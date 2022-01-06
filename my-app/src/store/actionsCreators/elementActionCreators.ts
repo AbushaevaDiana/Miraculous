@@ -40,4 +40,11 @@ function addText() {
   }
 }
 
-export {changeTextContent, moveElement, gotoElement, deleteElement, addText}
+function addPicture(src: string) {
+  return {
+    type: StateTypes.ADD_PICTURE,
+    payload: src
+  }
+}
+
+export {changeTextContent, moveElement, gotoElement, deleteElement, addText, addPicture}

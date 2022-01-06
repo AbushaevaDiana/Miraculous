@@ -1,25 +1,58 @@
 import '../../App.css';
 import styles from './InsertPanel.module.css';
 import { connect } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
-import { PresentationMaker, SelectionType } from '../../types';
-import { addText, deleteElement} from '../../store/actionsCreators/elementActionCreators';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { Img, PresentationMaker, SelectionType } from '../../types';
+import { addText, deleteElement, addPicture} from '../../store/actionsCreators/elementActionCreators';
+
 
 interface InsertPanelProps {
     addText: () => void,
     selection: SelectionType,
+    addPicture: (src: string) => void,
 }
 
 export function InsertPanel(props: InsertPanelProps) {
+    function getFileName(srcP: string, props: InsertPanelProps) {
+        console.log(srcP);
+        let fr = new FileReader();
+        props.addPicture('Htllj');
+    }
     return (
         <>
-            <div className={styles.imageContainer}>
+            <form className={styles.imageContainer}>
                 <div className={styles.imgBlock}>
-                    <div className={styles.icon + ' ' + styles.imgIcon}></div>
+                    <div className={styles.icon + ' ' + styles.imgIcon}
+                    onClick={() => {
+                        const fileInputNode = document.createElement("input");
+                        fileInputNode.type = "file";
+                        fileInputNode.click();
+                        fileInputNode.addEventListener("change", () => {
+                        const file = fileInputNode.files?.[0] as File;
+                        const reader = new FileReader();
+                        
+                        reader.onloadend = function () {
+                        const newImage: Img = {
+                        type: 'img',
+                        src: "https://via.placeholder.com/150",
+                        filter: 'none'
+                        };
+                        
+                        if (file.type.includes("image")) {
+                        newImage.src = String(reader.result);
+                        }
+                        console.log(newImage)
+                        props.addPicture(newImage.src)
+                        /*dispatch(createElement, true, selectedSlide, newImage);*/
+                        };
+                        
+                        reader.readAsDataURL(file);
+                        });
+                        }}></div>
                     <div className={styles.insc}>Картинку</div>
                 </div>
-                <input type="text" className={styles.imgInput} />
-            </div>
+                <input type="file" id="inputImg" className={styles.imgInput} /*onInput={(e) => props.addPicture(e.currentTarget.value)}*/ />
+            </form>
             <div className={styles.textContainer}>
                 <div className={styles.textBlock} onClick = {() => props.addText()}>
                     <div className={styles.icon + ' ' + styles.textIcon}></div>
@@ -48,6 +81,7 @@ export function InsertPanel(props: InsertPanelProps) {
 const mapDispatchToProps = ({
     addText,
     deleteElement,
+    addPicture,
 })
   
 function mapStateToProps(state: PresentationMaker) {

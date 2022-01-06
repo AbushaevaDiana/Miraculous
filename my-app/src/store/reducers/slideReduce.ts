@@ -94,6 +94,43 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'ADD_PICTURE':
+        console.log('add picture work', action.payload)
+        return state.map(slide => {
+          if (slide.selected === true)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.concat([{
+                size: {
+                    h: 100,
+                    w: 100,
+                },
+                border: {
+                    color: {
+                        type: 'color',
+                        color: '#000000',
+                    },
+                    borderStyle: 'none',
+                    width: 5,
+                },
+                position: {
+                    x: 0,
+                    y: 0,
+                },
+                elementConcept: {
+                  type: 'img',
+                  src: action.payload,
+                  filter: 'none',
+               },
+                idElement: setNewId(),
+                selected: false,
+            }])
+            } 
+          } else { 
+              return slide
+            }
+      });
     case 'ADD_TEXT':
         console.log('add element work')
         return state.map(slide => {
