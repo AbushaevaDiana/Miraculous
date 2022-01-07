@@ -11,7 +11,7 @@ import { changePresentationNAME } from '../../store/actionsCreators/nameActionCr
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import { savePresentation, openPresentation } from '../../store/actionsCreators/presentationActionCreators';
 import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
-import {loadPresentation} from '../../store/reducers/presentationReduser'
+import {loadFile} from '../../store/reducers/presentationReduser'
 
 interface HeadmenuProps {
     name: string,
@@ -71,7 +71,7 @@ export function Headmenu(props: HeadmenuProps) {
                 <ul className={styles.headmenu}>
                     <li className= {styles.headmenuLi}>       
                         <button className={styles.headmenuLiButton} 
-                        onClick = {() => loadPresentation((object) => {props.openPresentation(object)})}>Файл</button>
+                        onClick = {() => loadFile((object) => {props.openPresentation(object)})}>Файл</button>
                     </li>
                     <li className={styles.headmenuLi}>
                         <button className={styles.headmenuLiButton} onClick={handleToggleMainPanel}>Главная</button>

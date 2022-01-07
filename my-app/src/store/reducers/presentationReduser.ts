@@ -21,16 +21,14 @@ const stateStart: Presentation = {
     name: 'Презентация без названия',
 }
 
-export function loadPresentation(callback: (object: any) => void) {
-    const fileInputNode = document.createElement("input");
-    fileInputNode.type = "file";
-    fileInputNode.click();
-    fileInputNode.addEventListener("change", () => {
-      const file = fileInputNode.files?.[0] as File;
-  
-      const dataStr = window.URL.createObjectURL(file);
-  
-      fetch(dataStr)
+export function loadFile(callback: (object: any) => void) {
+    const inputFile = document.createElement("input");
+    inputFile.type = "file";
+    inputFile.click();
+    inputFile.addEventListener("change", () => {
+      const file = inputFile.files?.[0] as File;
+
+      fetch(window.URL.createObjectURL(file))
         .then((response) => response.json())
         .then((json) => {
           callback(json);
