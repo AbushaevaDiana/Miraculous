@@ -9,8 +9,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
 import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
+import { savePresentation, openPresentation } from '../../store/actionsCreators/presentationActionCreators';
 import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
-
+import {loadPresentation} from '../../store/reducers/presentationReduser'
 
 interface HeadmenuProps {
     name: string,
@@ -21,8 +22,8 @@ interface HeadmenuProps {
     deleteElement: (selection: SelectionType) => void,
     addSlide: () => void,
     deleteSlide: (idSlide: Number[]) => void,
-    
-
+    savePresentation: () => void,
+    openPresentation: (newPresentation: Presentation) => void,
     changePresentationNAME: (name: string) => void,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     addPicture: (src: string) => void,
@@ -69,7 +70,8 @@ export function Headmenu(props: HeadmenuProps) {
             </span> 
                 <ul className={styles.headmenu}>
                     <li className= {styles.headmenuLi}>       
-                        <button className={styles.headmenuLiButton}>Файл</button>
+                        <button className={styles.headmenuLiButton} 
+                        onClick = {() => loadPresentation((object) => {props.openPresentation(object)})}>Файл</button>
                     </li>
                     <li className={styles.headmenuLi}>
                         <button className={styles.headmenuLiButton} onClick={handleToggleMainPanel}>Главная</button>
@@ -102,6 +104,8 @@ const mapDispatchToProps = {
     addRectangle,
     addRound,
     addTriangle,
+    savePresentation,
+    openPresentation,
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

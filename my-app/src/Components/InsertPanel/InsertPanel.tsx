@@ -35,7 +35,6 @@ export function InsertPanel(props: InsertPanelProps) {
                         if (file.type.includes("image")) {
                           src = String(reader.result);
                         }
-                        console.log(src)
                         props.addPicture(src)
                         };
                         
