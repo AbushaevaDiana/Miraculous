@@ -15,17 +15,24 @@ interface AppProps {
 }
 
 function App(props: AppProps) {
-  return (
-    <div className='App'>
-      <header className='AppHeader'>
-        <Headmenu></Headmenu>
-      </header>
-      <body className='AppBody'>
-        <Slidemenu gotoSlide = {props.gotoSlide}></Slidemenu>
-        <PresentationContent></PresentationContent>
-      </body>
-    </div>
-  );
+  if(props.state.mode === 'editor'){
+    return (
+      <div className='App'>
+        <header className='AppHeader'>
+          <Headmenu></Headmenu>
+        </header>
+        <body className='AppBody'>
+          <Slidemenu gotoSlide = {props.gotoSlide}></Slidemenu>
+          <PresentationContent></PresentationContent>
+        </body>
+      </div>
+    )
+  }
+  else{
+    return(
+      <div></div>
+    )
+  }
 }
 
 //
