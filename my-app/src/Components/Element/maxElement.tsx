@@ -81,8 +81,8 @@ export function MaxElement(props: miniElementProps){
             let elementStyle = {
                 width: w6,
                 height: h6,
-                left: props.element.position.x*24/20/2,
-                top: props.element.position.y*24/20/2,
+                left: props.element.position.x*24/20,
+                top: props.element.position.y*24/20,
             }
             let x1: string = String(w6/46)
             let x2: string = String(w6/2 )
@@ -104,8 +104,8 @@ export function MaxElement(props: miniElementProps){
             let elementStyle = {
                 width: w6,
                 height: h6,
-                top: props.element.position.y*24/20/2,
-                left: props.element.position.x*24/20/2,
+                top: props.element.position.y*24/20,
+                left: props.element.position.x*24/20,
             }
             let width: number = (w6 - 6) 
             let heigth: number = (h6 - 6)
