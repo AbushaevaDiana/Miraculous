@@ -389,7 +389,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     width: 5,
                 },
                 position: {
-                    x: 0,
+                    x: 100,
                     y: 0,
                 },
                 elementConcept: {
