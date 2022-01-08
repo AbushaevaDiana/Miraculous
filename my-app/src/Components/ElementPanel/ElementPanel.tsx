@@ -3,12 +3,16 @@ import styles from './ElementPanel.module.css';
 import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { PresentationMaker, SelectionType } from '../../types';
-import { deleteElement, changeFillColor, changeLineColor, changeTextColor} from '../../store/actionsCreators/elementActionCreators';
+import { deleteElement, changeFillColor, changeLineColor, changeTextColor, changeElementWeigth, changeElementHeigth, moveElementX, moveElementY} from '../../store/actionsCreators/elementActionCreators';
 
 interface ElementPanelProps {
     deleteElement: (selection: SelectionType) => void,
     selection: SelectionType,
     changeTextColor: (selection: SelectionType, color: string) => void,
+    changeElementWeigth: (selection: SelectionType, w: number) => void,
+    changeElementHeigth: (selection: SelectionType, h: number) => void,
+    moveElementY: (selection: SelectionType, y: number) => void,
+    moveElementX: (selection: SelectionType, x: number) => void,
     changeLineColor: (selection: SelectionType, color: string) => void,
     changeFillColor: (selection: SelectionType, color: string) => void,
 }
@@ -16,9 +20,9 @@ interface ElementPanelProps {
 export function ElementPanel(props: ElementPanelProps) {
     const hanglerOnChangeLine = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
-        const inputColorStr = String(inputColor.value)
-        console.log('цвет', inputColorStr)
-        props.changeLineColor(props.selection, inputColorStr)
+        const inputColorStr = String(inputColor.value);
+        console.log('цвет', inputColorStr);
+        props.changeLineColor(props.selection, inputColorStr);
     }
     const hanglerOnChangeFill = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
@@ -32,6 +36,27 @@ export function ElementPanel(props: ElementPanelProps) {
         console.log('цвет', inputColorStr)
         props.changeTextColor(props.selection, inputColorStr)
     }
+    const hanglerOnChangeWidth = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputWidth = event.target as HTMLInputElement
+        const inputWidthNumer = Number(inputWidth.value);
+        props.changeElementWeigth(props.selection, inputWidthNumer)
+    }
+    const hanglerOnChangeHeigth = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputWidth = event.target as HTMLInputElement
+        const inputWidthNumer = Number(inputWidth.value);
+        props.changeElementHeigth(props.selection, inputWidthNumer)
+    }
+    const hanglerOnChangeY = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputWidth = event.target as HTMLInputElement
+        const inputWidthNumer = Number(inputWidth.value);
+        props.moveElementY(props.selection, inputWidthNumer)
+    }
+    const hanglerOnChangeX = (event: ChangeEvent<HTMLInputElement>) => {
+        const inputWidth = event.target as HTMLInputElement
+        const inputWidthNumer = Number(inputWidth.value);
+        props.moveElementX(props.selection, inputWidthNumer)
+    }
+    
         return (
             <>
                 <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
@@ -97,21 +122,25 @@ export function ElementPanel(props: ElementPanelProps) {
                     <div className={styles.resizeContainer}>
                         <div className={styles.resizeInputContainer}>
                             <span className={styles.resizeInscr}>Ширина:</span>
-                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                            <input type="number" id="tentacles" name="tentacles" min="0" onChange = {hanglerOnChangeWidth}
+                             className={styles.resizeInput}></input>
                         </div>
                         <div className={styles.resizeInputContainer}>
                             <span className={styles.resizeInscr}>Высота:</span>
-                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                            <input type="number" id="tentacles" name="tentacles" min="0" onChange = {hanglerOnChangeHeigth}
+                             className={styles.resizeInput}></input>
                         </div>
                     </div>
                     <div className={styles.resizeContainer}>
                         <div className={styles.resizeInputContainer}>
                             <span className={styles.resizeInscr}>x</span>
-                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                            <input type="number" id="tentacles" name="tentacles" min="0"  onChange = {hanglerOnChangeX}
+                             className={styles.resizeInput}></input>
                         </div>
                         <div className={styles.resizeInputContainer}>
                             <span className={styles.resizeInscr}>y</span>
-                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                            <input type="number" id="tentacles" name="tentacles" min="0" onChange = {hanglerOnChangeY}
+                            className={styles.resizeInput}></input>
                         </div> 
                     </div>
                 </div>
@@ -130,6 +159,10 @@ const mapDispatchToProps = ({
     changeTextColor,
     changeLineColor,
     changeFillColor,
+    moveElementY,
+    moveElementX,
+    changeElementWeigth,
+    changeElementHeigth,
 })
   
 function mapStateToProps(state: PresentationMaker) {
