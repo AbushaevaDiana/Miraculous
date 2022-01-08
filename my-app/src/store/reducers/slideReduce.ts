@@ -1,5 +1,6 @@
 import { type } from "os";
 import { Reducer } from "react"
+import { getPositionOfLineAndCharacter } from "typescript";
 import { setNewId } from "../../functions/functions"
 import { ActionType, Figure, Slide } from "../../types"
 
@@ -227,8 +228,8 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
-    case 'MOVE_ELEMENT':
-        console.log('move work')
+    case 'MOVE_ELEMENT_X':
+        console.log('по x двинулся')
         return state.map(slide => {
           if (slide.idSlide === action.payload.idSlides)
           { 
@@ -238,7 +239,79 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                 if(element.idElement === action.payload.idElements){
                   return {
                     ...element,
-                    position: action.payload.position
+                    position: {
+                      x: action.payload,
+                      y: element.position.y
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'MOVE_ELEMENT_Y':
+        console.log('по у двинулся')
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.idElements){
+                  return {
+                    ...element,
+                    position: {
+                      x: element.position.y,
+                      y: action.payload 
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'CHANGE_ELEMENT_WEIGTH':
+        console.log('ширина меняется')
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.idElements){
+                  return {
+                    ...element,
+                    size: {
+                      h: action.payload,
+                      w: element.size.w
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'CHANGE_ELEMENT_HEIGTH':
+        console.log('высота меняется')
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.idElements){
+                  return {
+                    ...element,
+                    size: {
+                      h: element.size.h,
+                      w: action.payload
+                    }
                 }
                 } else { return element}
               }) 
