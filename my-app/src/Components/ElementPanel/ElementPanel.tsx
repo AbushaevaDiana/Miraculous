@@ -92,6 +92,31 @@ export function ElementPanel(props: ElementPanelProps) {
                      defaultValue='#F08080'>
                     </input>
                 </div>
+
+                <div className={styles.toolbarSelectContainer + ' ' + styles.elementSettings + ' ' + styles.resizeAndMove}>
+                    <div className={styles.resizeContainer}>
+                        <div className={styles.resizeInputContainer}>
+                            <span className={styles.resizeInscr}>Ширина:</span>
+                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                        </div>
+                        <div className={styles.resizeInputContainer}>
+                            <span className={styles.resizeInscr}>Высота:</span>
+                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                        </div>
+                    </div>
+                    <div className={styles.resizeContainer}>
+                        <div className={styles.resizeInputContainer}>
+                            <span className={styles.resizeInscr}>x</span>
+                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                        </div>
+                        <div className={styles.resizeInputContainer}>
+                            <span className={styles.resizeInscr}>y</span>
+                            <input type="number" id="tentacles" name="tentacles" min="0" className={styles.resizeInput}></input>
+                        </div> 
+                    </div>
+                </div>
+
+
                 <div className={styles.deleteElementContainer} onClick = {() => props.deleteElement(props.selection)}>   
                     <div className={styles.deleteElementIcon}></div>
                     <p className={styles.deleteElementInscr}>Удалить элемент</p> 
