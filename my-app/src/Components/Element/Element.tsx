@@ -75,12 +75,13 @@ export function Element(props: ElementProps){
           
           <div className={styles.element} style = {elementStyle} onClick={() => props.gotoElement(props.element.idElement)} 
         /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
-            <textarea className={styles.text} style = {elementStyle} defaultValue={props.element.elementConcept.textContent} 
-                        onKeyPress= {
-                        (e) => {if (e.key === "Enter") {
-                        e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
-                        props.changeTextContent(props.selection, e.currentTarget.value)
-                        e.currentTarget.blur()
+            <textarea className={styles.text} style = {elementStyle} 
+                defaultValue={props.element.elementConcept.textContent} 
+                onKeyPress= {
+                (e) => {if (e.key === "Enter") {
+                e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
+                props.changeTextContent(props.selection, e.currentTarget.value)
+                e.currentTarget.blur()
                 }}}/>
             </div>
         </>
@@ -99,10 +100,10 @@ export function Element(props: ElementProps){
          }
         return (
          <>
-           <div className = {styles.element} onClick={(e) => {props.gotoElement(props.element.idElement);
-           e.stopPropagation();
-           setMoving(true);
-        }}>               
+           <div style={elementStyle} className = {styles.element} onClick={(e) => {props.gotoElement(props.element.idElement);
+               e.stopPropagation();
+               setMoving(true);
+            }}>               
                <img src={src} style={elementStyle} alt={String(props.element.idElement)} /> 
             </div>
          </>
