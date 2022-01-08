@@ -62,8 +62,8 @@ export function Element(props: ElementProps){
            height: props.element.size.h,
            WebkitFilter: webFilter,
            borderColor: bColor,
-           left: String(props.element.position.x),
-           top: String(props.element.position.y),
+           top: props.element.position.y,
+           left: props.element.position.x
         }
        return (
         <>
@@ -90,11 +90,13 @@ export function Element(props: ElementProps){
         let elementStyle = {
             width: props.element.size.w,
             height: props.element.size.h,
-            WebkitFilter: webFilter
+            WebkitFilter: webFilter,
+            top: props.element.position.y,
+            left: props.element.position.x
          }
         return (
          <>
-           <div onClick={(e) => {props.gotoElement(props.element.idElement);
+           <div className = {styles.element} onClick={(e) => {props.gotoElement(props.element.idElement);
            e.stopPropagation();
            setMoving(true);
         }}>               
@@ -110,11 +112,13 @@ export function Element(props: ElementProps){
                 width: props.element.size.w,
                 height: props.element.size.h,
                 WebkitFilter: webFilter,
+                top: props.element.position.y,
+                left: props.element.position.x
             }
             let width: number = props.element.size.w/2 
             let heigth: number = props.element.size.h/2 
             return (
-                <svg style={elementStyle} onClick={() => props.gotoElement(props.element.idElement)}>
+                <svg style={elementStyle} className = {styles.element} onClick={() => props.gotoElement(props.element.idElement)}>
                     <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                     fill={props.element.elementConcept.fillcolor} 
                     stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
@@ -137,7 +141,7 @@ export function Element(props: ElementProps){
             let y3: string = String(props.element.size.h - 3 )
             let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
             return (
-               <svg style={elementStyle} onClick={() => props.gotoElement(props.element.idElement)}>
+               <svg style={elementStyle} className = {styles.element} onClick={() => props.gotoElement(props.element.idElement)}>
                   <polygon points={point} fill={props.element.elementConcept.fillcolor} 
                   stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                </svg>             
@@ -148,11 +152,13 @@ export function Element(props: ElementProps){
                 width: props.element.size.w,
                 height: props.element.size.h,
                 WebkitFilter: webFilter,
+                top: props.element.position.y,
+                left: props.element.position.x
             }
             let width: number = (props.element.size.w - 6) 
             let heigth: number = (props.element.size.h - 6)
             return (
-                <svg style={elementStyle} onClick={() => props.gotoElement(props.element.idElement)}>
+                <svg style={elementStyle} className = {styles.element} onClick={() => props.gotoElement(props.element.idElement)}>
                       <rect x="3" y="3" width={width} height={heigth} 
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>

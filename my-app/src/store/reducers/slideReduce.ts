@@ -299,8 +299,8 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     width: 5,
                 },
                 position: {
-                    x: 100,
-                    y: 100,
+                    x: 0,
+                    y: 0,
                 },
                 elementConcept: round,
                 idElement: setNewId(),
@@ -329,8 +329,8 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     width: 5,
                 },
                 position: {
-                    x: 100,
-                    y: 100,
+                    x: 0,
+                    y: 0,
                 },
                 elementConcept: rectangel,
                 idElement: setNewId(),

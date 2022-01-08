@@ -6,4 +6,9 @@
     word-wrap: break-word;
     word-break: break-all;
     resize: none;
+    position: absolute;
 }
+
+.element{
+    position: absolute;
+} 

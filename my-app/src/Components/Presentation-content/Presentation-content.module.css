@@ -6,6 +6,9 @@
     display: inline-flex;
     box-shadow: 0 14px 28px #F08080, 10px 10px 10px #F08080;
     background-size: contain;
+    position: absolute;
+    top: 5%;
+    left: 25%;
 }
 
 .presentationContentEmpty{
