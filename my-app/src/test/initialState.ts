@@ -17,7 +17,7 @@ export const initialState:  PresentationMaker = {
                     {
                         size: {
                             h: 50,
-                            w: 70,
+                            w: 150,
                         },
                         border: {
                             color: 'black',
@@ -33,7 +33,7 @@ export const initialState:  PresentationMaker = {
                             color: 'red',
                             textContent: 'Привет ', 
                             links: '',
-                            size: 14,
+                            size: 40,
                             font: 'Roboto',
                             italic: false,
                             bold: false,

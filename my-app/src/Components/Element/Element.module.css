@@ -9,5 +9,6 @@
 }
 
 .element{
+    resize: none;
     position: absolute;
 } 

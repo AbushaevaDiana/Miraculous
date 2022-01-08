@@ -75,6 +75,7 @@ export function Element(props: ElementProps){
            borderColor: bColor,
            top: y,
            left: x,
+           fontSize: props.element.elementConcept.size
         }
        return (
         <>
