@@ -1,3 +1,18 @@
+.headtext {
+    margin-top: 0;
+    margin-right: 10px;
+    color: #F08080;
+    font-weight: bold;
+}
+
+.headmenuName {
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-self: start;
+    align-items: center;     
+}
+
 .toolbar {
     padding: 10px 17px 12px 20px;
     width: 100%;
@@ -16,16 +31,14 @@
     height: 22%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .headmenuLi {
     width: 25%;
-}
-
-.headmenuLiButton {
-    border-color: #F08080;
-    width: 100%;
     height: 100%;
+    position: relative;
+    border-color: #F08080;
     background-color: #FFEEDD;
     color: #000000;
     font-family: 'Roboto';
@@ -36,25 +49,68 @@
     transition-property: background-color, color;
     transition-duration: .3s;
     transition-timing-function: ease-in-out;
+    border: 2px solid #FF6666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.headmenuLiButton:hover {
+.headmenuLi:hover {
     background-color: #F08080;
     color: #fff;
 }
 
-.headmenuName{
-    display: flex;
-    flex-direction: row;
-    justify-self: start;
-    align-self: center;
-       
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    background: #FFEEDD;
+    border: 2px solid #F08080;
 }
 
-.headmenuInput{
+.submenu > li {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+    background-color: #FFEEDD;
+    border: 2px solid #FF6666;
+    transition-property: background-color, color;
+    transition-duration: .3s;
+    transition-timing-function: ease-in-out;
+    color: black;
+    display: block;
+    padding: 10px 15px;
+}
+
+.submenu > li:hover {
+    background-color: #F08080;
+    color: white;
+}
+
+ul li:hover .submenu {
+    display: block;
+  }
+
+ul li:hover .submenu {
+    visibility: visible;
+    opacity: 1;
+}
+
+.headmenuInput {
     background-color: #FFEEDD;
     border: none;
-
     color: #F08080;
     font-weight: bold;
 }

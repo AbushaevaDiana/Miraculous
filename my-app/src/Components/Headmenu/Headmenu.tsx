@@ -54,10 +54,11 @@ export function Headmenu(props: HeadmenuProps) {
         setNameInputVisible(!nameInputVisible)
     }
     console.log(props.name);
+     
     return (
             <>
             <span className={styles.headmenuName}>             
-                <p className='headtext'onClick = {handleToggleNameInput}>
+                <p className = {styles.headtext} onClick = {handleToggleNameInput}>
                     Презентация Miraculous:  
                 </p>
                 <input type="text" className={styles.headmenuInput} defaultValue={props.name} 
@@ -69,19 +70,17 @@ export function Headmenu(props: HeadmenuProps) {
                 }}}/>
             </span> 
                 <ul className={styles.headmenu}>
-                    <li className= {styles.headmenuLi}>       
-                        <button className={styles.headmenuLiButton} 
-                        onClick = {() => loadFile((object) => {props.openPresentation(object)})}>Файл</button>
+                    <li className= {styles.headmenuLi}>Файл
+                        <ul className={styles.submenu}>
+                            <li>Предпросмотр</li>
+                            <li>Сохранить в pdf</li>
+                            <li onClick={() => props.savePresentation()}>Сохранить в json</li>
+                            <li onClick = {() => loadFile((object) => {props.openPresentation(object)})}>Загрузить из файла</li>
+                        </ul>
                     </li>
-                    <li className={styles.headmenuLi}>
-                        <button className={styles.headmenuLiButton} onClick={handleToggleMainPanel}>Главная</button>
-                    </li>
-                    <li className={styles.headmenuLi}>
-                        <button className={styles.headmenuLiButton} onClick={handleToggleInsertPanel}>Вставить</button>
-                    </li>
-                    <li className={styles.headmenuLi}>
-                        <button className={styles.headmenuLiButton} onClick={handleToggleElementPanel}>Элемент</button>
-                    </li>
+                    <li className={styles.headmenuLi} onClick={handleToggleMainPanel}>Главная</li>
+                    <li className={styles.headmenuLi} onClick={handleToggleInsertPanel}>Вставить</li>
+                    <li className={styles.headmenuLi} onClick={handleToggleElementPanel}>Элемент</li>
                 </ul>
                 <div className = {styles.toolbar}>
                     <BasicBtns />
