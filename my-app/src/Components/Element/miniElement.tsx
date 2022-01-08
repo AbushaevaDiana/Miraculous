@@ -33,7 +33,7 @@ export function MiniElement(props: miniElementProps){
         }
        return (
         <>
-            <textarea style = {elementStyle} className={styles.text}  defaultValue={textI}/>
+            <textarea style = {elementStyle} className={styles.text+ '' + styles.element}  defaultValue={textI}/>
         </>
      )
     }

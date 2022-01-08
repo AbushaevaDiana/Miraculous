@@ -36,11 +36,15 @@ export function Element(props: ElementProps){
         
     const posit = p as Position;
     //const sz = s as Size;
+
+
     
+//Сам элемент
     let webFilter: string = 'none'
     if(props.element.selected === true){
         webFilter = 'drop-shadow(7px 7px 7px #222)';
     }
+    // let dragging: boolean = false;
 //Текстовый элемент
     let textI: string = '';   
     if(props.element.elementConcept.type === 'text'){
@@ -54,6 +58,13 @@ export function Element(props: ElementProps){
        if(props.element.border.borderStyle !== 'none'){
            bColor = props.element.border.color
        }
+       let x = props.element.position.x;
+       let y = props.element.position.y;
+    //    document.body.addEventListener("mousemove", (e) => {
+    //     if (dragging) return
+    //     x = e.pageX
+    //     y = e.pageY
+    //   })
        let elementStyle = {
            font: props.element.elementConcept.font,
            fontWeight: fW,
@@ -62,13 +73,14 @@ export function Element(props: ElementProps){
            height: props.element.size.h,
            WebkitFilter: webFilter,
            borderColor: bColor,
-           top: props.element.position.y,
-           left: props.element.position.x
+           top: y,
+           left: x,
         }
        return (
         <>
           
-          <div onClick={() => props.gotoElement(props.element.idElement)}>
+          <div className={styles.element} onClick={() => props.gotoElement(props.element.idElement)} 
+        /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
             <svg height="6" width="6">
                 <circle cx="3" cy="3" r="3" stroke="black" stroke-width="3" fill="black" />
              </svg>
