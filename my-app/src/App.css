@@ -49,13 +49,6 @@ html {
   color: #000;
 }
 
-.headtext {
-  margin-top: 0;
-  height: 15%;
-  color: #F08080;
-  font-weight: bold;
-}
-
 .AppBody {
   position: fixed;
   width: 100%;

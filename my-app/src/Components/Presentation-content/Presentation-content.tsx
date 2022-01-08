@@ -46,7 +46,7 @@ function PresentationContent(props: PropsPresentationContent){
       return (
         <>
           <div className={styles.presentationContentEmpty}>
-              <div className={styles.presentationContentText}>Выбирите слайд / Создайте и выбирете слайд</div>
+              <div className={styles.presentationContentText}>Выберите слайд / Создайте и выберите слайд</div>
               <div className={styles.presentationContentImg}></div>
           </div>
         </>
