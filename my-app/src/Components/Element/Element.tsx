@@ -58,13 +58,6 @@ export function Element(props: ElementProps){
        if(props.element.border.borderStyle !== 'none'){
            bColor = props.element.border.color
        }
-       let x = props.element.position.x;
-       let y = props.element.position.y;
-    //    document.body.addEventListener("mousemove", (e) => {
-    //     if (dragging) return
-    //     x = e.pageX
-    //     y = e.pageY
-    //   })
        let elementStyle = {
            font: props.element.elementConcept.font,
            fontWeight: fW,
@@ -73,19 +66,16 @@ export function Element(props: ElementProps){
            height: props.element.size.h,
            WebkitFilter: webFilter,
            borderColor: bColor,
-           top: y,
-           left: x,
-           fontSize: props.element.elementConcept.size
+           fontSize: props.element.elementConcept.size,
+           top: props.element.position.y,
+           left: props.element.position.x,
         }
        return (
         <>
           
-          <div className={styles.element} onClick={() => props.gotoElement(props.element.idElement)} 
+          <div className={styles.element} style = {elementStyle} onClick={() => props.gotoElement(props.element.idElement)} 
         /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
-            <svg height="6" width="6">
-                <circle cx="3" cy="3" r="3" stroke="black" stroke-width="3" fill="black" />
-             </svg>
-            <textarea style = {elementStyle} className={styles.text}  defaultValue={textI} 
+            <textarea className={styles.text} style = {elementStyle} defaultValue={props.element.elementConcept.textContent} 
                         onKeyPress= {
                         (e) => {if (e.key === "Enter") {
                         e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value

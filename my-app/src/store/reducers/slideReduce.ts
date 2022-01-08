@@ -453,7 +453,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               ...slide,
               elementlist: slide.elementlist.concat([{
                 size: {
-                    h: 100,
+                    h: 50,
                     w: 100,
                 },
                 border: {
@@ -462,7 +462,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     width: 5,
                 },
                 position: {
-                    x: 100,
+                    x: 0,
                     y: 0,
                 },
                 elementConcept: {
@@ -470,7 +470,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     color: '#000000',
                     textContent: 'Текст',
                     links: '',
-                    size: 12,
+                    size: 20,
                     font: 'TimesNewRoman',
                     italic: false,
                     bold: false,

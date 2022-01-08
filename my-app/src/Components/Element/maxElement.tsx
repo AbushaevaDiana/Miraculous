@@ -25,16 +25,18 @@ export function MaxElement(props: miniElementProps){
            font: props.element.elementConcept.font,
            fontWeight: fW,
            color: props.element.elementConcept.color,
-           width: (props.element.size.w),
-           height: (props.element.size.h),
+           width: (props.element.size.w*24/20),
+           height: (props.element.size.h*24/20),
            borderColor: bColor,
-           top: props.element.position.y,
-           left: props.element.position.x,
-           fontSize: props.element.elementConcept.size,
+           top: (props.element.position.y*24/20),
+           left: (props.element.position.x*24/20),
+           fontSize: (props.element.elementConcept.size*24/20),
         }
        return (
         <>
-           <textarea disabled style = {elementStyle} className={styles.text}  defaultValue={textI}/>
+            <div className={styles.element} style = {elementStyle}>
+                <textarea disabled className={styles.text}  style = {elementStyle} defaultValue={props.element.elementConcept.textContent} />
+            </div>
         </>
      )
     }
@@ -43,10 +45,10 @@ export function MaxElement(props: miniElementProps){
         let src: string = props.element.elementConcept.src;
         console.log(src);
         let elementStyle = {
-            width: (props.element.size.w),
-            height: (props.element.size.h),
-            top: props.element.position.y,
-            left: props.element.position.x,
+            width: (props.element.size.w*24/20),
+            height: (props.element.size.h*24/20),
+            top: props.element.position.y*24/20,
+            left: props.element.position.x*24/20,
          }
         return (
          <>
@@ -60,13 +62,13 @@ export function MaxElement(props: miniElementProps){
     if (props.element.elementConcept.type === 'figure') {
         if (props.element.elementConcept.figureConcept === 'Round') {
             let elementStyle = {
-                width: (props.element.size.w),
-                height: (props.element.size.h),
-                top: props.element.position.y,
-                left: props.element.position.x,
+                width: (props.element.size.w*24/20),
+                height: (props.element.size.h*24/20),
+                top: props.element.position.y*24/20,
+                left: props.element.position.x*24/20,
             }
-            let width: number = props.element.size.w/2 
-            let heigth: number = props.element.size.h/2
+            let width: number = props.element.size.w*24/20/2 
+            let heigth: number = props.element.size.h*24/20/2
             return (
                 <svg style={elementStyle} className = {styles.element}>
                     <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
@@ -76,13 +78,13 @@ export function MaxElement(props: miniElementProps){
             )
         }
         if (props.element.elementConcept.figureConcept === 'Triangel') {
-            let w6: number = props.element.size.w/2
-            let h6: number = props.element.size.h/2
+            let w6: number = props.element.size.w*24/20
+            let h6: number = props.element.size.h*24/20
             let elementStyle = {
                 width: w6,
                 height: h6,
-                left: props.element.position.x/2,
-                top: props.element.position.y/2,
+                left: props.element.position.x*24/20/2,
+                top: props.element.position.y*24/20/2,
             }
             let x1: string = String(w6/46)
             let x2: string = String(w6/2 )
@@ -99,13 +101,13 @@ export function MaxElement(props: miniElementProps){
             )
         }
         if (props.element.elementConcept.figureConcept === 'Rectangel') {
-            let w6: number = props.element.size.w/2
-            let h6: number = props.element.size.h/2
+            let w6: number = props.element.size.w*24/20
+            let h6: number = props.element.size.h*24/20
             let elementStyle = {
                 width: w6,
                 height: h6,
-                top: props.element.position.y/2,
-                left: props.element.position.x/2,
+                top: props.element.position.y*24/20/2,
+                left: props.element.position.x*24/20/2,
             }
             let width: number = (w6 - 6) 
             let heigth: number = (h6 - 6)

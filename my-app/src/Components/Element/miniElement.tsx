@@ -25,16 +25,18 @@ export function MiniElement(props: miniElementProps){
            font: props.element.elementConcept.font,
            fontWeight: fW,
            color: props.element.elementConcept.color,
-           width: (props.element.size.w/5),
-           height: (props.element.size.h/5),
+           width: (props.element.size.w/6),
+           height: (props.element.size.h/6),
            borderColor: bColor,
+           fontSize: props.element.elementConcept.size/6,
            top: props.element.position.y/6,
            left: props.element.position.x/6,
-           fontSize: props.element.elementConcept.size/6,
         }
        return (
         <>
-            <textarea disabled style = {elementStyle} className={styles.text}  defaultValue={textI}/>
+            <div className={styles.element} style = {elementStyle}>
+                <p className={styles.text}  style = {elementStyle}>{props.element.elementConcept.textContent}</p>
+            </div>
         </>
      )
     }

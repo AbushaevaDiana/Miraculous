@@ -1,54 +1,25 @@
 import { PresentationMaker } from "../types"
 
 export const initialState:  PresentationMaker = {
-    mode: 'preview',
+    mode: 'editor',
     history: {
         actionlist: [],
         currentIndex: -1,
     },
     selection: {
-        idSlides: [],
+        idSlides: [1],
         idElements: [],
     },
     presentation: {
         slidelist: [
             {
-                elementlist:[ 
-                    {
-                        size: {
-                            h: 50,
-                            w: 150,
-                        },
-                        border: {
-                            color: 'black',
-                            borderStyle: 'solid',
-                            width: 40,
-                        },
-                        position: {
-                            x: 0,
-                            y: 0,
-                        },
-                        elementConcept: {
-                            type: 'text',
-                            color: 'red',
-                            textContent: 'Привет ', 
-                            links: '',
-                            size: 40,
-                            font: 'Roboto',
-                            italic: false,
-                            bold: false,
-                            underline: false,
-                        },
-                        idElement: 577,
-                        selected: false,
-                    }
-                ], 
+                elementlist:[], 
                 background: {
                     type: 'color',
                     color: '#FFFFFF'},
                 effects: 'fading',
                 idSlide: 1,
-                selected: false,
+                selected: true,
             },   
         ],
         name: 'Презентация без названия',
