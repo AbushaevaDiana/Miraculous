@@ -52,9 +52,7 @@ export function MaxElement(props: miniElementProps){
          }
         return (
          <>
-           <div className = {styles.element}>               
-               <img src={src} style={elementStyle} alt={String(props.element.idElement)} /> 
-            </div>
+            <img className = {styles.element} style={elementStyle} src={src} alt={String(props.element.idElement)} /> 
          </>
       )
      }

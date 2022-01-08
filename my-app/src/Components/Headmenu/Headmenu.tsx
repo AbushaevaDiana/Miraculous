@@ -51,22 +51,21 @@ export function Headmenu(props: HeadmenuProps) {
         setInsertPanelVisible(false);
     };
 
-    const [nameInputVisible, setNameInputVisible] = useState(false);
-    const handleToggleNameInput = () => {
-        setNameInputVisible(!nameInputVisible)
-    }
-    console.log(props.name);
+    // const [nameInputVisible, setNameInputVisible] = useState(false);
+    // const handleToggleNameInput = () => {
+    //     setNameInputVisible(!nameInputVisible)
+    // }
      
     return (
             <>
             <span className={styles.headmenuName}>             
-                <p className = {styles.headtext} onClick = {handleToggleNameInput}>
+                <p className = {styles.headtext} >
                     Презентация Miraculous:  
                 </p>
                 <input type="text" className={styles.headmenuInput} defaultValue={props.name} 
-                    onKeyPress= {
+                    onKeyPress = {
                     (e) => {if (e.key === "Enter") {
-                    e.currentTarget.value = (e.currentTarget.value == '') ? 'Презентация без названия' : e.currentTarget.value
+                    e.currentTarget.value = (props.name == '') ? 'Презентация без названия' : e.currentTarget.value
                     props.changePresentationNAME(e.currentTarget.value)
                     e.currentTarget.blur()
                 }}}/>

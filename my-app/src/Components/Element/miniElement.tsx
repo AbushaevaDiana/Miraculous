@@ -51,10 +51,8 @@ export function MiniElement(props: miniElementProps){
             left: props.element.position.x/6,
          }
         return (
-         <>
-           <div className = {styles.element}>               
-               <img src={src} style={elementStyle} alt={String(props.element.idElement)} /> 
-            </div>
+         <>              
+            <img className = {styles.element} style={elementStyle} src={src} alt={String(props.element.idElement)} /> 
          </>
       )
      }
