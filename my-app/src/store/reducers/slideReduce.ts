@@ -194,7 +194,99 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     elementConcept: {
                         ...element.elementConcept,
                         fillcolor: action.payload.color,
-                    } 
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'MOVE_ELEMENT_X':
+        console.log('move x work', action.payload.x)
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    position: {
+                      ...element.position,
+                      x: action.payload.x,
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'MOVE_ELEMENT_Y':
+        console.log('move y work', action.payload.y)
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    position: {
+                      ...element.position,
+                      y: action.payload.y,
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'CHANGE_ELEMENT_HEIGTH':
+        console.log('resize h work', action.payload.h)
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    size: {
+                      ...element.size,
+                      h: action.payload.h,
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'CHANGE_ELEMENT_WEIGTH':
+        console.log('resize w work', action.payload.w)
+        return state.map(slide => {
+          if (slide.idSlide === action.payload.selection.idSlides)
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    size: {
+                      ...element.size,
+                      w: action.payload.w,
+                    }
                 }
                 } else { return element}
               }) 
@@ -222,98 +314,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                     selected: false 
                 }
                 }
-              }) 
-            } 
-          } else { 
-              return slide
-            }
-      });
-    case 'MOVE_ELEMENT_X':
-        console.log('по x двинулся')
-        return state.map(slide => {
-          if (slide.idSlide === action.payload.idSlides)
-          { 
-            return {
-              ...slide,
-              elementlist: slide.elementlist.map(element => {
-                if(element.idElement === action.payload.idElements){
-                  return {
-                    ...element,
-                    position: {
-                      x: action.payload,
-                      y: element.position.y
-                    }
-                }
-                } else { return element}
-              }) 
-            } 
-          } else { 
-              return slide
-            }
-      });
-      case 'MOVE_ELEMENT_Y':
-        console.log('по у двинулся')
-        return state.map(slide => {
-          if (slide.idSlide === action.payload.idSlides)
-          { 
-            return {
-              ...slide,
-              elementlist: slide.elementlist.map(element => {
-                if(element.idElement === action.payload.idElements){
-                  return {
-                    ...element,
-                    position: {
-                      x: element.position.y,
-                      y: action.payload 
-                    }
-                }
-                } else { return element}
-              }) 
-            } 
-          } else { 
-              return slide
-            }
-      });
-      case 'CHANGE_ELEMENT_WEIGTH':
-        console.log('ширина меняется')
-        return state.map(slide => {
-          if (slide.idSlide === action.payload.idSlides)
-          { 
-            return {
-              ...slide,
-              elementlist: slide.elementlist.map(element => {
-                if(element.idElement === action.payload.idElements){
-                  return {
-                    ...element,
-                    size: {
-                      h: action.payload,
-                      w: element.size.w
-                    }
-                }
-                } else { return element}
-              }) 
-            } 
-          } else { 
-              return slide
-            }
-      });
-      case 'CHANGE_ELEMENT_HEIGTH':
-        console.log('высота меняется')
-        return state.map(slide => {
-          if (slide.idSlide === action.payload.idSlides)
-          { 
-            return {
-              ...slide,
-              elementlist: slide.elementlist.map(element => {
-                if(element.idElement === action.payload.idElements){
-                  return {
-                    ...element,
-                    size: {
-                      h: element.size.h,
-                      w: action.payload
-                    }
-                }
-                } else { return element}
               }) 
             } 
           } else { 

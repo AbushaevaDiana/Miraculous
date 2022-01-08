@@ -25,7 +25,7 @@ function moveElementX(selection: SelectionType, x: Number) {
     type: StateTypes.MOVE_ELEMENT_X,
     payload: {
         selection,
-        x
+        x,
       }
   }
 }
@@ -35,7 +35,7 @@ function moveElementY(selection: SelectionType, y: Number) {
     type: StateTypes.MOVE_ELEMENT_Y,
     payload: {
         selection,
-        y
+        y,
       }
   }
 }
@@ -45,7 +45,7 @@ function changeElementHeigth(selection: SelectionType, h: Number) {
     type: StateTypes.CHANGE_ELEMENT_HEIGTH,
     payload: {
         selection,
-        h
+        h,
       }
   }
 }
@@ -55,7 +55,7 @@ function changeElementWeigth(selection: SelectionType, w: Number) {
     type: StateTypes.CHANGE_ELEMENT_WEIGTH,
     payload: {
         selection,
-        w
+        w,
       }
   }
 }

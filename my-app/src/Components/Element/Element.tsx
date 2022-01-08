@@ -128,6 +128,7 @@ export function Element(props: ElementProps){
                 top: props.element.position.y,
                 left: props.element.position.x
             }
+            console.log(props.element.position.y)
             let width: number = props.element.size.w/2 
             let heigth: number = props.element.size.h/2 
             return (
