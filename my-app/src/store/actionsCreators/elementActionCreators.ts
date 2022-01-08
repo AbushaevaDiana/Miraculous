@@ -20,6 +20,46 @@ function moveElement(selection: SelectionType, position: Position) {
     }
 }
 
+function moveElementX(selection: SelectionType, x: Number) {
+  return {
+    type: StateTypes.MOVE_ELEMENT_X,
+    payload: {
+        selection,
+        x
+      }
+  }
+}
+
+function moveElementY(selection: SelectionType, y: Number) {
+  return {
+    type: StateTypes.MOVE_ELEMENT_Y,
+    payload: {
+        selection,
+        y
+      }
+  }
+}
+
+function changeElementHeigth(selection: SelectionType, h: Number) {
+  return {
+    type: StateTypes.CHANGE_ELEMENT_HEIGTH,
+    payload: {
+        selection,
+        h
+      }
+  }
+}
+
+function changeElementWeigth(selection: SelectionType, w: Number) {
+  return {
+    type: StateTypes.CHANGE_ELEMENT_WEIGTH,
+    payload: {
+        selection,
+        w
+      }
+  }
+}
+
 function gotoElement(idElement: Number) {
   return {
       type: StateTypes.GOTO_ELEMENT,
@@ -110,4 +150,5 @@ function changeBorderColor(selection: SelectionType, color: string) {
 export {changeTextContent, moveElement, gotoElement, 
        deleteElement, addText, addPicture, addRound, 
        addRectangle, addTriangle, changeFillColor, changeLineColor,
-       changeTextColor, changeBorderColor}
+       changeTextColor, changeBorderColor, changeElementWeigth,
+       changeElementHeigth, moveElementX, moveElementY}
