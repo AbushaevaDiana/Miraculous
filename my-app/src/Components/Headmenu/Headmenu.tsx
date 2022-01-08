@@ -12,6 +12,7 @@ import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import { savePresentation, openPresentation } from '../../store/actionsCreators/presentationActionCreators';
 import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
 import {loadFile} from '../../store/reducers/presentationReduser'
+import { changeMode } from '../../store/actionsCreators/modeActionCreators'
 
 interface HeadmenuProps {
     name: string,
@@ -27,6 +28,7 @@ interface HeadmenuProps {
     changePresentationNAME: (name: string) => void,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     addPicture: (src: string) => void,
+    changeMode: () => void,
 }
 
 export function Headmenu(props: HeadmenuProps) {
@@ -72,7 +74,7 @@ export function Headmenu(props: HeadmenuProps) {
                 <ul className={styles.headmenu}>
                     <li className= {styles.headmenuLi}>Файл
                         <ul className={styles.submenu}>
-                            <li>Предпросмотр</li>
+                            <li onClick = {() => props.changeMode()}>Предпросмотр</li>
                             <li>Сохранить в pdf</li>
                             <li onClick={() => props.savePresentation()}>Сохранить в json</li>
                             <li onClick = {() => loadFile((object) => {props.openPresentation(object)})}>Загрузить из файла</li>
@@ -105,6 +107,7 @@ const mapDispatchToProps = {
     addTriangle,
     savePresentation,
     openPresentation,
+    changeMode,
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

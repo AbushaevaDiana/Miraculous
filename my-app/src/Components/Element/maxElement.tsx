@@ -7,7 +7,7 @@ interface miniElementProps{
     element: ElementType,
 };
 
-export function MiniElement(props: miniElementProps){ 
+export function MaxElement(props: miniElementProps){ 
 //Текстовый элемент
     let textI: string = '';   
     if(props.element.elementConcept.type === 'text'){
@@ -25,16 +25,16 @@ export function MiniElement(props: miniElementProps){
            font: props.element.elementConcept.font,
            fontWeight: fW,
            color: props.element.elementConcept.color,
-           width: (props.element.size.w/5),
-           height: (props.element.size.h/5),
+           width: (props.element.size.w),
+           height: (props.element.size.h),
            borderColor: bColor,
-           top: props.element.position.y/6,
-           left: props.element.position.x/6,
-           fontSize: props.element.elementConcept.size/6,
+           top: props.element.position.y,
+           left: props.element.position.x,
+           fontSize: props.element.elementConcept.size,
         }
        return (
         <>
-            <textarea disabled style = {elementStyle} className={styles.text}  defaultValue={textI}/>
+           <textarea disabled style = {elementStyle} className={styles.text}  defaultValue={textI}/>
         </>
      )
     }
@@ -43,10 +43,10 @@ export function MiniElement(props: miniElementProps){
         let src: string = props.element.elementConcept.src;
         console.log(src);
         let elementStyle = {
-            width: (props.element.size.w/6),
-            height: (props.element.size.h/6),
-            top: props.element.position.y/6,
-            left: props.element.position.x/6,
+            width: (props.element.size.w),
+            height: (props.element.size.h),
+            top: props.element.position.y,
+            left: props.element.position.x,
          }
         return (
          <>
@@ -60,60 +60,60 @@ export function MiniElement(props: miniElementProps){
     if (props.element.elementConcept.type === 'figure') {
         if (props.element.elementConcept.figureConcept === 'Round') {
             let elementStyle = {
-                width: (props.element.size.w/6),
-                height: (props.element.size.h/6),
-                top: props.element.position.y/6,
-                left: props.element.position.x/6,
+                width: (props.element.size.w),
+                height: (props.element.size.h),
+                top: props.element.position.y,
+                left: props.element.position.x,
             }
-            let width: number = props.element.size.w/12 
-            let heigth: number = props.element.size.h/12
+            let width: number = props.element.size.w/2 
+            let heigth: number = props.element.size.h/2
             return (
                 <svg style={elementStyle} className = {styles.element}>
-                    <ellipse rx={width-1} ry={heigth-1} cx={width} cy={heigth} 
+                    <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                     fill={props.element.elementConcept.fillcolor} 
-                    stroke={props.element.elementConcept.linecolor} strokeWidth="1"/>
+                    stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
                 </svg>               
             )
         }
         if (props.element.elementConcept.figureConcept === 'Triangel') {
-            let w6: number = props.element.size.w/6
-            let h6: number = props.element.size.h/6
+            let w6: number = props.element.size.w/2
+            let h6: number = props.element.size.h/2
             let elementStyle = {
                 width: w6,
                 height: h6,
-                left: props.element.position.x/6,
-                top: props.element.position.y/6,
+                left: props.element.position.x/2,
+                top: props.element.position.y/2,
             }
             let x1: string = String(w6/46)
             let x2: string = String(w6/2 )
-            let x3: string = String(w6 - 1 ) 
-            let y1: string = String(h6 - 1)
+            let x3: string = String(w6 - 3) 
+            let y1: string = String(h6 - 3)
             let y2: string = String(h6/28 )
-            let y3: string = String(h6 - 1 )
+            let y3: string = String(h6 - 3)
             let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
             return (
                <svg style={elementStyle} className = {styles.element}>
                   <polygon points={point} fill={props.element.elementConcept.fillcolor} 
-                  stroke={props.element.elementConcept.linecolor} stroke-width="1"/>
+                  stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                </svg>             
             )
         }
         if (props.element.elementConcept.figureConcept === 'Rectangel') {
-            let w6: number = props.element.size.w/6
-            let h6: number = props.element.size.h/6
+            let w6: number = props.element.size.w/2
+            let h6: number = props.element.size.h/2
             let elementStyle = {
                 width: w6,
                 height: h6,
-                top: props.element.position.y/6,
-                left: props.element.position.x/6,
+                top: props.element.position.y/2,
+                left: props.element.position.x/2,
             }
-            let width: number = (w6 - 2) 
-            let heigth: number = (h6 - 2)
+            let width: number = (w6 - 6) 
+            let heigth: number = (h6 - 6)
             return (
                 <svg style={elementStyle} className = {styles.element}>
-                      <rect x="1" y="1" width={width} height={heigth} 
+                      <rect x="3" y="3" width={width} height={heigth} 
                       fill={props.element.elementConcept.fillcolor} 
-                      stroke={props.element.elementConcept.linecolor} stroke-width="1"/>
+                      stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                 </svg>               
             )
         }
@@ -133,5 +133,5 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MiniElement);
+export default connect(mapStateToProps, mapDispatchToProps)(MaxElement);
 //

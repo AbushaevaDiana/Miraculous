@@ -1,7 +1,7 @@
 import { PresentationMaker } from "../types"
 
 export const initialState:  PresentationMaker = {
-    mode: 'editor',
+    mode: 'preview',
     history: {
         actionlist: [],
         currentIndex: -1,

@@ -12,3 +12,35 @@
     height: 100%;
     background: white;
 }
+
+.navigator{
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    width: 20%;
+    height: 7%;
+    background-color: #FFEEDD;
+}
+
+.buttons{
+    width: 33%;
+    height: 100%;
+    border-color: #F08080;
+}
+
+.buttons:hover {
+    background-color: #fae3cb; 
+    border-color: #FF6666;  
+}
+
+.left{
+    background: url(../img/arrow_cupid_heart_love_left.png) no-repeat center /100% 100%;
+}
+
+.right{
+    background: url(../img/arrow_cupid_heart_love_right.png) no-repeat center /100% 100%;
+}
+
+.end{
+    background: url(../img/check_mark_complete_done_good_heart_ok_valentine_icon_146714.png) no-repeat center /100% 100%;
+}

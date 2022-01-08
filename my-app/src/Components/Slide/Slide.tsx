@@ -5,13 +5,11 @@ import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators'
 import { MiniElement } from '../Element/miniElement'
-import { Element } from '../Element/Element';
-import slidelist from '../../store/reducers/slideReduce';
 
 
 interface SLideProps{
    slide: Slide,
-   gotoSlide: (idSlide: Number) => void,
+   gotoSlide: (idSlide: number) => void,
    selection: SelectionType,
    index: Number,
 };

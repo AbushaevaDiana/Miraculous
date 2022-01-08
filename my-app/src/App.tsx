@@ -8,7 +8,7 @@ import { initialState } from './test/initialState';
 import { Presentation, PresentationMaker, SelectionType } from './types';
 import { connect } from 'react-redux';
 import { addSlide, deleteSlide, gotoSlide } from './store/actionsCreators/slideActionCreators';
-import { Preview } from './Components/Preview/Preview';
+import  Preview  from './Components/Preview/Preview';
 
 interface AppProps {
   gotoSlide: (idSlide: Number) => void,
