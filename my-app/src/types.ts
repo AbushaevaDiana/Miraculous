@@ -30,10 +30,11 @@ export enum StateTypes {
     SAVE_PRESENTATION = 'SAVE_PRESENTATION',
     OPEN_PRESENTATION = 'OPEN_PRESENTATION',
     CHANGE_MODE = 'CHANGE_MODE',
+    ADD_TO_HISTORY = 'ADD_TO_HISTORY'
 }
 
 export type PresentationMaker = {
-    readonly presentation: Presentation, 
+    presentation: Presentation, 
     mode: Mode,
     history: History,
     selection: SelectionType,

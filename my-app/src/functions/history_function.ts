@@ -1,35 +1,27 @@
 import { Editer, History, Presentation, PresentationMaker } from '../types';
 
-//пересмотреть
-function undo(presentationMaker: PresentationMaker): PresentationMaker {
-    let newHistory: History = presentationMaker.history;
-    let i: number = newHistory.currentIndex - 1;
-    let newState: Editer = newHistory.actionlist[newHistory.currentIndex];
-    if (i >= 0) {    
-        newState = newHistory.actionlist[i];
-        newHistory.currentIndex = i;
-    }; 
-    return {
-       ...presentationMaker,
-       presentation: newState.presentation,
-       selection: newState.selection,
-       history: newHistory,
+export function undo(presentationMaker: PresentationMaker): PresentationMaker {
+    const newPresentationMaker: PresentationMaker = {
+    ...presentationMaker,
     };
-};
-
-//пересмотреть
-function redo(presentationMaker: PresentationMaker): PresentationMaker {
-    let newHistory: History = presentationMaker.history;
-    let i: number = newHistory.currentIndex + 1;
-    let newState: Editer = newHistory.actionlist[newHistory.currentIndex];
-    if(i < newHistory.actionlist.length){
-        newState = newHistory.actionlist[i];
-        newHistory.currentIndex = i;
-    }; 
-    return {
-       ...presentationMaker,
-       presentation: newState.presentation,
-       selection: newState.selection,
-       history: newHistory,
+    if (presentationMaker.history.currentIndex > 0) {
+        newPresentationMaker.history.currentIndex = presentationMaker.history.currentIndex - 1;
+        newPresentationMaker.presentation = presentationMaker.history.actionlist[newPresentationMaker.history.currentIndex].presentation;
+        newPresentationMaker.selection = presentationMaker.history.actionlist[newPresentationMaker.history.currentIndex].selection;
+    }    
+    return newPresentationMaker;
+}
+    
+export function redo(presentationMaker: PresentationMaker): PresentationMaker {
+    const newPresentationMaker: PresentationMaker = {
+        ...presentationMaker,
     };
-};
+    
+    if (presentationMaker.history.currentIndex < presentationMaker.history.actionlist.length-1 ) {
+        newPresentationMaker.history.currentIndex = presentationMaker.history.currentIndex + 1;
+        newPresentationMaker.presentation = presentationMaker.history.actionlist[newPresentationMaker.history.currentIndex].presentation;
+        newPresentationMaker.selection = presentationMaker.history.actionlist[newPresentationMaker.history.currentIndex].selection;
+    }
+    
+    return newPresentationMaker;
+}

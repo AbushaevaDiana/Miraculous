@@ -5,6 +5,7 @@ import name from "./presentationNameReduser";
 import  presentationNameReduser  from "./presentationNameReduser";
 import slidelist from "./slideReduce";
 import slidelistReduser from "./slideReduce";
+import { undo, redo } from "../../functions/history_function";
 
 const stateStart: Presentation = {
     slidelist: [
@@ -62,7 +63,13 @@ const presentation: Reducer<Presentation, any> = (state: Presentation = stateSta
             return state;
         case 'OPEN_PRESENTATION': 
             console.log('open work')
-            return action.payload
+            return action.payload;
+        case 'Undo':
+            console.log('undo p') 
+            return action.payload.presentation;
+        case 'Redo':
+            console.log('redo p') 
+            return action.payload.presentation;
         default: return{
             slidelist: slidelist(state.slidelist, action),
             name: name(state.name, action),

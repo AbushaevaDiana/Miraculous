@@ -4,7 +4,7 @@ export const initialState:  PresentationMaker = {
     mode: 'editor',
     history: {
         actionlist: [],
-        currentIndex: -1,
+        currentIndex: 0,
     },
     selection: {
         idSlides: [1],

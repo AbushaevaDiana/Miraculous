@@ -9,8 +9,6 @@ import store from './store/store';
 import { Editer, PresentationMaker } from './types';
 import {saveToHistory} from '../src/functions/addActionToHistory'
 
-saveToHistory()
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

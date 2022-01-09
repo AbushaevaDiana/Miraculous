@@ -1,5 +1,6 @@
 import { Reducer } from "react"
 import { ActionType, SelectionType } from "../../types"
+import { undo, redo } from "../../functions/history_function"
 
 const selection: Reducer<SelectionType, any> = (state: SelectionType = {idSlides: [], idElements: [] }, action: ActionType): SelectionType => {
     switch (action.type) {
@@ -19,6 +20,12 @@ const selection: Reducer<SelectionType, any> = (state: SelectionType = {idSlides
               idSlides: [], 
               idElements: []
             };
+        case 'Undo':
+          console.log('undo s') 
+          return action.payload.selection;
+        case 'Redo':
+          console.log('redo s') 
+          return action.payload.selection;
         default:
           return state
         }

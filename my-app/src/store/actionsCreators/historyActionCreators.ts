@@ -1,15 +1,27 @@
-import { Presentation, PresentationMaker, SelectionType, StateTypes } from "../../types";
+import { Editer, Presentation, PresentationMaker, SelectionType, StateTypes } from "../../types";
 
-function undo() {
+function undoAct(presentationMaker: PresentationMaker) {
     return {
       type: StateTypes.Undo,
+      payload: presentationMaker,
     }
   }
 
-function redo() {
+function redoAct(presentationMaker: PresentationMaker) {
   return {
     type: StateTypes.Redo,
+    payload: presentationMaker,
   }
-}  
+} 
+
+function addToHistory(presentation: Presentation, selection: SelectionType){
+  return{
+    type: StateTypes.ADD_TO_HISTORY,
+    payload: {
+      presentation,
+      selection
+    }
+  }
+}
   
-export {undo, redo}
+export {undoAct, redoAct, addToHistory}
