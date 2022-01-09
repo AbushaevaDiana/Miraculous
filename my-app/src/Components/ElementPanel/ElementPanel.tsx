@@ -71,11 +71,7 @@ export function ElementPanel(props: ElementPanelProps) {
                                 <option className={styles.selectFieldOption}>Open Sans</option>
                                 <option className={styles.selectFieldOption}>Praise</option>
                             </select>
-                            <select  className={styles.fontSelectField +  ' ' + styles.selectField}>
-                                <option className={styles.selectFieldOption}>32,0 pt</option>
-                                <option className={styles.selectFieldOption}>33,0 pt</option>
-                                <option className={styles.selectFieldOption}>34,0 pt</option>
-                            </select>
+                            <input placeholder='Размер шрифта' type="number" id="tentacles" name="tentacles" min="0" className={styles.selectField + ' ' + styles.fontSelectField}></input>
                         </div>
                         <div className={styles.fontSettingsMark +  ' ' + styles.fontMark}>
                             <div className={styles.fontMarkIcon}>
