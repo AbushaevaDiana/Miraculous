@@ -1,10 +1,12 @@
 import '../../App.css';
 import styles from './Slide.module.css';
-import { PresentationMaker, SelectionType, Slide, Color } from '../../types';
+import { PresentationMaker, SelectionType, Slide, Color, Presentation } from '../../types';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators'
 import { MiniElement } from '../Element/miniElement'
+import store from '../../store/store';
+import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 
 
 interface SLideProps{
@@ -12,6 +14,7 @@ interface SLideProps{
    gotoSlide: (idSlide: number) => void,
    selection: SelectionType,
    index: Number,
+   addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 };
 
 export function SlideView(props:SLideProps){    
@@ -39,7 +42,9 @@ export function SlideView(props:SLideProps){
       return (
          <>
                 <p className={styles.slidemenuListSlideIndex}>{props.index}</p>
-                <div key={props.slide.idSlide} style={sLideStyle} className={privet} onClick={() => {props.gotoSlide(props.slide.idSlide)}}>
+                <div key={props.slide.idSlide} style={sLideStyle} className={privet} 
+                  onClick={() => {props.gotoSlide(props.slide.idSlide);
+                  props.addToHistory(store.getState().presentation, store.getState().selection);}}>
                   <ul> 
                    {props.slide.elementlist.map(element => <MiniElement key = {element.idElement} element = {element}></MiniElement>)}
                   </ul>
@@ -54,8 +59,9 @@ function mapStateToProps(state: PresentationMaker) {
 };
 
 const mapDispatchToProps = {
-   gotoSlide
+   gotoSlide,
+   addToHistory
 }
 
-export default connect(mapStateToProps)(SlideView);
+export default connect(mapStateToProps, mapDispatchToProps)(SlideView);
 //
