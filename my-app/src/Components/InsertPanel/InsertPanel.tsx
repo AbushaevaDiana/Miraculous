@@ -83,7 +83,6 @@ export function InsertPanel(props: InsertPanelProps) {
 
 const mapDispatchToProps = ({
     addText,
-    deleteElement,
     addPicture,
     addRectangle,
     addRound,

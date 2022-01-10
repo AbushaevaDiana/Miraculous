@@ -3,14 +3,17 @@ import styles from './MainPanel.module.css';
 import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
-import { PresentationMaker, SelectionType } from '../../types';
+import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import { changeBorderColor} from '../../store/actionsCreators/elementActionCreators';
+import store from '../../store/store';
+import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 
 interface MainPanelProps {
     selection: SelectionType,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     editSLideBackgroundImg: (idSlides: Number[], newBackground: string) => void,
     changeBorderColor: (selection: SelectionType, color: string) => void,
+    addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 }
 
 function MainPanel(props: MainPanelProps) {
@@ -18,13 +21,15 @@ function MainPanel(props: MainPanelProps) {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
         console.log('цвет', inputColorStr)
-        props.editSLideBackgroundColor(props.selection.idSlides, inputColorStr)
+        props.editSLideBackgroundColor(props.selection.idSlides, inputColorStr);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeBorderColor = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
         console.log('цвет', inputColorStr)
-        props.changeBorderColor(props.selection, inputColorStr)
+        props.changeBorderColor(props.selection, inputColorStr);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     return (
         <>
@@ -47,7 +52,8 @@ function MainPanel(props: MainPanelProps) {
                           src = String(reader.result);
                         }
                         console.log(src)
-                        props.editSLideBackgroundImg(props.selection.idSlides, src)
+                        props.editSLideBackgroundImg(props.selection.idSlides, src);
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
                         };
                         
                         reader.readAsDataURL(file);
@@ -57,7 +63,8 @@ function MainPanel(props: MainPanelProps) {
                 </div>
                 <div className={styles.backgroundColor}>
                     <div className={styles.chooseColorIcon}></div>
-                    <input type="color" onChange = {hanglerOnChange} id="slideBackground" className= {styles.chooseColorSelect} defaultValue='#F08080'></input>
+                    <input type="color" onChange = {hanglerOnChange} id="slideBackground" 
+                    className= {styles.chooseColorSelect} defaultValue='#F08080'></input>
                 </div>
             </div>
             <div className={styles.elementOutlineContainer}>
@@ -101,6 +108,7 @@ const mapDispatchToProps = ({
     editSLideBackgroundColor,
     editSLideBackgroundImg,
     changeBorderColor,
+    addToHistory,
 })
   
 function mapStateToProps(state: PresentationMaker) {
