@@ -6,6 +6,7 @@ import { Editer, History, Presentation, PresentationMaker, SelectionType } from 
 import { connect } from 'react-redux';
 import { addToHistory, undoAct, redoAct } from '../../store/actionsCreators/historyActionCreators';
 import { undo, redo } from "../../functions/history_function"
+import store from '../../store/store';
 
 interface BasicBtnsProps {
     addSlide: () => void,
@@ -22,7 +23,7 @@ function BasicBtns(props: BasicBtnsProps){
         return ( 
             <>
                 <div className={styles.slideBtnContainer}>
-                    <div className={styles.slideBtn} onClick={() => {props.addSlide(); props.addToHistory(props.presentation, props.selection)}}>   
+                    <div className={styles.slideBtn} onClick={() => {props.addSlide(); props.addToHistory(store.getState().presentation, store.getState().selection)}}>   
                         <div className={styles.slideBtnImg + ' ' + styles.newSlideBtnImg} id='newSlideBtnImg'></div>
                         <p className={styles.slideBtnInscr + ' ' + styles.toolInsc}>Новый слайд</p> 
                     </div>
