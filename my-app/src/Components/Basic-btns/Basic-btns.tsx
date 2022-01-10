@@ -27,7 +27,7 @@ function BasicBtns(props: BasicBtnsProps){
                         <div className={styles.slideBtnImg + ' ' + styles.newSlideBtnImg} id='newSlideBtnImg'></div>
                         <p className={styles.slideBtnInscr + ' ' + styles.toolInsc}>Новый слайд</p> 
                     </div>
-                    <div className={styles.slideBtn} onClick={() => {props.deleteSlide(props.selection.idSlides); props.addToHistory(props.presentation, props.selection)}}>   
+                    <div className={styles.slideBtn} onClick={() => {props.deleteSlide(props.selection.idSlides); props.addToHistory(store.getState().presentation, store.getState().selection)}}>   
                         <div className={styles.slideBtnImg + ' ' + styles.deleteSlideBtnImg} id='deleteSlideBtnImg'></div>
                         <p className={styles.slideBtnInscr + ' ' + styles.toolInsc}>Удалить слайд</p> 
                     </div>

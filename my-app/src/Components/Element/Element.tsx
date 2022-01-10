@@ -1,11 +1,12 @@
 import '../../App.css';
 import styles from './Element.module.css';
-import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Position } from '../../types';
+import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Position, Presentation } from '../../types';
 import { connect } from 'react-redux';
 import React, { MouseEvent, DragEvent, useEffect, useRef, useState } from 'react';
 import { changeTextContent, moveElement, gotoElement } from '../../store/actionsCreators/elementActionCreators'
-import { url } from 'inspector';
+import store from '../../store/store';
 import { useMoveAndResize } from '../../Hooks/useMoving';
+import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 
 interface ElementProps{
     element: ElementType,
@@ -13,6 +14,7 @@ interface ElementProps{
     changeTextContent: (selection: SelectionType, content: string) => void,
     moveElement: (selection: SelectionType, position: Position) => void,
     gotoElement: (idElement: Number) => void,
+    addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 };
 
 export function Element(props: ElementProps){
@@ -73,7 +75,9 @@ export function Element(props: ElementProps){
        return (
         <>
           
-          <div className={styles.element} style = {elementStyle} onClick={() => props.gotoElement(props.element.idElement)} 
+          <div className={styles.element} style = {elementStyle} 
+           onClick={() => {props.gotoElement(props.element.idElement);
+           props.addToHistory(store.getState().presentation, store.getState().selection)}} 
         /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
             <textarea className={styles.text} style = {elementStyle} 
                 defaultValue={props.element.elementConcept.textContent} 
@@ -81,7 +85,8 @@ export function Element(props: ElementProps){
                 (e) => {if (e.key === "Enter") {
                 e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
                 props.changeTextContent(props.selection, e.currentTarget.value)
-                e.currentTarget.blur()
+                e.currentTarget.blur();
+                props.addToHistory(store.getState().presentation, store.getState().selection)
                 }}}/>
             </div>
         </>
@@ -100,9 +105,11 @@ export function Element(props: ElementProps){
          }
         return (
          <>
-           <div style={elementStyle} className = {styles.element} onClick={(e) => {props.gotoElement(props.element.idElement);
-               e.stopPropagation();
-               setMoving(true);
+           <div style={elementStyle} className = {styles.element} 
+           onClick={(e) => {props.gotoElement(props.element.idElement);
+            props.addToHistory(store.getState().presentation, store.getState().selection)
+            //    e.stopPropagation();
+            //    setMoving(true);
             }}>               
                <img src={src} style={elementStyle} alt={String(props.element.idElement)} /> 
             </div>
@@ -123,7 +130,9 @@ export function Element(props: ElementProps){
             let width: number = props.element.size.w/2 
             let heigth: number = props.element.size.h/2 
             return (
-                <svg style={elementStyle} className = {styles.element} onClick={() => props.gotoElement(props.element.idElement)}>
+                <svg style={elementStyle} className = {styles.element} 
+                onClick={() => {props.gotoElement(props.element.idElement);
+                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                     <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                     fill={props.element.elementConcept.fillcolor} 
                     stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
@@ -146,7 +155,9 @@ export function Element(props: ElementProps){
             let y3: string = String(props.element.size.h - 3 )
             let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
             return (
-               <svg style={elementStyle} className = {styles.element} onClick={() => props.gotoElement(props.element.idElement)}>
+               <svg style={elementStyle} className = {styles.element} 
+               onClick={() => {props.gotoElement(props.element.idElement);
+                props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                   <polygon points={point} fill={props.element.elementConcept.fillcolor} 
                   stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                </svg>             
@@ -163,7 +174,9 @@ export function Element(props: ElementProps){
             let width: number = (props.element.size.w - 6) 
             let heigth: number = (props.element.size.h - 6)
             return (
-                <svg style={elementStyle} className = {styles.element} onClick={() => props.gotoElement(props.element.idElement)}>
+                <svg style={elementStyle} className = {styles.element} 
+                onClick={() => {props.gotoElement(props.element.idElement);
+                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                       <rect x="3" y="3" width={width} height={heigth} 
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
@@ -186,6 +199,7 @@ const mapDispatchToProps = {
     changeTextContent,
     moveElement,
     gotoElement,
+    addToHistory,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Element);

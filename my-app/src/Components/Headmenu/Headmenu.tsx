@@ -13,6 +13,8 @@ import { savePresentation, openPresentation } from '../../store/actionsCreators/
 import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
 import {loadFile} from '../../store/reducers/presentationReduser'
 import { changeMode } from '../../store/actionsCreators/modeActionCreators'
+import store from '../../store/store';
+import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 
 interface HeadmenuProps {
     name: string,
@@ -29,6 +31,7 @@ interface HeadmenuProps {
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     addPicture: (src: string) => void,
     changeMode: () => void,
+    addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 }
 
 export function Headmenu(props: HeadmenuProps) {
@@ -69,7 +72,8 @@ export function Headmenu(props: HeadmenuProps) {
                     (e) => {if (e.key === "Enter") {
                     e.currentTarget.value = (props.name == '') ? 'Презентация без названия' : e.currentTarget.value
                     props.changePresentationNAME(e.currentTarget.value)
-                    e.currentTarget.blur()
+                    e.currentTarget.blur(); 
+                    props.addToHistory(store.getState().presentation, store.getState().selection)
                     handleToggleNameInput()
                 }}}/> ) : (<p className={styles.headmenuInput}>{props.name}</p>)}
 
@@ -111,6 +115,7 @@ const mapDispatchToProps = {
     savePresentation,
     openPresentation,
     changeMode,
+    addToHistory,
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({

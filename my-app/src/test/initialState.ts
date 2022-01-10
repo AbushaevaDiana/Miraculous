@@ -3,7 +3,7 @@ import { PresentationMaker } from "../types"
 export const initialState:  PresentationMaker = {
     mode: 'editor',
     selection: {
-        idSlides: [1],
+        idSlides: [],
         idElements: [],
     },
     presentation: {
@@ -15,7 +15,7 @@ export const initialState:  PresentationMaker = {
                     color: '#FFFFFF'},
                 effects: 'fading',
                 idSlide: 1,
-                selected: true,
+                selected: false,
             },   
         ],
         name: 'Презентация без названия',
@@ -32,13 +32,13 @@ export const initialState:  PresentationMaker = {
                             color: '#FFFFFF'},
                         effects: 'fading',
                         idSlide: 1,
-                        selected: true,
+                        selected: false,
                     },   
                 ],
                 name: 'Презентация без названия',
             },
             selection: {
-                idSlides: [1],
+                idSlides: [],
                 idElements: [],
             },}
         ],
