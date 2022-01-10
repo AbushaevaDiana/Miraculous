@@ -154,7 +154,9 @@ export function ElementPanel(props: ElementPanelProps) {
                 </div>
 
 
-                <div className={styles.deleteElementContainer} onClick = {() => props.deleteElement(props.selection)}>   
+                <div className={styles.deleteElementContainer} 
+                onClick = {() => {props.deleteElement(props.selection);
+                props.addToHistory(store.getState().presentation, store.getState().selection);}}>   
                     <div className={styles.deleteElementIcon}></div>
                     <p className={styles.deleteElementInscr}>Удалить элемент</p> 
                 </div>
