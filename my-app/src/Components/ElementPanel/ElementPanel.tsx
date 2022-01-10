@@ -2,8 +2,11 @@ import '../../App.css';
 import styles from './ElementPanel.module.css';
 import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { PresentationMaker, SelectionType } from '../../types';
-import { deleteElement, changeFillColor, changeLineColor, changeTextColor, changeElementWeigth, changeElementHeigth, moveElementX, moveElementY} from '../../store/actionsCreators/elementActionCreators';
+import { Presentation, PresentationMaker, SelectionType } from '../../types';
+import store from '../../store/store';
+import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
+import { deleteElement, changeFillColor, changeLineColor, changeTextColor, changeElementWeigth,
+ changeElementHeigth, moveElementX, moveElementY} from '../../store/actionsCreators/elementActionCreators';
 
 interface ElementPanelProps {
     deleteElement: (selection: SelectionType) => void,
@@ -15,6 +18,7 @@ interface ElementPanelProps {
     moveElementX: (selection: SelectionType, x: number) => void,
     changeLineColor: (selection: SelectionType, color: string) => void,
     changeFillColor: (selection: SelectionType, color: string) => void,
+    addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 }
 
 export function ElementPanel(props: ElementPanelProps) {
@@ -23,38 +27,46 @@ export function ElementPanel(props: ElementPanelProps) {
         const inputColorStr = String(inputColor.value);
         console.log('цвет', inputColorStr);
         props.changeLineColor(props.selection, inputColorStr);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
+        
     }
     const hanglerOnChangeFill = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
         console.log('цвет', inputColorStr)
-        props.changeFillColor(props.selection, inputColorStr)
+        props.changeFillColor(props.selection, inputColorStr);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeText = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
         console.log('цвет', inputColorStr)
-        props.changeTextColor(props.selection, inputColorStr)
+        props.changeTextColor(props.selection, inputColorStr);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeWidth = (event: ChangeEvent<HTMLInputElement>) => {
         const inputWidth = event.target as HTMLInputElement
         const inputWidthNumer = Number(inputWidth.value);
-        props.changeElementWeigth(props.selection, inputWidthNumer)
+        props.changeElementWeigth(props.selection, inputWidthNumer);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeHeigth = (event: ChangeEvent<HTMLInputElement>) => {
         const inputWidth = event.target as HTMLInputElement
         const inputWidthNumer = Number(inputWidth.value);
-        props.changeElementHeigth(props.selection, inputWidthNumer)
+        props.changeElementHeigth(props.selection, inputWidthNumer);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeY = (event: ChangeEvent<HTMLInputElement>) => {
         const inputWidth = event.target as HTMLInputElement
         const inputWidthNumer = Number(inputWidth.value);
-        props.moveElementY(props.selection, inputWidthNumer)
+        props.moveElementY(props.selection, inputWidthNumer);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeX = (event: ChangeEvent<HTMLInputElement>) => {
         const inputWidth = event.target as HTMLInputElement
         const inputWidthNumer = Number(inputWidth.value);
-        props.moveElementX(props.selection, inputWidthNumer)
+        props.moveElementX(props.selection, inputWidthNumer);
+        props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     
         return (
@@ -159,6 +171,7 @@ const mapDispatchToProps = ({
     moveElementX,
     changeElementWeigth,
     changeElementHeigth,
+    addToHistory,
 })
   
 function mapStateToProps(state: PresentationMaker) {
