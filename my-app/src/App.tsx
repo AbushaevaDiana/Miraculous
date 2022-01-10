@@ -11,7 +11,6 @@ import { addSlide, deleteSlide, gotoSlide } from './store/actionsCreators/slideA
 import  Preview  from './Components/Preview/Preview';
 
 interface AppProps {
-  gotoSlide: (idSlide: Number) => void,
   state: PresentationMaker,
 }
 
@@ -23,7 +22,7 @@ function App(props: AppProps) {
           <Headmenu></Headmenu>
         </header>
         <body className='AppBody'>
-          <Slidemenu gotoSlide = {props.gotoSlide}></Slidemenu>
+          <Slidemenu></Slidemenu>
           <PresentationContent></PresentationContent>
         </body>
       </div>
@@ -42,7 +41,6 @@ function mapStateToProps(state: PresentationMaker) {
 };
 
 const mapDispatchToProps = {
-  gotoSlide,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
