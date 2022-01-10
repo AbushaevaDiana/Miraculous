@@ -85,8 +85,7 @@ export function Element(props: ElementProps){
                 (e) => {if (e.key === "Enter") {
                 e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
                 props.changeTextContent(props.selection, e.currentTarget.value)
-                e.currentTarget.blur();
-                props.addToHistory(store.getState().presentation, store.getState().selection)
+                e.currentTarget.blur()
                 }}}/>
             </div>
         </>
