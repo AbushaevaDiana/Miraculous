@@ -2,7 +2,9 @@ import '../../App.css';
 import styles from './InsertPanel.module.css';
 import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { Img, PresentationMaker, SelectionType } from '../../types';
+import { Img, Presentation, PresentationMaker, SelectionType } from '../../types';
+import store from '../../store/store';
+import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
 
 
@@ -13,6 +15,7 @@ interface InsertPanelProps {
     addRectangle: () => void,
     selection: SelectionType,
     addPicture: (src: string) => void,
+    addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 }
 
 export function InsertPanel(props: InsertPanelProps) {
@@ -35,17 +38,20 @@ export function InsertPanel(props: InsertPanelProps) {
                         if (file.type.includes("image")) {
                           src = String(reader.result);
                         }
-                        props.addPicture(src)
+                        props.addPicture(src);
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
                         };
                         
                         reader.readAsDataURL(file);
-                        });
+                        })
                         }}></div>
                     <div className={styles.insc}>Картинку</div>
                 </div>
             </form>
             <div className={styles.textContainer}>
-                <div className={styles.textBlock} onClick = {() => props.addText()}>
+                <div className={styles.textBlock} 
+                onClick = {() => {props.addText();
+                props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                     <div className={styles.icon + ' ' + styles.textIcon}></div>
                     <div className={styles.insc}>Текст</div>
                 </div>
@@ -55,13 +61,19 @@ export function InsertPanel(props: InsertPanelProps) {
                     <div className={styles.icon + ' ' + styles.figureIcon}></div>
                     <div className={styles.insc}>Фигуру</div>
                 </div>
-                <div className={styles.figureTypeBlock} onClick = {() => props.addTriangle()}>
+                <div className={styles.figureTypeBlock} 
+                onClick = {() => {props.addTriangle();
+                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                     <div className={styles.figureTypeIcon + ' ' + styles.triangleIcon}></div>
                 </div>
-                <div className={styles.figureTypeBlock} onClick = {() => props.addRound()}>
+                <div className={styles.figureTypeBlock} 
+                onClick = {() => {props.addRound();
+                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                     <div className={styles.figureTypeIcon + ' ' + styles.circleIcon}></div>
                 </div>
-                <div className={styles.figureTypeBlock} onClick = {() => props.addRectangle()}>
+                <div className={styles.figureTypeBlock} 
+                onClick = {() => {props.addRectangle();
+                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                     <div className={styles.figureTypeIcon + ' ' + styles.squareIcon}></div>
                 </div>
             </div>
@@ -76,6 +88,7 @@ const mapDispatchToProps = ({
     addRectangle,
     addRound,
     addTriangle,
+    addToHistory
 })
   
 function mapStateToProps(state: PresentationMaker) {
