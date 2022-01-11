@@ -52,7 +52,6 @@ function MainPanel(props: MainPanelProps) {
                         if (file.type.includes("image")) {
                           src = String(reader.result);
                         }
-                        console.log(src)
                         props.editSLideBackgroundImg(props.selection.idSlides, src);
                         props.addToHistory(store.getState().presentation, store.getState().selection);
                         };
@@ -71,22 +70,28 @@ function MainPanel(props: MainPanelProps) {
             <div className={styles.elementOutlineContainer}>
                 <div className={styles.elementOutlineInscr}>Контур элемента</div>
                 <div className={styles.selectContainer}>
-                    <input type="number" placeholder='Размер контура' id="tentacles" name="tentacles" min="0" className={styles.elementOutlineSelect}></input>
+                    <input type="number" placeholder='Размер контура' id="tentacles" 
+                    name="tentacles" min="0" className={styles.elementOutlineSelect}></input>
                     <select onChange = {(e) => 
                     {if(e.currentTarget.value === 'Без границы'){
                         props.changeElementBorder(props.selection, 'none');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
                     };
                     if(e.currentTarget.value === 'Сплошная линия'){
                         props.changeElementBorder(props.selection, 'solid');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
                     };
                     if(e.currentTarget.value === 'Пунктирная линия'){
                         props.changeElementBorder(props.selection, 'dashed');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
                     };
                     if(e.currentTarget.value === 'Двойная линия'){
                         props.changeElementBorder(props.selection, 'double');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
                     };
                     if(e.currentTarget.value === 'Точки'){
                         props.changeElementBorder(props.selection, 'dotted');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
                     };
                     }} 
                     className={styles.elementOutlineSelect}>
