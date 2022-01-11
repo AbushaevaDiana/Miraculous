@@ -1,6 +1,6 @@
 .slideBackgroundContainer {
-    padding: 8px 15px;
-    width: 35%;
+    /* padding: 8px 15px; */
+    width: 30%;
     display: flex;
     border-right: 1px solid black;
 }
@@ -9,11 +9,12 @@
     width: 55%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-right: 1px solid #A0A0A0;
+    padding: 0 4%;
 }
 
 .slideBackgroundInscr {
-    margin-right: 20px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
@@ -23,7 +24,7 @@
 }
 
 .chooseImgContainer {
-    width: 45%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,7 +129,6 @@
 .colorContourContainer {
     margin-left: auto;
     margin-right: auto;
-    padding-top: 5px;
     width: 30%;
     display: flex;
     flex-direction: column;
