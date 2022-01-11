@@ -61,7 +61,7 @@
 
 .elementSettings {
     padding: 8px;
-    width: 11%;
+    width: 15%;
     display: flex;
     align-items: center;
     border-right: 1px solid #000000;
@@ -133,6 +133,94 @@
     width: 55px;
     height: 55px;
     background: url('../img/filterIcon.png');
+}
+
+.headmenu {
+    width: 100%;
+    border: 0;
+    padding: 0;
+    list-style: none; 
+    margin: 0;
+    height: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headmenuLi {
+    width: 25%;
+    height: 100%;
+    position: relative;
+    border-color: #F08080;
+    background-color: #FFEEDD;
+    color: #000000;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    transition-property: background-color, color;
+    transition-duration: .3s;
+    transition-timing-function: ease-in-out;
+    border: 2px solid #FF6666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.headmenuLi:hover {
+    background-color: #F08080;
+    color: #fff;
+}
+
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    background: #FFEEDD;
+    border: 2px solid #F08080;
+}
+
+.submenu > li {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+    background-color: #FFEEDD;
+    border: 2px solid #FF6666;
+    transition-property: background-color, color;
+    transition-duration: .3s;
+    transition-timing-function: ease-in-out;
+    color: black;
+    display: block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.submenu > li:hover {
+    background-color: #F08080;
+    color: white;
+}
+
+ul li:hover .submenu {
+    display: block;
+  }
+
+ul li:hover .submenu {
+    visibility: visible;
+    opacity: 1;
 }
 
 .contourIcon {

@@ -107,11 +107,21 @@ export function ElementPanel(props: ElementPanelProps) {
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' + styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.filterIcon}></div>
-                    <select className={styles.elementSettingsSelect + ' ' + styles.selectField}>
+                    <ul className={styles.headmenu}>
+                        <li className={styles.headmenuLi}>Фильтры
+                            <ul className={styles.submenu}>
+                                <li>черно-белый</li>
+                                <li>красный</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+                    {/* <select className={styles.elementSettingsSelect + ' ' + styles.selectField}>
                         <option className={styles.selectFieldOption}>Фильтры</option>
                         <option className={styles.selectFieldOption}>черно-белый</option>
                         <option className={styles.selectFieldOption}>красный</option>
-                    </select>
+                    </select> */}
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.contourIcon}></div>
