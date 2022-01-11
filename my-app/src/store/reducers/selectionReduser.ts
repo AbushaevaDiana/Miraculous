@@ -6,7 +6,12 @@ const selection: Reducer<SelectionType, any> = (state: SelectionType = {idSlides
     switch (action.type) {
         case 'GOTO_SLIDE':
             return {
-                    idSlides: action.payload,
+                    idSlides: [action.payload],
+                    idElements: []
+                };
+        case 'GOTO_SLIDES':
+            return {
+                    idSlides: state.idSlides.concat([action.payload]), 
                     idElements: []
                 };
         case 'GOTO_ELEMENT':

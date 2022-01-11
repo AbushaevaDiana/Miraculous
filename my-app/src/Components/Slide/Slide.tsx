@@ -3,7 +3,7 @@ import styles from './Slide.module.css';
 import { PresentationMaker, SelectionType, Slide, Color, Presentation } from '../../types';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
-import { addSlide, deleteSlide, gotoSlide } from '../../store/actionsCreators/slideActionCreators'
+import { addSlide, deleteSlide, gotoSlide, gotoSlides } from '../../store/actionsCreators/slideActionCreators'
 import { MiniElement } from '../Element/miniElement'
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
@@ -12,6 +12,7 @@ import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 interface SLideProps{
    slide: Slide,
    gotoSlide: (idSlide: number) => void,
+   gotoSlides: (idSlide: number) => void,
    selection: SelectionType,
    index: Number,
    addToHistory: (presentation: Presentation, selection: SelectionType) => void,
@@ -43,8 +44,13 @@ export function SlideView(props:SLideProps){
          <>
                 <p className={styles.slidemenuListSlideIndex}>{props.index}</p>
                 <div key={props.slide.idSlide} style={sLideStyle} className={privet} 
-                  onClick={() => {props.gotoSlide(props.slide.idSlide);
-                  props.addToHistory(store.getState().presentation, store.getState().selection);}}>
+                  onClick={(e) => {
+                    if(!e.ctrlKey){
+                        props.gotoSlide(props.slide.idSlide);
+                     }
+                     else{props.gotoSlides(props.slide.idSlide);}
+                     props.addToHistory(store.getState().presentation, store.getState().selection);}
+                  }>
                   <ul> 
                    {props.slide.elementlist.map(element => <MiniElement key = {element.idElement} element = {element}></MiniElement>)}
                   </ul>
@@ -60,7 +66,8 @@ function mapStateToProps(state: PresentationMaker) {
 
 const mapDispatchToProps = {
    gotoSlide,
-   addToHistory
+   addToHistory,
+   gotoSlides,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlideView);

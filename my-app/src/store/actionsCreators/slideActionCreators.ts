@@ -49,8 +49,15 @@ function gotoSlide(idSlide: Number) {
     }
 }
 
+function gotoSlides(idSlide: Number) {
+    return {
+        type: StateTypes.GOTO_SLIDES,
+        payload: idSlide,
+    }
+}
 
-export { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor, editSLideBackgroundImg}
+
+export { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor, editSLideBackgroundImg, gotoSlides}
 
 
 /////////////
