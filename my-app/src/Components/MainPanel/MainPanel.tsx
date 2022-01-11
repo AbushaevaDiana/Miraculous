@@ -71,7 +71,7 @@ function MainPanel(props: MainPanelProps) {
                 <div className={styles.elementOutlineInscr}>Контур элемента</div>
                 <div className={styles.selectContainer}>
                     <input type="number" placeholder='Размер контура' id="tentacles" name="tentacles" min="0" className={styles.elementOutlineSelect}></input>
-                    <select className={styles.elementOutlineSelect}>
+                    <select /*onChange = {(e) => {console.log('Click work!', e.currentTarget.value)}}*/ className={styles.elementOutlineSelect}>
                         <option className={styles.elementOutlineOption}>Без границы</option>
                         <option className={styles.elementOutlineOption}>Сплошная линия</option>
                         <option className={styles.elementOutlineOption}>Пунктирная линия</option>
@@ -88,7 +88,7 @@ function MainPanel(props: MainPanelProps) {
             <div className={styles.animationContainer}>
                 <div className={styles.animationIcon}></div>
                 <select className={styles.elementOutlineSelect + ' ' + styles.elementOutlineSelectSmall}>
-                    <option className={styles.elementOutlineOption}>Без анимации</option>
+                    <option  className={styles.elementOutlineOption}>Без анимации</option>
                     <option className={styles.elementOutlineOption}>Появление</option>
                     <option className={styles.elementOutlineOption}>Вспытие</option>
                     <option className={styles.elementOutlineOption}>оРиГаМи</option>
