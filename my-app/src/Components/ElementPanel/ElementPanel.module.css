@@ -63,6 +63,7 @@
     padding: 8px;
     width: 11%;
     display: flex;
+    align-items: center;
     border-right: 1px solid #000000;
 }
 
@@ -149,13 +150,14 @@
 }
 
 .deleteElementContainer {
-    padding-top: 10px;
+    /* padding-top: 10px; */
     margin-left: auto;
     margin-right: auto;
     width: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
 }
 
@@ -194,12 +196,27 @@
 }
 
 .resizeInputContainer {
+    margin-bottom: 8px;
     display: flex;
+    align-items: center;
     flex-direction: row;
 }
 
 .resizeInput {
-    width: 80%;
+    width: 50%;
     height: 88%;
+    background: transparent;
+    border: 2px solid black;
+}
+
+.resizeInscr {
+    margin-right: 5px;
+    width: 50%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 85%;
+    line-height: 1;
+    color: #000000;
 }
 

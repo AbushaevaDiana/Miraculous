@@ -70,12 +70,7 @@ function MainPanel(props: MainPanelProps) {
             <div className={styles.elementOutlineContainer}>
                 <div className={styles.elementOutlineInscr}>Контур элемента</div>
                 <div className={styles.selectContainer}>
-                    <select className={styles.elementOutlineSelect}>
-                        <option className={styles.elementOutlineOption}>5px</option>
-                        <option className={styles.elementOutlineOption}>6px</option>
-                        <option className={styles.elementOutlineOption}>7px</option>
-                        <option className={styles.elementOutlineOption}>8px</option>
-                    </select>
+                    <input type="number" placeholder='Размер контура' id="tentacles" name="tentacles" min="0" className={styles.elementOutlineSelect}></input>
                     <select className={styles.elementOutlineSelect}>
                         <option className={styles.elementOutlineOption}>Без границы</option>
                         <option className={styles.elementOutlineOption}>Сплошная линия</option>
