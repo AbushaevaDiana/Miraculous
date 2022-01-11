@@ -80,13 +80,17 @@ export function Element(props: ElementProps){
            props.addToHistory(store.getState().presentation, store.getState().selection)}} 
         /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
             <textarea className={styles.text} style = {elementStyle} 
-                defaultValue={props.element.elementConcept.textContent} 
-                onKeyPress= {
-                (e) => {if (e.key === "Enter") {
-                e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
-                props.changeTextContent(props.selection, e.currentTarget.value)
-                e.currentTarget.blur()
-                }}}/>
+                value={props.element.elementConcept.textContent}
+                onChange = {(e) => {props.changeTextContent(props.selection, e.currentTarget.value);
+                    props.addToHistory(store.getState().presentation, store.getState().selection)}
+                } 
+                // onKeyPress= {
+                // (e) => {if (e.key === "Enter") {
+                // e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
+                // props.changeTextContent(props.selection, e.currentTarget.value)
+                // e.currentTarget.blur()
+                // }}}
+                />
             </div>
         </>
      )

@@ -9,7 +9,6 @@ import  store  from '../../store/store'
 
 interface SlidemenuList {
     slidelist: Array<Slide>,
-    gotoSlide: (idSlide: Number) => void,
 }
 
 function Slidemenu(props: SlidemenuList){
@@ -32,7 +31,6 @@ function mapStateToProps(state: PresentationMaker) {
 };
 
 const mapDispatchToProps = {
-    gotoSlide
 }
 
 export default connect(mapStateToProps)(Slidemenu);
