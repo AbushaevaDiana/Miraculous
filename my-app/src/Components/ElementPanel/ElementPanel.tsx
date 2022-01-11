@@ -110,8 +110,14 @@ export function ElementPanel(props: ElementPanelProps) {
                     <ul className={styles.headmenu}>
                         <li className={styles.headmenuLi}>Фильтры
                             <ul className={styles.submenu}>
-                                <li>черно-белый</li>
-                                <li>красный</li>
+                                <li onClick = {() => {
+                                    props.setImageFilter(props.selection, 'black-white');
+                                    props.addToHistory(store.getState().presentation, store.getState().selection);
+                                }}>черно-белый</li>
+                                <li onClick = {() => {
+                                    props.setImageFilter(props.selection, 'none');
+                                    props.addToHistory(store.getState().presentation, store.getState().selection);
+                                }}>без фильтров</li>
                             </ul>
                         </li>
                     </ul>

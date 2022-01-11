@@ -98,7 +98,6 @@ export function Element(props: ElementProps){
 //Картинка
     if(props.element.elementConcept.type === 'img') {
         let src: string = props.element.elementConcept.src;
-        console.log(src);
         if(props.element.elementConcept.filter === 'black-white'){
             if(webFilter === 'none'){
                 webFilter = 'grayscale(100%)';

@@ -169,6 +169,29 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'SET_IMAGE_FILTER':
+        console.log('SET_IMAGE_FILTER')
+        return state.map(slide => {
+          if (action.payload.selection.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        filter: action.payload.filter,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
       case 'CHANGE_TEXT_COLOR':
         console.log('change text color work')
         return state.map(slide => {

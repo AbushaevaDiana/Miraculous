@@ -44,11 +44,13 @@ export function MaxElement(props: miniElementProps){
     if(props.element.elementConcept.type === 'img') {
         let src: string = props.element.elementConcept.src;
         let webFilter: string = 'none';
-        if(webFilter === 'none' && props.element.elementConcept.filter === 'black-white'){
-            webFilter = 'grayscale(100%)';
-        } else {
-            webFilter = webFilter + ' grayscale(100%)';
-        };
+        if(props.element.elementConcept.filter === 'black-white'){
+            if(webFilter === 'none'){
+                webFilter = 'grayscale(100%)';
+            } else {
+                webFilter = webFilter + ' grayscale(100%)';
+            };
+        }
         let elementStyle = {
             WebkitFilter: webFilter,
             width: (props.element.size.w*24/20),
