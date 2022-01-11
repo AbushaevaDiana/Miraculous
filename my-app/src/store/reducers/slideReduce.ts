@@ -146,6 +146,29 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'CHANGE_ELEMENT_BORDER':
+        console.log('change border work')
+        return state.map(slide => {
+          if (action.payload.selection.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    border: {
+                      ...element.border,
+                      borderStyle: action.payload.style,
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
       case 'CHANGE_BORDER_COLOR':
         console.log('change border color work')
         return state.map(slide => {

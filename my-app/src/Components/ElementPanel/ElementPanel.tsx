@@ -107,7 +107,7 @@ export function ElementPanel(props: ElementPanelProps) {
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' + styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.filterIcon}></div>
-                    <ul className={styles.headmenu}>
+                    {/* <ul className={styles.headmenu}>
                         <li className={styles.headmenuLi}>Фильтры
                             <ul className={styles.submenu}>
                                 <li onClick = {() => {
@@ -120,14 +120,22 @@ export function ElementPanel(props: ElementPanelProps) {
                                 }}>без фильтров</li>
                             </ul>
                         </li>
-                    </ul>
-
-
-                    {/* <select className={styles.elementSettingsSelect + ' ' + styles.selectField}>
-                        <option className={styles.selectFieldOption}>Фильтры</option>
-                        <option className={styles.selectFieldOption}>черно-белый</option>
-                        <option className={styles.selectFieldOption}>красный</option>
-                    </select> */}
+                    </ul> */}
+                    <p>Фильтры</p>
+                    <select onChange = {(e) => {
+                        if(e.currentTarget.value === 'Черно-белый'){
+                            props.setImageFilter(props.selection, 'black-white');
+                            props.addToHistory(store.getState().presentation, store.getState().selection);
+                        };
+                        if(e.currentTarget.value === 'Без фильтров'){
+                            props.setImageFilter(props.selection, 'none');
+                            props.addToHistory(store.getState().presentation, store.getState().selection);
+                        }
+                    }}
+                    className={styles.elementSettingsSelect + ' ' + styles.selectField}>
+                        <option className={styles.selectFieldOption}>Черно-белый</option>
+                        <option className={styles.selectFieldOption}>Без фильтров</option>
+                    </select> 
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.contourIcon}></div>

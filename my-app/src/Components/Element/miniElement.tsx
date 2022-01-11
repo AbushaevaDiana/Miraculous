@@ -17,25 +17,25 @@ export function MiniElement(props: miniElementProps){
        if(props.element.elementConcept.bold === true){
         fW = 'bold'
        }
-       let bColor: string = 'transparent'
-       if(props.element.border.borderStyle !== 'none'){
-           bColor = props.element.border.color
-       }
-       let elementStyle = {
-           font: props.element.elementConcept.font,
-           fontWeight: fW,
-           color: props.element.elementConcept.color,
-           width: (props.element.size.w/6),
-           height: (props.element.size.h/6),
-           borderColor: bColor,
-           fontSize: props.element.elementConcept.size/6,
-           top: props.element.position.y/6,
-           left: props.element.position.x/6,
-        }
+        let elementStyle = {
+            width: (props.element.size.w/6),
+            height: (props.element.size.h/6),
+            top: props.element.position.y/6,
+            left: props.element.position.x/6,
+            borderStyle: props.element.border.borderStyle,
+            borderColor: props.element.border.color,
+            borderWidth: props.element.border.width/6,
+         }
+         let textStyle = {
+             color: props.element.elementConcept.color,
+             fontSize: props.element.elementConcept.size/6,
+             fontFamily: props.element.elementConcept.font,
+             fontWeight: fW,
+         }
        return (
         <>
             <div className={styles.element} style = {elementStyle}>
-                <p className={styles.text}  style = {elementStyle}>{props.element.elementConcept.textContent}</p>
+                <p className={styles.text}  style = {textStyle}>{props.element.elementConcept.textContent}</p>
             </div>
         </>
      )
@@ -57,6 +57,9 @@ export function MiniElement(props: miniElementProps){
             height: (props.element.size.h/6),
             top: props.element.position.y/6,
             left: props.element.position.x/6,
+            borderWidth: props.element.border.width/6,
+            borderStyle: props.element.border.borderStyle,
+            borderColor: props.element.border.color,
          }
         return (
          <>              

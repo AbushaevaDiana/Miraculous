@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
-import { changeBorderColor} from '../../store/actionsCreators/elementActionCreators';
+import { changeBorderColor, changeElementBorder} from '../../store/actionsCreators/elementActionCreators';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 
@@ -13,6 +13,7 @@ interface MainPanelProps {
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     editSLideBackgroundImg: (idSlides: Number[], newBackground: string) => void,
     changeBorderColor: (selection: SelectionType, color: string) => void,
+    changeElementBorder: (selection: SelectionType, style: string) => void,
     addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 }
 
@@ -71,10 +72,29 @@ function MainPanel(props: MainPanelProps) {
                 <div className={styles.elementOutlineInscr}>Контур элемента</div>
                 <div className={styles.selectContainer}>
                     <input type="number" placeholder='Размер контура' id="tentacles" name="tentacles" min="0" className={styles.elementOutlineSelect}></input>
-                    <select /*onChange = {(e) => {console.log('Click work!', e.currentTarget.value)}}*/ className={styles.elementOutlineSelect}>
+                    <select onChange = {(e) => 
+                    {if(e.currentTarget.value === 'Без границы'){
+                        props.changeElementBorder(props.selection, 'none');
+                    };
+                    if(e.currentTarget.value === 'Сплошная линия'){
+                        props.changeElementBorder(props.selection, 'solid');
+                    };
+                    if(e.currentTarget.value === 'Пунктирная линия'){
+                        props.changeElementBorder(props.selection, 'dashed');
+                    };
+                    if(e.currentTarget.value === 'Двойная линия'){
+                        props.changeElementBorder(props.selection, 'double');
+                    };
+                    if(e.currentTarget.value === 'Точки'){
+                        props.changeElementBorder(props.selection, 'dotted');
+                    };
+                    }} 
+                    className={styles.elementOutlineSelect}>
                         <option className={styles.elementOutlineOption}>Без границы</option>
                         <option className={styles.elementOutlineOption}>Сплошная линия</option>
                         <option className={styles.elementOutlineOption}>Пунктирная линия</option>
+                        <option className={styles.elementOutlineOption}>Двойная линия</option>
+                        <option className={styles.elementOutlineOption}>Точки</option>
                     </select>
                 </div>
                 <div className={styles.backgroundColor}>
@@ -103,6 +123,7 @@ const mapDispatchToProps = ({
     editSLideBackgroundImg,
     changeBorderColor,
     addToHistory,
+    changeElementBorder,
 })
   
 function mapStateToProps(state: PresentationMaker) {

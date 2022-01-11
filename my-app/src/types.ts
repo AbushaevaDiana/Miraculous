@@ -33,6 +33,7 @@ export enum StateTypes {
     CHANGE_MODE = 'CHANGE_MODE',
     ADD_TO_HISTORY = 'ADD_TO_HISTORY',
     SET_IMAGE_FILTER = 'SET_IMAGE_FILTER',
+    CHANGE_ELEMENT_BORDER = 'CHANGE_ELEMENT_BORDER',
 }
 
 export type PresentationMaker = {

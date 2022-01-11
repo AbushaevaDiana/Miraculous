@@ -17,25 +17,25 @@ export function MaxElement(props: miniElementProps){
        if(props.element.elementConcept.bold === true){
         fW = 'bold'
        }
-       let bColor: string = 'transparent'
-       if(props.element.border.borderStyle !== 'none'){
-           bColor = props.element.border.color
-       }
        let elementStyle = {
-           font: props.element.elementConcept.font,
-           fontWeight: fW,
-           color: props.element.elementConcept.color,
            width: (props.element.size.w*24/20),
            height: (props.element.size.h*24/20),
-           borderColor: bColor,
            top: (props.element.position.y*24/20),
            left: (props.element.position.x*24/20),
-           fontSize: (props.element.elementConcept.size*24/20),
+           borderStyle: props.element.border.borderStyle,
+           borderColor: props.element.border.color,
+           borderWidth: props.element.border.width*24/20,
+        }
+        let textStyle = {
+            color: props.element.elementConcept.color,
+            fontSize: (props.element.elementConcept.size*24/20),
+            fontFamily: props.element.elementConcept.font,
+            fontWeight: fW,
         }
        return (
         <>
             <div className={styles.element} style = {elementStyle}>
-                <textarea disabled className={styles.text}  style = {elementStyle} defaultValue={props.element.elementConcept.textContent} />
+                <textarea disabled className={styles.text}  style = {textStyle} defaultValue={props.element.elementConcept.textContent} />
             </div>
         </>
      )
@@ -57,6 +57,9 @@ export function MaxElement(props: miniElementProps){
             height: (props.element.size.h*24/20),
             top: props.element.position.y*24/20,
             left: props.element.position.x*24/20,
+            borderWidth: props.element.border.width*24/20,
+            borderStyle: props.element.border.borderStyle,
+            borderColor: props.element.border.color,
          }
         return (
          <>

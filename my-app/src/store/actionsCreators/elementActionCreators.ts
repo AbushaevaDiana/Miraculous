@@ -157,9 +157,19 @@ function changeBorderColor(selection: SelectionType, color: string) {
   }
 }
 
+function changeElementBorder(selection: SelectionType, style: string) {
+  return {
+      type: StateTypes.CHANGE_ELEMENT_BORDER,
+      payload: {
+          selection,
+          style,
+      }
+  }
+}
+
 export {changeTextContent, moveElement, gotoElement, 
        deleteElement, addText, addPicture, addRound, 
        addRectangle, addTriangle, changeFillColor, changeLineColor,
        changeTextColor, changeBorderColor, changeElementWeigth,
        changeElementHeigth, moveElementX, moveElementY,
-       setImageFilter}
+       setImageFilter, changeElementBorder}

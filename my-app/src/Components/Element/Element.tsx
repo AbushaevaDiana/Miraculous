@@ -46,40 +46,43 @@ export function Element(props: ElementProps){
     if(props.element.selected === true){
         webFilter = 'drop-shadow(7px 7px 7px #222)';
     }
+    // let bColor: string = 'transparent'
+    // if(props.element.border.borderStyle !== 'none'){
+    //     bColor = props.element.border.color
+    // }
     // let dragging: boolean = false;
-//Текстовый элемент
-    let textI: string = '';   
+//Текстовый элемент  
     if(props.element.elementConcept.type === 'text'){
+       let textI: string = ''; 
        textI = props.element.elementConcept.textContent;
-       console.log(props.element.elementConcept.textContent)
        let fW: string = 'normal'
        if(props.element.elementConcept.bold === true){
         fW = 'bold'
        }
-       let bColor: string = 'transparent'
-       if(props.element.border.borderStyle !== 'none'){
-           bColor = props.element.border.color
-       }
        let elementStyle = {
-           font: props.element.elementConcept.font,
-           fontWeight: fW,
-           color: props.element.elementConcept.color,
-           width: props.element.size.w,
-           height: props.element.size.h,
-           WebkitFilter: webFilter,
-           borderColor: bColor,
-           fontSize: props.element.elementConcept.size,
-           top: props.element.position.y,
-           left: props.element.position.x,
+          width: props.element.size.w,
+          height: props.element.size.h,
+          top: props.element.position.y,
+          left: props.element.position.x,
+          borderStyle: props.element.border.borderStyle,
+          borderColor: props.element.border.color,
+          borderWidth: props.element.border.width,
+        }
+        let textStyle = {
+            border: 'transparent',
+            color: props.element.elementConcept.color,
+            fontSize: props.element.elementConcept.size,
+            WebkitFilter: webFilter,
+            fontFamily: props.element.elementConcept.font,
+            fontWeight: fW,
         }
        return (
         <>
-          
           <div className={styles.element} style = {elementStyle} 
            onClick={() => {props.gotoElement(props.element.idElement);
            props.addToHistory(store.getState().presentation, store.getState().selection)}} 
         /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
-            <textarea className={styles.text} style = {elementStyle} 
+            <textarea className={styles.text} style = {textStyle} 
                 value={props.element.elementConcept.textContent}
                 onChange = {(e) => {props.changeTextContent(props.selection, e.currentTarget.value);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}
@@ -108,10 +111,17 @@ export function Element(props: ElementProps){
         let elementStyle = {
             width: props.element.size.w,
             height: props.element.size.h,
-            WebkitFilter: webFilter,
             top: props.element.position.y,
-            left: props.element.position.x, 
+            left: props.element.position.x,
          }
+        let imgStyle = {
+            borderWidth: props.element.border.width,
+            borderStyle: props.element.border.borderStyle,
+            borderColor: props.element.border.color,
+            width: props.element.size.w,
+            height: props.element.size.h,
+            WebkitFilter: webFilter,
+        }
         return (
          <>
            <div style={elementStyle} className = {styles.element} 
@@ -120,7 +130,7 @@ export function Element(props: ElementProps){
             //    e.stopPropagation();
             //    setMoving(true);
             }}>               
-               <img src={src} style={elementStyle} alt={String(props.element.idElement)} /> 
+               <img src={src} style={imgStyle} alt={String(props.element.idElement)} /> 
             </div>
          </>
       )
