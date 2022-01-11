@@ -77,9 +77,8 @@ function MainPanel(props: MainPanelProps) {
                         <option className={styles.elementOutlineOption}>Пунктирная линия</option>
                     </select>
                 </div>
-                <div className={styles.colorContourContainer}>
+                <div className={styles.backgroundColor}>
                     <div className={styles.colorContourIcon}></div>
-                    {/* <hr className={styles.hrIcon} /> */}
                     <input type="color"id="borderColor"  onChange = {hanglerOnChangeBorderColor}
                     className= {styles.chooseColorSelect} defaultValue='#F08080'>
                     </input>
