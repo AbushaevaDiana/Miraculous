@@ -136,6 +136,16 @@ function changeTextColor(selection: SelectionType, color: string) {
   }
 }
 
+function setImageFilter(selection: SelectionType, filter: string) {
+  return {
+      type: StateTypes.SET_IMAGE_FILTER,
+      payload: {
+          selection,
+          filter,
+      }
+  }
+}
+
 
 function changeBorderColor(selection: SelectionType, color: string) {
   return {
@@ -151,4 +161,5 @@ export {changeTextContent, moveElement, gotoElement,
        deleteElement, addText, addPicture, addRound, 
        addRectangle, addTriangle, changeFillColor, changeLineColor,
        changeTextColor, changeBorderColor, changeElementWeigth,
-       changeElementHeigth, moveElementX, moveElementY}
+       changeElementHeigth, moveElementX, moveElementY,
+       setImageFilter}

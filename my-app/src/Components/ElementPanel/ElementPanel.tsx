@@ -6,7 +6,7 @@ import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 import { deleteElement, changeFillColor, changeLineColor, changeTextColor, changeElementWeigth,
- changeElementHeigth, moveElementX, moveElementY} from '../../store/actionsCreators/elementActionCreators';
+ changeElementHeigth, moveElementX, moveElementY, setImageFilter} from '../../store/actionsCreators/elementActionCreators';
 
 interface ElementPanelProps {
     deleteElement: (selection: SelectionType) => void,
@@ -19,6 +19,7 @@ interface ElementPanelProps {
     changeLineColor: (selection: SelectionType, color: string) => void,
     changeFillColor: (selection: SelectionType, color: string) => void,
     addToHistory: (presentation: Presentation, selection: SelectionType) => void,
+    setImageFilter: (selection: SelectionType, filter: string) => void,
 }
 
 export function ElementPanel(props: ElementPanelProps) {
@@ -174,6 +175,7 @@ const mapDispatchToProps = ({
     changeElementWeigth,
     changeElementHeigth,
     addToHistory,
+    setImageFilter,
 })
   
 function mapStateToProps(state: PresentationMaker) {

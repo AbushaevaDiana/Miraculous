@@ -99,12 +99,19 @@ export function Element(props: ElementProps){
     if(props.element.elementConcept.type === 'img') {
         let src: string = props.element.elementConcept.src;
         console.log(src);
+        if(props.element.elementConcept.filter === 'black-white'){
+            if(webFilter === 'none'){
+                webFilter = 'grayscale(100%)';
+            } else {
+                webFilter = webFilter + ' grayscale(100%)';
+            };
+        }
         let elementStyle = {
             width: props.element.size.w,
             height: props.element.size.h,
             WebkitFilter: webFilter,
             top: props.element.position.y,
-            left: props.element.position.x
+            left: props.element.position.x, 
          }
         return (
          <>
