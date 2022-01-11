@@ -141,12 +141,12 @@ export function ElementPanel(props: ElementPanelProps) {
                     </div>
                     <div className={styles.resizeContainer}>
                         <div className={styles.resizeInputContainer}>
-                            <span className={styles.resizeInscr}>x</span>
+                            <span className={styles.resizeInscr}>x:</span>
                             <input type="number" id="tentacles" name="tentacles" min="0"  onChange = {hanglerOnChangeX}
                              className={styles.resizeInput}></input>
                         </div>
                         <div className={styles.resizeInputContainer}>
-                            <span className={styles.resizeInscr}>y</span>
+                            <span className={styles.resizeInscr}>y:</span>
                             <input type="number" id="tentacles" name="tentacles" min="0" onChange = {hanglerOnChangeY}
                             className={styles.resizeInput}></input>
                         </div> 
