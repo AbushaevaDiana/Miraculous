@@ -75,7 +75,7 @@ function MainPanel(props: MainPanelProps) {
                     name="tentacles" min="0" className={styles.elementOutlineSelect}
                     onChange = {(e) => {props.changeBorderSize(props.selection, Number(e.currentTarget.value))}}
                     ></input>
-                    <select onChange = {(e) => 
+                    <select onClick = {(e) => 
                     {if(e.currentTarget.value === 'Без границы'){
                         props.changeElementBorder(props.selection, 'none');
                         props.addToHistory(store.getState().presentation, store.getState().selection);

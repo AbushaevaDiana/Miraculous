@@ -149,7 +149,7 @@ export function ElementPanel(props: ElementPanelProps) {
                         </li>
                     </ul> */}
                     <p>Фильтры</p>
-                    <select onChange = {(e) => {
+                    <select onClick = {(e) => {
                         if(e.currentTarget.value === 'Черно-белый'){
                             props.setImageFilter(props.selection, 'black-white');
                             props.addToHistory(store.getState().presentation, store.getState().selection);
