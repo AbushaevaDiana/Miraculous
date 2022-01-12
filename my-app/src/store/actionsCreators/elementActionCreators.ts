@@ -136,6 +136,16 @@ function changeTextColor(selection: SelectionType, color: string) {
   }
 }
 
+function changeTextFont(selection: SelectionType, font: string) {
+  return {
+      type: StateTypes.CHANGE_TEXT_FONT,
+      payload: {
+          selection,
+          font,
+      }
+  }
+}
+
 function changeTextSize(selection: SelectionType, size: number) {
   return {
       type: StateTypes.CHANGE_TEXT_SIZE,
@@ -192,4 +202,5 @@ export {changeTextContent, moveElement, gotoElement,
        addRectangle, addTriangle, changeFillColor, changeLineColor,
        changeTextColor, changeBorderColor, changeElementWeigth,
        changeElementHeigth, moveElementX, moveElementY,
-       setImageFilter, changeElementBorder, changeTextSize, changeBorderSize}
+       setImageFilter, changeElementBorder, changeTextSize, changeBorderSize,
+      changeTextFont}

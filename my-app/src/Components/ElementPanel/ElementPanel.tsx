@@ -6,12 +6,14 @@ import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 import { deleteElement, changeFillColor, changeLineColor, changeTextColor, changeElementWeigth,
- changeElementHeigth, moveElementX, moveElementY, setImageFilter, changeTextSize} from '../../store/actionsCreators/elementActionCreators';
+ changeElementHeigth, moveElementX, moveElementY, setImageFilter, changeTextSize,
+changeTextFont} from '../../store/actionsCreators/elementActionCreators';
 
 interface ElementPanelProps {
     deleteElement: (selection: SelectionType) => void,
     selection: SelectionType,
     changeTextColor: (selection: SelectionType, color: string) => void,
+    changeTextFont: (selection: SelectionType, font: string) => void,
     changeTextSize: (selection: SelectionType, size: number) => void,
     changeElementWeigth: (selection: SelectionType, w: number) => void,
     changeElementHeigth: (selection: SelectionType, h: number) => void,
@@ -80,10 +82,18 @@ export function ElementPanel(props: ElementPanelProps) {
                     </div>
                     <div className={styles.fontContainerSettings +  ' ' + styles.fontSettings}>
                         <div className={styles.fontSettingsSelect +  ' ' + styles.fontSelect}>
-                            <select className={styles.fontSelectField +  ' ' + styles.selectField}>
+                            <select className={styles.fontSelectField +  ' ' + styles.selectField}
+                            onChange = {(e) => {props.changeTextFont(props.selection, e.currentTarget.value)}}>
                                 <option className={styles.selectFieldOption}>Roboto</option>
-                                <option className={styles.selectFieldOption}>Open Sans</option>
-                                <option className={styles.selectFieldOption}>Praise</option>
+                                <option className={styles.selectFieldOption}>Times New Roman</option>
+                                <option className={styles.selectFieldOption}>Lobster</option>
+                                <option className={styles.selectFieldOption}>Pacifico</option>
+                                <option className={styles.selectFieldOption}>Caveat</option>
+                                <option className={styles.selectFieldOption}>Comforter Brush</option>
+                                <option className={styles.selectFieldOption}>Play</option>
+                                <option className={styles.selectFieldOption}>Alegreya</option>
+                                <option className={styles.selectFieldOption}>Montserrat Alternates</option>
+                                <option className={styles.selectFieldOption}>Pangolin</option>
                             </select>
                             <input placeholder='Размер шрифта' type="number" 
                             id="tentacles" name="tentacles" min="0" 
@@ -205,6 +215,7 @@ const mapDispatchToProps = ({
     addToHistory,
     setImageFilter,
     changeTextSize,
+    changeTextFont,
 })
   
 function mapStateToProps(state: PresentationMaker) {

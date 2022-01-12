@@ -257,6 +257,28 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      case 'CHANGE_TEXT_FONT':
+        return state.map(slide => {
+          if (action.payload.selection.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.selection.idElements){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        font: action.payload.font,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
       case 'CHANGE_TEXT_COLOR':
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))
