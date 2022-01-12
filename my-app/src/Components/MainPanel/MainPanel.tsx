@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
-import { changeBorderColor, changeElementBorder} from '../../store/actionsCreators/elementActionCreators';
+import { changeBorderColor, changeElementBorder, changeBorderSize} from '../../store/actionsCreators/elementActionCreators';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 
@@ -13,6 +13,7 @@ interface MainPanelProps {
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     editSLideBackgroundImg: (idSlides: Number[], newBackground: string) => void,
     changeBorderColor: (selection: SelectionType, color: string) => void,
+    changeBorderSize: (selection: SelectionType, size: number) => void,
     changeElementBorder: (selection: SelectionType, style: string) => void,
     addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 }
@@ -71,7 +72,9 @@ function MainPanel(props: MainPanelProps) {
                 <div className={styles.elementOutlineInscr}>Контур элемента</div>
                 <div className={styles.selectContainer}>
                     <input type="number" placeholder='Размер контура' id="tentacles" 
-                    name="tentacles" min="0" className={styles.elementOutlineSelect}></input>
+                    name="tentacles" min="0" className={styles.elementOutlineSelect}
+                    onChange = {(e) => {props.changeBorderSize(props.selection, Number(e.currentTarget.value))}}
+                    ></input>
                     <select onChange = {(e) => 
                     {if(e.currentTarget.value === 'Без границы'){
                         props.changeElementBorder(props.selection, 'none');
@@ -129,6 +132,7 @@ const mapDispatchToProps = ({
     changeBorderColor,
     addToHistory,
     changeElementBorder,
+    changeBorderSize,
 })
   
 function mapStateToProps(state: PresentationMaker) {
