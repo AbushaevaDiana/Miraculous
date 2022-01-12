@@ -17,6 +17,9 @@ export function MaxElement(props: miniElementProps){
        if(props.element.elementConcept.bold === true){
         fW = 'bold'
        }
+    //    if(props.element.elementConcept.bold === true){
+    //     fW = 'bold'
+    //    }
        let elementStyle = {
            width: (props.element.size.w*24/20),
            height: (props.element.size.h*24/20),
@@ -31,11 +34,12 @@ export function MaxElement(props: miniElementProps){
             fontSize: (props.element.elementConcept.size*24/20),
             fontFamily: props.element.elementConcept.font,
             fontWeight: fW,
+            border: 'none'
         }
        return (
         <>
             <div className={styles.element} style = {elementStyle}>
-                <textarea disabled className={styles.text}  style = {textStyle} defaultValue={props.element.elementConcept.textContent} />
+                <textarea disabled className={styles.text}  style = {textStyle} value={props.element.elementConcept.textContent} />
             </div>
         </>
      )

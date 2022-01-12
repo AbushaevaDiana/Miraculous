@@ -31,11 +31,13 @@ export function MiniElement(props: miniElementProps){
              fontSize: props.element.elementConcept.size/6,
              fontFamily: props.element.elementConcept.font,
              fontWeight: fW,
+             border: 'none'
          }
        return (
         <>
             <div className={styles.element} style = {elementStyle}>
-                <p className={styles.text}  style = {textStyle}>{props.element.elementConcept.textContent}</p>
+            <textarea disabled className={styles.text}  style = {textStyle} value={props.element.elementConcept.textContent} />
+                {/* <p className={styles.text}  style = {textStyle}>{props.element.elementConcept.textContent}</p> */}
             </div>
         </>
      )
