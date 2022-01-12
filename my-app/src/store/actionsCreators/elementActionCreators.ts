@@ -136,6 +136,26 @@ function changeTextColor(selection: SelectionType, color: string) {
   }
 }
 
+function changeTextSize(selection: SelectionType, size: number) {
+  return {
+      type: StateTypes.CHANGE_TEXT_SIZE,
+      payload: {
+          selection,
+          size,
+      }
+  }
+}
+
+function changeBorderSize(selection: SelectionType, size: number) {
+  return {
+      type: StateTypes.CHANGE_BORDER_WIDTH,
+      payload: {
+          selection,
+          size,
+      }
+  }
+}
+
 function setImageFilter(selection: SelectionType, filter: string) {
   return {
       type: StateTypes.SET_IMAGE_FILTER,
@@ -172,4 +192,4 @@ export {changeTextContent, moveElement, gotoElement,
        addRectangle, addTriangle, changeFillColor, changeLineColor,
        changeTextColor, changeBorderColor, changeElementWeigth,
        changeElementHeigth, moveElementX, moveElementY,
-       setImageFilter, changeElementBorder}
+       setImageFilter, changeElementBorder, changeTextSize, changeBorderSize}

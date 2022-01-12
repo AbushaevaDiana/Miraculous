@@ -6,12 +6,13 @@ import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 import { deleteElement, changeFillColor, changeLineColor, changeTextColor, changeElementWeigth,
- changeElementHeigth, moveElementX, moveElementY, setImageFilter} from '../../store/actionsCreators/elementActionCreators';
+ changeElementHeigth, moveElementX, moveElementY, setImageFilter, changeTextSize} from '../../store/actionsCreators/elementActionCreators';
 
 interface ElementPanelProps {
     deleteElement: (selection: SelectionType) => void,
     selection: SelectionType,
     changeTextColor: (selection: SelectionType, color: string) => void,
+    changeTextSize: (selection: SelectionType, size: number) => void,
     changeElementWeigth: (selection: SelectionType, w: number) => void,
     changeElementHeigth: (selection: SelectionType, h: number) => void,
     moveElementY: (selection: SelectionType, y: number) => void,
@@ -84,7 +85,10 @@ export function ElementPanel(props: ElementPanelProps) {
                                 <option className={styles.selectFieldOption}>Open Sans</option>
                                 <option className={styles.selectFieldOption}>Praise</option>
                             </select>
-                            <input placeholder='Размер шрифта' type="number" id="tentacles" name="tentacles" min="0" className={styles.selectField + ' ' + styles.fontSelectField}></input>
+                            <input placeholder='Размер шрифта' type="number" 
+                            id="tentacles" name="tentacles" min="0" 
+                            className={styles.selectField + ' ' + styles.fontSelectField}
+                            onChange = {(e) => props.changeTextSize(props.selection, Number(e.currentTarget.value))}></input>
                         </div>
                         <div className={styles.fontSettingsMark +  ' ' + styles.fontMark}>
                             <div className={styles.fontMarkIcon}>
@@ -200,6 +204,7 @@ const mapDispatchToProps = ({
     changeElementHeigth,
     addToHistory,
     setImageFilter,
+    changeTextSize,
 })
   
 function mapStateToProps(state: PresentationMaker) {

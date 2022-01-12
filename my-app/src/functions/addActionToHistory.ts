@@ -10,13 +10,16 @@ export function saveToHistory( history: History, newPresentation: Presentation, 
     selection: newSelection
   }
 
-  newHistory.currentIndex = history.currentIndex+1;
+  if(newHistory.actionlist[newHistory.currentIndex] !== newState){
+    newHistory.currentIndex = history.currentIndex+1;
 
-  const newActionlist = newHistory.actionlist.filter(
-    (value, currentIndex) => currentIndex <= newHistory.currentIndex && value
-  );
-  newHistory.actionlist = [...newActionlist, newState];
-  console.log(newHistory)
+    const newActionlist = newHistory.actionlist.filter(
+      (value, currentIndex) => currentIndex <= newHistory.currentIndex && value
+    );
+    newHistory.actionlist = [...newActionlist, newState];
+    console.log(newHistory)
+  }
+
   return newHistory
 }
 
