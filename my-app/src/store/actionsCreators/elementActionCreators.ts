@@ -136,6 +136,27 @@ function changeTextColor(selection: SelectionType, color: string) {
   }
 }
 
+function setTextBold(selection: SelectionType) {
+  return {
+      type: StateTypes.SET_TEXT_BOLD,
+      payload: selection
+  }
+}
+
+function setTextItalic(selection: SelectionType) {
+  return {
+      type: StateTypes.SET_TEXT_ITALIC,
+      payload: selection
+  }
+}
+
+function setTextUnderline(selection: SelectionType) {
+  return {
+      type: StateTypes.SET_TEXT_UNDERLINE,
+      payload: selection
+  }
+}
+
 function changeTextFont(selection: SelectionType, font: string) {
   return {
       type: StateTypes.CHANGE_TEXT_FONT,
@@ -203,4 +224,4 @@ export {changeTextContent, moveElement, gotoElement,
        changeTextColor, changeBorderColor, changeElementWeigth,
        changeElementHeigth, moveElementX, moveElementY,
        setImageFilter, changeElementBorder, changeTextSize, changeBorderSize,
-      changeTextFont}
+      changeTextFont, setTextUnderline, setTextItalic, setTextBold}

@@ -14,8 +14,16 @@ export function MiniElement(props: miniElementProps){
        textI = props.element.elementConcept.textContent;
        console.log(props.element.elementConcept.textContent)
        let fW: string = 'normal'
+       let fI: string = 'normal'
+       let fU: string = 'none'
        if(props.element.elementConcept.bold === true){
         fW = 'bold'
+       }
+       if(props.element.elementConcept.italic === true){
+        fI = 'italic'
+       }
+       if(props.element.elementConcept.underline === true){
+        fU = 'underline'
        }
         let elementStyle = {
             width: (props.element.size.w/6),
@@ -30,6 +38,8 @@ export function MiniElement(props: miniElementProps){
              color: props.element.elementConcept.color,
              fontSize: props.element.elementConcept.size/6,
              fontFamily: props.element.elementConcept.font,
+             textDecoration: fU,
+             fontStyle: fI,
              fontWeight: fW,
              border: 'none'
          }

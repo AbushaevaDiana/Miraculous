@@ -14,12 +14,17 @@ export function MaxElement(props: miniElementProps){
        textI = props.element.elementConcept.textContent;
        console.log(props.element.elementConcept.textContent)
        let fW: string = 'normal'
+       let fI: string = 'normal'
+       let fU: string = 'none'
        if(props.element.elementConcept.bold === true){
         fW = 'bold'
        }
-    //    if(props.element.elementConcept.bold === true){
-    //     fW = 'bold'
-    //    }
+       if(props.element.elementConcept.italic === true){
+        fI = 'italic'
+       }
+       if(props.element.elementConcept.underline === true){
+        fU = 'underline'
+       }
        let elementStyle = {
            width: (props.element.size.w*24/20),
            height: (props.element.size.h*24/20),
@@ -30,10 +35,12 @@ export function MaxElement(props: miniElementProps){
            borderWidth: props.element.border.width*24/20,
         }
         let textStyle = {
+            textDecoration: fU,
+            fontStyle: fI,
+            fontWeight: fW,
             color: props.element.elementConcept.color,
             fontSize: (props.element.elementConcept.size*24/20),
             fontFamily: props.element.elementConcept.font,
-            fontWeight: fW,
             border: 'none'
         }
        return (

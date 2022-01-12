@@ -279,6 +279,74 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+      //
+      case 'SET_TEXT_BOLD':
+        return state.map(slide => {
+          if (action.payload.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.idElements && element.elementConcept.type === 'text'){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        bold: !element.elementConcept.bold,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'SET_TEXT_ITALIC':
+        return state.map(slide => {
+          if (action.payload.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.idElements && element.elementConcept.type === 'text'){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        italic: !element.elementConcept.italic,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      case 'SET_TEXT_UNDERLINE':
+        return state.map(slide => {
+          if (action.payload.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if(element.idElement === action.payload.idElements && element.elementConcept.type === 'text'){
+                  return {
+                    ...element,
+                    elementConcept: {
+                        ...element.elementConcept,
+                        underline: !element.elementConcept.underline,
+                    } 
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+      //
       case 'CHANGE_TEXT_COLOR':
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))

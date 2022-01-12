@@ -7,7 +7,7 @@ import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 import { deleteElement, changeFillColor, changeLineColor, changeTextColor, changeElementWeigth,
  changeElementHeigth, moveElementX, moveElementY, setImageFilter, changeTextSize,
-changeTextFont} from '../../store/actionsCreators/elementActionCreators';
+changeTextFont, setTextBold, setTextItalic, setTextUnderline} from '../../store/actionsCreators/elementActionCreators';
 
 interface ElementPanelProps {
     deleteElement: (selection: SelectionType) => void,
@@ -23,6 +23,9 @@ interface ElementPanelProps {
     changeFillColor: (selection: SelectionType, color: string) => void,
     addToHistory: (presentation: Presentation, selection: SelectionType) => void,
     setImageFilter: (selection: SelectionType, filter: string) => void,
+    setTextBold: (selection: SelectionType) => void,
+    setTextItalic: (selection: SelectionType) => void,
+    setTextUnderline: (selection: SelectionType) => void,
 }
 
 export function ElementPanel(props: ElementPanelProps) {
@@ -102,13 +105,22 @@ export function ElementPanel(props: ElementPanelProps) {
                         </div>
                         <div className={styles.fontSettingsMark +  ' ' + styles.fontMark}>
                             <div className={styles.fontMarkIcon}>
-                                <button className={styles.bold + ' ' + styles.fontMarkIconButton}>А</button>
+                                <button className={styles.bold + ' ' + styles.fontMarkIconButton}
+                                onClick = {() => {
+                                    props.setTextBold(props.selection);
+                                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>А</button>
                             </div> 
                             <div className={styles.fontMarkIcon}>
-                                <button className={styles.italic + ' ' + styles.fontMarkIconButton}>А</button>
+                                <button className={styles.italic + ' ' + styles.fontMarkIconButton}
+                                onClick = {() => {
+                                    props.setTextItalic(props.selection);
+                                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>А</button>
                             </div>
                             <div className={styles.fontMarkIcon}>
-                                <button className={styles.underlined + ' ' + styles.fontMarkIconButton}>А</button>
+                                <button className={styles.underlined + ' ' + styles.fontMarkIconButton}
+                                onClick = {() => {
+                                    props.setTextUnderline(props.selection);
+                                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>А</button>
                             </div>
                             <div className={styles.fontMarkIcon}>
                                 <button className={styles.selectColor + ' ' + styles.fontMarkIconButton}>А</button>
@@ -216,6 +228,9 @@ const mapDispatchToProps = ({
     setImageFilter,
     changeTextSize,
     changeTextFont,
+    setTextBold,
+    setTextItalic,
+    setTextUnderline,
 })
   
 function mapStateToProps(state: PresentationMaker) {
