@@ -86,7 +86,8 @@ export function ElementPanel(props: ElementPanelProps) {
                     <div className={styles.fontContainerSettings +  ' ' + styles.fontSettings}>
                         <div className={styles.fontSettingsSelect +  ' ' + styles.fontSelect}>
                             <select className={styles.fontSelectField +  ' ' + styles.selectField}
-                            onChange = {(e) => {props.changeTextFont(props.selection, e.currentTarget.value)}}>
+                            onClick = {(e) => {props.changeTextFont(props.selection, e.currentTarget.value);
+                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                                 <option className={styles.selectFieldOption}>Roboto</option>
                                 <option className={styles.selectFieldOption}>Times New Roman</option>
                                 <option className={styles.selectFieldOption}>Lobster</option>
