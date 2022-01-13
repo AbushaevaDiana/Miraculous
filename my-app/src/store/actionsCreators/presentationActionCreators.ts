@@ -13,4 +13,11 @@ function openPresentation(newPresentation: Presentation) {
     }
 }
 
-export {savePresentation, openPresentation}
+function exportPresentation(newPresentation: Presentation) {
+    return{
+        type: StateTypes.EXPORT_PRESENTATION,
+        payload: newPresentation
+    }
+}
+
+export {savePresentation, openPresentation, exportPresentation}

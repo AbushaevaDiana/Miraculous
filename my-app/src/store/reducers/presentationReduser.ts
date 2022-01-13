@@ -6,7 +6,8 @@ import  presentationNameReduser  from "./presentationNameReduser";
 import slidelist from "./slideReduce";
 import slidelistReduser from "./slideReduce";
 import { undo, redo } from "../../functions/history_function";
-
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const stateStart: Presentation = {
     slidelist: [
@@ -38,42 +39,19 @@ export function loadFile(callback: (object: any) => void) {
     });
 }
 
-// export function loadFileGoogleDrive(callback: (object: any) => void) {
-//     const inputFile = document.createElement("input");
-//     inputFile.type = "file";
-//     inputFile.click();
-//     inputFile.addEventListener("change", () => {
-//       const file = inputFile.files?.[0] as File;
-
-//       fetch(window.URL.createObjectURL(file))
-//         .then((response) => response.json())
-//         .then((json) => {
-//           callback(json);
-//         });
-//     });
-// }
 
 
 const presentation: Reducer<Presentation, any> = (state: Presentation = stateStart, action: ActionType): Presentation => {
     switch (action.type) {
-        // case 'EXPORT_PRESENTATION':
-        //     console.log('save work');
-
-             
-        //     //создаем обьект элемента типа <a></a>
-        //     const download = document.createElement("a");
-        //     //добавляем в обьект <a></a> созданный URL
-        //     download.setAttribute("href", dataStr);
-        //     //добавляем в обьект атрибут скачать(При наличии атрибута download браузер не переходит по ссылке,
-        //     // а предложит скачать документ, указанный в адресе ссылки.) и передаем в качестве имени название
-        //     //презентации и json разрешение
-        //     download.setAttribute(
-        //       "download",
-        //       state.name + ".pdf"
-        //     );
-        //     downloadAnchorNode.click();
-        //     downloadAnchorNode.remove();
-        //     return state;
+        case 'EXPORT_PRESENTATION':
+            html2canvas(document.querySelector("#capture")).then(canvas => {
+                document.body.appendChild(canvas);  // if you want see your screenshot in body.
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF();
+                pdf.addImage(imgData, 'PNG', 0, 0);
+                pdf.save("download.pdf"); 
+            });
+            return state
         case 'SAVE_PRESENTATION':
             console.log('save work');
             //прверащаем обьект в json строку

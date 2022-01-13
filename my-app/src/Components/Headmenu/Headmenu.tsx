@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { addSlide, deleteSlide, editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
 import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
-import { savePresentation, openPresentation } from '../../store/actionsCreators/presentationActionCreators';
+import { savePresentation, openPresentation, exportPresentation } from '../../store/actionsCreators/presentationActionCreators';
 import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
 import {loadFile} from '../../store/reducers/presentationReduser'
 import { changeMode } from '../../store/actionsCreators/modeActionCreators'
@@ -27,6 +27,7 @@ interface HeadmenuProps {
     deleteSlide: (idSlide: Number[]) => void,
     savePresentation: () => void,
     openPresentation: (newPresentation: Presentation) => void,
+    exportPresentation: (newPresentation: Presentation) => void,
     changePresentationNAME: (name: string) => void,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     addPicture: (src: string) => void,
@@ -116,6 +117,7 @@ const mapDispatchToProps = {
     openPresentation,
     changeMode,
     addToHistory,
+    exportPresentation,
 }
 
 const mapStateToProps = (state: PresentationMaker) => ({
