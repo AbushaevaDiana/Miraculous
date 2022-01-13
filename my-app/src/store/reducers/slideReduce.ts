@@ -435,6 +435,33 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               return slide
             }
       });
+
+      case 'MOVE_ELEMENT':
+        console.log('зашел в move element!');
+        console.log(action.payload);
+        return state.map(slide => {
+          if (action.payload.selection.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if (element.selected === true){
+                  console.log('зашел в улсовие2')
+                  return {
+                    ...element,
+                    position: {
+                      x: element.position.x + action.payload.position.x,
+                      y: element.position.y + action.payload.position.y,
+                    }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+
       case 'CHANGE_ELEMENT_HEIGTH':
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))
