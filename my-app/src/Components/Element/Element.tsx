@@ -7,6 +7,7 @@ import { changeTextContent, moveElement, gotoElement } from '../../store/actions
 import store from '../../store/store';
 import { useMoveAndResize } from '../../Hooks/useMoving';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
+import { useDragAndDrop } from '../../Hooks/draganddrops_2';
 
 interface ElementProps{
     element: ElementType,
@@ -16,27 +17,31 @@ interface ElementProps{
     gotoElement: (idElement: Number) => void,
     addToHistory: (presentation: Presentation, selection: SelectionType) => void,
 };
+type DeltaType = {x: number, y: number};
+   
 
 export function Element(props: ElementProps){
-   
     const [moving, setMoving] = useState(false);
-    const elementRef = useRef<HTMLDivElement>(null);
+    const [delta, setDelta] = useState<DeltaType>({x: 0, y:0});
+    const elementRef = useRef<SVGSVGElement>(null);
+    const getSelection = () => props.selection;
+    useDragAndDrop(elementRef, setDelta, getSelection, props.moveElement);
 
-    useEffect(() => {
-        !moving && props.moveElement(props.selection, posit)
-    })
+    // useEffect(() => {
+    //     !moving && props.moveElement(props.selection, posit)
+    // })
 
-    const [p, s] = useMoveAndResize(
-        elementRef,
-        // resizeRef,
-        props.element.position,
-        props.element.selected,
-        (status) => {
-        props.element.selected && setMoving(status);
-        });
+    // const [p, s] = useMoveAndResize(
+    //     // elementRef,
+    //     // resizeRef,
+    //     props.element.position,
+    //     props.element.selected,
+    //     (status) => {
+    //     props.element.selected && setMoving(status);
+    //     });
 
         
-    const posit = p as Position;
+    // const posit = p as Position;
     //const sz = s as Size;
 
 
@@ -198,13 +203,13 @@ export function Element(props: ElementProps){
                 width: props.element.size.w,
                 height: props.element.size.h,
                 WebkitFilter: webFilter,
-                top: props.element.position.y,
-                left: props.element.position.x
+                top: props.element.position.y + delta.y,
+                left: props.element.position.x + delta.x,
             }
             let width: number = (props.element.size.w - 6) 
             let heigth: number = (props.element.size.h - 6)
             return (
-                <svg style={elementStyle} className = {styles.element} 
+                <svg ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                       <rect x="3" y="3" width={width} height={heigth} 
