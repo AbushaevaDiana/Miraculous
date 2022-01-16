@@ -85,7 +85,7 @@ export type Slide = {
     selected: boolean,
 };
 
-export type Effect = 'rotation' | 'none' | 'increase';
+export type Effect = 'rotation' | 'none' | 'increase' | 'fading';
 
 export type Color = {
     type: 'color',

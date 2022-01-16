@@ -37,13 +37,27 @@
     animation-fill-mode: both;
     transform-origin: 0% 100%;
     animation: scale 1s;
+}
 
+@keyframes fading {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.animation3{
+    animation-fill-mode: both;
+    transform-origin: 0% 100%;
+    animation: fading 1s;
 }
 
 .animationNon{
     transform-origin: 0% 100%;
     /*animation-name: leaf-odd-grow;*/
-    animation-duration: 1s;
+    animation-duration: 2s;
     animation-fill-mode: both;
 }
 

@@ -41,6 +41,9 @@ export function Preview(props: PropsPreview) {
     if(mainSlide.effects == 'rotation'){
       animation = styles.animation2
     }
+    if(mainSlide.effects == 'fading'){
+      animation = styles.animation3
+    }
     return (
         <>
             <div className={styles.previewContainer}>

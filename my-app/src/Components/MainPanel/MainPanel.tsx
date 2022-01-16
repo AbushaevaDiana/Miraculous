@@ -130,12 +130,16 @@ function MainPanel(props: MainPanelProps) {
                         props.addSlideEffect('rotation');
                         props.addToHistory(store.getState().presentation, store.getState().selection);
                     };
+                    if(e.currentTarget.value === 'Проявление'){
+                        props.addSlideEffect('fading');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
+                    };
                     }}
                 className={styles.elementOutlineSelect + ' ' + styles.elementOutlineSelectSmall}>
                     <option  className={styles.elementOutlineOption}>Без анимации</option>
                     <option className={styles.elementOutlineOption}>Увелечение</option>
                     <option className={styles.elementOutlineOption}>Поворот</option>
-                    <option className={styles.elementOutlineOption}>оРиГаМи</option>
+                    <option className={styles.elementOutlineOption}>Проявление</option>
                 </select>
             </div>
         </>
