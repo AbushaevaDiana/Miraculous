@@ -27,7 +27,7 @@ interface HeadmenuProps {
     deleteSlide: (idSlide: Number[]) => void,
     savePresentation: () => void,
     openPresentation: (newPresentation: Presentation) => void,
-    exportPresentation: (newPresentation: Presentation) => void,
+    exportPresentation: () => void,
     changePresentationNAME: (name: string) => void,
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     addPicture: (src: string) => void,
@@ -83,7 +83,7 @@ export function Headmenu(props: HeadmenuProps) {
                     <li className= {styles.headmenuLi}>Файл
                         <ul className={styles.submenu}>
                             <li onClick = {() => props.changeMode()}>Предпросмотр</li>
-                            <li>Сохранить в pdf</li>
+                            <li onClick = {() => props.exportPresentation()}>Сохранить в pdf</li>
                             <li onClick={() => props.savePresentation()}>Сохранить в json</li>
                             <li onClick = {() => loadFile((object) => {props.openPresentation(object)})}>Загрузить из файла</li>
                         </ul>

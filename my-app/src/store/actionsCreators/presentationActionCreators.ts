@@ -1,8 +1,8 @@
 import {Presentation, StateTypes } from "../../types";
 
-function savePresentation() {
+function exportPresentation() {
     return {
-        type: StateTypes.SAVE_PRESENTATION,
+        type: StateTypes.EXPORT_PRESENTATION,
     }
 }
 
@@ -13,10 +13,9 @@ function openPresentation(newPresentation: Presentation) {
     }
 }
 
-function exportPresentation(newPresentation: Presentation) {
+function savePresentation() {
     return{
-        type: StateTypes.EXPORT_PRESENTATION,
-        payload: newPresentation
+        type: StateTypes.SAVE_PRESENTATION,
     }
 }
 
