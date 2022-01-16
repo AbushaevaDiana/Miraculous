@@ -84,7 +84,7 @@ export type Slide = {
     selected: boolean,
 };
 
-export type Effect = 'occurrence' | 'fading';
+export type Effect = 'occurrence' | 'fading' | 'none';
 
 export type Color = {
     type: 'color',

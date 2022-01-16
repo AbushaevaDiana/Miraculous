@@ -40,27 +40,10 @@ export function loadFile(callback: (object: any) => void) {
 const presentation: Reducer<Presentation, any> = (state: Presentation = stateStart, action: ActionType): Presentation => {
     switch (action.type) {
         case 'EXPORT_PRESENTATION':
-            console.log('export pdf');
-            // for(let i=0; i< state.slidelist.length; i++){
-            //     let id = String(state.slidelist[i].idSlide);
-            //     const input = document.getElementById(id);
-            //     if(input !== null){
-            //       html2canvas(input)
-            //       .then((canvas) => {
-            //        const imgData = canvas.toDataURL('image/png', 1);
-            //        const pdf = new jsPDF('l');
-            //        pdf.addPage();
-            //        pdf.addImage(imgData, 'JPEG', 0, 0, 300, 180);
-            //        // pdf.output('dataurlnewwindow');
-            //        pdf.save("download.pdf");
-            //     });
-            //     }
-            // };  
             saveProgramAsPDF(state);
             return state
         case 'SAVE_PRESENTATION':
             console.log('save work');
-            //прверащаем обьект в json строку
             const toJSON = JSON.stringify(state);
             //кодируем эту строку в виде Url, чтобы избежать некорректных запросов к серверу
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(toJSON);

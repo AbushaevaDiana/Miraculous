@@ -33,7 +33,7 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
           type: 'color',
           color: '#FFFFFF'
         },
-        effects: 'occurrence',
+        effects: 'none',
         selected: false,
       }]);
     case 'DELETE_SLIDE':

@@ -1,6 +1,6 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { ActionType, ElementType, Img, Presentation, PresentationMaker, Slide, TextType } from "../types";
+import { ElementType, Presentation, Slide} from "../types";
 
 const exportWidth = 1110
 const exportHeight = 660

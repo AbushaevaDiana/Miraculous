@@ -7,6 +7,29 @@
     justify-content: center;
 }
 
+@keyframes leaf-odd-grow {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+.animation1{
+    transform-origin: 0% 100%;
+    animation-name: leaf-odd-grow;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.animationNon{
+    transform-origin: 0% 100%;
+    /*animation-name: leaf-odd-grow;*/
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
 .previewContent {
     position: relative;
     width: 73%;
@@ -45,3 +68,5 @@
 .end{
     background: url(../img/check_mark_complete_done_good_heart_ok_valentine_icon_146714.png) no-repeat center /100% 100%;
 }
+
+

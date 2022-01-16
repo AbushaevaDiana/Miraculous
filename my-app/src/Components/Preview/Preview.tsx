@@ -33,18 +33,25 @@ export function Preview(props: PropsPreview) {
     const mainSLideStyle = {
       background: back,
     };
+
+    let animation = styles.animationNon;
+    if(mainSlide.effects != 'none'){
+      animation = styles.animation1
+    }
     return (
         <>
             <div className={styles.previewContainer}>
-                <div style={mainSLideStyle}  className={styles.previewContent}>
+                <div style={mainSLideStyle} key = {mainSlide.idSlide} id = 'Preview' 
+                className={styles.previewContent + ' ' + animation}>
                     <ul> 
                         {mainSlide.elementlist.map(element => <MaxElement key = {element.idElement} element = {element}></MaxElement>)}
                     </ul>
-                    <nav className={styles.navigator}>
+                </div>
+                <nav className={styles.navigator}>
                       <button className={styles.left + " " + styles.buttons}
                       onClick={() => {
                         if(i > 0){
-                        props.gotoSlide(props.slidelist[i-1].idSlide)}
+                        props.gotoSlide(props.slidelist[i-1].idSlide)};
                         }}></button>
                       <button className={styles.right + " " + styles.buttons}
                       onClick={() => {
@@ -53,8 +60,7 @@ export function Preview(props: PropsPreview) {
                         }}></button>
                       <button className={styles.end + " " + styles.buttons}
                       onClick = {() => props.changeMode()}></button>
-                    </nav>
-                </div>
+                </nav>
             </div>
         </>
     )
