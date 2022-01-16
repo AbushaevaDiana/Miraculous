@@ -83,7 +83,7 @@ export function Headmenu(props: HeadmenuProps) {
                     <li className= {styles.headmenuLi}>Файл
                         <ul className={styles.submenu}>
                             <li onClick = {() => props.changeMode()}>Предпросмотр</li>
-                            <li onClick = {() => props.exportPresentation()}>Сохранить в pdf</li>
+                            <li onClick = {() => props.exportPresentation()}>Экспорт в pdf</li>
                             <li onClick={() => props.savePresentation()}>Сохранить в json</li>
                             <li onClick = {() => loadFile((object) => {props.openPresentation(object)})}>Загрузить из файла</li>
                         </ul>
