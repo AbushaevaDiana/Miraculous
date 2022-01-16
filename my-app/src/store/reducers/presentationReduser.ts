@@ -42,8 +42,8 @@ export function loadFile(callback: (object: any) => void) {
 }
 
 
-const exportWidth = 1050
-const exportHeight = 730
+const exportWidth = 1110
+const exportHeight = 660
 
 
 function setElementToPagePDF(progSlide: ElementType, doc:jsPDF) {
