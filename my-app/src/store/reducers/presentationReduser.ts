@@ -13,7 +13,7 @@ const stateStart: Presentation = {
             background:{
                 type: 'color', 
                 color: '#FFFFFF'},
-            effects: 'fading',
+            effects: 'none',
             idSlide: 1,
             selected: false,
         },   

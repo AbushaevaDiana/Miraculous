@@ -2,20 +2,22 @@ import '../../App.css';
 import styles from './MainPanel.module.css';
 import { connect } from 'react-redux';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
-import { Presentation, PresentationMaker, SelectionType } from '../../types';
+import { addSlideEffect, editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
+import { Presentation, PresentationMaker, SelectionType, Slide } from '../../types';
 import { changeBorderColor, changeElementBorder, changeBorderSize} from '../../store/actionsCreators/elementActionCreators';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 
 interface MainPanelProps {
     selection: SelectionType,
+    slidelist: Slide[],
     editSLideBackgroundColor: (idSlides: Number[], newBackground: string) => void,
     editSLideBackgroundImg: (idSlides: Number[], newBackground: string) => void,
     changeBorderColor: (selection: SelectionType, color: string) => void,
     changeBorderSize: (selection: SelectionType, size: number) => void,
     changeElementBorder: (selection: SelectionType, style: string) => void,
     addToHistory: (presentation: Presentation, selection: SelectionType) => void,
+    addSlideEffect: (effect: string) => void,   
 }
 
 function MainPanel(props: MainPanelProps) {
@@ -115,10 +117,24 @@ function MainPanel(props: MainPanelProps) {
             </div>
             <div className={styles.animationContainer}>
                 <div className={styles.animationIcon}></div>
-                <select className={styles.elementOutlineSelect + ' ' + styles.elementOutlineSelectSmall}>
+                <select onClick = {(e) => 
+                    {if(e.currentTarget.value === 'Без анимации'){
+                        props.addSlideEffect('none');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
+                    };
+                    if(e.currentTarget.value === 'Увелечение'){
+                        props.addSlideEffect('increase');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
+                    };
+                    if(e.currentTarget.value === 'Поворот'){
+                        props.addSlideEffect('rotation');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);
+                    };
+                    }}
+                className={styles.elementOutlineSelect + ' ' + styles.elementOutlineSelectSmall}>
                     <option  className={styles.elementOutlineOption}>Без анимации</option>
-                    <option className={styles.elementOutlineOption}>Появление</option>
-                    <option className={styles.elementOutlineOption}>Вспытие</option>
+                    <option className={styles.elementOutlineOption}>Увелечение</option>
+                    <option className={styles.elementOutlineOption}>Поворот</option>
                     <option className={styles.elementOutlineOption}>оРиГаМи</option>
                 </select>
             </div>
@@ -133,10 +149,11 @@ const mapDispatchToProps = ({
     addToHistory,
     changeElementBorder,
     changeBorderSize,
+    addSlideEffect
 })
   
 function mapStateToProps(state: PresentationMaker) {
-    return {selection: state.selection} 
+    return {selection: state.selection, slidelist: state.presentation.slidelist} 
 }
   
 export default connect(mapStateToProps, mapDispatchToProps)(MainPanel)

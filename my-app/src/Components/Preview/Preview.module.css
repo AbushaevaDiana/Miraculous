@@ -5,6 +5,7 @@
     background: black;
     display: flex;
     justify-content: center;
+    scroll-behavior: unset;
 }
 
 @keyframes leaf-odd-grow {
@@ -14,13 +15,29 @@
     100% {
       transform: scale(1);
     }
-  }
+}
 
 .animation1{
     transform-origin: 0% 100%;
     animation-name: leaf-odd-grow;
-    animation-duration: 1s;
+    animation-duration: 0.7s;
     animation-fill-mode: both;
+}
+
+@keyframes scale {
+    0% {
+      transform: rotateX(-90deg) rotateZ(-90deg) scale(0);
+    }
+    100%{
+        transform: rotateX(0deg) rotateZ(0deg) scale(1);
+    }
+  }
+
+.animation2{
+    animation-fill-mode: both;
+    transform-origin: 0% 100%;
+    animation: scale 1s;
+
 }
 
 .animationNon{

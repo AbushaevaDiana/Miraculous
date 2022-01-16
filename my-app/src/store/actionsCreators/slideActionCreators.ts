@@ -5,9 +5,15 @@ function addSlide() {
     return {
       type: StateTypes.ADD_SLIDE
     }
-  }
-  
-  
+}
+
+function addSlideEffect(effect: string) {
+    return {
+      type: StateTypes.ADD_SLIDE_EFFECT,
+      payload: effect,
+    }
+}
+ 
 function editSLideBackgroundColor(idSlides: Number[], newBackground: string) {
     return {
         type: StateTypes.EDIT_SLIDE_BACKGROUND_COLOR,
@@ -57,7 +63,7 @@ function gotoSlides(idSlide: Number) {
 }
 
 
-export { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor, editSLideBackgroundImg, gotoSlides}
+export { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor, editSLideBackgroundImg, gotoSlides, addSlideEffect}
 
 
 /////////////

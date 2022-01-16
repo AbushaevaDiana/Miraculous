@@ -30,7 +30,7 @@ export const initialState:  PresentationMaker = {
                         background: {
                             type: 'color',
                             color: '#FFFFFF'},
-                        effects: 'fading',
+                        effects: 'none',
                         idSlide: 1,
                         selected: false,
                     },   

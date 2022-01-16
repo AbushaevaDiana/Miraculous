@@ -3,6 +3,7 @@ export type ActionType = any
 export enum StateTypes {
     ADD_SLIDE = 'ADD_SLIDE',
     DELETE_SLIDE = 'DELETE_SLIDE',
+    ADD_SLIDE_EFFECT = 'ADD_SLIDE_EFFECT',
     MOVE_SLIDE = 'MOVE_SLIDE',
     GOTO_SLIDE = 'GOTO_SLIDE',
     GOTO_SLIDES = 'GOTO_SLIDES',
@@ -84,7 +85,7 @@ export type Slide = {
     selected: boolean,
 };
 
-export type Effect = 'occurrence' | 'fading' | 'none';
+export type Effect = 'rotation' | 'none' | 'increase';
 
 export type Color = {
     type: 'color',

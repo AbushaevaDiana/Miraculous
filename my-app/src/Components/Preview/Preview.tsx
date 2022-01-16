@@ -35,8 +35,11 @@ export function Preview(props: PropsPreview) {
     };
 
     let animation = styles.animationNon;
-    if(mainSlide.effects != 'none'){
+    if(mainSlide.effects == 'increase'){
       animation = styles.animation1
+    }
+    if(mainSlide.effects == 'rotation'){
+      animation = styles.animation2
     }
     return (
         <>
@@ -57,7 +60,9 @@ export function Preview(props: PropsPreview) {
                       onClick={() => {
                         if(i < props.slidelist.length-1){
                         props.gotoSlide(props.slidelist[i+1].idSlide)}
-                        }}></button>
+                        else{props.changeMode()}
+                        }
+                        }></button>
                       <button className={styles.end + " " + styles.buttons}
                       onClick = {() => props.changeMode()}></button>
                 </nav>

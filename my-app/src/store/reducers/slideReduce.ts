@@ -67,6 +67,14 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             } else { 
                 return slide}
         });
+    case 'ADD_SLIDE_EFFECT':
+      console.log('effect change work')
+        return state.map(slide => {
+          return{
+            ...slide,
+            effects: action.payload
+          }
+      });
     case 'EDIT_SLIDE_BACKGROUND_COLOR':
       console.log('back color change work')
         return state.map(slide => {
