@@ -45,7 +45,7 @@ export function MiniElement(props: miniElementProps){
          }
        return (
         <>
-            <div className={styles.element} style = {elementStyle}>
+            <div id={String(props.element.idElement)} className={styles.element} style = {elementStyle}>
             <textarea disabled className={styles.text}  style = {textStyle} value={props.element.elementConcept.textContent} />
                 {/* <p className={styles.text}  style = {textStyle}>{props.element.elementConcept.textContent}</p> */}
             </div>
@@ -75,7 +75,7 @@ export function MiniElement(props: miniElementProps){
          }
         return (
          <>              
-            <img className = {styles.element} style={elementStyle} src={src} alt={String(props.element.idElement)} /> 
+            <img id={String(props.element.idElement)} className = {styles.element} style={elementStyle} src={src} alt={String(props.element.idElement)} /> 
          </>
       )
      }
@@ -91,7 +91,7 @@ export function MiniElement(props: miniElementProps){
             let width: number = props.element.size.w/12 
             let heigth: number = props.element.size.h/12
             return (
-                <svg style={elementStyle} className = {styles.element}>
+                <svg id={String(props.element.idElement)} style={elementStyle} className = {styles.element}>
                     <ellipse rx={width-1} ry={heigth-1} cx={width} cy={heigth} 
                     fill={props.element.elementConcept.fillcolor} 
                     stroke={props.element.elementConcept.linecolor} strokeWidth="1"/>
@@ -115,7 +115,7 @@ export function MiniElement(props: miniElementProps){
             let y3: string = String(h6 - 1 )
             let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
             return (
-               <svg style={elementStyle} className = {styles.element}>
+               <svg id={String(props.element.idElement)} style={elementStyle} className = {styles.element}>
                   <polygon points={point} fill={props.element.elementConcept.fillcolor} 
                   stroke={props.element.elementConcept.linecolor} stroke-width="1"/>
                </svg>             
@@ -133,7 +133,7 @@ export function MiniElement(props: miniElementProps){
             let width: number = (w6 - 2) 
             let heigth: number = (h6 - 2)
             return (
-                <svg style={elementStyle} className = {styles.element}>
+                <svg id={String(props.element.idElement)} style={elementStyle} className = {styles.element}>
                       <rect x="1" y="1" width={width} height={heigth} 
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="1"/>

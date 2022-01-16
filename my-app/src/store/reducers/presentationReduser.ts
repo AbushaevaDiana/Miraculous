@@ -1,14 +1,9 @@
 import { Reducer } from "redux";
-import { combineReducers } from "redux";
 import { ActionType, ElementType, Img, Presentation, PresentationMaker, Slide, TextType } from "../../types";
 import name from "./presentationNameReduser";
-import  presentationNameReduser  from "./presentationNameReduser";
 import slidelist from "./slideReduce";
-import slidelistReduser from "./slideReduce";
 import { undo, redo } from "../../functions/history_function";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import store from "../store";
+import { saveProgramAsPDF } from "../../functions/exportFunctions";
 
 
 const stateStart: Presentation = {
@@ -41,66 +36,6 @@ export function loadFile(callback: (object: any) => void) {
     });
 }
 
-
-const exportWidth = 1110
-const exportHeight = 660
-
-
-function setElementToPagePDF(progSlide: ElementType, doc:jsPDF) {
-if (progSlide.elementConcept.type === "img"){
-let imgData2 = progSlide.elementConcept.src;
-doc.addImage(imgData2, 'PNG', +progSlide.position.x, +progSlide.position.y, +progSlide.size.w, +progSlide.size.h)
-}
-else if (progSlide.elementConcept.type === "text"){
-   let textData: TextType = progSlide.elementConcept;
-   doc.addFont(textData.textContent, String(progSlide.idElement), textData.font)}
-else if (progSlide.elementConcept.type === "figure"){ 
-   let fig = 'elipse';
-   if(progSlide.elementConcept.figureConcept == 'Rectangel') fig = 'rectangel';
-   if(progSlide.elementConcept.figureConcept == 'Triangel') fig = 'triangel';
-   doc.addSvgAsImage(fig, progSlide.position.x, progSlide.position.y, progSlide.size.w, progSlide.size.h);
-}
-return doc
-}
-
-function setPagePDF(progSlide: Slide, doc:jsPDF) { 
-if (progSlide.background.type == "img") {
-let imgData2 = progSlide.background.src
-doc.addImage(imgData2, 'PNG', +0, +0, +exportWidth, +exportHeight)
-}
-if (progSlide.background.type == "color") {
-doc.setFillColor(progSlide.background.color)
-doc.rect(0, 0, exportWidth, exportHeight, "F")
-}
-for (var i = 0; i < progSlide.elementlist.length; i++) {
-doc = setElementToPagePDF(progSlide.elementlist[i], doc)
-}
-return doc
-}
-
-function setPDF(prog: Presentation, doc: jsPDF) {
-for (var i = 0; i < prog.slidelist.length; i++){
-doc = setPagePDF(prog.slidelist[i], doc)
-if (i + 1 < prog.slidelist.length) {
-doc.addPage([exportWidth, exportHeight], "landscape")
-}
-}
-}
-
-async function saveDocPDF(prog: Presentation, Path:string, doc:jsPDF){
-await setPDF(prog, doc)
-doc.save(Path + "/" + prog.name + ".pdf")
-}
-
-function saveProgramAsPDF(prog: Presentation) {
-const Path: string = ''
-let doc = new jsPDF({
-orientation: "landscape",
-unit: "px",
-format: [exportWidth, exportHeight]
-}) 
-saveDocPDF(prog, Path, doc)
-}
 
 const presentation: Reducer<Presentation, any> = (state: Presentation = stateStart, action: ActionType): Presentation => {
     switch (action.type) {
