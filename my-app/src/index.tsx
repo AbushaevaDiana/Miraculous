@@ -8,6 +8,21 @@ import { createStore } from 'redux';
 import store from './store/store';
 import { Editer, PresentationMaker } from './types';
 import {saveToHistory} from '../src/functions/addActionToHistory'
+import { redoAct, undoAct } from './store/actionsCreators/historyActionCreators';
+import { redo, undo } from './functions/history_function';
+
+document.addEventListener('keydown', (e) => {
+  if((e.ctrlKey) && (e.key=='z' || e.key=='Z')){
+  document.removeEventListener('keydown', ()=>{})
+  console.log('ctrl z');
+  store.dispatch(undoAct(undo(store.getState())));
+  }
+  if((e.ctrlKey) && (e.key=='y' || e.key=='Y')){
+    document.removeEventListener('keydown', ()=>{})
+    console.log('ctrl y');
+    store.dispatch(redoAct(redo(store.getState())));
+    }
+})
 
 ReactDOM.render(
   <React.StrictMode>

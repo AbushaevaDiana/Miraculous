@@ -75,6 +75,19 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             effects: action.payload
           }
       });
+    case 'MOVE_SLIDE': 
+      console.log('move slide')
+      let end = action.payload.start;
+      let start = action.payload.end;
+      return state
+
+    //   return state.map(slide => {
+    //     if (slide.idSlide == action.payload.start.idSlide)
+    //     {return action.payload.end}
+    //     else{if (slide.idSlide == action.payload.end.idSlide)
+    //     {return action.payload.start}
+    //     else {return slide}}
+    // });
     case 'EDIT_SLIDE_BACKGROUND_COLOR':
       console.log('back color change work')
         return state.map(slide => {

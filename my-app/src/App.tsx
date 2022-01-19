@@ -19,22 +19,18 @@ interface AppProps {
   redoAct: (presentationMaker: PresentationMaker) => void,
 }
 
+
 function App(props: AppProps) {
-  if(props.presentationMaker.mode === 'editor'){
+    if(props.presentationMaker.mode === 'editor'){
     return (
-      <div className='App'  onKeyDown = {(e) => {
-        if(e.ctrlKey){
-          console.log('ctrl z')
-          props.redoAct(redo(store.getState()))
-        }
-      }}>
-        <header className='AppHeader'>
+      <div className='App'>
+        <div className='AppHeader'>
           <Headmenu></Headmenu>
-        </header>
-        <body className='AppBody'>
+        </div>
+        <div className='AppBody'>
           <Slidemenu></Slidemenu>
-          <PresentationContent></PresentationContent>
-        </body>
+          <PresentationContent ></PresentationContent>
+        </div>
       </div>
     )
   }

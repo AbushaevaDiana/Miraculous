@@ -3,16 +3,18 @@ import styles from './Slide.module.css';
 import { PresentationMaker, SelectionType, Slide, Color, Presentation } from '../../types';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
-import { addSlide, deleteSlide, gotoSlide, gotoSlides } from '../../store/actionsCreators/slideActionCreators'
+import { addSlide, deleteSlide, gotoSlide, gotoSlides, moveSlide } from '../../store/actionsCreators/slideActionCreators'
 import { MiniElement } from '../Element/miniElement'
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
+import slidelist from '../../store/reducers/slideReduce';
 
 
 interface SLideProps{
    slide: Slide,
    gotoSlide: (idSlide: number) => void,
    gotoSlides: (idSlide: number) => void,
+   moveSlide: (start: Slide, end: Slide) => void,
    selection: SelectionType,
    index: Number,
    addToHistory: (presentation: Presentation, selection: SelectionType) => void,
@@ -22,10 +24,11 @@ export function SlideView(props:SLideProps){
    let privet = styles.slidemenuListSlide;
    let borderCol: string = 'none';
    let back: string = '';
+   let dragging: boolean = true;
    if(props.slide.background.type === 'img'){
      back = 'url(' + props.slide.background.src + ') no-repeat center /100% 100%'
      if(props.slide.selected === true){
-      borderCol = '#000'
+      borderCol = '#000';
    } else {borderCol = ''}
    }
    if(props.slide.background.type === 'color'){
@@ -39,11 +42,31 @@ export function SlideView(props:SLideProps){
       background: back,
     };
 
-   console.log(props.slide.background)
+    const [currentSlide, setCurrentSlide] = useState<Slide>(props.slide);
+    function onDragStartHangler(e: React.DragEvent<HTMLDivElement>, slide: Slide){
+       console.log('drag', slide);
+       setCurrentSlide(slide);
+    }
+    function onDragLeaveHangler(e: React.DragEvent<HTMLDivElement>){}
+    function onDragEndHangler(e: React.DragEvent<HTMLDivElement>){}
+    function onDragOverHangler(e: React.DragEvent<HTMLDivElement>){
+      e.preventDefault();
+      
+    }
+    function onDropHangler(e: React.DragEvent<HTMLDivElement>, slide: Slide){
+       e.preventDefault();
+       props.moveSlide(currentSlide, slide);
+       console.log('drop', slide)
+    }
       return (
          <>
                 <p className={styles.slidemenuListSlideIndex}>{props.index}</p>
-                <div key={props.slide.idSlide} style={sLideStyle} className={privet} 
+                <div draggable={dragging} key={props.slide.idSlide} style={sLideStyle} className={privet} 
+                  onDragStart = {(e) => onDragStartHangler(e, props.slide)}
+                  onDragLeave = {(e) => onDragLeaveHangler(e)}
+                  onDragEnd ={(e) => onDragEndHangler(e)}
+                  onDragOver = {(e) => onDragOverHangler(e)}
+                  onDrop = {(e) => onDropHangler(e, props.slide)}
                   onClick={(e) => {
                     if(!e.ctrlKey){
                         props.gotoSlide(props.slide.idSlide);
@@ -68,6 +91,7 @@ const mapDispatchToProps = {
    gotoSlide,
    addToHistory,
    gotoSlides,
+   moveSlide,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlideView);
