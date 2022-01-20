@@ -139,14 +139,14 @@ export function Element(props: ElementProps){
         }
         return (
          <>
-           <div ref={elementRef} style={elementStyle} className = {styles.element} 
+           <svg ref={elementRef} style={elementStyle} className = {styles.element} 
            onClick={(e) => {props.gotoElement(props.element.idElement);
             props.addToHistory(store.getState().presentation, store.getState().selection)
             //    e.stopPropagation();
             //    setMoving(true);
             }}>               
-               <img draggable src={src} style={imgStyle} alt={String(props.element.idElement)} /> 
-            </div>
+               <image href={src} style={imgStyle}/> 
+            </svg>
          </>
       )
      }
