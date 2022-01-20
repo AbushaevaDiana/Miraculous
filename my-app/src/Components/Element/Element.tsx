@@ -170,14 +170,16 @@ export function Element(props: ElementProps){
             let width: number = props.element.size.w/2;
             let heigth: number = props.element.size.h/2; 
             return (
-                <svg ref={elementRef} style={elementStyle} className = {styles.element} 
+                <div ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                    <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
-                    fill={props.element.elementConcept.fillcolor} 
-                    stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
+                    <svg>
+                        <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
+                        fill={props.element.elementConcept.fillcolor} 
+                        stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
+                    </svg> 
                     <div className = {styles.resize} style={resizeStyle}></div>
-                </svg>               
+                </div>              
             )
         }
         if (props.element.elementConcept.figureConcept === 'Triangel') {
@@ -196,12 +198,15 @@ export function Element(props: ElementProps){
             let y3: string = String(props.element.size.h - 3 )
             let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
             return (
-               <svg ref={elementRef} style={elementStyle} className = {styles.element} 
+               <div ref={elementRef} style={elementStyle} className = {styles.element} 
                onClick={() => {props.gotoElement(props.element.idElement);
-                props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                  <polygon points={point} fill={props.element.elementConcept.fillcolor} 
-                  stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
-               </svg>             
+               props.addToHistory(store.getState().presentation, store.getState().selection)}}>
+                   <svg>
+                      <polygon points={point} fill={props.element.elementConcept.fillcolor} 
+                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
+                  </svg> 
+                  <div className = {styles.resize} style={resizeStyle}></div> 
+               </div>           
             )
         }
         if (props.element.elementConcept.figureConcept === 'Rectangel') {
@@ -215,13 +220,16 @@ export function Element(props: ElementProps){
             let width: number = (props.element.size.w - 6) 
             let heigth: number = (props.element.size.h - 6)
             return (
-                <svg ref={elementRef} style={elementStyle} className = {styles.element} 
+                <div ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
+                    <svg>
                       <rect x="3" y="3" width={width} height={heigth} 
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
-                </svg>               
+                    </svg> 
+                    <div className = {styles.resize} style={resizeStyle}></div>  
+                </div>            
             )
         }
     }
