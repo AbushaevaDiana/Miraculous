@@ -47,15 +47,18 @@ export function Element(props: ElementProps){
 
     
 //Сам элемент
-    let webFilter: string = 'none'
+    let webFilter: string = 'none';
+    let resize = 'none';
     if(props.element.selected === true){
         webFilter = 'drop-shadow(7px 7px 7px #222)';
+        resize = '';
+    };
+    let resizeStyle = {
+        background: resize,
+        top: props.element.size.h -20,
+        left: props.element.size.w -20,
     }
-    // let bColor: string = 'transparent'
-    // if(props.element.border.borderStyle !== 'none'){
-    //     bColor = props.element.border.color
-    // }
-    // let dragging: boolean = false;
+
 //Текстовый элемент  
     if(props.element.elementConcept.type === 'text'){
        let textI: string = ''; 
@@ -95,8 +98,7 @@ export function Element(props: ElementProps){
         <>
           <div className={styles.element} style = {elementStyle} ref={elementRef} 
            onClick={() => {props.gotoElement(props.element.idElement);
-           props.addToHistory(store.getState().presentation, store.getState().selection)}} 
-        /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
+           props.addToHistory(store.getState().presentation, store.getState().selection)}} >
             <textarea className={styles.text} style = {textStyle} 
                 value={props.element.elementConcept.textContent}
                 onChange = {(e) => {props.changeTextContent(props.selection, e.currentTarget.value);
@@ -109,6 +111,7 @@ export function Element(props: ElementProps){
                 // e.currentTarget.blur()
                 // }}}
                 />
+                <div className = {styles.resize} style={resizeStyle}></div>
             </div>
         </>
      )
@@ -139,14 +142,17 @@ export function Element(props: ElementProps){
         }
         return (
          <>
-           <svg ref={elementRef} style={elementStyle} className = {styles.element} 
+          <div ref={elementRef} style={elementStyle} className = {styles.element} 
            onClick={(e) => {props.gotoElement(props.element.idElement);
             props.addToHistory(store.getState().presentation, store.getState().selection)
             //    e.stopPropagation();
             //    setMoving(true);
-            }}>               
-               <image href={src} style={imgStyle}/> 
-            </svg>
+            }}>
+               <svg>               
+                   <image href={src} style={imgStyle}/>
+               </svg>
+               <div className = {styles.resize} style={resizeStyle}></div>
+            </div>
          </>
       )
      }
@@ -170,6 +176,7 @@ export function Element(props: ElementProps){
                     <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                     fill={props.element.elementConcept.fillcolor} 
                     stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
+                    <div className = {styles.resize} style={resizeStyle}></div>
                 </svg>               
             )
         }

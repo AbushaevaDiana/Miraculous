@@ -13,3 +13,12 @@
 .element{
     position: absolute;
 } 
+
+.resize{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background: url('../img/bug.png') center center / 100% 100% no-repeat;
+};
