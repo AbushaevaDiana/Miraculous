@@ -24,14 +24,14 @@ function MainPanel(props: MainPanelProps) {
     const hanglerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
-        console.log('цвет', inputColorStr)
+        // console.log('цвет', inputColorStr)
         props.editSLideBackgroundColor(props.selection.idSlides, inputColorStr);
         props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeBorderColor = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
-        console.log('цвет', inputColorStr)
+        // console.log('цвет', inputColorStr)
         props.changeBorderColor(props.selection, inputColorStr);
         props.addToHistory(store.getState().presentation, store.getState().selection);
     }

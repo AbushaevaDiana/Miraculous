@@ -23,7 +23,7 @@ type DeltaType = {x: number, y: number};
 export function Element(props: ElementProps){
     const [moving, setMoving] = useState(false);
     const [delta, setDelta] = useState<DeltaType>({x: 0, y:0});
-    const elementRef = useRef<SVGSVGElement>(null);
+    const elementRef = useRef<any>(null);
     const getSelection = () => props.selection;
     useDragAndDrop(elementRef, setDelta, getSelection, props.moveElement);
 
@@ -75,8 +75,8 @@ export function Element(props: ElementProps){
        let elementStyle = {
           width: props.element.size.w,
           height: props.element.size.h,
-          top: props.element.position.y,
-          left: props.element.position.x,
+          top: props.element.position.y + delta.y,
+          left: props.element.position.x + delta.x,
           borderStyle: props.element.border.borderStyle,
           borderColor: props.element.border.color,
           borderWidth: props.element.border.width,
@@ -90,11 +90,10 @@ export function Element(props: ElementProps){
             fontSize: props.element.elementConcept.size,
             WebkitFilter: webFilter,
             fontFamily: props.element.elementConcept.font,
-
         }
        return (
         <>
-          <div className={styles.element} style = {elementStyle} 
+          <div className={styles.element} style = {elementStyle} ref={elementRef} 
            onClick={() => {props.gotoElement(props.element.idElement);
            props.addToHistory(store.getState().presentation, store.getState().selection)}} 
         /*onMouseDown = {() => {dragging = true; console.log('draggong', dragging)}}*/>
@@ -127,8 +126,8 @@ export function Element(props: ElementProps){
         let elementStyle = {
             width: props.element.size.w,
             height: props.element.size.h,
-            top: props.element.position.y,
-            left: props.element.position.x,
+            top: props.element.position.y + delta.y,
+            left: props.element.position.x + delta.x,
          }
         let imgStyle = {
             borderWidth: props.element.border.width,
@@ -140,13 +139,13 @@ export function Element(props: ElementProps){
         }
         return (
          <>
-           <div style={elementStyle} className = {styles.element} 
+           <div ref={elementRef} style={elementStyle} className = {styles.element} 
            onClick={(e) => {props.gotoElement(props.element.idElement);
             props.addToHistory(store.getState().presentation, store.getState().selection)
             //    e.stopPropagation();
             //    setMoving(true);
             }}>               
-               <img src={src} style={imgStyle} alt={String(props.element.idElement)} /> 
+               <img draggable src={src} style={imgStyle} alt={String(props.element.idElement)} /> 
             </div>
          </>
       )
@@ -158,14 +157,14 @@ export function Element(props: ElementProps){
                 width: props.element.size.w,
                 height: props.element.size.h,
                 WebkitFilter: webFilter,
-                top: props.element.position.y,
-                left: props.element.position.x
+                top: props.element.position.y + delta.y,
+                left: props.element.position.x + delta.x,
             }
-            console.log(props.element.position.y)
-            let width: number = props.element.size.w/2 
-            let heigth: number = props.element.size.h/2 
+            // console.log(props.element.position.y)
+            let width: number = props.element.size.w/2;
+            let heigth: number = props.element.size.h/2; 
             return (
-                <svg style={elementStyle} className = {styles.element} 
+                <svg ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                     <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
@@ -179,8 +178,8 @@ export function Element(props: ElementProps){
                 width: props.element.size.w,
                 height: props.element.size.h,
                 WebkitFilter: webFilter,
-                left: props.element.position.x,
-                top: props.element.position.y,
+                left: props.element.position.x + delta.x,
+                top: props.element.position.y + delta.y,
             }
             let x1: string = String(props.element.size.w/46)
             let x2: string = String(props.element.size.w/2 )
@@ -190,7 +189,7 @@ export function Element(props: ElementProps){
             let y3: string = String(props.element.size.h - 3 )
             let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
             return (
-               <svg style={elementStyle} className = {styles.element} 
+               <svg ref={elementRef} style={elementStyle} className = {styles.element} 
                onClick={() => {props.gotoElement(props.element.idElement);
                 props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                   <polygon points={point} fill={props.element.elementConcept.fillcolor} 

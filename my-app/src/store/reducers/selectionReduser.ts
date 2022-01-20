@@ -15,7 +15,7 @@ const selection: Reducer<SelectionType, any> = (state: SelectionType = {idSlides
                     idElements: []
                 };
         case 'GOTO_ELEMENT':
-          console.log('elements work!', action.payload)
+          // console.log('elements work!', action.payload)
             return {
                   idSlides: state.idSlides,
                   idElements: action.payload,
@@ -26,10 +26,10 @@ const selection: Reducer<SelectionType, any> = (state: SelectionType = {idSlides
               idElements: []
             };
         case 'Undo':
-          console.log('undo s') 
+          // console.log('undo s') 
           return action.payload.selection;
         case 'Redo':
-          console.log('redo s') 
+          // console.log('redo s') 
           return action.payload.selection;
         default:
           return state

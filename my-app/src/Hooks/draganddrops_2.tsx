@@ -73,11 +73,14 @@ export const useDragAndDrop = (ref: React.RefObject<any>, setDelta: Function, ge
 
         const selection = getSelection();
         console.log(selection);
-        const newDelta = {x: delta.x /2 , y: delta.y / 2};
+        const newDelta = {x: delta.x / 2, y: delta.y/ 2};
 
         store.dispatch(moveElement(selection, newDelta));
 
+        console.log(delta);
+
         setDelta({x: 0, y: 0});
+        delta = {x: 0, y: 0};
     }
 
     const onMouseMove = (e: MouseEvent) => {

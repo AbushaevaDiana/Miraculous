@@ -2,9 +2,9 @@ import store from '../store/store';
 import { Editer, History, Presentation, PresentationMaker, SelectionType} from '../types';
 
 export function saveToHistory( history: History, newPresentation: Presentation, newSelection: SelectionType): History {
-  console.log('добавленно в историю', history)
+  // console.log('добавленно в историю', history)
   const newHistory: History = {...history};
-  console.log(newHistory)
+  // console.log(newHistory)
   const newState: Editer = {
     presentation: newPresentation,
     selection: newSelection
@@ -17,7 +17,7 @@ export function saveToHistory( history: History, newPresentation: Presentation, 
       (value, currentIndex) => currentIndex <= newHistory.currentIndex && value
     );
     newHistory.actionlist = [...newActionlist, newState];
-    console.log(newHistory)
+    // console.log(newHistory)
   }
 
   return newHistory
