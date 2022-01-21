@@ -148,8 +148,8 @@ export function Element(props: ElementProps){
             //    e.stopPropagation();
             //    setMoving(true);
             }}>
-               <svg>               
-                   <image href={src} style={imgStyle}/>
+               <svg preserveAspectRatio="none">              
+                   <image href={src} style={imgStyle} preserveAspectRatio="none"/>
                </svg>
                <div className = {styles.resize} style={resizeStyle}></div>
             </div>
