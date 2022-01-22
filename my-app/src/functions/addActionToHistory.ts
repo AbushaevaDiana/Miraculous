@@ -10,7 +10,13 @@ export function saveToHistory( history: History, newPresentation: Presentation, 
     selection: newSelection
   }
 
-  if(newHistory.actionlist[newHistory.currentIndex] !== newState){
+  const oldState: Editer = {
+    presentation: newHistory.actionlist[newHistory.currentIndex].presentation,
+    selection: newHistory.actionlist[newHistory.currentIndex].selection,
+  }
+
+  if(newState != oldState){
+    console.log('изменение', oldState, newState)
     newHistory.currentIndex = history.currentIndex+1;
 
     const newActionlist = newHistory.actionlist.filter(

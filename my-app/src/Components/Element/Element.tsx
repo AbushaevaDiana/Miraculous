@@ -25,7 +25,7 @@ export function Element(props: ElementProps){
     const [delta, setDelta] = useState<DeltaType>({x: 0, y:0});
     const elementRef = useRef<any>(null);
     const getSelection = () => props.selection;
-    useDragAndDrop(elementRef, setDelta, getSelection, props.moveElement);
+    useDragAndDrop(elementRef, setDelta, getSelection, props.moveElement, props.addToHistory);
 
     // useEffect(() => {
     //     !moving && props.moveElement(props.selection, posit)
@@ -104,12 +104,6 @@ export function Element(props: ElementProps){
                 onChange = {(e) => {props.changeTextContent(props.selection, e.currentTarget.value);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}
                 } 
-                // onKeyPress= {
-                // (e) => {if (e.key === "Enter") {
-                // e.currentTarget.value = (e.currentTarget.value == '') ? 'Введите текст' : e.currentTarget.value
-                // props.changeTextContent(props.selection, e.currentTarget.value)
-                // e.currentTarget.blur()
-                // }}}
                 />
                 <div className = {styles.resize} style={resizeStyle}></div>
             </div>

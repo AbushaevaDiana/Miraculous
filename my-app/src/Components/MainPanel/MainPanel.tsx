@@ -75,7 +75,8 @@ function MainPanel(props: MainPanelProps) {
                 <div className={styles.selectContainer}>
                     <input type="number" placeholder='Размер контура' id="tentacles" 
                     name="tentacles" min="0" className={styles.elementOutlineSelect}
-                    onChange = {(e) => {props.changeBorderSize(props.selection, Number(e.currentTarget.value))}}
+                    onChange = {(e) => {props.changeBorderSize(props.selection, Number(e.currentTarget.value));
+                        props.addToHistory(store.getState().presentation, store.getState().selection);}}
                     ></input>
                     <select onClick = {(e) => 
                     {if(e.currentTarget.value === 'Без границы'){
