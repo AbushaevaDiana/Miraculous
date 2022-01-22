@@ -173,7 +173,7 @@ export function Element(props: ElementProps){
                 <div ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                    <svg>
+                    <svg preserveAspectRatio="none">
                         <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                         fill={props.element.elementConcept.fillcolor} 
                         stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
@@ -201,7 +201,7 @@ export function Element(props: ElementProps){
                <div ref={elementRef} style={elementStyle} className = {styles.element} 
                onClick={() => {props.gotoElement(props.element.idElement);
                props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                   <svg>
+                   <svg preserveAspectRatio="none">
                       <polygon points={point} fill={props.element.elementConcept.fillcolor} 
                        stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                   </svg> 
@@ -223,7 +223,7 @@ export function Element(props: ElementProps){
                 <div ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                    <svg>
+                    <svg preserveAspectRatio="none" >
                       <rect x="3" y="3" width={width} height={heigth} 
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
