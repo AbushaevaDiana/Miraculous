@@ -26,8 +26,8 @@ export function MaxElement(props: miniElementProps){
         fU = 'underline'
        }
        let elementStyle = {
-           width: props.element.size.w*24/20,
-           height: props.element.size.h*24/20,
+           width: (props.element.size.w*24/17.2),
+           height: props.element.size.h*24/16.8,
            top: props.element.position.y*24/16.8,
            left: props.element.position.x*24/17.2,
            borderStyle: props.element.border.borderStyle,
@@ -39,7 +39,7 @@ export function MaxElement(props: miniElementProps){
             fontStyle: fI,
             fontWeight: fW,
             color: props.element.elementConcept.color,
-            fontSize: props.element.elementConcept.size*24/20,
+            fontSize: props.element.elementConcept.size*24/17,
             fontFamily: props.element.elementConcept.font,
             border: 'none'
         }
@@ -64,8 +64,8 @@ export function MaxElement(props: miniElementProps){
         }
         let elementStyle = {
             WebkitFilter: webFilter,
-            width: (props.element.size.w*24/20),
-            height: (props.element.size.h*24/20),
+            width: (props.element.size.w*24/17.2),
+            height: (props.element.size.h*24/16.8),
             top: props.element.position.y*24/16.8,
             left: props.element.position.x*24/17.2,
             borderWidth: props.element.border.width*24/20,
@@ -82,13 +82,13 @@ export function MaxElement(props: miniElementProps){
     if (props.element.elementConcept.type === 'figure') {
         if (props.element.elementConcept.figureConcept === 'Round') {
             let elementStyle = {
-                width: (props.element.size.w*24/20),
-                height: (props.element.size.h*24/20),
+                width: (props.element.size.w*24/17.2),
+                height: (props.element.size.h*24/16.8),
                 top: props.element.position.y*24/16.8,
                 left: props.element.position.x*24/17.2,
             }
-            let width: number = props.element.size.w*24/20/2 
-            let heigth: number = props.element.size.h*24/20/2
+            let width: number = props.element.size.w*24/17.2/2 
+            let heigth: number = props.element.size.h*24/16.8/2
             return (
                 <svg style={elementStyle} className = {styles.element}>
                     <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
@@ -98,8 +98,8 @@ export function MaxElement(props: miniElementProps){
             )
         }
         if (props.element.elementConcept.figureConcept === 'Triangel') {
-            let w6: number = props.element.size.w*24/20
-            let h6: number = props.element.size.h*24/20
+            let w6: number = props.element.size.w*24/17.2
+            let h6: number = props.element.size.h*24/16.8
             let elementStyle = {
                 width: w6,
                 height: h6,
@@ -121,8 +121,8 @@ export function MaxElement(props: miniElementProps){
             )
         }
         if (props.element.elementConcept.figureConcept === 'Rectangel') {
-            let w6: number = props.element.size.w*24/20
-            let h6: number = props.element.size.h*24/20
+            let w6: number = props.element.size.w*24/17.2
+            let h6: number = props.element.size.h*24/16.8
             let elementStyle = {
                 width: w6,
                 height: h6,

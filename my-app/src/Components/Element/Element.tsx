@@ -142,7 +142,7 @@ export function Element(props: ElementProps){
             //    e.stopPropagation();
             //    setMoving(true);
             }}>
-               <svg preserveAspectRatio="none">              
+               <svg preserveAspectRatio="none" style={elementStyle}>              
                    <image href={src} style={imgStyle} preserveAspectRatio="none"/>
                </svg>
                <div className = {styles.resize} style={resizeStyle}></div>
@@ -167,7 +167,7 @@ export function Element(props: ElementProps){
                 <div ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                    <svg preserveAspectRatio="none">
+                    <svg preserveAspectRatio="none" style={elementStyle}>
                         <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                         fill={props.element.elementConcept.fillcolor} 
                         stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
@@ -195,7 +195,7 @@ export function Element(props: ElementProps){
                <div ref={elementRef} style={elementStyle} className = {styles.element} 
                onClick={() => {props.gotoElement(props.element.idElement);
                props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                   <svg preserveAspectRatio="none">
+                   <svg preserveAspectRatio="none" style={elementStyle}>
                       <polygon points={point} fill={props.element.elementConcept.fillcolor} 
                        stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                   </svg> 
@@ -217,8 +217,8 @@ export function Element(props: ElementProps){
                 <div ref={elementRef} style={elementStyle} className = {styles.element} 
                 onClick={() => {props.gotoElement(props.element.idElement);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                    <svg preserveAspectRatio="none" >
-                      <rect x="3" y="3" width={width} height={heigth} 
+                    <svg preserveAspectRatio="none"  style={elementStyle}>
+                      <rect x="3" y="3" width={width} height={heigth} preserveAspectRatio="none"
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                     </svg> 
