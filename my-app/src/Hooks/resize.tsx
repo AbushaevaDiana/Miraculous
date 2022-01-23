@@ -19,7 +19,7 @@ type ElementPositionType = {
     thirdPointY?: number
 };
 
-export const useResizeElement = (ref: React.RefObject<any>, setDif: Function, getSelection: any, resizeElement: any) => {
+export const useResizeElement = (ref: React.RefObject<any>, setDif: Function, getSelection: any, resizeElement: any, addToHistory: any) => {
     let dif: DifType = {
         x: 0,
         y: 0
@@ -60,6 +60,7 @@ export const useResizeElement = (ref: React.RefObject<any>, setDif: Function, ge
         const newDif = {x: dif.x / 2, y: dif.y/ 2};
 
         store.dispatch(resizeElement(selection, newDif));
+        store.dispatch(addToHistory(store.getState().presentation, store.getState().selection));
 
         console.log(dif);
 

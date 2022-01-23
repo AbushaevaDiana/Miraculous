@@ -31,26 +31,7 @@ export function Element(props: ElementProps){
     const resizeRef = useRef<any>(null);
     const getSelection = () => props.selection;
     useDragAndDrop(elementRef, setDelta, getSelection, props.moveElement, props.addToHistory);
-    useResizeElement(resizeRef, setDif, getSelection, props.resizeElement);
-
-    // useEffect(() => {
-    //     !moving && props.moveElement(props.selection, posit)
-    // })
-
-    // const [p, s] = useMoveAndResize(
-    //     // elementRef,
-    //     // resizeRef,
-    //     props.element.position,
-    //     props.element.selected,
-    //     (status) => {
-    //     props.element.selected && setMoving(status);
-    //     });
-
-        
-    // const posit = p as Position;
-    //const sz = s as Size;
-
-
+    useResizeElement(resizeRef, setDif, getSelection, props.resizeElement, props.addToHistory);
     
 //Сам элемент
     let webFilter: string = 'none';
@@ -132,23 +113,26 @@ export function Element(props: ElementProps){
             top: props.element.position.y + delta.y,
             left: props.element.position.x + delta.x,
          }
-        let imgStyle = {
+        let svgStyle = {
+            width: props.element.size.w,
+            height: props.element.size.h,
+            top: props.element.position.y + delta.y,
+            left: props.element.position.x + delta.x,
+            WebkitFilter: webFilter,
             borderWidth: props.element.border.width,
             borderStyle: props.element.border.borderStyle,
             borderColor: props.element.border.color,
+        }
+        let imgStyle = {
             width: props.element.size.w,
             height: props.element.size.h,
-            WebkitFilter: webFilter,
         }
         return (
          <>
-          <div ref={elementRef} style={elementStyle} className = {styles.element} 
-           onClick={(e) => {props.gotoElement(props.element.idElement);
-            props.addToHistory(store.getState().presentation, store.getState().selection)
-            //    e.stopPropagation();
-            //    setMoving(true);
-            }}>
-               <svg preserveAspectRatio="none" style={elementStyle}>              
+          <div style={elementStyle} className = {styles.element} >
+               <svg ref={elementRef} preserveAspectRatio="none" style={svgStyle}
+               onClick={(e) => {props.gotoElement(props.element.idElement);
+                props.addToHistory(store.getState().presentation, store.getState().selection)}}>              
                    <image href={src} style={imgStyle} preserveAspectRatio="none"/>
                </svg>
                <div ref={resizeRef} className = {styles.resize} style={resizeStyle}></div>
@@ -170,10 +154,10 @@ export function Element(props: ElementProps){
             let width: number = props.element.size.w/2;
             let heigth: number = props.element.size.h/2; 
             return (
-                <div ref={elementRef} style={elementStyle} className = {styles.element} 
-                onClick={() => {props.gotoElement(props.element.idElement);
-                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                    <svg preserveAspectRatio="none" style={elementStyle}>
+                <div style={elementStyle} className = {styles.element} >
+                    <svg preserveAspectRatio="none" style={elementStyle} ref={elementRef}
+                    onClick={() => {props.gotoElement(props.element.idElement);
+                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                         <ellipse rx={width-3} ry={heigth-3} cx={width} cy={heigth} 
                         fill={props.element.elementConcept.fillcolor} 
                         stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
@@ -198,10 +182,10 @@ export function Element(props: ElementProps){
             let y3: string = String(props.element.size.h - 3 )
             let point: string = x1+','+y1+' '+x2+','+y2+' '+x3+','+y3
             return (
-               <div ref={elementRef} style={elementStyle} className = {styles.element} 
-               onClick={() => {props.gotoElement(props.element.idElement);
-               props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                   <svg preserveAspectRatio="none" style={elementStyle}>
+               <div  style={elementStyle} className = {styles.element} >
+                   <svg ref={elementRef} preserveAspectRatio="none" style={elementStyle}
+                    onClick={() => {props.gotoElement(props.element.idElement);
+                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                       <polygon points={point} fill={props.element.elementConcept.fillcolor} 
                        stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                   </svg> 
@@ -220,10 +204,10 @@ export function Element(props: ElementProps){
             let width: number = (props.element.size.w - 6) 
             let heigth: number = (props.element.size.h - 6)
             return (
-                <div ref={elementRef} style={elementStyle} className = {styles.element} 
-                onClick={() => {props.gotoElement(props.element.idElement);
-                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                    <svg preserveAspectRatio="none"  style={elementStyle}>
+                <div  style={elementStyle} className = {styles.element} >
+                    <svg ref={elementRef} preserveAspectRatio="none"  style={elementStyle}
+                     onClick={() => {props.gotoElement(props.element.idElement);
+                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                       <rect x="3" y="3" width={width} height={heigth} preserveAspectRatio="none"
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
