@@ -74,18 +74,18 @@
     left: 40%;
     width: 20%;
     height: 7%;
-    background-color: #FFEEDD;
+    background-color: transparent;
 }
 
 .buttons{
     width: 33%;
     height: 100%;
-    border-color: #F08080;
+    border-color: rgba(231, 52, 52, 0.486);
 }
 
 .buttons:hover {
-    background-color: #fae3cb; 
-    border-color: #FF6666;  
+    background-color: rgba(233, 122, 122, 0.5); 
+    border-color:  #f37171; 
 }
 
 .left{
