@@ -9,49 +9,53 @@ interface miniElementProps{
 
 export function MiniElement(props: miniElementProps){ 
 //Текстовый элемент
-    let textI: string = '';   
-    if(props.element.elementConcept.type === 'text'){
-       textI = props.element.elementConcept.textContent;
-       console.log(props.element.elementConcept.textContent)
-       let fW: string = 'normal'
-       let fI: string = 'normal'
-       let fU: string = 'none'
-       if(props.element.elementConcept.bold === true){
-        fW = 'bold'
-       }
-       if(props.element.elementConcept.italic === true){
-        fI = 'italic'
-       }
-       if(props.element.elementConcept.underline === true){
-        fU = 'underline'
-       }
-        let elementStyle = {
-            width: (props.element.size.w/6),
-            height: (props.element.size.h/6),
-            top: props.element.position.y/6,
-            left: props.element.position.x/6,
-            borderStyle: props.element.border.borderStyle,
-            borderColor: props.element.border.color,
-            borderWidth: props.element.border.width/6,
-         }
-         let textStyle = {
-             color: props.element.elementConcept.color,
-             fontSize: props.element.elementConcept.size/6,
-             fontFamily: props.element.elementConcept.font,
-             textDecoration: fU,
-             fontStyle: fI,
-             fontWeight: fW,
-             border: 'none'
-         }
-       return (
-        <>
-            <div id={String(props.element.idElement)} className={styles.element} style = {elementStyle}>
-            <textarea disabled className={styles.text}  style = {textStyle} value={props.element.elementConcept.textContent} />
-                {/* <p className={styles.text}  style = {textStyle}>{props.element.elementConcept.textContent}</p> */}
-            </div>
-        </>
-     )
+let textI: string = '';   
+if(props.element.elementConcept.type === 'text'){
+   textI = props.element.elementConcept.textContent;
+   console.log(props.element.elementConcept.textContent)
+   let fW: string = 'normal'
+   let fI: string = 'normal'
+   let fU: string = 'none'
+   if(props.element.elementConcept.bold === true){
+    fW = 'bold'
+   }
+   if(props.element.elementConcept.italic === true){
+    fI = 'italic'
+   }
+   if(props.element.elementConcept.underline === true){
+    fU = 'underline'
+   }
+   let elementStyle = {
+       width: (props.element.size.w/6),
+       height: (props.element.size.h/6),
+       top: (props.element.position.y/6),
+       left: (props.element.position.x/6),
+       borderStyle: props.element.border.borderStyle,
+       borderColor: props.element.border.color,
+       borderWidth: props.element.border.width/6,
+       textAligth: 'start', 
     }
+    let textStyle = {
+        textDecoration: fU,
+        fontStyle: fI,
+        fontWeight: fW,
+        color: props.element.elementConcept.color,
+        fontSize: (props.element.elementConcept.size/6),
+        fontFamily: props.element.elementConcept.font,
+        border: 'none',
+        margin: 0,
+        padding: 0,
+    }
+   return (
+    <>
+        <div className={styles.element} style = {elementStyle}>
+            {/* <textarea disabled className={styles.text}  style = {textStyle} 
+            value={props.element.elementConcept.textContent} /> */}
+            <p className={styles.text}  style = {textStyle}>{props.element.elementConcept.textContent}</p>
+        </div>
+    </>
+ )
+}
 //Картинка
     if(props.element.elementConcept.type === 'img') {
         let src: string = props.element.elementConcept.src;

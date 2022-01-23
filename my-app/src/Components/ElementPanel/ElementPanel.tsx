@@ -102,7 +102,9 @@ export function ElementPanel(props: ElementPanelProps) {
                             <input placeholder='Размер шрифта' type="number" 
                             id="tentacles" name="tentacles" min="0" 
                             className={styles.selectField + ' ' + styles.fontSelectField}
-                            onChange = {(e) => props.changeTextSize(props.selection, Number(e.currentTarget.value))}></input>
+                            onChange = {(e) => 
+                            {props.changeTextSize(props.selection, Number(e.currentTarget.value));
+                             props.addToHistory(store.getState().presentation, store.getState().selection);}}></input>
                         </div>
                         <div className={styles.fontSettingsMark +  ' ' + styles.fontMark}>
                             <div className={styles.fontMarkIcon}>

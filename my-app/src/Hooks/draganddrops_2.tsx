@@ -19,7 +19,7 @@ type ElementPositionType = {
     thirdPointY?: number
 };
 
-export const useDragAndDrop = (ref: React.RefObject<any>, setDelta: Function, getSelection: any, moveElement: any) => {
+export const useDragAndDrop = (ref: React.RefObject<any>, setDelta: Function, getSelection: any, moveElement: any, addToHistory: any) => {
     let delta: DeltaType = {
         x: 0,
         y: 0
@@ -76,6 +76,7 @@ export const useDragAndDrop = (ref: React.RefObject<any>, setDelta: Function, ge
         const newDelta = {x: delta.x / 2, y: delta.y/ 2};
 
         store.dispatch(moveElement(selection, newDelta));
+        store.dispatch(addToHistory(store.getState().presentation, store.getState().selection));
 
         console.log(delta);
 
