@@ -80,7 +80,7 @@
 .buttons{
     width: 33%;
     height: 100%;
-    border-color: rgba(231, 52, 52, 0.486);
+    border-color: rgba(231, 52, 52, 0.144);
 }
 
 .buttons:hover {
