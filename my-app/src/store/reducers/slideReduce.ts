@@ -483,6 +483,30 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
 
+      case 'RESIZE_ELEMENT':
+        console.log('resize', action.payload.size);
+        return state.map(slide => {
+          if (action.payload.selection.idSlides.includes(slide.idSlide))
+          { 
+            return {
+              ...slide,
+              elementlist: slide.elementlist.map(element => {
+                if (element.selected === true) {
+                  return {
+                    ...element,
+                   size: {
+                     h: element.size.h + action.payload.size.y,
+                     w: element.size.w + action.payload.size.x,
+                   }
+                }
+                } else { return element}
+              }) 
+            } 
+          } else { 
+              return slide
+            }
+      });
+
       case 'CHANGE_ELEMENT_HEIGTH':
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))

@@ -1,4 +1,4 @@
-import { Position, SelectionType, StateTypes } from "../../types";
+import { Position, SelectionType, Size, StateTypes } from "../../types";
 
 function changeTextContent(selection: SelectionType, content: string) {
     return {
@@ -36,6 +36,16 @@ function moveElementY(selection: SelectionType, y: Number) {
     payload: {
         selection,
         y,
+      }
+  }
+}
+
+function resizeElement(selection: SelectionType, size: Size) {
+  return {
+    type: StateTypes.RESIZE_ELEMENT,
+    payload: {
+        selection,
+        size,
       }
   }
 }
@@ -218,7 +228,7 @@ function changeElementBorder(selection: SelectionType, style: string) {
   }
 }
 
-export {changeTextContent, moveElement, gotoElement, 
+export {changeTextContent, moveElement, resizeElement, gotoElement, 
        deleteElement, addText, addPicture, addRound, 
        addRectangle, addTriangle, changeFillColor, changeLineColor,
        changeTextColor, changeBorderColor, changeElementWeigth,

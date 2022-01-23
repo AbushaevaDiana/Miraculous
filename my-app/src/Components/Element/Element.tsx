@@ -3,11 +3,12 @@ import styles from './Element.module.css';
 import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Position, Presentation } from '../../types';
 import { connect } from 'react-redux';
 import React, { MouseEvent, DragEvent, useEffect, useRef, useState } from 'react';
-import { changeTextContent, moveElement, gotoElement } from '../../store/actionsCreators/elementActionCreators'
+import { changeTextContent, moveElement, gotoElement, resizeElement } from '../../store/actionsCreators/elementActionCreators'
 import store from '../../store/store';
 import { useMoveAndResize } from '../../Hooks/useMoving';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 import { useDragAndDrop } from '../../Hooks/draganddrops_2';
+import { useResizeElement } from '../../Hooks/resize';
 
 interface ElementProps{
     element: ElementType,
@@ -16,16 +17,21 @@ interface ElementProps{
     moveElement: (selection: SelectionType, position: Position) => void,
     gotoElement: (idElement: Number) => void,
     addToHistory: (presentation: Presentation, selection: SelectionType) => void,
+    resizeElement: (selection: SelectionType, size: Size) => void,
 };
 type DeltaType = {x: number, y: number};
+type DifType = {x: number, y: number};
    
 
 export function Element(props: ElementProps){
     const [moving, setMoving] = useState(false);
     const [delta, setDelta] = useState<DeltaType>({x: 0, y:0});
+    const [dif, setDif] = useState<DifType>({x: 0, y: 0});
     const elementRef = useRef<any>(null);
+    const resizeRef = useRef<any>(null);
     const getSelection = () => props.selection;
     useDragAndDrop(elementRef, setDelta, getSelection, props.moveElement);
+    useResizeElement(resizeRef, setDif, getSelection, props.resizeElement);
 
     // useEffect(() => {
     //     !moving && props.moveElement(props.selection, posit)
@@ -76,8 +82,8 @@ export function Element(props: ElementProps){
         fU = 'underline'
        }
        let elementStyle = {
-          width: props.element.size.w,
-          height: props.element.size.h,
+          width: props.element.size.w + dif.x,
+          height: props.element.size.h + dif.y,
           top: props.element.position.y + delta.y,
           left: props.element.position.x + delta.x,
           borderStyle: props.element.border.borderStyle,
@@ -111,7 +117,7 @@ export function Element(props: ElementProps){
                 // e.currentTarget.blur()
                 // }}}
                 />
-                <div className = {styles.resize} style={resizeStyle}></div>
+                <div ref={resizeRef} className = {styles.resize} style={resizeStyle}></div>
             </div>
         </>
      )
@@ -151,7 +157,7 @@ export function Element(props: ElementProps){
                <svg preserveAspectRatio="none">              
                    <image href={src} style={imgStyle} preserveAspectRatio="none"/>
                </svg>
-               <div className = {styles.resize} style={resizeStyle}></div>
+               <div ref={resizeRef} className = {styles.resize} style={resizeStyle}></div>
             </div>
          </>
       )
@@ -178,7 +184,7 @@ export function Element(props: ElementProps){
                         fill={props.element.elementConcept.fillcolor} 
                         stroke={props.element.elementConcept.linecolor} strokeWidth="3"/>
                     </svg> 
-                    <div className = {styles.resize} style={resizeStyle}></div>
+                    <div ref={resizeRef} className = {styles.resize} style={resizeStyle}></div>
                 </div>              
             )
         }
@@ -205,7 +211,7 @@ export function Element(props: ElementProps){
                       <polygon points={point} fill={props.element.elementConcept.fillcolor} 
                        stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                   </svg> 
-                  <div className = {styles.resize} style={resizeStyle}></div> 
+                  <div ref={resizeRef} className = {styles.resize} style={resizeStyle}></div> 
                </div>           
             )
         }
@@ -228,7 +234,7 @@ export function Element(props: ElementProps){
                       fill={props.element.elementConcept.fillcolor} 
                       stroke={props.element.elementConcept.linecolor} stroke-width="3"/>
                     </svg> 
-                    <div className = {styles.resize} style={resizeStyle}></div>  
+                    <div ref={resizeRef} className = {styles.resize} style={resizeStyle}></div>  
                 </div>            
             )
         }
@@ -249,6 +255,7 @@ const mapDispatchToProps = {
     moveElement,
     gotoElement,
     addToHistory,
+    resizeElement,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Element);

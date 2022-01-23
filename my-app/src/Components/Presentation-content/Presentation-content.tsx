@@ -2,15 +2,16 @@ import '../../App.css';
 import styles from './Presentation-content.module.css';
 import { connect } from 'react-redux';
 import React, { useEffect, useRef, useState } from 'react';
-import { Position, PresentationMaker, SelectionType, Slide } from '../../types';
-import Element from '../Element/Element'
-import { changeTextContent, moveElement } from '../../store/actionsCreators/elementActionCreators'
+import { Position, PresentationMaker, SelectionType, Size, Slide } from '../../types';
+import Element from '../Element/Element';
+import { changeTextContent, moveElement, resizeElement} from '../../store/actionsCreators/elementActionCreators';
 
 interface PropsPresentationContent{
   slidelist: Slide[],
   selection: SelectionType,
   changeTextContent: (selection: SelectionType, content: string) => void,
   moveElement: (selection: SelectionType, position: Position) => void,
+  resizeElement: (selection: SelectionType, size: Size) => void,
 }
 
 function PresentationContent(props: PropsPresentationContent){
@@ -62,6 +63,7 @@ function mapStateToProps(state: PresentationMaker) {
 const mapDispatchToProps = {
   moveElement,
   changeTextContent,
+  resizeElement,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PresentationContent);
