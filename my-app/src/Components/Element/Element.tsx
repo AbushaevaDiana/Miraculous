@@ -83,10 +83,11 @@ export function Element(props: ElementProps){
         }
        return (
         <>
-          <div className={styles.element} style = {elementStyle} ref={elementRef} 
-           onClick={() => {props.gotoElement(props.element.idElement);
-           props.addToHistory(store.getState().presentation, store.getState().selection)}} >
+          <div className={styles.element} style = {elementStyle} >
             <textarea className={styles.text} style = {textStyle} 
+            ref={elementRef} 
+            onClick={() => {props.gotoElement(props.element.idElement);
+            props.addToHistory(store.getState().presentation, store.getState().selection)}} 
                 value={props.element.elementConcept.textContent}
                 onChange = {(e) => {props.changeTextContent(props.selection, e.currentTarget.value);
                     props.addToHistory(store.getState().presentation, store.getState().selection)}
