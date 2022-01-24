@@ -24,17 +24,19 @@ export function SlideView(props:SLideProps){
    let privet = styles.slidemenuListSlide;
    let borderCol: string = 'none';
    let back: string = '';
-   let dragging: boolean = true;
+   let dragging: boolean = false;
    if(props.slide.background.type === 'img'){
      back = 'url(' + props.slide.background.src + ') no-repeat center /100% 100%'
      if(props.slide.selected === true){
       borderCol = '#000';
+      dragging = true;
    } else {borderCol = ''}
    }
    if(props.slide.background.type === 'color'){
       back = props.slide.background.color
       if(props.slide.selected === true){
-         borderCol = '#000'
+         borderCol = '#000';
+         dragging = true;
       } else {borderCol = ''}
    }
    const sLideStyle = {
