@@ -42,31 +42,10 @@ export function SlideView(props:SLideProps){
       background: back,
     };
 
-    const [currentSlide, setCurrentSlide] = useState<Slide>(props.slide);
-    function onDragStartHangler(e: React.DragEvent<HTMLDivElement>, slide: Slide){
-       console.log('drag', slide);
-       setCurrentSlide(slide);
-    }
-    function onDragLeaveHangler(e: React.DragEvent<HTMLDivElement>){}
-    function onDragEndHangler(e: React.DragEvent<HTMLDivElement>){}
-    function onDragOverHangler(e: React.DragEvent<HTMLDivElement>){
-      e.preventDefault();
-      
-    }
-    function onDropHangler(e: React.DragEvent<HTMLDivElement>, slide: Slide){
-       e.preventDefault();
-       props.moveSlide(currentSlide, slide);
-       console.log('drop', slide)
-    }
       return (
          <>
                 <p className={styles.slidemenuListSlideIndex}>{props.index}</p>
                 <div draggable={dragging} key={props.slide.idSlide} style={sLideStyle} className={privet} 
-                  onDragStart = {(e) => onDragStartHangler(e, props.slide)}
-                  onDragLeave = {(e) => onDragLeaveHangler(e)}
-                  onDragEnd ={(e) => onDragEndHangler(e)}
-                  onDragOver = {(e) => onDragOverHangler(e)}
-                  onDrop = {(e) => onDropHangler(e, props.slide)}
                   onClick={(e) => {
                     if(!e.ctrlKey){
                         props.gotoSlide(props.slide.idSlide);

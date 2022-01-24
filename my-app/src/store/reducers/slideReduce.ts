@@ -76,10 +76,24 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
           }
       });
     case 'MOVE_SLIDE': 
-      // console.log('move slide')
-      let end = action.payload.start;
-      let start = action.payload.end;
-      return state
+      let end = state.indexOf(action.payload.end);
+      let start = state.indexOf(action.payload.start);
+      console.log('move slide', end, start)
+
+      let newSlidelist: Slide[] = [];
+      for(let i = 0; i < state.length; i++){
+        // newSlidelist.push(state[i])
+        if(i == end){
+          newSlidelist.push(state[start]);  
+        } else {
+          if(i == start){
+            newSlidelist.push(state[end]);
+          } else {
+            newSlidelist.push(state[i]);
+          };
+        }
+      }
+      return newSlidelist
 
     //   return state.map(slide => {
     //     if (slide.idSlide == action.payload.start.idSlide)
