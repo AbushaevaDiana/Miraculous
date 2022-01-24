@@ -107,7 +107,16 @@ export function Element(props: ElementProps){
             } else {
                 webFilter = webFilter + ' grayscale(100%)';
             };
-        }
+        };
+        if(props.element.elementConcept.filter === 'negative'){
+            if(webFilter === 'none'){
+                webFilter = 'invert(1)';
+            } else {
+                webFilter = webFilter + ' invert(1)';
+            };
+        };
+
+        
         let elementStyle = {
             width: props.element.size.w,
             height: props.element.size.h,

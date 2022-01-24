@@ -152,18 +152,23 @@ export function ElementPanel(props: ElementPanelProps) {
                     </ul> */}
                     <p>Фильтры</p>
                     <select onClick = {(e) => {
+                        if(e.currentTarget.value === 'Без фильтров'){
+                            props.setImageFilter(props.selection, 'none');
+                            props.addToHistory(store.getState().presentation, store.getState().selection);
+                        };
                         if(e.currentTarget.value === 'Черно-белый'){
                             props.setImageFilter(props.selection, 'black-white');
                             props.addToHistory(store.getState().presentation, store.getState().selection);
                         };
-                        if(e.currentTarget.value === 'Без фильтров'){
-                            props.setImageFilter(props.selection, 'none');
+                        if(e.currentTarget.value === 'Негатив'){
+                            props.setImageFilter(props.selection, 'negative');
                             props.addToHistory(store.getState().presentation, store.getState().selection);
-                        }
+                        };
                     }}
                     className={styles.elementSettingsSelect + ' ' + styles.selectField}>
-                        <option className={styles.selectFieldOption}>Черно-белый</option>
                         <option className={styles.selectFieldOption}>Без фильтров</option>
+                        <option className={styles.selectFieldOption}>Черно-белый</option>
+                        <option className={styles.selectFieldOption}>Негатив</option>
                     </select> 
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>

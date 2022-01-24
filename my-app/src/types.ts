@@ -144,7 +144,7 @@ export type Img = {
     filter: Filter,
 };
 
-export type Filter = 'none' | 'black-white' | 'red' | 'green' | 'blue';
+export type Filter = 'none' | 'black-white' | 'red' | 'green' | 'blue' | 'negative';
 
 export type Figure = {
     type: 'figure',

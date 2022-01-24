@@ -66,7 +66,14 @@ if(props.element.elementConcept.type === 'text'){
             } else {
                 webFilter = webFilter + ' grayscale(100%)';
             };
-        }
+        };
+        if(props.element.elementConcept.filter === 'negative'){
+            if(webFilter === 'none'){
+                webFilter = 'invert(1)';
+            } else {
+                webFilter = webFilter + ' invert(1)';
+            };
+        };
         let elementStyle = {
             WebkitFilter: webFilter,
             width: (props.element.size.w/6),
