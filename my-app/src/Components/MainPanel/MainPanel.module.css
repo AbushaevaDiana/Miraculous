@@ -15,12 +15,17 @@
 }
 
 .slideBackgroundInscr {
+    width: 70%;
+    height: 80%;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 20px;
+    line-height: 1.2;
     color: black;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .chooseImgContainer {
@@ -86,11 +91,12 @@
     align-items: center;
     margin-right: 10px;
     width: 24%;
+    height: 100%;
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
     text-align: center;
     color: black;
 }
@@ -109,21 +115,121 @@
 .elementOutlineSelect {
     padding: 0 5px;
     width: 100%;
-    height: 23px;
+    height: 40%;
     background-color: transparent;
     border: 2px solid black;
+    font-size: 80%;
+    line-height: 1;
+    font-weight: 600;
+    outline: 0;
+}
+
+.elementOutlineOption {
+    width: 100%;
+    height: 50px;
+    background-color: #FFEEDD;
+    border: 2px solid black;
+    border-radius: none;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+    font-family: 'Roboto';
+    font-style: normal;
+    color: #000000;    
+}
+
+.headmenu {
+    width: 100%;
+    height: 40%;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+    outline: 0;
+    border: 2px solid black;
+    list-style: none; 
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headmenuLi {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #FFEEDD;
+    color: #000000;
+    font-family: 'Roboto';
+    font-style: normal;
+    transition-property: background-color, color;
+    transition-duration: .3s;
+    transition-timing-function: ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
     font-size: 14px;
     line-height: 1;
     font-weight: 600;
 }
 
-.elementOutlineOption {
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    background: #FFEEDD;
+}
+
+.submenu > li {
+    padding-top: 8px;
+    text-align: center;
+    width: 100%;
+    height: 30px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 1;
-    color: #000000;    
+    background-color: #FFEEDD;
+    transition-property: background-color, color;
+    transition-duration: .3s;
+    transition-timing-function: ease-in-out;
+    color: black;
+    display: block;
+    border-bottom: 2px solid black;
+    cursor: pointer;
+}
+
+.submenu > li:last-child {
+    border-bottom: none;
+}
+
+.submenu > li:nth-child(3) {
+    padding-top: 2px;
+}
+
+.submenu > li:hover {
+    background-color: #F08080;
+    color: white;
+}
+
+ul li:hover .submenu {
+    display: block;
+  }
+
+ul li:hover .submenu {
+    visibility: visible;
+    opacity: 1;
 }
 
 .colorContourContainer {
@@ -150,6 +256,15 @@
     height: 5px;
     background-color: #FF6666;
     border: none;
+}
+
+.elementOutlineSelect::placeholder {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    color: black;
 }
 
 .elementOutlineSelectSmall {

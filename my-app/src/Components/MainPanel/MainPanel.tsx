@@ -78,35 +78,22 @@ function MainPanel(props: MainPanelProps) {
                     onChange = {(e) => {props.changeBorderSize(props.selection, Number(e.currentTarget.value));
                         props.addToHistory(store.getState().presentation, store.getState().selection);}}
                     ></input>
-                    <select onClick = {(e) => 
-                    {if(e.currentTarget.value === 'Без границы'){
-                        props.changeElementBorder(props.selection, 'none');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    if(e.currentTarget.value === 'Сплошная линия'){
-                        props.changeElementBorder(props.selection, 'solid');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    if(e.currentTarget.value === 'Пунктирная линия'){
-                        props.changeElementBorder(props.selection, 'dashed');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    if(e.currentTarget.value === 'Двойная линия'){
-                        props.changeElementBorder(props.selection, 'double');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    if(e.currentTarget.value === 'Точки'){
-                        props.changeElementBorder(props.selection, 'dotted');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    }} 
-                    className={styles.elementOutlineSelect}>
-                        <option className={styles.elementOutlineOption}>Без границы</option>
-                        <option className={styles.elementOutlineOption}>Сплошная линия</option>
-                        <option className={styles.elementOutlineOption}>Пунктирная линия</option>
-                        <option className={styles.elementOutlineOption}>Двойная линия</option>
-                        <option className={styles.elementOutlineOption}>Точки</option>
-                    </select>
+                    <ul className={styles.headmenu}>
+                        <li className= {styles.headmenuLi}>Тип границы
+                            <ul className={styles.submenu}>
+                                <li onClick = {() => {props.changeElementBorder(props.selection, 'none');
+                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>Без границы</li>
+                                <li onClick= {() => {props.changeElementBorder(props.selection, 'solid');
+                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>Сплошая линия</li>
+                                <li onClick={() => {props.changeElementBorder(props.selection, 'dashed');
+                        props.addToHistory(store.getState().presentation, store.getState().selection);}}>Пунктирная линия</li>
+                                <li onClick={() => {props.changeElementBorder(props.selection, 'double');
+                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>Двойная линия</li>
+                                <li onClick={() => {props.changeElementBorder(props.selection, 'dotted');
+                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>Точки</li>
+                            </ul>
+                        </li>
+                    </ul>                    
                 </div>
                 <div className={styles.backgroundColor}>
                     <div className={styles.colorContourIcon}></div>
