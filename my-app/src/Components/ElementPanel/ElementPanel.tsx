@@ -79,13 +79,9 @@ export function ElementPanel(props: ElementPanelProps) {
         return (
             <>
                 <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
-                    <div className={styles.fontContainerBtn + ' ' + styles.fontBtn}>
-                        <div className={styles.fontBtnImg}></div>
-                        <p className={styles.fontBtnInsc +  ' ' + styles.toolInsc}>Шрифт</p>
-                    </div>
                     <div className={styles.fontContainerSettings +  ' ' + styles.fontSettings}>
                         <div className={styles.fontSettingsSelect +  ' ' + styles.fontSelect}>
-                            <select className={styles.fontSelectField +  ' ' + styles.selectField}
+                            {/* <select className={styles.fontSelectField +  ' ' + styles.selectField}
                             onClick = {(e) => {props.changeTextFont(props.selection, e.currentTarget.value);
                                 props.addToHistory(store.getState().presentation, store.getState().selection)}}>
                                 <option className={styles.selectFieldOption}>Roboto</option>
@@ -98,13 +94,39 @@ export function ElementPanel(props: ElementPanelProps) {
                                 <option className={styles.selectFieldOption}>Alegreya</option>
                                 <option className={styles.selectFieldOption}>Montserrat Alternates</option>
                                 <option className={styles.selectFieldOption}>Pangolin</option>
-                            </select>
+                            </select> */}
+                            <ul className={styles.headmenu}>
+                                <li className={styles.headmenuLi}>Шрифт
+                                    <ul className={styles.submenu}>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Roboto');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Roboto</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Times New Roman');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Times New Roman</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Lobster');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Lobster</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Pacifico');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Pacifico</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Caveat');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Caveat</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Comforter Brush');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Comforter Brush</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Play');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Play</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Alegreya');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Alegreya</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Montserrat Alternates');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Montserrat Alternates</li>
+                                        <li onClick = {() => {props.changeTextFont(props.selection, 'Pangolin');
+                                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Pangolin</li>
+                                    </ul>
+                                </li>
+                            </ul>
                             <input placeholder='Размер шрифта' type="number" 
                             id="tentacles" name="tentacles" min="0" 
                             className={styles.selectField + ' ' + styles.fontSelectField}
                             onChange = {(e) => 
                             {props.changeTextSize(props.selection, Number(e.currentTarget.value));
-                             props.addToHistory(store.getState().presentation, store.getState().selection);}}></input>
+                             props.addToHistory(store.getState().presentation, store.getState().selection)}}></input>
                         </div>
                         <div className={styles.fontSettingsMark +  ' ' + styles.fontMark}>
                             <div className={styles.fontMarkIcon}>
@@ -136,9 +158,9 @@ export function ElementPanel(props: ElementPanelProps) {
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' + styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.filterIcon}></div>
-                    {/* <ul className={styles.headmenu}>
-                        <li className={styles.headmenuLi}>Фильтры
-                            <ul className={styles.submenu}>
+                    <ul className={styles.headmenu  + ' ' + styles.headmenuFilters}>
+                        <li className={styles.headmenuLi + ' ' + styles.headmenuLiFilters}>Фильтры
+                            <ul className={styles.submenuFilters}>
                                 <li onClick = {() => {
                                     props.setImageFilter(props.selection, 'black-white');
                                     props.addToHistory(store.getState().presentation, store.getState().selection);
@@ -149,27 +171,7 @@ export function ElementPanel(props: ElementPanelProps) {
                                 }}>без фильтров</li>
                             </ul>
                         </li>
-                    </ul> */}
-                    <p>Фильтры</p>
-                    <select onClick = {(e) => {
-                        if(e.currentTarget.value === 'Без фильтров'){
-                            props.setImageFilter(props.selection, 'none');
-                            props.addToHistory(store.getState().presentation, store.getState().selection);
-                        };
-                        if(e.currentTarget.value === 'Черно-белый'){
-                            props.setImageFilter(props.selection, 'black-white');
-                            props.addToHistory(store.getState().presentation, store.getState().selection);
-                        };
-                        if(e.currentTarget.value === 'Негатив'){
-                            props.setImageFilter(props.selection, 'negative');
-                            props.addToHistory(store.getState().presentation, store.getState().selection);
-                        };
-                    }}
-                    className={styles.elementSettingsSelect + ' ' + styles.selectField}>
-                        <option className={styles.selectFieldOption}>Без фильтров</option>
-                        <option className={styles.selectFieldOption}>Черно-белый</option>
-                        <option className={styles.selectFieldOption}>Негатив</option>
-                    </select> 
+                    </ul>
                 </div>
                 <div className={styles.toolbarSelectContainer + ' ' +styles.elementSettings}>
                     <div className={styles.elementSettingsImg + ' ' + styles.contourIcon}></div>

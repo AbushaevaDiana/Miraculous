@@ -1,5 +1,4 @@
 .fontContainer {
-    padding: 15px 12px 10px 0;
     width: 22%;
     display: flex;
     border-right: 1px solid #000000;
@@ -36,13 +35,14 @@
 
 .fontSettings {
     padding: 0 15px;
-    width: 82%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .fontSettingsSelect {
-    margin-bottom: 6%;
+    margin-bottom: 2%;
+    justify-content: space-between;
 }
 
 .fontSelect {
@@ -60,7 +60,7 @@
 }
 
 .elementSettings {
-    padding: 8px;
+    /* padding: 8px; */
     width: 15%;
     display: flex;
     align-items: center;
@@ -69,7 +69,7 @@
 
 .fontSelectField {
     height: 23px;
-    width: 49%;
+    width: 48%;
 }
 
 .selectField:not(:last-child) {
@@ -129,52 +129,56 @@
 }
 
 .filterIcon {
-    margin-right: 25px;
-    width: 55px;
-    height: 55px;
-    background: url('../img/filterIcon.png');
+    /* margin-right: 25px; */
+    width: 40%;
+    height: 70%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../img/filterIcon.png');
 }
 
 .headmenu {
-    width: 100%;
-    border: 0;
-    padding: 0;
+    width: 48%;
+    height: 100%;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+    outline: 0;
+    border: 2px solid black;
     list-style: none; 
     margin: 0;
-    height: 22%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.headmenuFilters {
+    height: 48%;
+}
+
 .headmenuLi {
-    width: 25%;
+    width: 100%;
     height: 100%;
     position: relative;
-    border-color: #F08080;
     background-color: #FFEEDD;
     color: #000000;
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
     transition-property: background-color, color;
     transition-duration: .3s;
     transition-timing-function: ease-in-out;
-    border: 2px solid #FF6666;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
 }
 
-.headmenuLi:hover {
-    background-color: #F08080;
-    color: #fff;
-}
-
-.submenu {
+.submenu, .submenuFilters {
     position: absolute;
     top: 100%;
     left: 0;
@@ -188,57 +192,71 @@
     visibility: hidden;
     opacity: 0;
     background: #FFEEDD;
-    border: 2px solid #F08080;
+    border: 2px solid black;
 }
 
-.submenu > li {
+.submenu > li, .submenuFilters > li {
+    padding-top: 8px;
+    text-align: center;
+    width: 100%;
+    height: 30px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 12px;
     line-height: 1;
-    text-align: center;
     background-color: #FFEEDD;
-    border: 2px solid #FF6666;
     transition-property: background-color, color;
     transition-duration: .3s;
     transition-timing-function: ease-in-out;
     color: black;
     display: block;
-    padding: 10px 15px;
     cursor: pointer;
 }
 
-.submenu > li:hover {
+.submenu > li:nth-child(9) {
+    padding-top: 4px;
+}
+
+.submenuFilters > li {
+    height: 25px;
+    padding-top: 5px;
+}
+
+.submenu > li:last-child, .submenuFilters > li:last-child {
+    border-bottom: none;
+}
+
+.submenu > li:hover, .submenuFilters > li:hover {
     background-color: #F08080;
     color: white;
 }
 
-ul li:hover .submenu {
+ul li:hover .submenu, ul li:hover .submenuFilters {
     display: block;
   }
 
-ul li:hover .submenu {
+ul li:hover .submenu, ul li:hover .submenuFilters {
     visibility: visible;
     opacity: 1;
 }
 
-.contourIcon {
-    margin-right: 15px;
-    width: 60px;
-    height: 59px;
-    background: url('../img/contourIcon.png');
+.contourIcon, .fillIcon {
+    margin-right: 10%;
+    width: 40%;
+    height: 90%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../img/contourIcon.png');
 }
 
 .fillIcon {
-    margin-right: 15px;
-    width: 55px;
-    height: 58px;
-    background: url('../img/fillicon.png');
+    background-image: url('../img/fillicon.png');
 }
 
 .deleteElementContainer {
-    /* padding-top: 10px; */
+    padding: 0 8px;
     margin-left: auto;
     margin-right: auto;
     width: 5%;
@@ -250,9 +268,10 @@ ul li:hover .submenu {
 }
 
 .deleteElementIcon {
-    margin-bottom: 10px;
-    width: 53px;
-    height: 55px;
+    margin-bottom: 2px;
+    width: 90%;
+    height: 60%;
+    background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('../img/basket.png');
@@ -265,6 +284,7 @@ ul li:hover .submenu {
     font-size: 14px;
     line-height: 1;
     color: #000000;
+    text-align: center;
 }
 
 .resizeAndMove {
@@ -279,8 +299,13 @@ ul li:hover .submenu {
     justify-content: space-between;
 }
 
-.resizeContainer:not(:last-child) {
+.resizeContainer:first-child {
+    padding-left: 5%;
     margin-right: 5%;
+}
+
+.resizeContainer:last-child {
+    padding-right: 5%;
 }
 
 .resizeInputContainer {
@@ -299,12 +324,13 @@ ul li:hover .submenu {
 
 .resizeInscr {
     margin-right: 5px;
-    width: 50%;
+    width: 60%;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 600;
     font-size: 85%;
     line-height: 1;
     color: #000000;
+    text-align: center;
 }
 
