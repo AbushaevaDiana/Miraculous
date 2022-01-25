@@ -71,36 +71,37 @@ function MainPanel(props: MainPanelProps) {
                 </div>
             </div>
             <div className={styles.elementOutlineContainer}>
-                <div className={styles.elementOutlineInscr}>Контур элемента</div>
-                <div className={styles.selectContainer}>
-                    <input type="number" placeholder='Размер контура' id="tentacles" 
-                    name="tentacles" min="0" className={styles.elementOutlineSelect}
-                    onChange = {(e) => {props.changeBorderSize(props.selection, Number(e.currentTarget.value));
-                        props.addToHistory(store.getState().presentation, store.getState().selection);}}
-                    ></input>
-                    <ul className={styles.headmenu}>
-                        <li className= {styles.headmenuLi}>Тип границы
-                            <ul className={styles.submenu}>
-                                <li onClick = {() => {props.changeElementBorder(props.selection, 'none');
-                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>Без границы</li>
-                                <li onClick= {() => {props.changeElementBorder(props.selection, 'solid');
-                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>Сплошая линия</li>
-                                <li onClick={() => {props.changeElementBorder(props.selection, 'dashed');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);}}>Пунктирная линия</li>
-                                <li onClick={() => {props.changeElementBorder(props.selection, 'double');
-                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>Двойная линия</li>
-                                <li onClick={() => {props.changeElementBorder(props.selection, 'dotted');
-                        props.addToHistory(store.getState().presentation, store.getState().selection)}}>Точки</li>
-                            </ul>
-                        </li>
-                    </ul>                    
+                <div className={styles.contourContainer}>
+                    <div className={styles.elementOutlineInscr}>Контур элемента</div>
+                    <div className={styles.selectContainer}>
+                        <input type="number" placeholder='Размер контура' id="tentacles" 
+                        name="tentacles" min="0" className={styles.elementOutlineSelect}
+                        onChange = {(e) => {props.changeBorderSize(props.selection, Number(e.currentTarget.value));
+                            props.addToHistory(store.getState().presentation, store.getState().selection);}}
+                        ></input>
+                        <ul className={styles.headmenu}>
+                            <li className= {styles.headmenuLi}>Тип границы
+                                <ul className={styles.submenu}>
+                                    <li onClick = {() => {props.changeElementBorder(props.selection, 'none');
+                                    props.addToHistory(store.getState().presentation, store.getState().selection)}}>Без границы</li>
+                                    <li onClick= {() => {props.changeElementBorder(props.selection, 'solid');
+                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Сплошая линия</li>
+                                    <li onClick={() => {props.changeElementBorder(props.selection, 'dashed');
+                            props.addToHistory(store.getState().presentation, store.getState().selection);}}>Пунктирная линия</li>
+                                    <li onClick={() => {props.changeElementBorder(props.selection, 'double');
+                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Двойная линия</li>
+                                    <li onClick={() => {props.changeElementBorder(props.selection, 'dotted');
+                            props.addToHistory(store.getState().presentation, store.getState().selection)}}>Точки</li>
+                                </ul>
+                            </li>
+                        </ul>    
+                    </div>                
                 </div>
                 <div className={styles.backgroundColor}>
                     <div className={styles.colorContourIcon}></div>
                     <input type="color"id="borderColor"  onChange = {hanglerOnChangeBorderColor}
                     className= {styles.chooseColorSelect} defaultValue='#F08080'>
-                    </input>
-                    
+                    </input>                    
                 </div>
             </div>
             <div className={styles.animationContainer}>

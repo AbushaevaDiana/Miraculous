@@ -35,11 +35,11 @@ function BasicBtns(props: BasicBtnsProps){
                 <div className={styles.toolbarCancelRefund + ' ' +styles.cancelRefundBtn}>
                     <div className= {styles.cancelRefundBtnContainer + ' ' +styles.doRedoBtn} onClick = {() => props.undoAct(undo(props.presentationMaker))}>
                         <div className={styles.doRedoBtnArrow + ' ' + styles.arrowLeft}></div>
-                        {/* <p className={styles.doRedoBtnInsc + ' ' + styles.toolInsc}>Отмена</p> */}
+                        <p className={styles.doRedoBtnInsc + ' ' + styles.toolInsc}>Отмена</p>
                     </div>
                     <div className={styles.cancelRefundBtnContainer + ' ' +styles.doRedoBtn} onClick = {() => props.redoAct(redo(props.presentationMaker))}>
                         <div className={styles.doRedoBtnArrow + ' ' + styles.arrowRight}></div>
-                        {/* <p className={styles.doRedoBtnInsc + ' ' + styles.toolInsc}>Возврат</p> */}
+                        <p className={styles.doRedoBtnInsc + ' ' + styles.toolInsc}>Возврат</p>
                     </div>
                 </div>
             </>
