@@ -100,36 +100,26 @@ function MainPanel(props: MainPanelProps) {
                 <div className={styles.backgroundColor}>
                     <div className={styles.colorContourIcon}></div>
                     <input type="color"id="borderColor"  onChange = {hanglerOnChangeBorderColor}
-                    className= {styles.chooseColorSelect} defaultValue='#F08080'>
+                    className= {styles.chooseColorSelect + ' ' + styles.chooseColorContour} defaultValue='#F08080'>
                     </input>                    
                 </div>
             </div>
             <div className={styles.animationContainer}>
                 <div className={styles.animationIcon}></div>
-                <select onClick = {(e) => 
-                    {if(e.currentTarget.value === 'Без анимации'){
-                        props.addSlideEffect('none');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    if(e.currentTarget.value === 'Увелечение'){
-                        props.addSlideEffect('increase');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    if(e.currentTarget.value === 'Поворот'){
-                        props.addSlideEffect('rotation');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    if(e.currentTarget.value === 'Проявление'){
-                        props.addSlideEffect('fading');
-                        props.addToHistory(store.getState().presentation, store.getState().selection);
-                    };
-                    }}
-                className={styles.elementOutlineSelect + ' ' + styles.elementOutlineSelectSmall}>
-                    <option  className={styles.elementOutlineOption}>Без анимации</option>
-                    <option className={styles.elementOutlineOption}>Увелечение</option>
-                    <option className={styles.elementOutlineOption}>Поворот</option>
-                    <option className={styles.elementOutlineOption}>Проявление</option>
-                </select>
+                <ul className={styles.headmenu}>
+                    <li className= {styles.headmenuLi}>Анимация слайдов
+                        <ul className={styles.submenu}>
+                            <li onClick = {() => {props.addSlideEffect('none');
+                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>Без анимации</li>
+                            <li onClick= {() => {props.addSlideEffect('increase');
+                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>Увеличение</li>
+                            <li onClick={() => {props.addSlideEffect('rotation');
+                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>Поворот</li>
+                            <li onClick={() => {props.addSlideEffect('fading');
+                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>Проявление</li>
+                        </ul>
+                    </li>
+                </ul>    
             </div>
         </>
     )

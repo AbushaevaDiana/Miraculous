@@ -55,6 +55,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 .chooseColorIcon {
@@ -73,15 +74,19 @@
     border: 2px solid black;
 }
 
+.chooseColorContour {
+    width: 35%;
+    height: 23%;
+}
+
 .chooseColorSelect:hover {
     cursor: pointer;
 }
 
 .elementOutlineContainer {
     padding: 0 15px;
-    width: 35%;
+    width: 45%;
     display: flex;
-    align-items: center;
     border-right: 1px solid black;
 }
 
@@ -93,7 +98,7 @@
 .elementOutlineInscr {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 10%;
     width: 45%;
     height: 100%;
     font-family: 'Roboto';
@@ -107,7 +112,7 @@
 
 .selectContainer {
     padding-right: 10px;
-    width: 50%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -116,7 +121,7 @@
 
 .elementOutlineSelect {
     padding: 0 5px;
-    width: 100%;
+    width: 70%;
     height: 48%;
     background-color: transparent;
     border: 2px solid black;
@@ -141,7 +146,7 @@
 }
 
 .headmenu {
-    width: 100%;
+    width: 70%;
     height: 48%;
     background-color: transparent;
     font-size: 14px;
@@ -190,6 +195,7 @@
     visibility: hidden;
     opacity: 0;
     background: #FFEEDD;
+    border: 2px solid black;
 }
 
 .submenu > li {
@@ -208,7 +214,7 @@
     transition-timing-function: ease-in-out;
     color: black;
     display: block;
-    border-bottom: 2px solid black;
+    /* border-bottom: 2px solid black; */
     cursor: pointer;
 }
 
@@ -216,9 +222,9 @@
     border-bottom: none;
 }
 
-.submenu > li:nth-child(3) {
+/* .submenu > li:nth-child(3) {
     padding-top: 2px;
-}
+} */
 
 .submenu > li:hover {
     background-color: #F08080;
@@ -238,15 +244,15 @@ ul li:hover .submenu {
     margin-left: auto;
     margin-right: auto;
     width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .colorContourIcon {
-    margin-bottom: 8px;
-    width: 60px;
-    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    background-position: center;
+    margin-bottom: 5px;
+    width: 80%;
+    height: 80%;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('../img/contourIcon.png');
@@ -270,11 +276,10 @@ ul li:hover .submenu {
 }
 
 .elementOutlineSelectSmall {
-    width: 70%;
+    width: 50%;
 }
 
 .animationContainer {
-    padding: 8px 2% 0 2%;
     width: 18%;
     display: flex;
     flex-direction: column;
@@ -282,10 +287,11 @@ ul li:hover .submenu {
 }
 
 .animationIcon {
-    margin-bottom: 10px;
+    margin-bottom: 2px;
     width: 90px;
     height: 58px;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('../img/animationIcon.png');
+    background-position: center;
 }
