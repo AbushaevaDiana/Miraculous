@@ -1,5 +1,5 @@
 import { createStore, Store } from 'redux';
-import { ActionType, Presentation, PresentationMaker } from '../types';
+import { ActionType, PresentationMaker } from '../types';
 import rootReducer from './reducers/presentationMakerReduser';
 import { initialState } from '../test/initialState'
 

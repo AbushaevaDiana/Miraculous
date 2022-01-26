@@ -1,4 +1,4 @@
-import { Editer, History, Presentation, PresentationMaker } from '../types';
+import {PresentationMaker } from '../types';
 
 export function undo(presentationMaker: PresentationMaker): PresentationMaker {
     const newPresentationMaker: PresentationMaker = {

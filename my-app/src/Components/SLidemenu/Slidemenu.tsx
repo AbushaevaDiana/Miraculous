@@ -1,12 +1,10 @@
 import '../../App.css';
 import styles from './Slidemenu.module.css';
 import { connect } from 'react-redux';
-import { Presentation, PresentationMaker, Slide } from '../../types';
+import { PresentationMaker, Slide } from '../../types';
 import  SlideView  from '../Slide/Slide';
-import { addSlide, deleteSlide, gotoSlide, moveSlide} from '../../store/actionsCreators/slideActionCreators'
-import  store  from '../../store/store'
+import { moveSlide} from '../../store/actionsCreators/slideActionCreators'
 import { useState } from 'react';
-import slidelist from '../../store/reducers/slideReduce';
 
 
 interface SlidemenuList {

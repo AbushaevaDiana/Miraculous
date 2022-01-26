@@ -1,5 +1,4 @@
-import store from '../store/store';
-import { Editer, History, Presentation, PresentationMaker, SelectionType} from '../types';
+import { Editer, History, Presentation, SelectionType} from '../types';
 
 export function saveToHistory( history: History, newPresentation: Presentation, newSelection: SelectionType): History {
   const newHistory: History = {...history};

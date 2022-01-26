@@ -1,4 +1,4 @@
-import { Editer, Presentation, PresentationMaker, SelectionType, StateTypes } from "../../types";
+import { Presentation, PresentationMaker, SelectionType, StateTypes } from "../../types";
 
 function undoAct(presentationMaker: PresentationMaker) {
     return {

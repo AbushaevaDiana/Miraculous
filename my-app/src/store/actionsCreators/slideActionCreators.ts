@@ -1,5 +1,4 @@
-import { Color, Img, Slide, StateTypes } from "../../types";
-import { connect } from 'react-redux';
+import { Slide, StateTypes } from "../../types";
 
 function addSlide() {
     return {

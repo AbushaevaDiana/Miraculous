@@ -4,10 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import store from './store/store';
-import { Editer, PresentationMaker } from './types';
-import {saveToHistory} from '../src/functions/addActionToHistory'
 import { redoAct, undoAct } from './store/actionsCreators/historyActionCreators';
 import { redo, undo } from './functions/history_function';
 

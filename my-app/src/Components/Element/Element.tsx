@@ -2,7 +2,7 @@ import '../../App.css';
 import styles from './Element.module.css';
 import { PresentationMaker, SelectionType, ElementType, Size, Position, Presentation } from '../../types';
 import { connect } from 'react-redux';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { changeTextContent, moveElement, gotoElement, resizeElement } from '../../store/actionsCreators/elementActionCreators'
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';

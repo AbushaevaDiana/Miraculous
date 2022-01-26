@@ -1,8 +1,5 @@
 import { Reducer } from "redux";
 import { combineReducers } from "redux";
-import { ActionType, Presentation, PresentationMaker } from "../../types";
-import  presentationNameReduser  from "./presentationNameReduser";
-import slidelistReduser from "./slideReduce";
 import presentationReduser from "./presentationReduser";
 import modeReduser from "./modeReduser";
 import historyReduser from "./historyReduser";
