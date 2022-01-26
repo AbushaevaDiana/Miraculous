@@ -11,10 +11,10 @@ import { changePresentationNAME } from '../../store/actionsCreators/nameActionCr
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import { savePresentation, openPresentation, exportPresentation } from '../../store/actionsCreators/presentationActionCreators';
 import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
-import {loadFile} from '../../store/reducers/presentationReduser'
 import { changeMode } from '../../store/actionsCreators/modeActionCreators'
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
+import { loadFile } from '../../functions/openPresentationFunction';
 
 interface HeadmenuProps {
     name: string,

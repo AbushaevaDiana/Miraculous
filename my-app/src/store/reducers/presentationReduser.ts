@@ -1,8 +1,7 @@
 import { Reducer } from "redux";
-import { ActionType, ElementType, Img, Presentation, PresentationMaker, Slide, TextType } from "../../types";
+import { ActionType, Presentation} from "../../types";
 import name from "./presentationNameReduser";
 import slidelist from "./slideReduce";
-import { undo, redo } from "../../functions/history_function";
 import { saveProgramAsPDF } from "../../functions/exportFunctions";
 
 
@@ -19,21 +18,6 @@ const stateStart: Presentation = {
         },   
     ],
     name: 'Презентация без названия',
-}
-
-export function loadFile(callback: (object: any) => void) {
-    const inputFile = document.createElement("input");
-    inputFile.type = "file";
-    inputFile.click();
-    inputFile.addEventListener("change", () => {
-      const file = inputFile.files?.[0] as File;
-
-      fetch(window.URL.createObjectURL(file))
-        .then((response) => response.json())
-        .then((json) => {
-          callback(json);
-        });
-    });
 }
 
 
