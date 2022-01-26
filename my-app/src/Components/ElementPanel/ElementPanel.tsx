@@ -96,7 +96,7 @@ export function ElementPanel(props: ElementPanelProps) {
                                 <option className={styles.selectFieldOption}>Pangolin</option>
                             </select> */}
                             <ul className={styles.headmenu}>
-                                <li className={styles.headmenuLi}>Шрифт
+                                <li className={styles.headmenuLi}>Шрифт<span>ˇ</span>
                                     <ul className={styles.submenu}>
                                         <li onClick = {() => {props.changeTextFont(props.selection, 'Roboto');
                                             props.addToHistory(store.getState().presentation, store.getState().selection)}}>Roboto</li>
@@ -169,6 +169,10 @@ export function ElementPanel(props: ElementPanelProps) {
                                     props.setImageFilter(props.selection, 'none');
                                     props.addToHistory(store.getState().presentation, store.getState().selection);
                                 }}>без фильтров</li>
+                                <li onClick = {() => {
+                                    props.setImageFilter(props.selection, 'negative');
+                                    props.addToHistory(store.getState().presentation, store.getState().selection);
+                                }}>негатив</li>
                             </ul>
                         </li>
                     </ul>
