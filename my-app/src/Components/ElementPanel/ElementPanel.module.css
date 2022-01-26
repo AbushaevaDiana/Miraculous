@@ -159,7 +159,6 @@
 }
 
 .headmenuLi {
-    padding-left: 8%;
     width: 100%;
     height: 100%;
     position: relative;
@@ -177,14 +176,6 @@
     font-size: 14px;
     line-height: 1;
     font-weight: 600;
-}
-
-.headmenuLi span {
-    font-size: 14px;
-    margin-left: auto;
-    margin-right: 8%;
-    display: inline-block;
-    transform: translateY(3px);
 }
 
 .submenu, .submenuFilters {

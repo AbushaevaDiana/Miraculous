@@ -96,7 +96,7 @@ export function ElementPanel(props: ElementPanelProps) {
                                 <option className={styles.selectFieldOption}>Pangolin</option>
                             </select> */}
                             <ul className={styles.headmenu}>
-                                <li className={styles.headmenuLi}>Шрифт<span>ˇ</span>
+                                <li className={styles.headmenuLi}>Шрифт
                                     <ul className={styles.submenu}>
                                         <li onClick = {() => {props.changeTextFont(props.selection, 'Roboto');
                                             props.addToHistory(store.getState().presentation, store.getState().selection)}}>Roboto</li>
