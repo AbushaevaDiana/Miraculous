@@ -1,12 +1,12 @@
 .slideBackgroundContainer {
     /* padding: 8px 15px; */
-    width: 20%;
+    width: 30%;
     display: flex;
     border-right: 1px solid black;
 }
 
 .backgroundImage {
-    width: 80%;
+    width: 65%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,7 +51,7 @@
 }
 
 .backgroundColor {
-    width: 30%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,9 +59,9 @@
 }
 
 .chooseColorIcon {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     width: 75px;
-    height: 75px;
+    height: 65%;
     background-image: url('../img/fillicon.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -69,16 +69,16 @@
 }
 
 .chooseColorSelect {
-    height: 20px;
-    width: 30px;
+    height: 35%;
+    width: 45%;
     padding: 0 5px;
     background-color: transparent;
     border: 2px solid black;
 }
 
 .chooseColorContour {
-    width: 30px;
-    height: 20px;
+    width: 40%;
+    height: 35%;
 }
 
 .chooseColorSelect:hover {
@@ -86,15 +86,15 @@
 }
 
 .elementOutlineContainer {
-    padding: 0 15px;
-    width: 45%;
+    padding: 0 0 0 15px;
+    width: 40%;
     display: flex;
     border-right: 1px solid black;
 }
 
 .contourContainer {
     display: flex;
-    width: 70%;
+    width: 75%;
 }
 
 .elementOutlineInscr {
@@ -123,7 +123,7 @@
 
 .elementOutlineSelect {
     padding: 0 5px;
-    width: 70%;
+    width: 100%;
     height: 48%;
     background-color: transparent;
     border: 2px solid black;
@@ -148,7 +148,7 @@
 }
 
 .headmenu {
-    width: 70%;
+    width: 100%;
     height: 48%;
     background-color: transparent;
     font-size: 14px;
@@ -161,6 +161,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.headmenuAnimations {
+    width: 60%;
+    height: 40%;
 }
 
 .headmenuLi {
@@ -254,7 +259,7 @@ ul li:hover .submenu {
     background-position: center;
     margin-bottom: 5px;
     width: 80%;
-    height: 80%;
+    height: 65%;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('../img/contourIcon.png');
@@ -275,6 +280,9 @@ ul li:hover .submenu {
     font-size: 14px;
     line-height: 1;
     color: black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .elementOutlineSelectSmall {
@@ -289,7 +297,7 @@ ul li:hover .submenu {
 }
 
 .animationIcon {
-    margin-bottom: 2px;
+    margin-bottom: 2%;
     width: 90px;
     height: 58px;
     background-size: contain;

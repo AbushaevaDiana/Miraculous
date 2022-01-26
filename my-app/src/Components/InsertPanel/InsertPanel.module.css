@@ -23,6 +23,9 @@
 .imgIcon {
     width: 45px;
     height: 45px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-image: url('../img/imgIcon.png');
 }
 
@@ -76,12 +79,14 @@
 }
 
 .figureTypeBlock {
+    width: 30%;
     margin-top: 8px;
-    margin-right: 5%;
+    /* margin-right: 5%; */
     cursor: pointer;
 }
 
 .figureTypeBlock:not(:last-child) {
+    margin-right: 5%;
     padding-right: 5%;
     border-right: 1px solid #A0A0A0;   
 }

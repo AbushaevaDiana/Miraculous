@@ -106,7 +106,7 @@ function MainPanel(props: MainPanelProps) {
             </div>
             <div className={styles.animationContainer}>
                 <div className={styles.animationIcon}></div>
-                <ul className={styles.headmenu}>
+                <ul className={styles.headmenu + ' ' + styles.headmenuAnimations}>
                     <li className= {styles.headmenuLi}>Анимация слайдов
                         <ul className={styles.submenu}>
                             <li onClick = {() => {props.addSlideEffect('none');
