@@ -1,7 +1,7 @@
 import '../../App.css';
 import styles from './MainPanel.module.css';
 import { connect } from 'react-redux';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent} from 'react'
 import { addSlideEffect, editSLideBackgroundColor, editSLideBackgroundImg } from '../../store/actionsCreators/slideActionCreators';
 import { Presentation, PresentationMaker, SelectionType, Slide } from '../../types';
 import { changeBorderColor, changeElementBorder, changeBorderSize} from '../../store/actionsCreators/elementActionCreators';
@@ -24,14 +24,12 @@ function MainPanel(props: MainPanelProps) {
     const hanglerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
-        // console.log('цвет', inputColorStr)
         props.editSLideBackgroundColor(props.selection.idSlides, inputColorStr);
         props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeBorderColor = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
-        // console.log('цвет', inputColorStr)
         props.changeBorderColor(props.selection, inputColorStr);
         props.addToHistory(store.getState().presentation, store.getState().selection);
     }

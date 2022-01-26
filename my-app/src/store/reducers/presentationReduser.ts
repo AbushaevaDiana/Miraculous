@@ -43,18 +43,10 @@ const presentation: Reducer<Presentation, any> = (state: Presentation = stateSta
             saveProgramAsPDF(state);
             return state
         case 'SAVE_PRESENTATION':
-            console.log('save work');
             const toJSON = JSON.stringify(state);
-            //кодируем эту строку в виде Url, чтобы избежать некорректных запросов к серверу
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(toJSON);
-             
-            //создаем обьект элемента типа <a></a>
             const downloadAnchorNode = document.createElement("a");
-            //добавляем в обьект <a></a> созданный URL
             downloadAnchorNode.setAttribute("href", dataStr);
-            //добавляем в обьект атрибут скачать(При наличии атрибута download браузер не переходит по ссылке,
-            // а предложит скачать документ, указанный в адресе ссылки.) и передаем в качестве имени название
-            //презентации и json разрешение
             downloadAnchorNode.setAttribute(
               "download",
               state.name + ".json"
@@ -63,13 +55,10 @@ const presentation: Reducer<Presentation, any> = (state: Presentation = stateSta
             downloadAnchorNode.remove();
             return state;
         case 'OPEN_PRESENTATION': 
-            console.log('open work')
             return action.payload;
-        case 'Undo':
-            console.log('undo p') 
+        case 'Undo': 
             return action.payload.presentation;
         case 'Redo':
-            console.log('redo p') 
             return action.payload.presentation;
         default: return{
             slidelist: slidelist(state.slidelist, action),

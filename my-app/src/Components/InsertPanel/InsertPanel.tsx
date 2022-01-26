@@ -1,11 +1,10 @@
 import '../../App.css';
 import styles from './InsertPanel.module.css';
 import { connect } from 'react-redux';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { Img, Presentation, PresentationMaker, SelectionType } from '../../types';
+import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
-import { addText, deleteElement, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
+import { addText, addPicture, addRectangle, addRound, addTriangle} from '../../store/actionsCreators/elementActionCreators';
 
 
 interface InsertPanelProps {

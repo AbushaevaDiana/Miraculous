@@ -16,10 +16,8 @@ interface SlidemenuList {
 
 function Slidemenu(props: SlidemenuList){
     let [currentSlide, setCurrentSlide] = useState<Slide>(props.slidelist[0]);
-    // let currentSlide = props.slide
      function onDragStartHangler(e: React.DragEvent<HTMLDivElement>, slide: Slide){
         setCurrentSlide(slide);
-       // currentSlide = slide;
      }
      function onDragLeaveHangler(e: React.DragEvent<HTMLDivElement>){}
      function onDragEndHangler(e: React.DragEvent<HTMLDivElement>){}
@@ -29,7 +27,6 @@ function Slidemenu(props: SlidemenuList){
      }
      function onDropHangler(e: React.DragEvent<HTMLDivElement>, slide: Slide){
         e.preventDefault();
-        console.log('drop', currentSlide.idSlide, slide.idSlide);
         props.moveSlide(currentSlide, slide);
      }
         return (
@@ -52,9 +49,8 @@ function Slidemenu(props: SlidemenuList){
         )
 };
 
-//
+
 function mapStateToProps(state: PresentationMaker) {
-    console.log(state)
     return { slidelist: state.presentation.slidelist} 
 };
 
@@ -63,4 +59,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Slidemenu);
-//

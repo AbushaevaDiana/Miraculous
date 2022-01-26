@@ -1,7 +1,7 @@
 import '../../App.css';
 import styles from './ElementPanel.module.css';
 import { connect } from 'react-redux';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent} from 'react';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
@@ -32,7 +32,6 @@ export function ElementPanel(props: ElementPanelProps) {
     const hanglerOnChangeLine = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value);
-        console.log('цвет', inputColorStr);
         props.changeLineColor(props.selection, inputColorStr);
         props.addToHistory(store.getState().presentation, store.getState().selection);
         
@@ -40,14 +39,12 @@ export function ElementPanel(props: ElementPanelProps) {
     const hanglerOnChangeFill = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
-        console.log('цвет', inputColorStr)
         props.changeFillColor(props.selection, inputColorStr);
         props.addToHistory(store.getState().presentation, store.getState().selection);
     }
     const hanglerOnChangeText = (event: ChangeEvent<HTMLInputElement>) => {
         const inputColor = event.target as HTMLInputElement
         const inputColorStr = String(inputColor.value)
-        console.log('цвет', inputColorStr)
         props.changeTextColor(props.selection, inputColorStr);
         props.addToHistory(store.getState().presentation, store.getState().selection);
     }
@@ -81,20 +78,6 @@ export function ElementPanel(props: ElementPanelProps) {
                 <div className={styles.toolbarFont + ' ' +styles.fontContainer}>
                     <div className={styles.fontContainerSettings +  ' ' + styles.fontSettings}>
                         <div className={styles.fontSettingsSelect +  ' ' + styles.fontSelect}>
-                            {/* <select className={styles.fontSelectField +  ' ' + styles.selectField}
-                            onClick = {(e) => {props.changeTextFont(props.selection, e.currentTarget.value);
-                                props.addToHistory(store.getState().presentation, store.getState().selection)}}>
-                                <option className={styles.selectFieldOption}>Roboto</option>
-                                <option className={styles.selectFieldOption}>Times New Roman</option>
-                                <option className={styles.selectFieldOption}>Lobster</option>
-                                <option className={styles.selectFieldOption}>Pacifico</option>
-                                <option className={styles.selectFieldOption}>Caveat</option>
-                                <option className={styles.selectFieldOption}>Comforter Brush</option>
-                                <option className={styles.selectFieldOption}>Play</option>
-                                <option className={styles.selectFieldOption}>Alegreya</option>
-                                <option className={styles.selectFieldOption}>Montserrat Alternates</option>
-                                <option className={styles.selectFieldOption}>Pangolin</option>
-                            </select> */}
                             <ul className={styles.headmenu}>
                                 <li className={styles.headmenuLi}>Шрифт
                                     <ul className={styles.submenu}>

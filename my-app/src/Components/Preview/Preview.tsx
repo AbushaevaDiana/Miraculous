@@ -1,8 +1,7 @@
 import '../../App.css';
 import styles from './Preview.module.css';
 import { connect } from 'react-redux';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { Position, PresentationMaker, SelectionType, Slide } from '../../types';
+import {PresentationMaker, SelectionType, Slide } from '../../types';
 import MaxElement from '../Element/maxElement'
 import { changeMode } from '../../store/actionsCreators/modeActionCreators'
 import {gotoSlide } from '../../store/actionsCreators/slideActionCreators'

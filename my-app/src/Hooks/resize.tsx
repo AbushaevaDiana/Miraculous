@@ -37,7 +37,6 @@ export const useResizeElement = (ref: React.RefObject<any>, setDif: Function, ge
     }, []);
 
     const onMouseDown = (e: MouseEvent) => {
-        console.log('onMouseDown!!!');
         setDif({ x: 0, y: 0 });
 
         startPosition = {
@@ -53,16 +52,11 @@ export const useResizeElement = (ref: React.RefObject<any>, setDif: Function, ge
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
 
-        // modelPos = newPos;
-
         const selection = getSelection();
-        console.log(selection);
         const newDif = {x: dif.x / 2, y: dif.y/ 2};
 
         store.dispatch(resizeElement(selection, newDif));
         store.dispatch(addToHistory(store.getState().presentation, store.getState().selection));
-
-        console.log(dif);
 
         setDif({x: 0, y: 0});
         dif = {x: 0, y: 0};

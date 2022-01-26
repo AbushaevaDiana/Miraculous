@@ -1,8 +1,7 @@
 import '../../App.css';
 import styles from './Basic-btns.module.css';
-import React, { Component } from 'react';
-import { addSlide, deleteSlide, gotoSlide, editSLideBackgroundColor} from '../../store/actionsCreators/slideActionCreators';
-import { Editer, History, Presentation, PresentationMaker, SelectionType } from '../../types';
+import { addSlide, deleteSlide} from '../../store/actionsCreators/slideActionCreators';
+import { Presentation, PresentationMaker, SelectionType } from '../../types';
 import { connect } from 'react-redux';
 import { addToHistory, undoAct, redoAct } from '../../store/actionsCreators/historyActionCreators';
 import { undo, redo } from "../../functions/history_function"

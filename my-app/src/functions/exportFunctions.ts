@@ -31,8 +31,6 @@ function setElementToPagePDF(progSlide: ElementType, doc:jsPDF) {
                 };
                 if(progSlide.elementConcept.bold){styleT = styleT+'bold '};
                 if(progSlide.elementConcept.italic){styleT = styleT+'italic '};
-
-                console.log(String(progSlide.elementConcept.size) + "px " + progSlide.elementConcept.font + styleT);
                 
                 ctx.font = styleT + String(progSlide.elementConcept.size) + "px " + progSlide.elementConcept.font;
                 ctx.fillText(sLine, 0, parseInt(String(progSlide.elementConcept.size))*0.75) 

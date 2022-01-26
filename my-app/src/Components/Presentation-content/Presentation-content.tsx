@@ -1,7 +1,6 @@
 import '../../App.css';
 import styles from './Presentation-content.module.css';
 import { connect } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
 import { Position, PresentationMaker, SelectionType, Size, Slide } from '../../types';
 import Element from '../Element/Element';
 import { changeTextContent, moveElement, resizeElement} from '../../store/actionsCreators/elementActionCreators';
@@ -33,7 +32,6 @@ function PresentationContent(props: PropsPresentationContent){
       const mainSLideStyle = {
         background: back,
       };    
-      console.log('Main slide', mainSlide.idSlide)
       return (
           <>
               <div key={mainSlide.idSlide} style={mainSLideStyle} className = {styles.presentationContent}>

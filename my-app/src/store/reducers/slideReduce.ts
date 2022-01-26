@@ -1,6 +1,5 @@
-import { type } from "os";
+
 import { Reducer } from "react"
-import { getPositionOfLineAndCharacter } from "typescript";
 import { setNewId } from "../../functions/functions"
 import { ActionType, Figure, Slide } from "../../types"
 
@@ -25,7 +24,6 @@ let rectangel: Figure = {
 const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action: ActionType): Slide[] => {
     switch (action.type) {
     case 'ADD_SLIDE':
-      // console.log('add slide work')
       return state.concat([{ 
         elementlist: [],
         idSlide: setNewId(),
@@ -37,10 +35,8 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
         selected: false,
       }]);
     case 'DELETE_SLIDE':
-      // console.log('delete work')
       return state.filter(slide => slide.selected !== true);
     case 'GOTO_SLIDE':
-      // console.log('goto work')
         return state.map(slide => {
           if (slide.idSlide === action.payload)
           { 
@@ -56,7 +52,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
       case 'GOTO_SLIDES':
-        // console.log('goto slides work')
           return state.map(slide => {
             if (slide.idSlide === action.payload)
             { 
@@ -68,7 +63,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
                 return slide}
         });
     case 'ADD_SLIDE_EFFECT':
-      // console.log('effect change work')
         return state.map(slide => {
           return{
             ...slide,
@@ -78,11 +72,9 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
     case 'MOVE_SLIDE': 
       let end = state.indexOf(action.payload.end);
       let start = state.indexOf(action.payload.start);
-      console.log('move slide', end, start)
 
       let newSlidelist: Slide[] = [];
       for(let i = 0; i < state.length; i++){
-        // newSlidelist.push(state[i])
         if(i == end){
           newSlidelist.push(state[start]);  
         } else {
@@ -93,17 +85,8 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
           };
         }
       }
-      return newSlidelist
-
-    //   return state.map(slide => {
-    //     if (slide.idSlide == action.payload.start.idSlide)
-    //     {return action.payload.end}
-    //     else{if (slide.idSlide == action.payload.end.idSlide)
-    //     {return action.payload.start}
-    //     else {return slide}}
-    // });
+      return newSlidelist;
     case 'EDIT_SLIDE_BACKGROUND_COLOR':
-      // console.log('back color change work')
         return state.map(slide => {
           if (action.payload.idSlides.includes(slide.idSlide))
           { 
@@ -119,7 +102,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
       case 'EDIT_SLIDE_BACKGROUND_IMG':
-        // console.log('back img work', action.payload.newBackground)
           return state.map(slide => {
             if (action.payload.idSlides.includes(slide.idSlide))
             { 
@@ -136,7 +118,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               }
         });
       case 'CHANGE_TEXT_CONTENT':
-        // console.log('change text work')
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))
           { 
@@ -159,7 +140,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
       case 'CHANGE_LINE_COLOR':
-        // console.log('change line color work')
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))
           { 
@@ -182,7 +162,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
       case 'CHANGE_ELEMENT_BORDER':
-        // console.log('change border work')
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))
           { 
@@ -472,8 +451,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
       });
 
       case 'MOVE_ELEMENT':
-        console.log('зашел в move element!');
-        console.log(action.payload);
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))
           { 
@@ -481,7 +458,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
               ...slide,
               elementlist: slide.elementlist.map(element => {
                 if (element.selected === true){
-                  console.log('зашел в улсовие2')
                   return {
                     ...element,
                     position: {
@@ -498,7 +474,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
       });
 
       case 'RESIZE_ELEMENT':
-        console.log('resize', action.payload.size);
         return state.map(slide => {
           if (action.payload.selection.idSlides.includes(slide.idSlide))
           { 
@@ -749,7 +724,6 @@ const slidelist: Reducer<Array<Slide>, any> = (state: Array<Slide> = [], action:
             }
       });
     case 'DELETE_ELEMENT':
-      console.log('delete element work')
       return state.map(slide => {
         if (action.payload.idSlides.includes(slide.idSlide))
         { 

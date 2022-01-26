@@ -1,6 +1,6 @@
 import '../../App.css';
 import styles from './Element.module.css';
-import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Position } from '../../types';
+import { PresentationMaker, ElementType} from '../../types';
 import { connect } from 'react-redux';
 
 interface miniElementProps{
@@ -12,7 +12,6 @@ export function MiniElement(props: miniElementProps){
 let textI: string = '';   
 if(props.element.elementConcept.type === 'text'){
    textI = props.element.elementConcept.textContent;
-   console.log(props.element.elementConcept.textContent)
    let fW: string = 'normal'
    let fI: string = 'normal'
    let fU: string = 'none'
@@ -168,4 +167,3 @@ const mapDispatchToProps = {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MiniElement);
-//

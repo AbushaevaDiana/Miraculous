@@ -1,11 +1,10 @@
 import '../../App.css';
 import styles from './Element.module.css';
-import { PresentationMaker, SelectionType, Slide, Color, ElementType, Size, Position, Presentation } from '../../types';
+import { PresentationMaker, SelectionType, ElementType, Size, Position, Presentation } from '../../types';
 import { connect } from 'react-redux';
-import React, { MouseEvent, DragEvent, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { changeTextContent, moveElement, gotoElement, resizeElement } from '../../store/actionsCreators/elementActionCreators'
 import store from '../../store/store';
-import { useMoveAndResize } from '../../Hooks/useMoving';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
 import { useDragAndDrop } from '../../Hooks/draganddrops_2';
 import { useResizeElement } from '../../Hooks/resize';
@@ -160,7 +159,6 @@ export function Element(props: ElementProps){
                 top: props.element.position.y + delta.y,
                 left: props.element.position.x + delta.x,
             }
-            // console.log(props.element.position.y)
             let width: number = props.element.size.w/2;
             let heigth: number = props.element.size.h/2; 
             return (
@@ -247,4 +245,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Element);
-//

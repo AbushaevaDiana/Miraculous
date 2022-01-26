@@ -5,7 +5,7 @@ import ElementPanel from '../ElementPanel/ElementPanel';
 import InsertPanel from '../InsertPanel/InsertPanel';
 import MainPanel from '../MainPanel/MainPanel';
 import { connect } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
+import {useState } from 'react';
 import { addSlide, deleteSlide, editSLideBackgroundColor } from '../../store/actionsCreators/slideActionCreators';
 import { changePresentationNAME } from '../../store/actionsCreators/nameActionCreators';
 import { Presentation, PresentationMaker, SelectionType } from '../../types';

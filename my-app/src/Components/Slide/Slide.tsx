@@ -1,13 +1,11 @@
 import '../../App.css';
 import styles from './Slide.module.css';
-import { PresentationMaker, SelectionType, Slide, Color, Presentation } from '../../types';
+import { PresentationMaker, SelectionType, Slide, Presentation } from '../../types';
 import { connect } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
-import { addSlide, deleteSlide, gotoSlide, gotoSlides, moveSlide } from '../../store/actionsCreators/slideActionCreators'
+import { gotoSlide, gotoSlides, moveSlide } from '../../store/actionsCreators/slideActionCreators'
 import { MiniElement } from '../Element/miniElement'
 import store from '../../store/store';
 import { addToHistory} from '../../store/actionsCreators/historyActionCreators';
-import slidelist from '../../store/reducers/slideReduce';
 
 
 interface SLideProps{
@@ -63,7 +61,6 @@ export function SlideView(props:SLideProps){
       )
 };
 
-//
 function mapStateToProps(state: PresentationMaker) {
    return{selection: state.selection}
 };
@@ -76,4 +73,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlideView);
-//

@@ -1,7 +1,5 @@
 import './App.css';
 import styles from './Tabs.module.css';
-import { connect } from 'react-redux';
-import React, { useEffect, useRef, useState } from 'react';
 
 export function Tabs() {   
     return (
