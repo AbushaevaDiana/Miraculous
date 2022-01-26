@@ -22,12 +22,14 @@
 }
 
 .newSlideBtnImg {
-    width: 40%;
-    background-image: url('../img/newSlide__logo.png');
+    width: 50%;
+    background: url('../img/newSlide__logo.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .deleteSlideBtnImg {
-    width: 40%;
+    width: 50%;
     background-image: url('../img/basket.png');
 }
 
